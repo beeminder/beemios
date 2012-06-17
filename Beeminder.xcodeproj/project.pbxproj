@@ -1,0 +1,297 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
+		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
+		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
+		A1F03D5B158E9A850075D5DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D59158E9A850075D5DA /* InfoPlist.strings */; };
+		A1F03D5D158E9A850075D5DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D5C158E9A850075D5DA /* main.m */; };
+		A1F03D61158E9A850075D5DA /* BeeminderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */; };
+		A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */; };
+		A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D65158E9A850075D5DA /* MainStoryboard_iPad.storyboard */; };
+		A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D69158E9A850075D5DA /* BeeminderViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A1F03D54158E9A850075D5DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */ = {isa = PBXFileReference; path = "Beeminder-Info.plist"; sourceTree = "<group>"; };
+		A1F03D5A158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1F03D5C158E9A850075D5DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A1F03D5E158E9A850075D5DA /* Beeminder-Prefix.pch */ = {isa = PBXFileReference; path = "Beeminder-Prefix.pch"; sourceTree = "<group>"; };
+		A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */ = {isa = PBXFileReference; path = BeeminderAppDelegate.h; sourceTree = "<group>"; };
+		A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderAppDelegate.m; sourceTree = "<group>"; };
+		A1F03D63158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		A1F03D66158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		A1F03D68158E9A850075D5DA /* BeeminderViewController.h */ = {isa = PBXFileReference; path = BeeminderViewController.h; sourceTree = "<group>"; };
+		A1F03D69158E9A850075D5DA /* BeeminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1F03D49158E9A850075D5DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
+				A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */,
+				A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1F03D41158E9A850075D5DA = {
+			isa = PBXGroup;
+			children = (
+				A1F03D56158E9A850075D5DA /* Beeminder */,
+				A1F03D4F158E9A850075D5DA /* Frameworks */,
+				A1F03D4D158E9A850075D5DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1F03D4D158E9A850075D5DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1F03D4C158E9A850075D5DA /* Beeminder.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1F03D4F158E9A850075D5DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1F03D50158E9A850075D5DA /* UIKit.framework */,
+				A1F03D52158E9A850075D5DA /* Foundation.framework */,
+				A1F03D54158E9A850075D5DA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1F03D56158E9A850075D5DA /* Beeminder */ = {
+			isa = PBXGroup;
+			children = (
+				A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */,
+				A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */,
+				A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */,
+				A1F03D65158E9A850075D5DA /* MainStoryboard_iPad.storyboard */,
+				A1F03D68158E9A850075D5DA /* BeeminderViewController.h */,
+				A1F03D69158E9A850075D5DA /* BeeminderViewController.m */,
+				A1F03D57158E9A850075D5DA /* Supporting Files */,
+			);
+			path = Beeminder;
+			sourceTree = "<group>";
+		};
+		A1F03D57158E9A850075D5DA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */,
+				A1F03D59158E9A850075D5DA /* InfoPlist.strings */,
+				A1F03D5C158E9A850075D5DA /* main.m */,
+				A1F03D5E158E9A850075D5DA /* Beeminder-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1F03D4B158E9A850075D5DA /* Beeminder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1F03D6D158E9A850075D5DA /* Build configuration list for PBXNativeTarget "Beeminder" */;
+			buildPhases = (
+				A1F03D48158E9A850075D5DA /* Sources */,
+				A1F03D49158E9A850075D5DA /* Frameworks */,
+				A1F03D4A158E9A850075D5DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Beeminder;
+			productName = Beeminder;
+			productReference = A1F03D4C158E9A850075D5DA /* Beeminder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1F03D43158E9A850075D5DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Beeminder;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Andy Brett";
+			};
+			buildConfigurationList = A1F03D46158E9A850075D5DA /* Build configuration list for PBXProject "Beeminder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A1F03D41158E9A850075D5DA;
+			productRefGroup = A1F03D4D158E9A850075D5DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1F03D4B158E9A850075D5DA /* Beeminder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1F03D4A158E9A850075D5DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F03D5B158E9A850075D5DA /* InfoPlist.strings in Resources */,
+				A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */,
+				A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1F03D48158E9A850075D5DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F03D5D158E9A850075D5DA /* main.m in Sources */,
+				A1F03D61158E9A850075D5DA /* BeeminderAppDelegate.m in Sources */,
+				A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A1F03D59158E9A850075D5DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1F03D5A158E9A850075D5DA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1F03D63158E9A850075D5DA /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		A1F03D65158E9A850075D5DA /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1F03D66158E9A850075D5DA /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A1F03D6B158E9A850075D5DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1F03D6C158E9A850075D5DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1F03D6E158E9A850075D5DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
+				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A1F03D6F158E9A850075D5DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
+				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1F03D46158E9A850075D5DA /* Build configuration list for PBXProject "Beeminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1F03D6B158E9A850075D5DA /* Debug */,
+				A1F03D6C158E9A850075D5DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1F03D6D158E9A850075D5DA /* Build configuration list for PBXNativeTarget "Beeminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1F03D6E158E9A850075D5DA /* Debug */,
+				A1F03D6F158E9A850075D5DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1F03D43158E9A850075D5DA /* Project object */;
+}
