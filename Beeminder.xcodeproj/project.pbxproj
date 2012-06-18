@@ -16,6 +16,8 @@
 		A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */; };
 		A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D65158E9A850075D5DA /* MainStoryboard_iPad.storyboard */; };
 		A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D69158E9A850075D5DA /* BeeminderViewController.m */; };
+		A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D71158E9BE60075D5DA /* SplashViewController.m */; };
+		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +25,20 @@
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1F03D54158E9A850075D5DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */ = {isa = PBXFileReference; path = "Beeminder-Info.plist"; sourceTree = "<group>"; };
+		A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Beeminder-Info.plist"; sourceTree = "<group>"; };
 		A1F03D5A158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1F03D5C158E9A850075D5DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A1F03D5E158E9A850075D5DA /* Beeminder-Prefix.pch */ = {isa = PBXFileReference; path = "Beeminder-Prefix.pch"; sourceTree = "<group>"; };
-		A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */ = {isa = PBXFileReference; path = BeeminderAppDelegate.h; sourceTree = "<group>"; };
+		A1F03D5E158E9A850075D5DA /* Beeminder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Beeminder-Prefix.pch"; sourceTree = "<group>"; };
+		A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeeminderAppDelegate.h; sourceTree = "<group>"; };
 		A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderAppDelegate.m; sourceTree = "<group>"; };
 		A1F03D63158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A1F03D66158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		A1F03D68158E9A850075D5DA /* BeeminderViewController.h */ = {isa = PBXFileReference; path = BeeminderViewController.h; sourceTree = "<group>"; };
+		A1F03D68158E9A850075D5DA /* BeeminderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeeminderViewController.h; sourceTree = "<group>"; };
 		A1F03D69158E9A850075D5DA /* BeeminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderViewController.m; sourceTree = "<group>"; };
+		A1F03D70158E9BE60075D5DA /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		A1F03D71158E9BE60075D5DA /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		A1F03D76158EA2690075D5DA /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		A1F03D77158EA2690075D5DA /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,10 @@
 				A1F03D68158E9A850075D5DA /* BeeminderViewController.h */,
 				A1F03D69158E9A850075D5DA /* BeeminderViewController.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
+				A1F03D70158E9BE60075D5DA /* SplashViewController.h */,
+				A1F03D71158E9BE60075D5DA /* SplashViewController.m */,
+				A1F03D76158EA2690075D5DA /* SignInViewController.h */,
+				A1F03D77158EA2690075D5DA /* SignInViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -169,6 +179,8 @@
 				A1F03D5D158E9A850075D5DA /* main.m in Sources */,
 				A1F03D61158E9A850075D5DA /* BeeminderAppDelegate.m in Sources */,
 				A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */,
+				A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */,
+				A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

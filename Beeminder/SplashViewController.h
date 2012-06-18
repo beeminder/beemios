@@ -1,5 +1,5 @@
 //
-//  BeeminderViewController.h
+//  SplashViewController.h
 //  Beeminder
 //
 //  Created by Andy Brett on 6/17/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BeeminderViewController : UINavigationController
+@interface SplashViewController : UIViewController
 
 @end
