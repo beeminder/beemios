@@ -1,0 +1,1 @@
+Beeminder iOS App ("beemiOS" is pronounced "be my OS")
