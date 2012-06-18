@@ -7,10 +7,25 @@
 //
 
 #import "SignInViewController.h"
+#import "SBJson.h"
+
+@interface KeychainWrapper : NSObject {
+    NSMutableDictionary        *keychainData;
+    NSMutableDictionary        *genericPasswordQuery;
+}
+
+@property (nonatomic, strong) NSMutableDictionary *keychainData;
+@property (nonatomic, strong) NSMutableDictionary *genericPasswordQuery;
+
+- (void)mySetObject:(id)inObject forKey:(id)key;
+- (id)myObjectForKey:(id)key;
+- (void)resetKeychainItem;
+
+@end
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
-- (void)formSubmitted:(UIControl *)sender forEvent:(UIEvent *)event;
+- (void)formSubmitted;
 
 @end
 
@@ -49,14 +64,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)formSubmitted:(UIControl *)sender forEvent:(UIEvent *)event {
+- (void)formSubmitted {
     NSURL *loginUrl = [NSURL URLWithString:@"http://localhost:3000/api/v1/users/sign_in.json"];
     
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
     NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@", self.email.text, self.password.text];
-    NSLog(self.password.text);
+
     [loginRequest setHTTPMethod:@"POST"];
     [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -68,13 +83,8 @@
     }    
 }
 
-- (IBAction)passwordFieldSubmitted:(UITextField *)sender forEvent:(UIEvent *)event {
-    [self formSubmitted:sender forEvent:event];    
-}
-
-- (IBAction)signInButtonPressed:(UIButton *)sender forEvent:(UIEvent *)event {
-
-    [self formSubmitted:sender forEvent:event];
+- (IBAction)signInButtonPressed:(UIButton *)sender {
+    [self formSubmitted];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -97,16 +107,27 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSString *responseText = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+    if (self.responseStatus == 200) {
+        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
 
-    self.title = [NSString stringWithFormat:@"%i", self.responseStatus];
+        NSDictionary *responseJSON = [responseString JSONValue];
+        
+        NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
+        
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+    }
+    else {
+        self.title = @"Bad Login";
+    }
     
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.password) {
-        NSLog(@"foo");
         [theTextField resignFirstResponder];
+        [self formSubmitted];
     } else if (theTextField == self.email) {
         [self.password becomeFirstResponder];
     }

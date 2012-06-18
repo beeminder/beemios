@@ -26,6 +26,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    if ([defaults objectForKey:@"authenticationTokenKey"]) {
+        [self performSegueWithIdentifier:@"segueFromSplashToDashboard" sender:self];
+    }
+    
+    
+//    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"authentication_token" accessGroup:nil];
+//    
+//    NSLog([keychain objectForKey:@"authenticationToken"]);
+//    
 	// Do any additional setup after loading the view.
 }
 
