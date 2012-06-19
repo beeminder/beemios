@@ -8,11 +8,15 @@
 
 #import "GoalsTableViewController.h"
 
-@interface GoalsTableViewController ()
+@interface GoalsTableViewController () <NSURLConnectionDelegate>
 
 @end
 
 @implementation GoalsTableViewController
+
+@synthesize responseData = _responseData;
+@synthesize responseStatus = _responseStatus;
+@synthesize goalTitles = _goalTitles;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,7 +30,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
+    
+    NSString *username = [defaults objectForKey:@"username"];
+    
+    NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/goals.json?auth_token=%@", username, authenticationToken]];
+    
+    NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalsRequest delegate:self];
+    
+    if (connection) {
+        self.title = @"Fetching goals...";
+        self.responseData = [NSMutableData data];
+    }
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -50,16 +71,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSUInteger count = [self.goalTitles count];
+    return [self.goalTitles count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,7 +85,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    cell.textLabel.text = [self.goalTitles objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -122,6 +140,48 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+#pragma mark - NSURLConnection delegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    self.responseStatus = [httpResponse statusCode];
+    
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
+    [self.responseData appendData:d];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
+                                message:[error localizedDescription]
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                      otherButtonTitles:nil] show];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if (self.responseStatus == 200) {
+        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+        
+        NSDictionary *responseJSON = [responseString JSONValue];
+        
+        NSArray *goalSlugs = [responseJSON objectForKey:@"active"];
+        
+        self.goalTitles = [NSMutableArray arrayWithArray:goalSlugs];
+        
+        self.title = @"Your goals";
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self.tableView reloadData];
+
+    }
+    else {
+        self.title = @"Bad Login";
+    }
 }
 
 @end

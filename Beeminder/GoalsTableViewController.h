@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBJson.h"
 
 @interface GoalsTableViewController : UITableViewController
+
+@property NSMutableData *responseData;
+@property NSInteger responseStatus;
+@property NSMutableArray *goalTitles;
 
 @end

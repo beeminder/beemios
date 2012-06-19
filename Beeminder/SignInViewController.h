@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBJson.h"
 
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;

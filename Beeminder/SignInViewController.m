@@ -7,21 +7,6 @@
 //
 
 #import "SignInViewController.h"
-#import "SBJson.h"
-
-@interface KeychainWrapper : NSObject {
-    NSMutableDictionary        *keychainData;
-    NSMutableDictionary        *genericPasswordQuery;
-}
-
-@property (nonatomic, strong) NSMutableDictionary *keychainData;
-@property (nonatomic, strong) NSMutableDictionary *genericPasswordQuery;
-
-- (void)mySetObject:(id)inObject forKey:(id)key;
-- (id)myObjectForKey:(id)key;
-- (void)resetKeychainItem;
-
-@end
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -30,6 +15,7 @@
 @end
 
 @implementation SignInViewController
+
 @synthesize email = _email;
 @synthesize password = _password;
 @synthesize responseData = _responseData;
@@ -66,7 +52,6 @@
 
 - (void)formSubmitted {
     NSURL *loginUrl = [NSURL URLWithString:@"http://localhost:3000/api/v1/users/sign_in.json"];
-    
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
@@ -113,15 +98,20 @@
         NSDictionary *responseJSON = [responseString JSONValue];
         
         NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+        
+        NSString *username = [responseJSON objectForKey:@"username"];
+
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
         [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
+        
+        [defaults setObject:username forKey:@"username"];
         
         [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
     }
     else {
         self.title = @"Bad Login";
     }
-    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
