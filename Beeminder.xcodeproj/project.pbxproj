@@ -20,7 +20,8 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
-		A133F9FF158FB6D7002F151A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A133F9FE158FB6D7002F151A /* Security.framework */; };
+		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
+		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -62,7 +63,8 @@
 		A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		A133F9FE158FB6D7002F151A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Retina.png"; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,7 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A133F9FF158FB6D7002F151A /* Security.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
 				A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */,
 				A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */,
@@ -134,7 +135,8 @@
 		A1F03D41158E9A850075D5DA = {
 			isa = PBXGroup;
 			children = (
-				A133F9FE158FB6D7002F151A /* Security.framework */,
+				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
+				A1993CBC158FFE0A00011568 /* Icon.png */,
 				A1F03D56158E9A850075D5DA /* Beeminder */,
 				A1F03D4F158E9A850075D5DA /* Frameworks */,
 				A1F03D4D158E9A850075D5DA /* Products */,
@@ -246,6 +248,8 @@
 				A1F03D5B158E9A850075D5DA /* InfoPlist.strings in Resources */,
 				A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */,
 				A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */,
+				A1993CBD158FFE0A00011568 /* Icon.png in Resources */,
+				A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +366,7 @@
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -375,6 +380,7 @@
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
