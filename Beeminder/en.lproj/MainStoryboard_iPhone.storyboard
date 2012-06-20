@@ -13,15 +13,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Beeminder" autoshrinkMode="minimumFontSize" id="IxB-qI-MmK">
-                                <rect key="frame" x="119" y="20" width="83" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="highlightedColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WrO-Th-DZC">
-                                <rect key="frame" x="57" y="189" width="206" height="37"/>
+                                <rect key="frame" x="57" y="219" width="206" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Start tracking Your Goals">
@@ -36,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
-                                <rect key="frame" x="73" y="234" width="175" height="37"/>
+                                <rect key="frame" x="73" y="276" width="175" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign In to Beeminder">
@@ -50,6 +43,14 @@
                                     <segue destination="cow-QV-CvW" kind="push" id="Zlw-3C-Yc3"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="top" image="bee.png" id="hbt-5V-A9g">
+                                <rect key="frame" x="20" y="20" width="280" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="top" image="logo-text.png" id="rdk-0G-DNX">
+                                <rect key="frame" x="20" y="142" width="280" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.73725490199999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -327,7 +328,9 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="yLj-Mj-Rxe" customClass="BeeminderViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="czE-bo-pUh"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4bF-Bm-VNZ">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="4bF-Bm-VNZ">
+                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -339,6 +342,10 @@
             <point key="canvasLocation" x="-393" y="-404"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bee.png" width="107" height="104"/>
+        <image name="logo-text.png" width="261" height="30"/>
+    </resources>
     <classes>
         <class className="BeeminderViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BeeminderViewController.h"/>
@@ -370,6 +377,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ual-lg-eyK"/>
+        <segue reference="B86-A8-Wtf"/>
     </inferredMetricsTieBreakers>
 </document>

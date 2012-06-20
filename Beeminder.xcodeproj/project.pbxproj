@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12E48EE1591953B0014624E /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48ED1591953B0014624E /* logo-text.png */; };
+		A12E48F1159195480014624E /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48F0159195480014624E /* bee.png */; };
 		A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F97E158FA32D002F151A /* GoalsTableViewController.m */; };
 		A133F9F1158FB27F002F151A /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9D9158FB27F002F151A /* NSObject+SBJson.m */; };
 		A133F9F2158FB27F002F151A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9DC158FB27F002F151A /* SBJsonParser.m */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
+		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		A133F97D158FA32D002F151A /* GoalsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsTableViewController.h; sourceTree = "<group>"; };
 		A133F97E158FA32D002F151A /* GoalsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsTableViewController.m; sourceTree = "<group>"; };
 		A133F9D8158FB27F002F151A /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 		A1F03D57158E9A850075D5DA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A12E48F0159195480014624E /* bee.png */,
+				A12E48ED1591953B0014624E /* logo-text.png */,
 				A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */,
 				A1F03D59158E9A850075D5DA /* InfoPlist.strings */,
 				A1F03D5C158E9A850075D5DA /* main.m */,
@@ -255,6 +261,8 @@
 				A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */,
 				A1993CBD158FFE0A00011568 /* Icon.png in Resources */,
 				A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */,
+				A12E48EE1591953B0014624E /* logo-text.png in Resources */,
+				A12E48F1159195480014624E /* bee.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
