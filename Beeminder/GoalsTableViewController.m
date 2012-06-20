@@ -141,6 +141,13 @@
      */
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+
+    [segue.destinationViewController setTitle:[self.goalTitles objectAtIndex:path.row]];
+}
+
 #pragma mark - NSURLConnection delegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

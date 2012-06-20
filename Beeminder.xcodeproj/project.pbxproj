@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A12E48EE1591953B0014624E /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48ED1591953B0014624E /* logo-text.png */; };
 		A12E48F1159195480014624E /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48F0159195480014624E /* bee.png */; };
+		A12E48F4159197400014624E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E48F3159197400014624E /* GoalViewController.m */; };
 		A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F97E158FA32D002F151A /* GoalsTableViewController.m */; };
 		A133F9F1158FB27F002F151A /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9D9158FB27F002F151A /* NSObject+SBJson.m */; };
 		A133F9F2158FB27F002F151A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9DC158FB27F002F151A /* SBJsonParser.m */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
 		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
+		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
+		A12E48F3159197400014624E /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		A133F97D158FA32D002F151A /* GoalsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsTableViewController.h; sourceTree = "<group>"; };
 		A133F97E158FA32D002F151A /* GoalsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsTableViewController.m; sourceTree = "<group>"; };
 		A133F9D8158FB27F002F151A /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				A133F97E158FA32D002F151A /* GoalsTableViewController.m */,
 				A1993CC0159007B700011568 /* SettingsViewController.h */,
 				A1993CC1159007B700011568 /* SettingsViewController.m */,
+				A12E48F2159197400014624E /* GoalViewController.h */,
+				A12E48F3159197400014624E /* GoalViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */,
 				A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */,
 				A1993CC2159007B700011568 /* SettingsViewController.m in Sources */,
+				A12E48F4159197400014624E /* GoalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
