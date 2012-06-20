@@ -17,6 +17,7 @@
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
 @synthesize goalTitles = _goalTitles;
+@synthesize goalSlugs = _goalSlugs;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -144,8 +145,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-
-    [segue.destinationViewController setTitle:[self.goalTitles objectAtIndex:path.row]];
+    
+    NSString *slug = [self.goalSlugs objectAtIndex:path.row];
+    
+    [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
+    
+    
 }
 
 #pragma mark - NSURLConnection delegate
@@ -176,7 +181,7 @@
         NSDictionary *responseJSON = [responseString JSONValue];
         
         NSArray *goalSlugs = [responseJSON objectForKey:@"active"];
-        
+        self.goalSlugs = [NSMutableArray arrayWithArray:goalSlugs];
         self.goalTitles = [NSMutableArray arrayWithArray:goalSlugs];
         
         self.title = @"Your goals";

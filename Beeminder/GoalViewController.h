@@ -12,5 +12,7 @@
 
 @property NSMutableData *responseData;
 @property NSUInteger responseStatus;
-
+@property NSMutableArray *datapoints;
+@property (strong, nonatomic) IBOutlet UILabel *tmpLabel;
+@property NSString *slug;
 @end

@@ -17,6 +17,9 @@
 
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
+@synthesize datapoints = _datapoints;
+@synthesize tmpLabel = _tmpLabel;
+@synthesize slug = _slug;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,14 +35,14 @@
     [super viewDidLoad];
     
     
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
     
     NSString *username = [defaults objectForKey:@"username"];
-    NSString *goalSlug = @"foo";
     
-    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", username, goalSlug, authenticationToken]];
+    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", username, self.slug, authenticationToken]];
     
     NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
     
@@ -88,9 +91,13 @@
     if (self.responseStatus == 200) {
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
         
-        NSDictionary *responseJSON = [responseString JSONValue];
+        NSArray *responseJSON = [responseString JSONValue];
+
+        self.datapoints = [NSMutableArray arrayWithArray:responseJSON];
+        self.tmpLabel.text = [NSString stringWithFormat:@"I see %i datapoints!", self.datapoints.count];
         
-        NSArray *goalSlugs = [responseJSON objectForKey:@"active"];
+        
+
         
 //        self.goalTitles = [NSMutableArray arrayWithArray:goalSlugs];
 //        
@@ -105,4 +112,8 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setTmpLabel:nil];
+    [super viewDidUnload];
+}
 @end
