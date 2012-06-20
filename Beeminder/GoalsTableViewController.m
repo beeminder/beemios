@@ -16,8 +16,7 @@
 
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
-@synthesize goalTitles = _goalTitles;
-@synthesize goalSlugs = _goalSlugs;
+@synthesize goals = _goals;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -77,7 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.goalTitles count];
+    return [self.goals count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,7 +84,9 @@
     static NSString *CellIdentifier = @"Goal Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [self.goalTitles objectAtIndex:indexPath.row];
+    NSDictionary *goalDict = [self.goals objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [goalDict objectForKey:@"title"];
     
     return cell;
 }
@@ -146,7 +147,9 @@
 {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
     
-    NSString *slug = [self.goalSlugs objectAtIndex:path.row];
+    NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
+    
+    NSString *slug = [goalDict objectForKey:@"slug"];
     
     [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
     
@@ -180,9 +183,7 @@
         
         NSDictionary *responseJSON = [responseString JSONValue];
         
-        NSArray *goalSlugs = [responseJSON objectForKey:@"active"];
-        self.goalSlugs = [NSMutableArray arrayWithArray:goalSlugs];
-        self.goalTitles = [NSMutableArray arrayWithArray:goalSlugs];
+        self.goals = [responseJSON objectForKey:@"goals"];
         
         self.title = @"Your goals";
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];

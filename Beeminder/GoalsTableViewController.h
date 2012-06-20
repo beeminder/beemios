@@ -13,7 +13,6 @@
 
 @property NSMutableData *responseData;
 @property NSInteger responseStatus;
-@property NSMutableArray *goalTitles;
-@property NSMutableArray *goalSlugs;
+@property NSMutableArray *goals;
 
 @end
