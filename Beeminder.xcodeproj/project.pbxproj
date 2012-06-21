@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
 		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -202,6 +203,7 @@
 				A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */,
 				A1B5F8B61592843F004D9FF0 /* ChooseGoalTypeTableViewController.h */,
 				A1B5F8B71592843F004D9FF0 /* ChooseGoalTypeTableViewController.m */,
+				A126C9301592EE1700FE8CF8 /* constants.h */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";

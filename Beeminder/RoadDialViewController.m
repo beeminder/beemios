@@ -15,7 +15,9 @@
 @implementation RoadDialViewController
 
 @synthesize introLabel = _introLabel;
-@synthesize currentValue = _currentValue;
+@synthesize currentWeight = _currentWeight;
+@synthesize goalRateStepper = _goalRateStepper;
+@synthesize goalRateLabel = _goalRateLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,18 +30,17 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
+    
     self.title = self.goalType;
-    if ([self.goalType isEqualToString:@"Lose Weight"]) {
-        self.introLabel.text = @"Lose Weight Text";
+    self.goalRateLabel.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
+    
+    
+    if (![self.goalType isEqualToString:@"Lose Weight"]) {
+       [self.currentWeight removeFromSuperview];
     }
-    else if ([self.goalType isEqualToString:@"Do More"]) {
-        self.introLabel.text = @"Do More Text";
-    }
-    else {
-        [self.currentValue removeFromSuperview];
-    }
+    self.introLabel.text = @"Do More Text";
+    
     // TODO: store these in Core Data
 	// Do any additional setup after loading the view.
 }
@@ -57,8 +58,15 @@
 
 - (void)viewDidUnload {
     [self setIntroLabel:nil];
-    [self setCurrentValue:nil];
-    [self setCurrentValue:nil];
+    [self setCurrentWeight:nil];
+    [self setGoalRateStepper:nil];
+    [self setGoalRateLabel:nil];
     [super viewDidUnload];
 }
+
+- (IBAction)goalRateChanged:(UIStepper *)sender {
+        
+    self.goalRateLabel.text = [NSString stringWithFormat:@"%i", (int)sender.value];
+}
+
 @end

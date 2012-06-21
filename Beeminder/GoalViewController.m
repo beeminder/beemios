@@ -7,6 +7,7 @@
 //
 
 #import "GoalViewController.h"
+#import "constants.h"
 #import "SBJson.h"
 
 @interface GoalViewController () <NSURLConnectionDelegate>
@@ -42,7 +43,7 @@
     
     NSString *username = [defaults objectForKey:@"username"];
     
-    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", username, self.slug, authenticationToken]];
+    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, username, self.slug, authenticationToken]];
     
     NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
     

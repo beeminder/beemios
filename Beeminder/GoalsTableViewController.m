@@ -7,6 +7,7 @@
 //
 
 #import "GoalsTableViewController.h"
+#import "constants.h"
 
 @interface GoalsTableViewController () <NSURLConnectionDelegate>
 
@@ -36,7 +37,7 @@
     
     NSString *username = [defaults objectForKey:@"username"];
     
-    NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/goals.json?auth_token=%@", username, authenticationToken]];
+    NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@", kBaseURL, username, authenticationToken]];
     
     NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
     

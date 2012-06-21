@@ -113,16 +113,42 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="150" minValue="100" maxValue="300" id="nnS-Ch-ONE">
-                                <rect key="frame" x="18" y="77" width="284" height="23"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="naK-9D-1PS">
+                                <rect key="frame" x="175" y="146" width="125" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </slider>
+                                <segments>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="times per" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="f1k-kL-BMD">
+                                <rect key="frame" x="97" y="159" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="BlV-NZ-kSf">
+                                <rect key="frame" x="20" y="194" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="goalRateChanged:" destination="V2c-aC-eoo" eventType="valueChanged" id="LWN-EQ-p31"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="5" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="NJU-ll-jTX">
+                                <rect key="frame" x="20" y="154" width="69" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="T67-dM-wrY"/>
                     <connections>
-                        <outlet property="currentValue" destination="nnS-Ch-ONE" id="6cD-3y-YKn"/>
+                        <outlet property="goalRateLabel" destination="NJU-ll-jTX" id="mJm-Le-lBZ"/>
+                        <outlet property="goalRateStepper" destination="BlV-NZ-kSf" id="Guf-wC-pKK"/>
                         <outlet property="introLabel" destination="aQ9-Ly-MYM" id="wS5-ao-lZy"/>
                     </connections>
                 </viewController>
@@ -367,7 +393,10 @@
         <class className="RoadDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="currentValue" candidateClass="UIButton"/>
+                <relationship kind="action" name="goalRateChanged:" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="currentWeight" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="goalRateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalRateStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="introLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -380,6 +409,7 @@
         <class className="SignInViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
             <relationships>
+                <relationship kind="action" name="signInButtonPressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
             </relationships>

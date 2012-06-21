@@ -12,6 +12,10 @@
 
 @property (nonatomic, strong) NSString *goalType;
 @property (strong, nonatomic) IBOutlet UILabel *introLabel;
-@property (strong, nonatomic) IBOutlet UISlider *currentValue;
+@property (strong, nonatomic) IBOutlet UISlider *currentWeight;
+@property (strong, nonatomic) IBOutlet UIStepper *goalRateStepper;
+@property (strong, nonatomic) IBOutlet UILabel *goalRateLabel;
+
+- (IBAction)goalRateChanged:(UIStepper *)sender;
 
 @end

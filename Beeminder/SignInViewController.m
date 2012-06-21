@@ -7,6 +7,7 @@
 //
 
 #import "SignInViewController.h"
+#import "constants.h"
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -51,7 +52,9 @@
 }
 
 - (void)formSubmitted {
-    NSURL *loginUrl = [NSURL URLWithString:@"http://localhost:3000/api/v1/users/sign_in.json"];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/sign_in.json", kBaseURL];
+    
+    NSURL *loginUrl = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
