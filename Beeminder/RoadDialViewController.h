@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RoadDialViewController : UIViewController
+@interface RoadDialViewController : UIViewController 
+    <UIPickerViewDataSource,
+     UIPickerViewDelegate>
 
-@property (nonatomic, strong) NSString *goalType;
-@property (strong, nonatomic) IBOutlet UILabel *introLabel;
-@property (strong, nonatomic) IBOutlet UISlider *currentWeight;
-@property (strong, nonatomic) IBOutlet UIStepper *goalRateStepper;
-@property (strong, nonatomic) IBOutlet UILabel *goalRateLabel;
+@property (strong, nonatomic) IBOutlet UITextField *goalRateTextField;
+@property (strong, nonatomic) IBOutlet UITextField *goalUnitsTextField;
+@property (strong, nonatomic) IBOutlet UIPickerView *goalUnitsPicker;
 
-- (IBAction)goalRateChanged:(UIStepper *)sender;
+- (IBAction)goalRateStepperChanged;
+
 
 @end

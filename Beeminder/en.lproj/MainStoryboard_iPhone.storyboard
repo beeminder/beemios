@@ -25,7 +25,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="QVa-6D-ep4" kind="push" id="aRU-Nx-cjN"/>
+                                    <segue destination="jWY-8X-ePl" kind="push" id="3w6-ee-FGO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
@@ -63,98 +63,124 @@
             </objects>
             <point key="canvasLocation" x="51" y="-404"/>
         </scene>
-        <!--Choose Goal Type Table View Controller - Choose Goal Type-->
-        <scene sceneID="QmL-38-gmy">
+        <!--View Controller-->
+        <scene sceneID="Fml-p7-orr">
             <objects>
-                <tableViewController id="QVa-6D-ep4" customClass="ChooseGoalTypeTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SOy-ZJ-ZIu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GoalType" id="97T-No-fzX">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <connections>
-                                    <segue destination="V2c-aC-eoo" kind="push" identifier="segueToRoadDialViewController" id="xZZ-cP-3Q1"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="QVa-6D-ep4" id="LAx-c9-Uug"/>
-                            <outlet property="delegate" destination="QVa-6D-ep4" id="X4X-iR-kJd"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Choose Goal Type" id="mau-fb-Foo">
-                        <barButtonItem key="backBarButtonItem" title="Goal Type" id="GSR-fD-lB7"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xyy-PB-QxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="591" y="-701"/>
-        </scene>
-        <!--Road Dial View Controller-->
-        <scene sceneID="2f2-wV-9Hh">
-            <objects>
-                <viewController id="V2c-aC-eoo" customClass="RoadDialViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PCC-9r-Kku">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Mi-3f-gyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="jWY-8X-ePl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GaN-pU-HsX">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aQ9-Ly-MYM">
-                                <rect key="frame" x="20" y="20" width="280" height="53"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oh0-jc-5hb">
+                                <rect key="frame" x="117" y="69" width="86" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="naK-9D-1PS">
-                                <rect key="frame" x="175" y="146" width="125" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Day"/>
-                                    <segment title="Week"/>
-                                </segments>
-                            </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="times per" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f1k-kL-BMD">
-                                <rect key="frame" x="97" y="159" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="BlV-NZ-kSf">
-                                <rect key="frame" x="20" y="194" width="94" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Do More">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="goalRateChanged:" destination="V2c-aC-eoo" eventType="valueChanged" id="LWN-EQ-p31"/>
+                                    <segue destination="law-yH-2rS" kind="push" id="V2j-vI-Nvj"/>
                                 </connections>
-                            </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NJU-ll-jTX">
-                                <rect key="frame" x="20" y="154" width="69" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="T67-dM-wrY"/>
+                    <navigationItem key="navigationItem" id="pqA-Ps-5aa"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="520" y="-781"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kTo-r9-snd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FXZ-YT-PDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="law-yH-2rS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bhb-KQ-j4i">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Tck-4q-Zwq">
+                                <rect key="frame" x="112" y="134" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L9J-Yo-Q1s">
+                                <rect key="frame" x="124" y="189" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Enter">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Xgv-aN-lSx" kind="push" id="tMb-LY-m39"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="A7d-Po-yQH"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="889" y="-830"/>
+        </scene>
+        <!--Road Dial View Controller-->
+        <scene sceneID="Kzg-i9-IJH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INY-lf-v1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Xgv-aN-lSx" customClass="RoadDialViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="08g-UL-qPc">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="dBf-9P-m0F">
+                                <rect key="frame" x="21" y="52" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="Zd5-5b-iOq">
+                                <rect key="frame" x="21" y="94" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="goalRateStepperChanged" destination="Xgv-aN-lSx" eventType="valueChanged" id="AGY-Lb-McL"/>
+                                </connections>
+                            </stepper>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="uXC-Nq-efo">
+                                <rect key="frame" x="171" y="52" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" id="6K2-hD-lP7">
+                                <rect key="frame" x="0.0" y="200" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xgv-aN-lSx" id="dY2-BA-uHe"/>
+                                    <outlet property="delegate" destination="Xgv-aN-lSx" id="TJ4-gE-OwF"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zc8-9G-z2W"/>
                     <connections>
-                        <outlet property="goalRateLabel" destination="NJU-ll-jTX" id="mJm-Le-lBZ"/>
-                        <outlet property="goalRateStepper" destination="BlV-NZ-kSf" id="Guf-wC-pKK"/>
-                        <outlet property="introLabel" destination="aQ9-Ly-MYM" id="wS5-ao-lZy"/>
+                        <outlet property="goalRateTextField" destination="dBf-9P-m0F" id="X2a-Nw-4yy"/>
+                        <outlet property="goalUnitsPicker" destination="6K2-hD-lP7" id="YhZ-mK-hjq"/>
+                        <outlet property="goalUnitsTextField" destination="uXC-Nq-efo" id="9v8-u0-d1z"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W6k-Ds-DqU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1011" y="-701"/>
+            <point key="canvasLocation" x="1338" y="-1318"/>
         </scene>
         <!--Sign In View Controller - Sign In to Beeminder-->
         <scene sceneID="RMd-BL-Ydb">
@@ -379,9 +405,6 @@
         <class className="CPTGraphHostingView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
         </class>
-        <class className="ChooseGoalTypeTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalTypeTableViewController.h"/>
-        </class>
         <class className="GoalViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
             <relationships>
@@ -394,11 +417,10 @@
         <class className="RoadDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
-                <relationship kind="action" name="goalRateChanged:" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="currentWeight" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="goalRateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalRateStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="introLabel" candidateClass="UILabel"/>
+                <relationship kind="action" name="goalRateStepperChanged"/>
+                <relationship kind="outlet" name="goalRateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalUnitsPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalUnitsTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="SettingsViewController" superclassName="UIViewController">

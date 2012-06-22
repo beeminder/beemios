@@ -14,11 +14,9 @@
 
 @implementation RoadDialViewController
 
-@synthesize goalType = _goalType;
-@synthesize introLabel = _introLabel;
-@synthesize currentWeight = _currentWeight;
-@synthesize goalRateStepper = _goalRateStepper;
-@synthesize goalRateLabel = _goalRateLabel;
+@synthesize goalRateTextField = _goalRateTextField;
+@synthesize goalUnitsTextField = _goalUnitsTextField;
+@synthesize goalUnitsPicker = _goalUnitsPicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,17 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.goalUnitsPicker.hidden = YES;
     
-    self.title = self.goalType;
-    self.goalRateLabel.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
+//    self.title = self.goalType;
+//    self.goalRateTexField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
     
-    
-    if (![self.goalType isEqualToString:@"Lose Weight"]) {
-       [self.currentWeight removeFromSuperview];
-    }
-    self.introLabel.text = @"Do More Text";
-    
-    // TODO: store these in Core Data
 	// Do any additional setup after loading the view.
 }
 
@@ -58,16 +50,28 @@
 }
 
 - (void)viewDidUnload {
-    [self setIntroLabel:nil];
-    [self setCurrentWeight:nil];
-    [self setGoalRateStepper:nil];
-    [self setGoalRateLabel:nil];
+    [self setGoalRateTextField:nil];
+    [self setGoalUnitsTextField:nil];
+    [self setGoalUnitsPicker:nil];
     [super viewDidUnload];
 }
 
-- (IBAction)goalRateChanged:(UIStepper *)sender {
-        
-    self.goalRateLabel.text = [NSString stringWithFormat:@"%i", (int)sender.value];
+#pragma mark UIPickerViewDataSource methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
 }
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 5;
+}
+
+#pragma mark UIPickerViewDelegate methods
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return @"foo";
+}
+
+- (IBAction)goalRateStepperChanged {
+}
 @end
