@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CorePlot-CocoaTouch.h"
 
-@interface GoalViewController : UIViewController
+@interface GoalViewController : UIViewController <CPTPlotSpaceDelegate,
+    CPTPlotDataSource,
+    CPTAxisDelegate,
+    CPTPlotDelegate>
 
 @property NSMutableData *responseData;
 @property NSUInteger responseStatus;
 @property (strong, nonatomic) NSMutableArray *datapoints;
-@property (strong, nonatomic) IBOutlet UILabel *tmpLabel;
 @property (strong, nonatomic) NSString *slug;
+@property (strong, nonatomic) IBOutlet CPTGraphHostingView *graphHostingView;
+@property (nonatomic, strong) CPTPlotSpaceAnnotation *symbolTextAnnotation;
+
 @end

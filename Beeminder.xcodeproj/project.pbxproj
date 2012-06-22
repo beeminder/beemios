@@ -28,6 +28,8 @@
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1B5F8B81592843F004D9FF0 /* ChooseGoalTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B71592843F004D9FF0 /* ChooseGoalTypeTableViewController.m */; };
+		A1CA215815935A4700AE16FB /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */; };
+		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -40,6 +42,23 @@
 		A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D71158E9BE60075D5DA /* SplashViewController.m */; };
 		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1CA215315935A0B00AE16FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		A1CA215615935A2900AE16FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -74,14 +93,16 @@
 		A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Retina.png"; sourceTree = "<group>"; };
+		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		A1993CC1159007B700011568 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoadDialViewController.h; sourceTree = "<group>"; };
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
 		A1B5F8B61592843F004D9FF0 /* ChooseGoalTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeTableViewController.h; sourceTree = "<group>"; };
 		A1B5F8B71592843F004D9FF0 /* ChooseGoalTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeTableViewController.m; sourceTree = "<group>"; };
+		A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,8 +128,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
 				A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */,
+				A1CA215815935A4700AE16FB /* libCorePlot-CocoaTouch.a in Frameworks */,
 				A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,11 +172,28 @@
 			path = Beeminder;
 			sourceTree = "<group>";
 		};
-		A1F03D41158E9A850075D5DA = {
+		A1CA214B15935A0B00AE16FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
 				A1993CBC158FFE0A00011568 /* Icon.png */,
+				A12E48F0159195480014624E /* bee.png */,
+				A12E48ED1591953B0014624E /* logo-text.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A1F03D41158E9A850075D5DA = {
+			isa = PBXGroup;
+			children = (
 				A1F03D56158E9A850075D5DA /* Beeminder */,
 				A1F03D4F158E9A850075D5DA /* Frameworks */,
 				A1F03D4D158E9A850075D5DA /* Products */,
@@ -171,6 +211,8 @@
 		A1F03D4F158E9A850075D5DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */,
+				A1CA215915935AE200AE16FB /* QuartzCore.framework */,
 				A133F9FD158FB40E002F151A /* SBJson */,
 				A1F03D50158E9A850075D5DA /* UIKit.framework */,
 				A1F03D52158E9A850075D5DA /* Foundation.framework */,
@@ -211,8 +253,7 @@
 		A1F03D57158E9A850075D5DA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A12E48F0159195480014624E /* bee.png */,
-				A12E48ED1591953B0014624E /* logo-text.png */,
+				A1CA215B15935B0800AE16FB /* Resources */,
 				A1F03D58158E9A850075D5DA /* Beeminder-Info.plist */,
 				A1F03D59158E9A850075D5DA /* InfoPlist.strings */,
 				A1F03D5C158E9A850075D5DA /* main.m */,
@@ -235,6 +276,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A1CA215715935A2900AE16FB /* PBXTargetDependency */,
 			);
 			name = Beeminder;
 			productName = Beeminder;
@@ -261,12 +303,28 @@
 			mainGroup = A1F03D41158E9A850075D5DA;
 			productRefGroup = A1F03D4D158E9A850075D5DA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A1CA214B15935A0B00AE16FB /* Products */;
+					ProjectRef = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A1F03D4B158E9A850075D5DA /* Beeminder */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = A1CA215315935A0B00AE16FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A1F03D4A158E9A850075D5DA /* Resources */ = {
@@ -316,6 +374,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1CA215715935A2900AE16FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = A1CA215615935A2900AE16FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A1F03D59158E9A850075D5DA /* InfoPlist.strings */ = {
@@ -398,9 +464,13 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../core-plot/framework/**";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -412,9 +482,13 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../core-plot/framework/**";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

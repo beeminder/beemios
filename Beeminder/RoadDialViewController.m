@@ -14,6 +14,7 @@
 
 @implementation RoadDialViewController
 
+@synthesize goalType = _goalType;
 @synthesize introLabel = _introLabel;
 @synthesize currentWeight = _currentWeight;
 @synthesize goalRateStepper = _goalRateStepper;
