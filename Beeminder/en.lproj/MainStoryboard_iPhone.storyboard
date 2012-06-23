@@ -113,7 +113,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="A7d-Po-yQH"/>
+                    <navigationItem key="navigationItem" id="A7d-Po-yQH">
+                        <barButtonItem key="backBarButtonItem" title="Name" id="MAc-x4-dLk"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="goalNameTextField" destination="Tck-4q-Zwq" id="ABN-5u-Iu8"/>
                         <outlet property="scrollView" destination="Bhb-KQ-j4i" id="RGB-TI-V4V"/>
@@ -132,14 +134,14 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How often do you want to do this goal?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="fv6-lt-xGn">
-                                <rect key="frame" x="10" y="20" width="300" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How often do you want to do this goal?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="fv6-lt-xGn">
+                                <rect key="frame" x="40" y="20" width="241" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="n6l-dd-c3O">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="n6l-dd-c3O">
                                 <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
@@ -159,19 +161,13 @@
                                     <outlet property="delegate" destination="Xgv-aN-lSx" id="Rpl-MS-bjQ"/>
                                 </connections>
                             </pickerView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xe7-kn-zva">
-                                <rect key="frame" x="10" y="49" width="290" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zc8-9G-z2W"/>
+                    <navigationItem key="navigationItem" id="zc8-9G-z2W">
+                        <barButtonItem key="backBarButtonItem" title="Goal" id="8uP-y0-rnm"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="goalStatementLabel" destination="xe7-kn-zva" id="QFD-Mh-Fuy"/>
                         <outlet property="pickerToolbar" destination="n6l-dd-c3O" id="QIE-Ft-MXf"/>
                     </connections>
                 </viewController>
