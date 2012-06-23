@@ -12,11 +12,10 @@
     <UIPickerViewDataSource,
      UIPickerViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITextField *goalRateTextField;
-@property (strong, nonatomic) IBOutlet UITextField *goalUnitsTextField;
-@property (strong, nonatomic) IBOutlet UIStepper *goalRateStepper;
-@property (strong, nonatomic) IBOutlet UITextField *goalRateUnitsTextField;
-
-- (IBAction)goalRateStepperChanged;
+@property (nonatomic, strong) NSString *goalRateDenominatorUnits;
+@property (nonatomic, strong) NSString *goalRateNumeratorUnits;
+@property NSInteger goalRateNumerator;
+@property (strong, nonatomic) IBOutlet UIToolbar *pickerToolbar;
+@property (strong, nonatomic) IBOutlet UILabel *goalStatementLabel;
 
 @end

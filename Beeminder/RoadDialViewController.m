@@ -10,19 +10,22 @@
 
 @interface RoadDialViewController ()
 
-@property (nonatomic, strong) NSArray *goalUnitsOptions;
-@property (nonatomic, strong) NSArray *goalRateUnitsOptions;
+@property (nonatomic, strong) NSArray *goalRateNumeratorUnitsOptions;
+@property (nonatomic, strong) NSArray *goalRateDenominatorUnitsOptions;
+
+- (NSString *) goalStatement;
 
 @end
 
 @implementation RoadDialViewController
 
-@synthesize goalRateTextField = _goalRateTextField;
-@synthesize goalUnitsTextField = _goalUnitsTextField;
-@synthesize goalRateStepper = _goalRateStepper;
-@synthesize goalRateUnitsTextField = _goalRateUnitsTextField;
-@synthesize goalUnitsOptions = _goalUnitsOptions;
-@synthesize goalRateUnitsOptions = _goalRateUnitsOptions;
+@synthesize pickerToolbar = _pickerToolbar;
+@synthesize goalStatementLabel = _goalStatementLabel;
+@synthesize goalRateNumerator = _goalRateNumerator;
+@synthesize goalRateNumeratorUnits = _goalRateNumeratorUnits;
+@synthesize goalRateDenominatorUnits = _goalRateDenominatorUnits;
+@synthesize goalRateNumeratorUnitsOptions = _goalRateNumeratorUnitsOptions;
+@synthesize goalRateDenominatorUnitsOptions = _goalRateDenominatorUnitsOptions;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,32 +40,11 @@
 {
     [super viewDidLoad];
 
-    self.goalUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds lost", @"pounds gained", nil];
+    self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"lbs lost", @"lbs gained", nil];   
     
-    UIPickerView *goalUnitsPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
-    goalUnitsPicker.tag = 0;
-    goalUnitsPicker.delegate = self;
-    goalUnitsPicker.dataSource = self;
-    goalUnitsPicker.showsSelectionIndicator = YES;
+    self.goalRateDenominatorUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
+    self.goalStatementLabel.text = @"Default goal";
     
-    self.goalUnitsTextField.inputView = goalUnitsPicker;
-    
-    self.goalUnitsTextField.text = [self.goalUnitsOptions objectAtIndex:0];    
-    
-    self.goalRateUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
-    
-    UIPickerView *goalRateUnitsPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
-    goalRateUnitsPicker.tag = 1;
-    goalRateUnitsPicker.delegate = self;
-    goalRateUnitsPicker.dataSource = self;
-    goalRateUnitsPicker.showsSelectionIndicator = YES;
-    
-    self.goalRateUnitsTextField.inputView = goalRateUnitsPicker;
-
-    self.goalRateUnitsTextField.text = [self.goalRateUnitsOptions objectAtIndex:0];
-    
-    
-    [self goalRateStepperChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,56 +59,74 @@
 }
 
 - (void)viewDidUnload {
-    [self setGoalRateTextField:nil];
-    [self setGoalUnitsTextField:nil];
-    [self setGoalRateStepper:nil];
-    [self setGoalRateUnitsTextField:nil];
+    [self setPickerToolbar:nil];
+    [self setGoalStatementLabel:nil];
     [super viewDidUnload];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // save goal
     [segue.destinationViewController setTitle:@"foo"];
+}
+
+- (NSString *) goalStatement
+{
+    return [NSString stringWithFormat:@"%i %@ per %@", self.goalRateNumerator, self.goalRateNumeratorUnits, self.goalRateDenominatorUnits];
 }
 
 #pragma mark UIPickerViewDataSource methods
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView 
+{
+    return 4;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (pickerView.tag == 0) {
-        return self.goalUnitsOptions.count;
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component 
+{
+    switch(component) {
+        case 0: return 1000;
+        case 1: return self.goalRateNumeratorUnitsOptions.count;
+        case 2: return 1;
+        case 3: return self.goalRateDenominatorUnitsOptions.count;
+        default: return 0;
     }
-    else if (pickerView.tag == 1) {
-        return self.goalRateUnitsOptions.count;
-    }
-    return 1;
+    // not reached
+    return 0;
 }
 
 #pragma mark UIPickerViewDelegate methods
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (pickerView.tag == 0) {
-        self.goalUnitsTextField.text = [self.goalUnitsOptions objectAtIndex:row];
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component 
+{
+    switch(component) {
+        case 0: return 50.0;
+        case 2: return 50.0;
+        default: return 100.0;
     }
-    else if (pickerView.tag == 1) {
-        self.goalRateUnitsTextField.text = [self.goalRateUnitsOptions objectAtIndex:row];
-    }
+    return 100.0;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (pickerView.tag == 0) {
-        return [self.goalUnitsOptions objectAtIndex:row];
-    }
-    else {
-        return [self.goalRateUnitsOptions objectAtIndex:row];
-    }    
-
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component 
+{
+    self.goalRateNumerator = [pickerView selectedRowInComponent:0];
+    
+    self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
+    
+    self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:3]];
+    
+    self.goalStatementLabel.text = self.goalStatement;
+    
 }
 
-- (IBAction)goalRateStepperChanged {
-    self.goalRateTextField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
+{
+    switch (component) {
+        case 0: return [NSString stringWithFormat:@"%i", row];
+        case 1: return [self.goalRateNumeratorUnitsOptions objectAtIndex:row];
+        case 2: return @"per";
+        default: return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
+    }
+    return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
 }
 
 @end
