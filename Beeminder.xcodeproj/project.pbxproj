@@ -23,6 +23,7 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
+		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
@@ -93,6 +94,8 @@
 		A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
+		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
 		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				A1B5F8B61592843F004D9FF0 /* ChooseGoalTypeTableViewController.h */,
 				A1B5F8B71592843F004D9FF0 /* ChooseGoalTypeTableViewController.m */,
 				A126C9301592EE1700FE8CF8 /* constants.h */,
+				A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */,
+				A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				A12E48F4159197400014624E /* GoalViewController.m in Sources */,
 				A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */,
 				A1B5F8B81592843F004D9FF0 /* ChooseGoalTypeTableViewController.m in Sources */,
+				A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,12 +63,6 @@
     
     
     [self goalRateStepperChanged];
-
-    
-//    self.title = self.goalType;
-//    self.goalRateTexField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
-    
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +82,10 @@
     [self setGoalRateStepper:nil];
     [self setGoalRateUnitsTextField:nil];
     [super viewDidUnload];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [segue.destinationViewController setTitle:@"foo"];
 }
 
 #pragma mark UIPickerViewDataSource methods
@@ -130,6 +128,5 @@
 - (IBAction)goalRateStepperChanged {
     self.goalRateTextField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
 }
-
 
 @end
