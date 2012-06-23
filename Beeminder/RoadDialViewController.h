@@ -14,9 +14,9 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *goalRateTextField;
 @property (strong, nonatomic) IBOutlet UITextField *goalUnitsTextField;
-@property (strong, nonatomic) IBOutlet UIPickerView *goalUnitsPicker;
+@property (strong, nonatomic) IBOutlet UIStepper *goalRateStepper;
+@property (strong, nonatomic) IBOutlet UITextField *goalRateUnitsTextField;
 
 - (IBAction)goalRateStepperChanged;
-
 
 @end

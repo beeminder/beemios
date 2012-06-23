@@ -66,7 +66,6 @@
         <!--View Controller-->
         <scene sceneID="Fml-p7-orr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Mi-3f-gyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="jWY-8X-ePl" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GaN-pU-HsX">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -92,13 +91,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="pqA-Ps-5aa"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Mi-3f-gyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="-781"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kTo-r9-snd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FXZ-YT-PDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="law-yH-2rS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bhb-KQ-j4i">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -130,19 +129,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="A7d-Po-yQH"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FXZ-YT-PDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="889" y="-830"/>
         </scene>
         <!--Road Dial View Controller-->
         <scene sceneID="Kzg-i9-IJH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="INY-lf-v1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Xgv-aN-lSx" customClass="RoadDialViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08g-UL-qPc">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="dBf-9P-m0F">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="dBf-9P-m0F">
                                 <rect key="frame" x="21" y="52" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -161,24 +160,50 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <pickerView contentMode="scaleToFill" id="6K2-hD-lP7">
-                                <rect key="frame" x="0.0" y="200" width="320" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Xgv-aN-lSx" id="dY2-BA-uHe"/>
-                                    <outlet property="delegate" destination="Xgv-aN-lSx" id="TJ4-gE-OwF"/>
-                                </connections>
-                            </pickerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Qb9-1Z-uv6">
+                                <rect key="frame" x="73" y="140" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Every" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="u09-eC-lKj">
+                                <rect key="frame" x="21" y="145" width="44" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How often do you want to do this goal?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="fv6-lt-xGn">
+                                <rect key="frame" x="10" y="20" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ki9-RO-B7D">
+                                <rect key="frame" x="196" y="137" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Go!">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="zc8-9G-z2W"/>
                     <connections>
-                        <outlet property="goalRateTextField" destination="dBf-9P-m0F" id="X2a-Nw-4yy"/>
-                        <outlet property="goalUnitsPicker" destination="6K2-hD-lP7" id="YhZ-mK-hjq"/>
-                        <outlet property="goalUnitsTextField" destination="uXC-Nq-efo" id="9v8-u0-d1z"/>
+                        <outlet property="goalRateStepper" destination="Zd5-5b-iOq" id="zFK-Zf-iwI"/>
+                        <outlet property="goalRateTextField" destination="dBf-9P-m0F" id="wuL-B2-q7N"/>
+                        <outlet property="goalRateUnitsTextField" destination="Qb9-1Z-uv6" id="u4E-aV-x82"/>
+                        <outlet property="goalUnitsTextField" destination="uXC-Nq-efo" id="y8d-KE-nMe"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INY-lf-v1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1338" y="-1318"/>
         </scene>
@@ -418,8 +443,9 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="goalRateStepperChanged"/>
+                <relationship kind="outlet" name="goalRateStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="goalRateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalUnitsPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateUnitsTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="goalUnitsTextField" candidateClass="UITextField"/>
             </relationships>
         </class>

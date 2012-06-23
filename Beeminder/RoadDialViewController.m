@@ -10,13 +10,19 @@
 
 @interface RoadDialViewController ()
 
+@property (nonatomic, strong) NSArray *goalUnitsOptions;
+@property (nonatomic, strong) NSArray *goalRateUnitsOptions;
+
 @end
 
 @implementation RoadDialViewController
 
 @synthesize goalRateTextField = _goalRateTextField;
 @synthesize goalUnitsTextField = _goalUnitsTextField;
-@synthesize goalUnitsPicker = _goalUnitsPicker;
+@synthesize goalRateStepper = _goalRateStepper;
+@synthesize goalRateUnitsTextField = _goalRateUnitsTextField;
+@synthesize goalUnitsOptions = _goalUnitsOptions;
+@synthesize goalRateUnitsOptions = _goalRateUnitsOptions;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +36,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.goalUnitsPicker.hidden = YES;
+
+    self.goalUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds lost", @"pounds gained", nil];
+    
+    UIPickerView *goalUnitsPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    goalUnitsPicker.tag = 0;
+    goalUnitsPicker.delegate = self;
+    goalUnitsPicker.dataSource = self;
+    goalUnitsPicker.showsSelectionIndicator = YES;
+    
+    self.goalUnitsTextField.inputView = goalUnitsPicker;
+    
+    self.goalUnitsTextField.text = [self.goalUnitsOptions objectAtIndex:0];    
+    
+    self.goalRateUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
+    
+    UIPickerView *goalRateUnitsPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    goalRateUnitsPicker.tag = 1;
+    goalRateUnitsPicker.delegate = self;
+    goalRateUnitsPicker.dataSource = self;
+    goalRateUnitsPicker.showsSelectionIndicator = YES;
+    
+    self.goalRateUnitsTextField.inputView = goalRateUnitsPicker;
+
+    self.goalRateUnitsTextField.text = [self.goalRateUnitsOptions objectAtIndex:0];
+    
+    
+    [self goalRateStepperChanged];
+
     
 //    self.title = self.goalType;
 //    self.goalRateTexField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
@@ -52,7 +85,8 @@
 - (void)viewDidUnload {
     [self setGoalRateTextField:nil];
     [self setGoalUnitsTextField:nil];
-    [self setGoalUnitsPicker:nil];
+    [self setGoalRateStepper:nil];
+    [self setGoalRateUnitsTextField:nil];
     [super viewDidUnload];
 }
 
@@ -63,15 +97,39 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 5;
+    if (pickerView.tag == 0) {
+        return self.goalUnitsOptions.count;
+    }
+    else if (pickerView.tag == 1) {
+        return self.goalRateUnitsOptions.count;
+    }
+    return 1;
 }
 
 #pragma mark UIPickerViewDelegate methods
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (pickerView.tag == 0) {
+        self.goalUnitsTextField.text = [self.goalUnitsOptions objectAtIndex:row];
+    }
+    else if (pickerView.tag == 1) {
+        self.goalRateUnitsTextField.text = [self.goalRateUnitsOptions objectAtIndex:row];
+    }
+}
+
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return @"foo";
+    if (pickerView.tag == 0) {
+        return [self.goalUnitsOptions objectAtIndex:row];
+    }
+    else {
+        return [self.goalRateUnitsOptions objectAtIndex:row];
+    }    
+
 }
 
 - (IBAction)goalRateStepperChanged {
+    self.goalRateTextField.text = [NSString stringWithFormat:@"%i", (int)self.goalRateStepper.value];
 }
+
+
 @end
