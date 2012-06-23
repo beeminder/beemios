@@ -11,5 +11,7 @@
 @interface ChooseGoalNameViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *goalNameTextField;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UITextField *activeField;
 
 @end
