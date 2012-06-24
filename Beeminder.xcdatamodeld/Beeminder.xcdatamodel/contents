@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Datapoint" syncable="YES">
+    <entity name="Datapoint" representedClassName="Datapoint" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="measured_at" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <relationship name="goal" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="datapoints" inverseEntity="Goal" syncable="YES"/>
     </entity>
-    <entity name="Goal" syncable="YES">
+    <entity name="Goal" representedClassName="Goal" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="goal" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rate" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="safebuf" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="datapoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Datapoint" inverseName="goal" inverseEntity="Datapoint" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="goals" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="user" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="153" positionY="192" width="135" height="90"/>
-        <element name="Datapoint" positionX="-83" positionY="108" width="128" height="90"/>
+        <element name="Goal" positionX="135" positionY="192" width="153" height="165"/>
+        <element name="Datapoint" positionX="-83" positionY="108" width="128" height="105"/>
+        <element name="User" positionX="106" positionY="27" width="128" height="75"/>
     </elements>
 </model>
