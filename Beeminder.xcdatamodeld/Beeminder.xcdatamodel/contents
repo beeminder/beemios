@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Datapoint" syncable="YES">
+        <attribute name="measured_at" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="goal" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="datapoints" inverseEntity="Goal" syncable="YES"/>
+    </entity>
+    <entity name="Goal" syncable="YES">
+        <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="datapoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Datapoint" inverseName="goal" inverseEntity="Datapoint" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Goal" positionX="153" positionY="192" width="135" height="90"/>
+        <element name="Datapoint" positionX="-83" positionY="108" width="128" height="90"/>
+    </elements>
+</model>

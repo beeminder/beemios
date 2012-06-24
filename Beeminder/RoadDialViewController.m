@@ -132,8 +132,13 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
-{
+{ 
     if (pickerView.tag == 0) {
+//        NSUInteger i = [[pickerView subviews] count];
+//        [(UIView*)[[pickerView subviews] objectAtIndex:0] setHidden:YES];
+//        [(UIView*)[[pickerView subviews] objectAtIndex:14] setHidden:YES];
+        
+
         if (component == 0) {
             return [NSString stringWithFormat:@"%i", row];
         }
