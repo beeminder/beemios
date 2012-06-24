@@ -66,7 +66,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // save goal
-    [segue.destinationViewController setTitle:@"foo"];
+    [segue.destinationViewController setTitle:self.title];
 }
 
 - (NSString *) goalStatement
@@ -78,55 +78,72 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView 
 {
-    return 4;
+    if (pickerView.tag == 0) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component 
 {
-    switch(component) {
-        case 0: return 1000;
-        case 1: return self.goalRateNumeratorUnitsOptions.count;
-        case 2: return 1;
-        case 3: return self.goalRateDenominatorUnitsOptions.count;
-        default: return 0;
+    if (pickerView.tag == 0) {
+        if (component == 0) {
+            return 1000;
+        }
+        else {
+            return self.goalRateNumeratorUnitsOptions.count;
+        }
     }
-    // not reached
-    return 0;
+    else {
+        return self.goalRateDenominatorUnitsOptions.count;
+    }
 }
 
 #pragma mark UIPickerViewDelegate methods
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component 
 {
-    switch(component) {
-        case 0: return 50.0;
-        case 2: return 50.0;
-        default: return 100.0;
+    if (pickerView.tag == 0) {
+        if (component == 0) {
+            return 50.0;
+        }
+        else {
+            return 100.0;
+        }
     }
-    return 100.0;
+    else {
+        return 100.0;
+    }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component 
 {
-    self.goalRateNumerator = [pickerView selectedRowInComponent:0];
-    
-    self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
-    
-    self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:3]];
-    
+    if (pickerView.tag == 0) {
+        self.goalRateNumerator = [pickerView selectedRowInComponent:0];
+        self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
+    }
+    else {
+        self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:0]];
+    }
     self.goalStatementLabel.text = self.goalStatement;
     
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
 {
-    switch (component) {
-        case 0: return [NSString stringWithFormat:@"%i", row];
-        case 1: return [self.goalRateNumeratorUnitsOptions objectAtIndex:row];
-        case 2: return @"per";
-        default: return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
+    if (pickerView.tag == 0) {
+        if (component == 0) {
+            return [NSString stringWithFormat:@"%i", row];
+        }
+        else {
+            return [self.goalRateNumeratorUnitsOptions objectAtIndex:row];
+        }
     }
-    return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
+    else {
+        return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
+    }
 }
 
 @end
