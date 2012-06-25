@@ -16,8 +16,9 @@
 @property (nonatomic, strong) NSString *goalRateNumeratorUnits;
 @property NSInteger goalRateNumerator;
 @property (strong, nonatomic) IBOutlet UIToolbar *pickerToolbar;
-@property (strong, nonatomic) IBOutlet UILabel *goalStatementLabel;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
+@property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
 
 @end

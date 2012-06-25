@@ -12,6 +12,8 @@
 
 @interface ChooseGoalNameViewController ()
 
+- (void)fetchGoalSlugs;
+
 @end
 
 @implementation ChooseGoalNameViewController
@@ -21,6 +23,8 @@
 @synthesize scrollView = _scrollView;
 @synthesize activeField = _activeField;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize goalSlugs = _goalSlugs;
+@synthesize goalSlugExitsWarningLabel = _goalSlugExitsWarningLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,7 +39,7 @@
 {
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
-	// Do any additional setup after loading the view.
+    [self fetchGoalSlugs];
 }
 
 - (void)viewDidUnload
@@ -43,13 +47,28 @@
     [self setGoalNameTextField:nil];
     [self setSubmitButton:nil];
     [self setScrollView:nil];
+    [self setGoalSlugExitsWarningLabel:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)fetchGoalSlugs
+{
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];    
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Goal"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"user.username = %@", username];
+    
+    NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    self.goalSlugs = [goals valueForKey:@"slug"];
+    
 }
 
 #pragma mark Keyboard notifications
@@ -70,17 +89,16 @@
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
     
-    // If active text field is hidden by keyboard, scroll it so it's visible
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    CGPoint origin = self.activeField.frame.origin;
-    CGFloat height = self.activeField.frame.size.height;
+    CGPoint origin = self.goalSlugExitsWarningLabel.frame.origin;
+    CGFloat height = self.goalSlugExitsWarningLabel.frame.size.height;
     CGFloat buffer = 10.0;
     origin.y -= self.scrollView.contentOffset.y;
     origin.y += height;
     origin.y += buffer;
     if (!CGRectContainsPoint(aRect, origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y - (aRect.size.height) + height + buffer); 
+        CGPoint scrollPoint = CGPointMake(0.0, self.goalSlugExitsWarningLabel.frame.origin.y - (aRect.size.height) + height + buffer); 
         [self.scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
@@ -101,6 +119,19 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     self.activeField = nil;
+}
+
+- (IBAction)checkForExistingSlug 
+{
+    BOOL exists = [self slugExistsForTitle:self.goalNameTextField.text];
+    self.goalSlugExitsWarningLabel.hidden = !exists;
+    self.submitButton.enabled = !exists;
+
+}
+
+- (BOOL)slugExistsForTitle:(NSString *)title
+{
+    return [self.goalSlugs containsObject:[self slugFromTitle:title]];
 }
 
 - (NSString *)slugFromTitle:(NSString *)title
@@ -132,9 +163,14 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField 
 {
-    [textField resignFirstResponder];
-    [self.submitButton sendActionsForControlEvents:UIControlEventTouchUpInside]; //press button
-    return YES;
+    if ([self slugExistsForTitle:textField.text]) {
+        return NO;
+    }
+    else {
+        [textField resignFirstResponder];
+        [self.submitButton sendActionsForControlEvents:UIControlEventTouchUpInside]; //press button
+        return YES;
+    }
 }
 
 @end

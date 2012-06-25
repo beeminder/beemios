@@ -77,6 +77,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
+                                    <action selector="checkForExistingSlug" destination="law-yH-2rS" eventType="editingChanged" id="sSP-KJ-mOw"/>
                                     <outlet property="delegate" destination="law-yH-2rS" id="csx-5Q-PE9"/>
                                 </connections>
                             </textField>
@@ -110,6 +111,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You've already created a goal with that name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ilU-Eb-hqG">
+                                <rect key="frame" x="17" y="228" width="286" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.010851006337158076" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -118,6 +126,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="goalNameTextField" destination="Tck-4q-Zwq" id="ABN-5u-Iu8"/>
+                        <outlet property="goalSlugExitsWarningLabel" destination="ilU-Eb-hqG" id="pyX-WJ-0JJ"/>
                         <outlet property="scrollView" destination="Bhb-KQ-j4i" id="RGB-TI-V4V"/>
                         <outlet property="submitButton" destination="L9J-Yo-Q1s" id="6dI-kf-iDd"/>
                     </connections>
@@ -183,6 +192,8 @@
                         <barButtonItem key="backBarButtonItem" title="Goal" id="8uP-y0-rnm"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="goalRateDenominatorPickerView" destination="46E-EK-FkE" id="FBy-70-7PN"/>
+                        <outlet property="goalRateNumeratorPickerView" destination="aUg-wp-yXj" id="4O2-FX-au8"/>
                         <outlet property="pickerToolbar" destination="n6l-dd-c3O" id="QIE-Ft-MXf"/>
                     </connections>
                 </viewController>
@@ -432,6 +443,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalNameViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="goalNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalSlugExitsWarningLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
             </relationships>
@@ -448,7 +460,8 @@
         <class className="RoadDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="goalStatementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

@@ -14,5 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *activeField;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSArray *goalSlugs;
+@property (strong, nonatomic) IBOutlet UILabel *goalSlugExitsWarningLabel;
 
 @end

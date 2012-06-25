@@ -20,7 +20,6 @@
 @implementation RoadDialViewController
 
 @synthesize pickerToolbar = _pickerToolbar;
-@synthesize goalStatementLabel = _goalStatementLabel;
 @synthesize goalRateNumerator = _goalRateNumerator;
 @synthesize goalRateNumeratorUnits = _goalRateNumeratorUnits;
 @synthesize goalRateDenominatorUnits = _goalRateDenominatorUnits;
@@ -28,6 +27,8 @@
 @synthesize goalRateDenominatorUnitsOptions = _goalRateDenominatorUnitsOptions;
 @synthesize goalObject = _goalObject;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize goalRateNumeratorPickerView = _goalRateNumeratorPickerView;
+@synthesize goalRateDenominatorPickerView = _goalRateDenominatorPickerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,8 +46,12 @@
     self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"lbs lost", @"lbs gained", nil];   
     
     self.goalRateDenominatorUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
-    self.goalStatementLabel.text = @"Default goal";
-    
+    self.goalRateNumerator = 5;
+    self.goalRateNumeratorUnits = @"times";
+    self.goalRateDenominatorUnits = @"week";
+    [self.goalRateNumeratorPickerView selectRow:5 inComponent:0 animated:YES];
+    [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
+    [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,18 +67,19 @@
 
 - (void)viewDidUnload {
     [self setPickerToolbar:nil];
-    [self setGoalStatementLabel:nil];
+    [self setGoalRateNumeratorPickerView:nil];
+    [self setGoalRateDenominatorPickerView:nil];
     [super viewDidUnload];
 }
 
 - (double)weeklyRate {
-    if ([self.goalRateDenominatorUnits isEqualToString:@"weeks"]) {
+    if ([self.goalRateDenominatorUnits isEqualToString:@"week"]) {
         return (double)self.goalRateNumerator;
     }
-    else if ([self.goalRateDenominatorUnits isEqualToString:@"days"]) {
+    else if ([self.goalRateDenominatorUnits isEqualToString:@"day"]) {
         return (double)self.goalRateNumerator*7;
     }
-    else { // "months"
+    else { // "month"
         return (double)self.goalRateNumerator/4.3f;
     }
 }
@@ -145,7 +151,6 @@
     else {
         self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:0]];
     }
-    self.goalStatementLabel.text = self.goalStatement;
     
 }
 
