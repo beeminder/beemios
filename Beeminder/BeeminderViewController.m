@@ -14,6 +14,8 @@
 
 @implementation BeeminderViewController
 
+@synthesize managedObjectContext = _managedObjectContext;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

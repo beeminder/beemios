@@ -10,4 +10,6 @@
 
 @interface SplashViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @end

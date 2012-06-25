@@ -8,7 +8,8 @@
 
 #import "BeeminderAppDelegate.h"
 #import <CoreData/CoreData.h>
-
+#import "User+Create.h"
+#import "BeeminderViewController.h"
 @implementation BeeminderAppDelegate
 
 @synthesize window = _window;
@@ -19,6 +20,29 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    if (!username) {
+        // random string for the temporary username. 
+        NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
+        NSMutableString *s = [NSMutableString stringWithCapacity:20];
+        for (NSUInteger i = 0U; i < 20; i++) {
+            u_int32_t r = arc4random() % [alphabet length];
+            unichar c = [alphabet characterAtIndex:r];
+            [s appendFormat:@"%C", c];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:s forKey:@"username"];
+        
+        NSDictionary *userDict = [NSDictionary dictionaryWithObject:s forKey:@"username"];
+        
+        [User userWithUserDict:userDict withContext:self.managedObjectContext];
+    }
+    UINavigationController *navCon = (UINavigationController*)self.window.rootViewController;
+    BeeminderViewController *beeCon = (BeeminderViewController *) navCon.topViewController;
+    beeCon.managedObjectContext = self.managedObjectContext;
+    
     return YES;
 }
 							
@@ -88,7 +112,7 @@
     if (__managedObjectModel != nil) {
         return __managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"CoreDataApp" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Beeminder" withExtension:@"momd"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return __managedObjectModel;
 }
@@ -101,7 +125,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataApp.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Beeminder.sqlite"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

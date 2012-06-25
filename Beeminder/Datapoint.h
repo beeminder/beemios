@@ -13,7 +13,7 @@
 
 @interface Datapoint : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * measured_at;
+@property (nonatomic) int64_t measured_at;
 @property (nonatomic, retain) NSDecimalNumber * value;
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) Goal *goal;

@@ -1,27 +1,22 @@
 //
-//  Goal+Create.m
+//  User+Create.m
 //  Beeminder
 //
 //  Created by Andy Brett on 6/24/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "Goal+Create.h"
-#import "User+CreateGoal.h"
-#import "User.h"
+#import "User+Create.h"
 
-@implementation Goal (Create)
+@implementation User (Create)
 
-+ (Goal *)goalWithDictionary:(NSDictionary *)goalDict 
-   forUserWithUsername:(NSString *)username 
-   inManagedObjectContext:(NSManagedObjectContext *)context
++ (User *)userWithUserDict:(NSDictionary *)userDict withContext:(NSManagedObjectContext *)context
 {
-    Goal *goal = nil;
     User *user = nil;
     
     NSFetchRequest *userRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     
-    userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", username];
+    userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", [userDict objectForKey:@"username"]];
     NSSortDescriptor *userSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
     userRequest.sortDescriptors = [NSArray arrayWithObject:userSortDescriptor];
     
@@ -32,15 +27,16 @@
     }
     else if (users.count == 0) {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-        user.username = username;
+        user.username = [userDict objectForKey:@"username"];
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
     }
     else {
         user = [users lastObject];
     }
-    
-    goal = [user addGoalFromDictionary:goalDict inManagedObjectContext:context];
-    [context save:nil];
-    return goal;
+    return user;
 }
 
 @end

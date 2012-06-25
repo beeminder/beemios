@@ -26,6 +26,8 @@
 @synthesize goalRateDenominatorUnits = _goalRateDenominatorUnits;
 @synthesize goalRateNumeratorUnitsOptions = _goalRateNumeratorUnitsOptions;
 @synthesize goalRateDenominatorUnitsOptions = _goalRateDenominatorUnitsOptions;
+@synthesize goalObject = _goalObject;
+@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,8 +66,24 @@
     [super viewDidUnload];
 }
 
+- (double)weeklyRate {
+    if ([self.goalRateDenominatorUnits isEqualToString:@"weeks"]) {
+        return (double)self.goalRateNumerator;
+    }
+    else if ([self.goalRateDenominatorUnits isEqualToString:@"days"]) {
+        return (double)self.goalRateNumerator*7;
+    }
+    else { // "months"
+        return (double)self.goalRateNumerator/4.3f;
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // save goal
+
+    self.goalObject.rate = [self weeklyRate];
+    [self.managedObjectContext save:nil];
+    
     [segue.destinationViewController setTitle:self.title];
 }
 

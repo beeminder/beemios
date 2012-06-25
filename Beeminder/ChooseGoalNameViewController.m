@@ -7,6 +7,8 @@
 //
 
 #import "ChooseGoalNameViewController.h"
+#import "Goal+Create.h"
+#import "RoadDialViewController.h"
 
 @interface ChooseGoalNameViewController ()
 
@@ -18,12 +20,13 @@
 @synthesize submitButton = _submitButton;
 @synthesize scrollView = _scrollView;
 @synthesize activeField = _activeField;
+@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -100,9 +103,31 @@
     self.activeField = nil;
 }
 
+- (NSString *)slugFromTitle:(NSString *)title
+{
+    NSRegularExpression *whitespaceRegex = [NSRegularExpression regularExpressionWithPattern:@"[\\s]" options:0 error:nil];
+    
+    NSString *noSpaces = [whitespaceRegex stringByReplacingMatchesInString:title options:0 range:NSMakeRange(0, title.length) withTemplate:@"-"];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^A-Za-z0-9\\-\\_]" options:0 error:nil];
+    
+    NSString *slug = [regex stringByReplacingMatchesInString:noSpaces options:0 range:NSMakeRange(0, noSpaces.length) withTemplate:@""];
+    
+    return slug;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *slug = [self slugFromTitle:self.goalNameTextField.text];
+    
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:self.goalNameTextField.text, @"title", slug, @"slug", nil];    
+    
+    Goal *goal = [Goal goalWithDictionary:goalDict forUserWithUsername:username inManagedObjectContext:self.managedObjectContext];
     [segue.destinationViewController setTitle:self.goalNameTextField.text];
+    [segue.destinationViewController setGoalObject:goal];
+    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField 

@@ -14,10 +14,10 @@
 @interface Goal : NSManagedObject
 
 @property (nonatomic, retain) NSString * slug;
-@property (nonatomic, retain) NSNumber * goal;
-@property (nonatomic, retain) NSNumber * date;
-@property (nonatomic, retain) NSDecimalNumber * rate;
-@property (nonatomic, retain) NSNumber * safebuf;
+@property (nonatomic) double goal;
+@property (nonatomic) int64_t date;
+@property (nonatomic) double rate;
+@property (nonatomic) int64_t safebuf;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;

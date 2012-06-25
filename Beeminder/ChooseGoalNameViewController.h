@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *activeField;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
