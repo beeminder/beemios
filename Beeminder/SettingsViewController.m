@@ -43,6 +43,7 @@
 - (IBAction)signOutButtonPressed {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"authenticationTokenKey"];
+    [defaults setObject:nil forKey:@"username"];
     [self performSegueWithIdentifier:@"segueAfterSignOut" sender:self];
 }
 

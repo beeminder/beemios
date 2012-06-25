@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSArray *goalSlugs;
 @property (strong, nonatomic) IBOutlet UILabel *goalSlugExitsWarningLabel;
+@property (strong, nonatomic) UILabel *helperLabel;
 
 @end

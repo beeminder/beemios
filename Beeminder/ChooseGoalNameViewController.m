@@ -9,6 +9,7 @@
 #import "ChooseGoalNameViewController.h"
 #import "Goal+Create.h"
 #import "RoadDialViewController.h"
+#import "constants.h"
 
 @interface ChooseGoalNameViewController ()
 
@@ -25,6 +26,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize goalSlugs = _goalSlugs;
 @synthesize goalSlugExitsWarningLabel = _goalSlugExitsWarningLabel;
+@synthesize helperLabel = _helperLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +42,12 @@
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
     [self fetchGoalSlugs];
+    UILabel *welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 176)];
+    
+    welcome.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"] ? kLoggedInChooseGoalName : kWelcomeChooseGoalName;
+    
+    [welcome setNumberOfLines:0];
+    [self.view addSubview:welcome];
 }
 
 - (void)viewDidUnload

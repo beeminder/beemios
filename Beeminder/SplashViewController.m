@@ -31,7 +31,7 @@
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
     if ([defaults objectForKey:@"authenticationTokenKey"]) {
-        [self performSegueWithIdentifier:@"segueFromSplashToDashboard" sender:self];
+        [self performSegueWithIdentifier:@"segueFromSplashToSignin" sender:self];
     }
     
 	// Do any additional setup after loading the view.

@@ -35,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
+        [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
+    }
 	// Do any additional setup after loading the view.
 }
 
@@ -111,7 +114,7 @@
         
         [defaults setObject:username forKey:@"username"];
         
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
     else {
         self.title = @"Bad Login";
