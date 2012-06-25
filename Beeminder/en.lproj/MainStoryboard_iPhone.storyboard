@@ -109,7 +109,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="goalNameTextField" destination="Tck-4q-Zwq" id="ABN-5u-Iu8"/>
-                        <outlet property="goalSlugExitsWarningLabel" destination="ilU-Eb-hqG" id="pyX-WJ-0JJ"/>
+                        <outlet property="goalSlugExistsWarningLabel" destination="ilU-Eb-hqG" id="5hc-D6-AOT"/>
                         <outlet property="scrollView" destination="Bhb-KQ-j4i" id="RGB-TI-V4V"/>
                         <outlet property="submitButton" destination="L9J-Yo-Q1s" id="6dI-kf-iDd"/>
                     </connections>
@@ -121,7 +121,7 @@
         <!--Road Dial View Controller-->
         <scene sceneID="Kzg-i9-IJH">
             <objects>
-                <viewController id="Xgv-aN-lSx" customClass="RoadDialViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Xgv-aN-lSx" customClass="RoadDialViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08g-UL-qPc">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -256,7 +256,7 @@
                     <connections>
                         <outlet property="email" destination="AR1-lZ-qpt" id="meW-36-D5z"/>
                         <outlet property="password" destination="b88-32-Ykb" id="O5N-vk-bCo"/>
-                        <segue destination="rrU-HL-OPa" kind="modal" identifier="segueFromSigninToDashboard" id="ual-lg-eyK"/>
+                        <segue destination="rrU-HL-OPa" kind="push" identifier="segueFromSigninToDashboard" id="ual-lg-eyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ms8-Fr-DAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -268,7 +268,7 @@
             <objects>
                 <viewController id="5GU-h5-Z9o" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wLW-WJ-n5M">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pKD-gz-O4a">
@@ -298,21 +298,6 @@
             </objects>
             <point key="canvasLocation" x="1665" y="-104"/>
         </scene>
-        <!--Choose Goal Name View Controller - Add Goal-->
-        <scene sceneID="rsK-Ai-xPy">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qhK-BK-dTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="9ru-eG-LkX" customClass="ChooseGoalNameViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CmH-NT-Lsj">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Add Goal" id="j1B-VG-sRs"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1665" y="543"/>
-        </scene>
         <!--Goals Table View Controller - Your Goals-->
         <scene sceneID="pWv-c6-Wuv">
             <objects>
@@ -321,6 +306,21 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Zmh-vr-Jy3">
+                            <rect key="frame" x="0.0" y="66" width="320" height="51"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Add Goal">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <segue destination="law-yH-2rS" kind="push" identifier="segueToAddGoal" id="Agq-0d-xWn"/>
+                            </connections>
+                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Goal Cell" id="I8f-3q-Dgf">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -401,7 +401,6 @@
                     <connections>
                         <segue destination="hgb-kz-a4x" kind="relationship" relationship="viewControllers" id="fbd-Aj-tvp"/>
                         <segue destination="5GU-h5-Z9o" kind="relationship" relationship="viewControllers" id="ldg-Jy-dYP"/>
-                        <segue destination="9ru-eG-LkX" kind="relationship" relationship="viewControllers" id="oSf-Wd-KD7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyT-ng-sFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -431,9 +430,62 @@
         <image name="bee.png" width="107" height="104"/>
         <image name="logo-text.png" width="261" height="30"/>
     </resources>
+    <classes>
+        <class className="BeeminderViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BeeminderViewController.h"/>
+        </class>
+        <class className="CPTGraphHostingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
+        </class>
+        <class className="ChooseGoalNameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalNameViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="goalNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="graphHostingView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="GoalsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
+        </class>
+        <class className="RoadDialViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="signOutButtonPressed"/>
+            </relationships>
+        </class>
+        <class className="SignInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="SplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="jc8-b3-rod"/>
+    </inferredMetricsTieBreakers>
 </document>

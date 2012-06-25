@@ -121,6 +121,11 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.password) {
         [theTextField resignFirstResponder];

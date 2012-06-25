@@ -25,7 +25,7 @@
 @synthesize activeField = _activeField;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize goalSlugs = _goalSlugs;
-@synthesize goalSlugExitsWarningLabel = _goalSlugExitsWarningLabel;
+@synthesize goalSlugExistsWarningLabel = _goalSlugExitsWarningLabel;
 @synthesize helperLabel = _helperLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,14 +40,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerForKeyboardNotifications];
     [self fetchGoalSlugs];
-    UILabel *welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 176)];
     
-    welcome.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"] ? kLoggedInChooseGoalName : kWelcomeChooseGoalName;
+    UILabel *welcome = nil;
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]){
+        welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, kLoggedInChooseGoalHeight)];
+        
+        welcome.text = kLoggedInChooseGoalName;
+        [self.goalNameTextField becomeFirstResponder];
+    }
+    else {
+        welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, kWelcomeChooseGoalHeight)];
+        
+        welcome.text = kWelcomeChooseGoalName;
+    }
     
     [welcome setNumberOfLines:0];
     [self.view addSubview:welcome];
+    [self registerForKeyboardNotifications];    
 }
 
 - (void)viewDidUnload
@@ -55,7 +66,7 @@
     [self setGoalNameTextField:nil];
     [self setSubmitButton:nil];
     [self setScrollView:nil];
-    [self setGoalSlugExitsWarningLabel:nil];
+    [self setGoalSlugExistsWarningLabel:nil];
     [super viewDidUnload];
 }
 
@@ -73,7 +84,8 @@
     
     request.predicate = [NSPredicate predicateWithFormat:@"user.username = %@", username];
     
-    NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:NULL];
+    NSError *error;
+    NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:&error];
     
     self.goalSlugs = [goals valueForKey:@"slug"];
     
@@ -99,14 +111,14 @@
     
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    CGPoint origin = self.goalSlugExitsWarningLabel.frame.origin;
-    CGFloat height = self.goalSlugExitsWarningLabel.frame.size.height;
+    CGPoint origin = self.goalSlugExistsWarningLabel.frame.origin;
+    CGFloat height = self.goalSlugExistsWarningLabel.frame.size.height;
     CGFloat buffer = 10.0;
     origin.y -= self.scrollView.contentOffset.y;
     origin.y += height;
     origin.y += buffer;
     if (!CGRectContainsPoint(aRect, origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.goalSlugExitsWarningLabel.frame.origin.y - (aRect.size.height) + height + buffer); 
+        CGPoint scrollPoint = CGPointMake(0.0, self.goalSlugExistsWarningLabel.frame.origin.y - (aRect.size.height) + height + buffer); 
         [self.scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
@@ -132,9 +144,8 @@
 - (IBAction)checkForExistingSlug 
 {
     BOOL exists = [self slugExistsForTitle:self.goalNameTextField.text];
-    self.goalSlugExitsWarningLabel.hidden = !exists;
+    self.goalSlugExistsWarningLabel.hidden = !exists;
     self.submitButton.enabled = !exists;
-
 }
 
 - (BOOL)slugExistsForTitle:(NSString *)title

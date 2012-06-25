@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
@@ -148,16 +149,20 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    
-    NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
-    
-    NSString *slug = [goalDict objectForKey:@"slug"];
-    
-    [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
-    
-    [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
-    
+    if ([segue.identifier isEqualToString:@"segueToAddGoal"]) {
+        // do nothing
+    }
+    else {
+        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        
+        NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
+        
+        NSString *slug = [goalDict objectForKey:@"slug"];
+        
+        [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
+        
+        [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
+    }    
     
 }
 
