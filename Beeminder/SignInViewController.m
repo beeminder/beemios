@@ -21,6 +21,7 @@
 @synthesize password = _password;
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
+@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

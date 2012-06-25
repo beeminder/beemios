@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSMutableData *responseData;
 @property NSInteger responseStatus;
 @property (strong, nonatomic) NSMutableArray *goals;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

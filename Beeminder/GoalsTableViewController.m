@@ -7,6 +7,7 @@
 //
 
 #import "GoalsTableViewController.h"
+#import "GoalViewController.h"
 #import "constants.h"
 
 @interface GoalsTableViewController () <NSURLConnectionDelegate>
@@ -18,6 +19,7 @@
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
 @synthesize goals = _goals;
+@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

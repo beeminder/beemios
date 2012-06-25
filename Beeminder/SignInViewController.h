@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property NSMutableData *responseData;
 @property NSInteger responseStatus;
+@property NSManagedObjectContext *managedObjectContext;
 
 @end

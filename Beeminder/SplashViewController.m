@@ -62,7 +62,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+    if ([segue.identifier isEqualToString:@"segueFromSplashToDashboard"]) {
+        // do nothing
+    }
+    else {
+        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+    }
 }
 
 @end
