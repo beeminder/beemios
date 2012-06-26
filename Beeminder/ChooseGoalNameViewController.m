@@ -87,7 +87,7 @@
     NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:&error];
     
     Goal *g = nil;
-    NSMutableArray *slugs = nil;
+    NSMutableArray *slugs = [[NSMutableArray alloc] init];
     
     for (g in goals) {
         [slugs addObject:g.slug];
