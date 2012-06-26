@@ -163,7 +163,9 @@
         [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
         
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
-    }    
+    }
+    
+    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
     
 }
 
