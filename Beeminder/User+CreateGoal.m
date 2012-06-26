@@ -14,11 +14,11 @@
 
 - (Goal *)addGoalFromDictionary:(NSDictionary *)goalDict inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    Goal *goal = nil;
-    Goal *g = nil;
-    
-    for (g in self.goals) {
-        if (g.slug == [goalDict objectForKey:@"slug"]) {
+    Goal *goal;
+    Goal *g;
+    NSSet *goals = self.goals;    
+    for (g in goals) {
+        if ([g.slug isEqualToString:[goalDict objectForKey:@"slug"]]) {
             goal = g;
         }
     }
