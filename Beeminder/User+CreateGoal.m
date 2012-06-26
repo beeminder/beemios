@@ -32,7 +32,7 @@
         
         [self addGoalsObject:goal];
     }
-    
+    [context save:nil];
     return goal;
 }
 

@@ -9,6 +9,7 @@
 #import "GoalsTableViewController.h"
 #import "GoalViewController.h"
 #import "constants.h"
+#import "Goal+Create.h"
 
 @interface GoalsTableViewController () <NSURLConnectionDelegate>
 
@@ -194,6 +195,12 @@
         NSDictionary *responseJSON = [responseString JSONValue];
         
         self.goals = [responseJSON objectForKey:@"goals"];
+        
+        NSDictionary *goalDict = nil;
+        
+        for (goalDict in self.goals) {
+            [Goal goalWithDictionary:goalDict forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] inManagedObjectContext:self.managedObjectContext];
+        }
         
         self.title = @"Your goals";
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];

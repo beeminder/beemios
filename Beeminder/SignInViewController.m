@@ -8,6 +8,8 @@
 
 #import "SignInViewController.h"
 #import "constants.h"
+#import "User+Create.h"
+#import "GoalsTableViewController.h"
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -114,6 +116,8 @@
         
         [defaults setObject:username forKey:@"username"];
         
+        [User userWithUserDict:[NSDictionary dictionaryWithObject:username forKey:@"username"] withContext:self.managedObjectContext];
+        
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
     else {
@@ -124,6 +128,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+    UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
+    GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
+    
+    [goalCon setManagedObjectContext:self.managedObjectContext];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
