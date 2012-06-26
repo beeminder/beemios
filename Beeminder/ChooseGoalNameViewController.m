@@ -77,7 +77,6 @@
 
 - (void)fetchGoalSlugs
 {
-    
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];    
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Goal"];
@@ -87,7 +86,14 @@
     NSError *error;
     NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:&error];
     
-    self.goalSlugs = [goals valueForKey:@"slug"];
+    Goal *g = nil;
+    NSMutableArray *slugs = nil;
+    
+    for (g in goals) {
+        [slugs addObject:g.slug];
+    }
+    
+    self.goalSlugs = [NSArray arrayWithArray:(NSArray *)slugs];
     
 }
 
