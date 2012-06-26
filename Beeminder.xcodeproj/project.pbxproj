@@ -23,6 +23,7 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
+		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A186B1E81599F80E00A6F60C /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E71599F80E00A6F60C /* Datapoint.m */; };
@@ -37,7 +38,6 @@
 		A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C381597810C0031ABED /* User+CreateGoal.m */; };
 		A19D7C491597EE660031ABED /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C481597EE650031ABED /* User+Create.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
-		A1CA215815935A4700AE16FB /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
@@ -54,16 +54,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A1CA215315935A0B00AE16FB /* PBXContainerItemProxy */ = {
+		A1445578159A62FB00134BAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+			containerPortal = A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
 			remoteInfo = "CorePlot-CocoaTouch";
 		};
-		A1CA215615935A2900AE16FB /* PBXContainerItemProxy */ = {
+		A144557A159A630D00134BAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+			containerPortal = A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
 			remoteInfo = "CorePlot-CocoaTouch";
@@ -103,6 +103,7 @@
 		A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		A19D7C481597EE650031ABED /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoadDialViewController.h; sourceTree = "<group>"; };
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
-		A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1DB65151599880E002239DE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,11 +155,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */,
 				A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */,
 				A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
 				A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */,
-				A1CA215815935A4700AE16FB /* libCorePlot-CocoaTouch.a in Frameworks */,
 				A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +200,14 @@
 			path = Beeminder;
 			sourceTree = "<group>";
 		};
+		A1445570159A62FB00134BAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A19D7C24159760860031ABED /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,14 +226,6 @@
 				A19D7C481597EE650031ABED /* User+Create.m */,
 			);
 			name = CoreData;
-			sourceTree = "<group>";
-		};
-		A1CA214B15935A0B00AE16FB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A1CA215B15935B0800AE16FB /* Resources */ = {
@@ -260,8 +260,8 @@
 		A1F03D4F158E9A850075D5DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */,
 				A19D7BE11596DC3B0031ABED /* CoreData.framework */,
-				A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */,
 				A1CA215915935AE200AE16FB /* QuartzCore.framework */,
 				A133F9FD158FB40E002F151A /* SBJson */,
 				A1F03D50158E9A850075D5DA /* UIKit.framework */,
@@ -329,7 +329,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A1CA215715935A2900AE16FB /* PBXTargetDependency */,
+				A144557B159A630D00134BAF /* PBXTargetDependency */,
 			);
 			name = Beeminder;
 			productName = Beeminder;
@@ -358,8 +358,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A1CA214B15935A0B00AE16FB /* Products */;
-					ProjectRef = A1CA214A15935A0B00AE16FB /* CorePlot-CocoaTouch.xcodeproj */;
+					ProductGroup = A1445570159A62FB00134BAF /* Products */;
+					ProjectRef = A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -370,11 +370,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A1CA215415935A0B00AE16FB /* libCorePlot-CocoaTouch.a */ = {
+		A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = A1CA215315935A0B00AE16FB /* PBXContainerItemProxy */;
+			remoteRef = A1445578159A62FB00134BAF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -438,10 +438,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A1CA215715935A2900AE16FB /* PBXTargetDependency */ = {
+		A144557B159A630D00134BAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "CorePlot-CocoaTouch";
-			targetProxy = A1CA215615935A2900AE16FB /* PBXContainerItemProxy */;
+			targetProxy = A144557A159A630D00134BAF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -526,7 +526,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../core-plot/framework/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../andybrett-xcode-45-fixes/framework/**";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
@@ -544,7 +544,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../core-plot/framework/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../andybrett-xcode-45-fixes/framework/**";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (

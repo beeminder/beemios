@@ -30,6 +30,7 @@
 @synthesize graphHostingView = _graphHostingView;
 @synthesize graph = _graph;
 @synthesize symbolTextAnnotation = _symbolTextAnnotation;
+@synthesize managedObjectContext = _managedObjectContext;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
