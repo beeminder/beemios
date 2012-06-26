@@ -45,7 +45,7 @@
     UILabel *welcome = nil;
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]){
-        welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, kLoggedInChooseGoalHeight)];
+        welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 146, 280, kLoggedInChooseGoalHeight)];
         
         welcome.text = kLoggedInChooseGoalName;
         [self.goalNameTextField becomeFirstResponder];
