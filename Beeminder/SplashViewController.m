@@ -7,6 +7,7 @@
 //
 
 #import "SplashViewController.h"
+#import "GoalsTableViewController.h"
 
 @interface SplashViewController ()
 
@@ -31,7 +32,8 @@
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
     if ([defaults objectForKey:@"authenticationTokenKey"]) {
-        [self performSegueWithIdentifier:@"segueFromSplashToSignin" sender:self];
+        [[self.navigationController navigationBar] setHidden:YES];
+        [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }
     
 	// Do any additional setup after loading the view.
@@ -62,8 +64,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"segueFromSplashToDashboard"]) {
-        // do nothing
+    if ([segue.identifier isEqualToString:@"skipToDashboard"]) {
+        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
+        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
+        
+        [goalCon setManagedObjectContext:self.managedObjectContext];
+
     }
     else {
         [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
