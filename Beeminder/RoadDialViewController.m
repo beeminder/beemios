@@ -8,13 +8,12 @@
 
 #import "RoadDialViewController.h"
 #import "GoalsTableViewController.h"
+#import "constants.h"
 
-@interface RoadDialViewController ()
+@interface RoadDialViewController () <NSURLConnectionDelegate>
 
 @property (nonatomic, strong) NSArray *goalRateNumeratorUnitsOptions;
 @property (nonatomic, strong) NSArray *goalRateDenominatorUnitsOptions;
-
-- (NSString *) goalStatement;
 
 @end
 
@@ -30,6 +29,9 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize goalRateNumeratorPickerView = _goalRateNumeratorPickerView;
 @synthesize goalRateDenominatorPickerView = _goalRateDenominatorPickerView;
+@synthesize responseData = _responseData;
+@synthesize responseStatus = _responseStatus;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,21 +88,35 @@
 }
 
 - (IBAction)nextButtonPressed:(UIBarButtonItem *)sender {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
-    }
-    else {
-        [self performSegueWithIdentifier:@"segueToSignup" sender:self];
-    }
     
+    // save goal
+    self.goalObject.rate = [self weeklyRate];
+    [self.managedObjectContext save:nil];
+    
+    // post to server
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json", kBaseURL, username];
+    
+    NSURL *goalURL = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalURL];
+    
+    NSString *goalData = [NSString stringWithFormat:@"auth_token=%@&slug=%@&title=%@&gtype=%@", authToken, self.goalObject.slug, self.goalObject.title, @"hustler"];
+
+    [goalRequest setHTTPMethod:@"POST"];
+    [goalRequest setHTTPBody:[goalData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalRequest delegate:self];
+    
+    if (connection) {
+        self.responseData = [NSMutableData data];
+    }    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // save goal
-
-    self.goalObject.rate = [self weeklyRate];
-    [self.managedObjectContext save:nil];
-
     if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
         [[self.navigationController navigationBar] setHidden:YES];
         UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
@@ -112,11 +128,6 @@
         [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
     }
 
-}
-
-- (NSString *) goalStatement
-{
-    return [NSString stringWithFormat:@"%i %@ per %@", self.goalRateNumerator, self.goalRateNumeratorUnits, self.goalRateDenominatorUnits];
 }
 
 #pragma mark UIPickerViewDataSource methods
@@ -195,5 +206,39 @@
     }
 }
 
+#pragma mark NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    self.responseStatus = [httpResponse statusCode];
+    
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
+    [self.responseData appendData:d];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
+                                message:[error localizedDescription]
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if (self.responseStatus == 200) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
+            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"segueToSignup" sender:self];
+        }
+    }
+    else {
+        self.title = @"Could not save goal";
+    }
+}
 
 @end

@@ -12,7 +12,7 @@
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
-@property NSMutableData *responseData;
+@property (strong, nonatomic) NSMutableData *responseData;
 @property NSInteger responseStatus;
 @property NSManagedObjectContext *managedObjectContext;
 

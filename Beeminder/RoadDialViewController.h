@@ -20,5 +20,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
+@property (strong, nonatomic) NSMutableData *responseData;
+@property NSInteger responseStatus;
 
 @end
