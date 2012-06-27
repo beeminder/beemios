@@ -7,6 +7,7 @@
 //
 
 #import "RoadDialViewController.h"
+#import "GoalsTableViewController.h"
 
 @interface RoadDialViewController ()
 
@@ -84,13 +85,33 @@
     }
 }
 
+- (IBAction)nextButtonPressed:(UIBarButtonItem *)sender {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"segueToSignup" sender:self];
+    }
+    
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // save goal
 
     self.goalObject.rate = [self weeklyRate];
     [self.managedObjectContext save:nil];
-    
-    [segue.destinationViewController setTitle:self.title];
+
+    if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
+        [[self.navigationController navigationBar] setHidden:YES];
+        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
+        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
+        [goalCon setManagedObjectContext:self.managedObjectContext];
+    }
+    else {
+        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+    }
+
 }
 
 - (NSString *) goalStatement
@@ -173,5 +194,6 @@
         return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
     }
 }
+
 
 @end
