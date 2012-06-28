@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */ = {isa = PBXBuildFile; fileRef = A1283EFD159B4F6800DA7DFF /* User+Find.m */; };
 		A12E48EE1591953B0014624E /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48ED1591953B0014624E /* logo-text.png */; };
 		A12E48F1159195480014624E /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48F0159195480014624E /* bee.png */; };
 		A12E48F4159197400014624E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E48F3159197400014624E /* GoalViewController.m */; };
@@ -72,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		A1283EFC159B4F6800DA7DFF /* User+Find.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Find.h"; sourceTree = "<group>"; };
+		A1283EFD159B4F6800DA7DFF /* User+Find.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Find.m"; sourceTree = "<group>"; };
 		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
 		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				A19D7C381597810C0031ABED /* User+CreateGoal.m */,
 				A19D7C471597EE650031ABED /* User+Create.h */,
 				A19D7C481597EE650031ABED /* User+Create.m */,
+				A1283EFC159B4F6800DA7DFF /* User+Find.h */,
+				A1283EFD159B4F6800DA7DFF /* User+Find.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				A186B1E81599F80E00A6F60C /* Datapoint.m in Sources */,
 				A186B1EB1599F80E00A6F60C /* Goal.m in Sources */,
 				A186B1EE1599F80E00A6F60C /* User.m in Sources */,
+				A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

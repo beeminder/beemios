@@ -93,27 +93,33 @@
     self.goalObject.rate = [self weeklyRate];
     [self.managedObjectContext save:nil];
     
-    // post to server
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    // post to server if the user is already logged in
+
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json", kBaseURL, username];
-    
-    NSURL *goalURL = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalURL];
-    
-    NSString *goalData = [NSString stringWithFormat:@"auth_token=%@&slug=%@&title=%@&gtype=%@", authToken, self.goalObject.slug, self.goalObject.title, @"hustler"];
+    if (authToken) {
+        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json", kBaseURL, username];
+        
+        NSURL *goalURL = [NSURL URLWithString:urlString];
+        
+        NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalURL];
+        
+        NSString *goalData = [NSString stringWithFormat:@"auth_token=%@&slug=%@&title=%@&gtype=%@", authToken, self.goalObject.slug, self.goalObject.title, @"hustler"];
 
-    [goalRequest setHTTPMethod:@"POST"];
-    [goalRequest setHTTPBody:[goalData dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalRequest delegate:self];
-    
-    if (connection) {
-        self.responseData = [NSMutableData data];
-    }    
+        [goalRequest setHTTPMethod:@"POST"];
+        [goalRequest setHTTPBody:[goalData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalRequest delegate:self];
+        
+        if (connection) {
+            self.responseData = [NSMutableData data];
+        }
+    }
+    else {
+        [self performSegueWithIdentifier:@"segueToSignup" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -229,12 +235,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (self.responseStatus == 200) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
-            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
-        }
-        else {
-            [self performSegueWithIdentifier:@"segueToSignup" sender:self];
-        }
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
     }
     else {
         self.title = @"Could not save goal";

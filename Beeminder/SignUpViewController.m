@@ -7,14 +7,20 @@
 //
 
 #import "SignUpViewController.h"
+#import "User+Create.h"
+#import "User+Find.h"
+#import "constants.h"
+#import "Goal.h"
+#import "GoalsTableViewController.h"
 
-@interface SignUpViewController ()
+@interface SignUpViewController () <NSURLConnectionDelegate>
 
 @end
 
 @implementation SignUpViewController
 
-//@synthesize managedObjectContext = _managedObjectContext;
+@synthesize usernameTextField = _usernameTextField;
+@synthesize scrollView = _scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,17 +33,20 @@
 
 - (void)viewDidLoad
 {
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
-//        [self performSegueWithIdentifier:@"segueIfUserHasToken" sender:self];
-//    }
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self registerForKeyboardNotifications];    
 }
 
 - (void)viewDidUnload
 {
+    [self setUsernameTextField:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [self setManagedObjectContext:nil];
+    [self setEmailTextField:nil];
+    [self setPasswordTextField:nil];
+    [self setPasswordConfirmationTextField:nil];
+    [self setSubmitButton:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -47,7 +56,130 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+    [[self.navigationController navigationBar] setHidden:YES];
+    UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+    UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
+    GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
+    [goalCon setManagedObjectContext:self.managedObjectContext];
+
+}
+
+- (IBAction)submitButtonPressed
+{
+    // validate that password matches confirmation
+    
+    // save user
+    User *user = [User findByUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:self.managedObjectContext];
+    
+    user.username = self.usernameTextField.text;
+    user.email = self.emailTextField.text;
+    
+    [self.managedObjectContext save:nil];
+
+    Goal *goal = [[user.goals allObjects] objectAtIndex:0];
+    
+    // post to server
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users.json", kBaseURL];
+    
+    NSURL *userURL = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *userRequest = [NSMutableURLRequest requestWithURL:userURL];
+    
+    NSString *userData = [NSString stringWithFormat:@"email=%@&username=%@&password=%@&goal[gtype]=hustler&goal[slug]=%@&goal[title]=%@", user.email, user.username, self.passwordTextField.text, goal.slug, goal.title];
+    
+    [userRequest setHTTPMethod:@"POST"];
+    [userRequest setHTTPBody:[userData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:userRequest delegate:self];
+    
+    if (connection) {
+        self.responseData = [NSMutableData data];
+    }
+}
+
+#pragma mark Keyboard notifications
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect rect = [[self.scrollView.subviews objectAtIndex:0] frame];
+    [self.scrollView setContentSize:CGSizeMake(rect.size.width, rect.size.height + kbSize.height)];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = [[self.scrollView.subviews objectAtIndex:0] frame];
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y-kbSize.height);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeField = nil;
+}
+
+#pragma mark NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    self.responseStatus = [httpResponse statusCode];
+    
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
+    [self.responseData appendData:d];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
+                                message:[error localizedDescription]
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if (self.responseStatus == 200) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.usernameTextField.text forKey:@"username"];
+        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+        
+        NSDictionary *responseJSON = [responseString JSONValue];
+        
+        NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
+        
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+    }
+    else {
+        self.title = @"Could not create account";
+    }
 }
 
 @end

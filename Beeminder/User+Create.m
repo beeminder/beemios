@@ -28,6 +28,7 @@
     else if (users.count == 0) {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         user.username = [userDict objectForKey:@"username"];
+        user.email = [userDict objectForKey:@"email"];
         NSError *error;
         if (![context save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
