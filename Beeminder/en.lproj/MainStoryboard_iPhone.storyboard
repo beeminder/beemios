@@ -201,7 +201,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" text="To save your goal, create a Beeminder account" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="BoK-CH-H8j">
-                                        <rect key="frame" x="58" y="20" width="203" height="57"/>
+                                        <rect key="frame" x="58" y="31" width="203" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="highlightedColor"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -210,30 +210,42 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" text="" id="UYy-L2-PVx">
                                         <rect key="frame" x="58" y="141" width="203" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8SH-KL-GEY" id="T0N-PC-ifw"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" text="" id="jdW-Aj-fu1">
                                         <rect key="frame" x="58" y="104" width="203" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8SH-KL-GEY" id="NCv-L4-L1q"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" text="" id="jaW-7r-hxl">
                                         <rect key="frame" x="58" y="202" width="203" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8SH-KL-GEY" id="OE3-wU-TSE"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" text="" id="tbp-6e-hZ2">
                                         <rect key="frame" x="58" y="241" width="203" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8SH-KL-GEY" id="4X7-Yf-RkZ"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="6Xl-9h-ngA">
                                         <rect key="frame" x="92" y="280" width="135" height="44"/>
@@ -250,6 +262,13 @@
                                             <action selector="submitButtonPressed" destination="8SH-KL-GEY" eventType="touchUpInside" id="cUU-1b-auu"/>
                                         </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Could not create account" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="jjw-Ma-91x">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -263,6 +282,7 @@
                         <outlet property="scrollView" destination="vLo-lI-q7c" id="tbY-xj-H2S"/>
                         <outlet property="submitButton" destination="6Xl-9h-ngA" id="a7k-57-SaQ"/>
                         <outlet property="usernameTextField" destination="jdW-Aj-fu1" id="EwP-Kl-AKU"/>
+                        <outlet property="validationWarningLabel" destination="jjw-Ma-91x" id="BzD-Ch-wfk"/>
                         <outlet property="view" destination="vLo-lI-q7c" id="4Lu-lC-9mB"/>
                         <segue destination="rrU-HL-OPa" kind="push" identifier="segueToDashboard" id="5bu-Oa-s61"/>
                     </connections>
@@ -559,6 +579,7 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="SplashViewController" superclassName="UIViewController">
