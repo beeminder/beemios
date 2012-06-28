@@ -206,6 +206,12 @@
         
         NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
         
+        if (!authenticationToken) {
+            self.validationWarningLabel.text = @"Could not create account - username already taken";
+            self.validationWarningLabel.hidden = NO;
+            return;
+        }
+        
         [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
         
         [self performSegueWithIdentifier:@"segueToDashboard" sender:self];

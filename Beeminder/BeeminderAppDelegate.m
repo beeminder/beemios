@@ -21,9 +21,9 @@
 {
     // Override point for customization after application launch.
 
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    if (!username) {
+    if (!authToken) {
         // random string for the temporary username. 
         NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
         NSMutableString *s = [NSMutableString stringWithCapacity:20];
