@@ -13,12 +13,13 @@
 #import "Goal.h"
 #import "GoalsTableViewController.h"
 
-@interface SignUpViewController () <NSURLConnectionDelegate>
+@interface SignUpViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
 @end
 
 @implementation SignUpViewController
 
+@synthesize validationWarningLabel = _validationWarningLabel;
 @synthesize usernameTextField = _usernameTextField;
 @synthesize scrollView = _scrollView;
 
@@ -41,6 +42,7 @@
 {
     [self setUsernameTextField:nil];
     [self setScrollView:nil];
+    [self setValidationWarningLabel:nil];
     [super viewDidUnload];
     [self setManagedObjectContext:nil];
     [self setEmailTextField:nil];
@@ -64,9 +66,27 @@
 
 }
 
+- (BOOL)validateEmailWithString:(NSString*)email
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+
 - (IBAction)submitButtonPressed
 {
-    // validate that password matches confirmation
+    self.validationWarningLabel.hidden = YES;
+    if (![self.passwordTextField.text isEqualToString:self.passwordConfirmationTextField.text]) {
+        self.validationWarningLabel.text = @"Password and confirmation do not match";
+        self.validationWarningLabel.hidden = NO;
+        return;
+    }
+    
+    if (![self validateEmailWithString:self.emailTextField.text]) {
+        self.validationWarningLabel.text = @"Invalid email address";
+        self.validationWarningLabel.hidden = NO;
+        return;
+    }
     
     // save user
     User *user = [User findByUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:self.managedObjectContext];
@@ -130,7 +150,7 @@
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    
+    [self.scrollView setContentOffset:CGPointMake(0.0, 0.0)animated:YES];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -141,6 +161,19 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     self.activeField = nil;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark NSURLConnectionDelegate
@@ -178,7 +211,8 @@
         [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
     }
     else {
-        self.title = @"Could not create account";
+        self.validationWarningLabel.text = @"Could not create account";
+        self.validationWarningLabel.hidden = NO;
     }
 }
 
