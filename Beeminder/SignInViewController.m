@@ -9,7 +9,7 @@
 #import "SignInViewController.h"
 #import "constants.h"
 #import "User+Create.h"
-#import "GoalsTableViewController.h"
+#import "UIViewController+ManagedObjectContext.h"
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -23,7 +23,6 @@
 @synthesize password = _password;
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
-@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -128,11 +127,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
-    UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
-    GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
-    
-    [goalCon setManagedObjectContext:self.managedObjectContext];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {

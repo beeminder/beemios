@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SBJson.h"
+#import "UIViewController+ManagedObjectContext.h"
 
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property NSInteger responseStatus;
-@property NSManagedObjectContext *managedObjectContext;
 
 @end

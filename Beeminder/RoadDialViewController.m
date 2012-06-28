@@ -26,7 +26,6 @@
 @synthesize goalRateNumeratorUnitsOptions = _goalRateNumeratorUnitsOptions;
 @synthesize goalRateDenominatorUnitsOptions = _goalRateDenominatorUnitsOptions;
 @synthesize goalObject = _goalObject;
-@synthesize managedObjectContext = _managedObjectContext;
 @synthesize goalRateNumeratorPickerView = _goalRateNumeratorPickerView;
 @synthesize goalRateDenominatorPickerView = _goalRateDenominatorPickerView;
 @synthesize responseData = _responseData;
@@ -125,15 +124,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
         [[self.navigationController navigationBar] setHidden:YES];
-        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
-        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
-        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
-        [goalCon setManagedObjectContext:self.managedObjectContext];
     }
-    else {
-        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
-    }
-
 }
 
 #pragma mark UIPickerViewDataSource methods

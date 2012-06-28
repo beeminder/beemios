@@ -10,6 +10,7 @@
 #import "Goal+Create.h"
 #import "RoadDialViewController.h"
 #import "constants.h"
+#import "UIViewController+ManagedObjectContext.h"
 
 @interface ChooseGoalNameViewController ()
 
@@ -23,7 +24,6 @@
 @synthesize submitButton = _submitButton;
 @synthesize scrollView = _scrollView;
 @synthesize activeField = _activeField;
-@synthesize managedObjectContext = _managedObjectContext;
 @synthesize goalSlugs = _goalSlugs;
 @synthesize goalSlugExistsWarningLabel = _goalSlugExitsWarningLabel;
 @synthesize helperLabel = _helperLabel;
@@ -84,7 +84,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"user.username = %@", username];
     
     NSError *error;
-    NSArray *goals = [self.managedObjectContext executeFetchRequest:request error:&error];
+    NSArray *goals = [[self managedObjectContext] executeFetchRequest:request error:&error];
     
     Goal *g = nil;
     NSMutableArray *slugs = [[NSMutableArray alloc] init];
@@ -182,7 +182,6 @@
     Goal *goal = [Goal goalWithDictionary:goalDict forUserWithUsername:username inManagedObjectContext:self.managedObjectContext];
     [segue.destinationViewController setTitle:self.goalNameTextField.text];
     [segue.destinationViewController setGoalObject:goal];
-    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
     
 }
 

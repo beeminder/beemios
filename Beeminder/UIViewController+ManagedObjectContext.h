@@ -1,0 +1,15 @@
+//
+//  UIViewController+ManagedObjectContext.h
+//  Beeminder
+//
+//  Created by Andy Brett on 6/28/12.
+//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIViewController (ManagedObjectContext)
+
+- (NSManagedObjectContext *)managedObjectContext;
+
+@end

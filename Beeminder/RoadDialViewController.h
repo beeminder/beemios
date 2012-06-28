@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Goal.h"
+#import "UIViewController+ManagedObjectContext.h"
+
 @interface RoadDialViewController : UIViewController 
     <UIPickerViewDataSource,
      UIPickerViewDelegate>
@@ -17,7 +19,6 @@
 @property NSInteger goalRateNumerator;
 @property (strong, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @property (strong, nonatomic) Goal *goalObject;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
 @property (strong, nonatomic) NSMutableData *responseData;

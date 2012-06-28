@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SBJson.h"
+#import "UIViewController+ManagedObjectContext.h"
 
 @interface GoalsTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableData *responseData;
 @property NSInteger responseStatus;
 @property (strong, nonatomic) NSMutableArray *goals;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

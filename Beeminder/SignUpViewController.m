@@ -44,7 +44,6 @@
     [self setScrollView:nil];
     [self setValidationWarningLabel:nil];
     [super viewDidUnload];
-    [self setManagedObjectContext:nil];
     [self setEmailTextField:nil];
     [self setPasswordTextField:nil];
     [self setPasswordConfirmationTextField:nil];
@@ -59,11 +58,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [[self.navigationController navigationBar] setHidden:YES];
-    UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
-    UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
-    GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
-    [goalCon setManagedObjectContext:self.managedObjectContext];
-
 }
 
 - (BOOL)validateEmailWithString:(NSString*)email

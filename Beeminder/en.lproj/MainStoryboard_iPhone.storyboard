@@ -460,10 +460,10 @@
             </objects>
             <point key="canvasLocation" x="2610" y="-738"/>
         </scene>
-        <!--Navigation Controller - Goals-->
+        <!--Dashboard Navigation Controller - Goals-->
         <scene sceneID="g7X-kD-e6b">
             <objects>
-                <navigationController definesPresentationContext="YES" id="hgb-kz-a4x" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="hgb-kz-a4x" customClass="DashboardNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Goals" id="8LS-sR-cd1"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -540,6 +540,9 @@
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
             </relationships>
         </class>
+        <class className="DashboardNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
+        </class>
         <class className="GoalViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
             <relationships>
@@ -592,7 +595,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ual-lg-eyK"/>
         <segue reference="Agq-0d-xWn"/>
+        <segue reference="5bu-Oa-s61"/>
     </inferredMetricsTieBreakers>
 </document>

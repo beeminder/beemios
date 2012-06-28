@@ -38,6 +38,8 @@
 		A19D7C2315975FF10031ABED /* Goal+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C2215975FF10031ABED /* Goal+Create.m */; };
 		A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C381597810C0031ABED /* User+CreateGoal.m */; };
 		A19D7C491597EE660031ABED /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C481597EE650031ABED /* User+Create.m */; };
+		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
+		A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
@@ -129,6 +131,10 @@
 		A19D7C381597810C0031ABED /* User+CreateGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CreateGoal.m"; sourceTree = "<group>"; };
 		A19D7C471597EE650031ABED /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		A19D7C481597EE650031ABED /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
+		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
+		A1B31643159D16E000998C76 /* DashboardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardNavigationController.m; sourceTree = "<group>"; };
+		A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ManagedObjectContext.h"; sourceTree = "<group>"; };
+		A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ManagedObjectContext.m"; sourceTree = "<group>"; };
 		A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoadDialViewController.h; sourceTree = "<group>"; };
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -304,6 +310,10 @@
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
 				A186B1E31599F58C00A6F60C /* SignUpViewController.h */,
 				A186B1E41599F58C00A6F60C /* SignUpViewController.m */,
+				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
+				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
+				A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */,
+				A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -438,6 +448,8 @@
 				A186B1EB1599F80E00A6F60C /* Goal.m in Sources */,
 				A186B1EE1599F80E00A6F60C /* User.m in Sources */,
 				A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */,
+				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
+				A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

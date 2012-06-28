@@ -14,7 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordConfirmationTextField;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property NSInteger responseStatus;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;

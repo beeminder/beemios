@@ -20,6 +20,5 @@
 @property (strong, nonatomic) NSString *slug;
 @property (strong, nonatomic) IBOutlet CPTGraphHostingView *graphHostingView;
 @property (nonatomic, strong) CPTPlotSpaceAnnotation *symbolTextAnnotation;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

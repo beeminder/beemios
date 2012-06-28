@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+ManagedObjectContext.h"
 
 @interface SettingsViewController : UIViewController
 

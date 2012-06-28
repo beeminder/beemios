@@ -7,15 +7,13 @@
 //
 
 #import "SplashViewController.h"
-#import "GoalsTableViewController.h"
+#import "BeeminderViewController.h"
 
 @interface SplashViewController ()
 
 @end
 
 @implementation SplashViewController
-
-@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,19 +60,19 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"skipToDashboard"]) {
-        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
-        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
-        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
-        
-        [goalCon setManagedObjectContext:self.managedObjectContext];
-
-    }
-    else {
-        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"skipToDashboard"]) {
+//        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+//        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
+//        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
+//        
+//        [goalCon setManagedObjectContext:self.managedObjectContext];
+//
+//    }
+//    else {
+//        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
+//    }
+//}
 
 @end

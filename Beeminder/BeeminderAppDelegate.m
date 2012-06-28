@@ -39,8 +39,7 @@
         
         [User userWithUserDict:userDict withContext:self.managedObjectContext];
     }
-    UINavigationController *navCon = (UINavigationController*)self.window.rootViewController;
-    BeeminderViewController *beeCon = (BeeminderViewController *) navCon.topViewController;
+    BeeminderViewController *beeCon = (BeeminderViewController*)self.window.rootViewController;
     beeCon.managedObjectContext = self.managedObjectContext;
     
     return YES;

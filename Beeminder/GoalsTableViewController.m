@@ -20,7 +20,6 @@
 @synthesize responseData = _responseData;
 @synthesize responseStatus = _responseStatus;
 @synthesize goals = _goals;
-@synthesize managedObjectContext = _managedObjectContext;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -163,10 +162,7 @@
         [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
         
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
-    }
-    
-    [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
-    
+    }    
 }
 
 #pragma mark - NSURLConnection delegate
