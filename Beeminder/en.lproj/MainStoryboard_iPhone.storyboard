@@ -465,7 +465,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="460" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="dhW-RV-80l">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bee.png" id="dhW-RV-80l">
                                 <rect key="frame" x="0.0" y="0.0" width="460" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>

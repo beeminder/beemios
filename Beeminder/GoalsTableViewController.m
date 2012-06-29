@@ -159,9 +159,11 @@
         NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
         
         NSString *slug = [goalDict objectForKey:@"slug"];
-        NSString *graphURL = [goalDict objectForKey:@"graph_url"];
+        id graphURL = [goalDict objectForKey:@"graph_url"];
         
-        [segue.destinationViewController setGraphURL:graphURL];
+        if (graphURL != [NSNull null]) {
+            [segue.destinationViewController setGraphURL:graphURL];
+        }
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
     }    
 }

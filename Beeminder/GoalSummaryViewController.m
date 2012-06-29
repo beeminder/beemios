@@ -27,9 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
-    [self.imageView setImage:[[UIImage alloc] initWithData:imageData]];
-	// Do any additional setup after loading the view.
+    if (self.graphURL) {
+        
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
+        [self.imageView setImage:[[UIImage alloc] initWithData:imageData]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
