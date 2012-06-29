@@ -26,6 +26,7 @@
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
+		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A186B1E81599F80E00A6F60C /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E71599F80E00A6F60C /* Datapoint.m */; };
 		A186B1EB1599F80E00A6F60C /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1EA1599F80E00A6F60C /* Goal.m */; };
@@ -112,6 +113,8 @@
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
+		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
+		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A186B1E61599F80E00A6F60C /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
+				A1782811159D567E00F3336F /* GoalGraphViewController.h */,
+				A1782812159D567E00F3336F /* GoalGraphViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
+				A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

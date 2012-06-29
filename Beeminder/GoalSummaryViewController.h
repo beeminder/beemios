@@ -10,7 +10,7 @@
 #import "UIViewController+ManagedObjectContext.h"
 
 @interface GoalSummaryViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) NSString *graphURL;
+@property (strong, nonatomic) IBOutlet UIButton *graphButton;
 
 @end
