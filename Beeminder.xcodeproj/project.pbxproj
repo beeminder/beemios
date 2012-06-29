@@ -38,6 +38,7 @@
 		A19D7C2315975FF10031ABED /* Goal+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C2215975FF10031ABED /* Goal+Create.m */; };
 		A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C381597810C0031ABED /* User+CreateGoal.m */; };
 		A19D7C491597EE660031ABED /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C481597EE650031ABED /* User+Create.m */; };
+		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
@@ -131,6 +132,8 @@
 		A19D7C381597810C0031ABED /* User+CreateGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CreateGoal.m"; sourceTree = "<group>"; };
 		A19D7C471597EE650031ABED /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		A19D7C481597EE650031ABED /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
+		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
+		A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalSummaryViewController.m; sourceTree = "<group>"; };
 		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
 		A1B31643159D16E000998C76 /* DashboardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardNavigationController.m; sourceTree = "<group>"; };
 		A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ManagedObjectContext.h"; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
 				A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */,
 				A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */,
+				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
+				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */,
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */,
+				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

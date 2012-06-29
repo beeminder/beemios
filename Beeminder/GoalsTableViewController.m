@@ -8,6 +8,7 @@
 
 #import "GoalsTableViewController.h"
 #import "GoalViewController.h"
+#import "GoalSummaryViewController.h"
 #import "constants.h"
 #import "Goal+Create.h"
 
@@ -158,9 +159,9 @@
         NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
         
         NSString *slug = [goalDict objectForKey:@"slug"];
+        NSString *graphURL = [goalDict objectForKey:@"graph_url"];
         
-        [segue.destinationViewController performSelector:@selector(setSlug:) withObject:(slug)];
-        
+        [segue.destinationViewController setGraphURL:graphURL];
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
     }    
 }
