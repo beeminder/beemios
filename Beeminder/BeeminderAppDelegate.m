@@ -8,7 +8,6 @@
 
 #import "BeeminderAppDelegate.h"
 #import <CoreData/CoreData.h>
-#import "User+Create.h"
 #import "BeeminderViewController.h"
 @implementation BeeminderAppDelegate
 
@@ -21,24 +20,6 @@
 {
     // Override point for customization after application launch.
 
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    if (!authToken) {
-        // random string for the temporary username. 
-        NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
-        NSMutableString *s = [NSMutableString stringWithCapacity:20];
-        for (NSUInteger i = 0U; i < 20; i++) {
-            u_int32_t r = arc4random() % [alphabet length];
-            unichar c = [alphabet characterAtIndex:r];
-            [s appendFormat:@"%C", c];
-        }
-        
-        [[NSUserDefaults standardUserDefaults] setObject:s forKey:@"username"];
-        
-        NSDictionary *userDict = [NSDictionary dictionaryWithObject:s forKey:@"username"];
-        
-        [User userWithUserDict:userDict withContext:self.managedObjectContext];
-    }
     BeeminderViewController *beeCon = (BeeminderViewController*)self.window.rootViewController;
     beeCon.managedObjectContext = self.managedObjectContext;
     

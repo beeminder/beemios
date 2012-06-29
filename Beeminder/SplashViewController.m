@@ -8,6 +8,7 @@
 
 #import "SplashViewController.h"
 #import "BeeminderViewController.h"
+#import "User+Create.h"
 
 @interface SplashViewController ()
 
@@ -27,9 +28,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    if ([defaults objectForKey:@"authenticationTokenKey"]) {
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    if (!username) {
+        // random string for the temporary username.
+        NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
+        NSMutableString *s = [NSMutableString stringWithCapacity:20];
+        for (NSUInteger i = 0U; i < 20; i++) {
+            u_int32_t r = arc4random() % [alphabet length];
+            unichar c = [alphabet characterAtIndex:r];
+            [s appendFormat:@"%C", c];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:s forKey:@"username"];
+        
+        NSDictionary *userDict = [NSDictionary dictionaryWithObject:s forKey:@"username"];
+        
+        [User userWithUserDict:userDict withContext:[self managedObjectContext]];
+    }
+    
+    else if (authToken) {
         [[self.navigationController navigationBar] setHidden:YES];
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }
@@ -59,20 +80,5 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.identifier isEqualToString:@"skipToDashboard"]) {
-//        UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
-//        UINavigationController *navCon = (UINavigationController *) [tabBar.viewControllers objectAtIndex:0];
-//        GoalsTableViewController *goalCon = (GoalsTableViewController *)[navCon.viewControllers objectAtIndex:0];
-//        
-//        [goalCon setManagedObjectContext:self.managedObjectContext];
-//
-//    }
-//    else {
-//        [segue.destinationViewController setManagedObjectContext:self.managedObjectContext];
-//    }
-//}
 
 @end

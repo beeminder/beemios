@@ -44,7 +44,18 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"authenticationTokenKey"];
     [defaults setObject:nil forKey:@"username"];
-    [self performSegueWithIdentifier:@"segueAfterSignOut" sender:self];
+    
+    NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
+    NSMutableString *s = [NSMutableString stringWithCapacity:20];
+    for (NSUInteger i = 0U; i < 20; i++) {
+        u_int32_t r = arc4random() % [alphabet length];
+        unichar c = [alphabet characterAtIndex:r];
+        [s appendFormat:@"%C", c];
+    }
+    
+    [defaults setObject:s forKey:@"username"];
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end
