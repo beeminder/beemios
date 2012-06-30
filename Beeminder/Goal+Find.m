@@ -20,7 +20,7 @@
     
     NSArray *goals = [context executeFetchRequest:goalRequest error:NULL];
     
-    if (!goal || goals.count > 1) {
+    if (!goals || goals.count > 1) {
         // error
     }
     else {

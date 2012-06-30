@@ -500,7 +500,7 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="units" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="AOw-jA-Vsi">
-                                <rect key="frame" x="173" y="241" width="36" height="21"/>
+                                <rect key="frame" x="173" y="241" width="127" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -513,8 +513,8 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Add data:" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="5Hq-O5-i1s">
-                                <rect key="frame" x="113" y="196" width="102" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Add data:" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="5Hq-O5-i1s">
+                                <rect key="frame" x="20" y="196" width="280" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -531,6 +531,7 @@
                         <outlet property="inputStepper" destination="YcL-8d-VDM" id="8Wg-p7-jsM"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
                         <outlet property="instructionLabel" destination="5Hq-O5-i1s" id="mT1-qg-gBV"/>
+                        <outlet property="submitButton" destination="RjJ-3S-8pz" id="x5p-pS-zKZ"/>
                         <outlet property="unitsLabel" destination="AOw-jA-Vsi" id="ImE-kd-sd2"/>
                     </connections>
                 </viewController>
@@ -658,6 +659,7 @@
                 <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

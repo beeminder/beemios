@@ -9,6 +9,7 @@
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="goal" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="gtype" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="safebuf" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>

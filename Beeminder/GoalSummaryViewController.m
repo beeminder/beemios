@@ -14,11 +14,12 @@
 @end
 
 @implementation GoalSummaryViewController
-@synthesize unitsLabel;
-@synthesize instructionLabel;
-@synthesize inputTextField;
-@synthesize inputStepper;
-@synthesize graphButton;
+@synthesize unitsLabel = _unitsLabel;
+@synthesize instructionLabel = _instructionLabel;
+@synthesize inputTextField = _inputTextField;
+@synthesize inputStepper = _inputStepper;
+@synthesize submitButton = _submitButton;
+@synthesize graphButton = _graphButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,22 +41,30 @@
     
     self.goalObject = [Goal findBySlug:self.slug forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:[self managedObjectContext]];
     
-    if ([self.goalObject.units isEqualToString:@"times"]) {
-        self.inputStepper.hidden = YES;
-        self.inputTextField.hidden = YES;
-        self.instructionLabel.text = @"Check off this goal:";
+    if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
+        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
+        if ([self.goalObject.units isEqualToString:@"times"]) {
+            self.inputStepper.hidden = YES;
+            self.inputTextField.hidden = YES;
+            self.unitsLabel.hidden = YES;
+            self.instructionLabel.text = @"Check off this goal:";
+        }
+        else if (self.goalObject.units) {
+            self.unitsLabel.text = self.goalObject.units;            
+        }
     }
     else {
-        if (self.goalObject.units) {
-            self.unitsLabel.text = self.goalObject.units;
-        }
-        self.inputTextField.text = [NSString stringWithFormat:@"%f", self.inputStepper.value];
+        self.inputStepper.hidden = YES;
+        self.inputTextField.hidden = YES;
+        self.unitsLabel.hidden = YES;
+        self.instructionLabel.hidden = YES;
+        self.submitButton.hidden = YES;
     }
 }
 
 - (IBAction)inputStepperValueChanged
 {
-    self.inputTextField.text = [NSString stringWithFormat:@"%f", self.inputStepper.value];
+    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -81,6 +90,7 @@
     [self setInstructionLabel:nil];
     [self setInputTextField:nil];
     [self setInputStepper:nil];
+    [self setSubmitButton:nil];
     [super viewDidUnload];
 }
 @end

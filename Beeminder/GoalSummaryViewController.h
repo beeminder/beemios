@@ -20,5 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 @end

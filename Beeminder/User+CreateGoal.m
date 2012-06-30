@@ -27,6 +27,7 @@
         goal = [NSEntityDescription insertNewObjectForEntityForName:@"Goal" inManagedObjectContext:context];
         goal.slug = [goalDict objectForKey:@"slug"];
         goal.title = [goalDict objectForKey:@"title"];
+        goal.gtype = [goalDict objectForKey:@"gtype"];
         
         // other attributes here.
         
