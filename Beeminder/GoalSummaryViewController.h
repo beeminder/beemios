@@ -10,6 +10,7 @@
 #import "UIViewController+ManagedObjectContext.h"
 #import "Goal+Find.h"
 #import "GoalGraphViewController.h"
+#import "DejalActivityView.h"
 
 @interface GoalSummaryViewController : UIViewController
 @property (strong, nonatomic) NSString *graphURL;
@@ -21,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
+@property (strong, nonatomic) UIImage *graphImage;
 
 @end

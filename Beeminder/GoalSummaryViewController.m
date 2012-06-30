@@ -34,11 +34,9 @@
 {
     [super viewDidLoad];
     if (self.graphURL) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
-        [self.graphButton setBackgroundImage:[[UIImage alloc] initWithData:imageData] forState:UIControlStateNormal];
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Fetching graph..."];
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
-    
     self.goalObject = [Goal findBySlug:self.slug forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:[self managedObjectContext]];
     
     if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
@@ -62,6 +60,16 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (self.graphURL) {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
+        self.graphImage = [[UIImage alloc] initWithData:imageData];
+        [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
+        [DejalBezelActivityView removeViewAnimated:YES];
+    }
+}
+
 - (IBAction)inputStepperValueChanged
 {
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
@@ -70,7 +78,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
-    ggvCon.graphURL = self.graphURL;
+    ggvCon.graphImage = self.graphImage;
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,4 +101,5 @@
     [self setSubmitButton:nil];
     [super viewDidUnload];
 }
+
 @end

@@ -14,6 +14,7 @@
 
 @implementation GoalGraphViewController
 @synthesize graphImageView;
+@synthesize graphImage = _graphImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,10 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.graphURL) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
+    if (self.graphImage) {
         [self.graphImageView setFrame:self.view.frame];
-        [self.graphImageView setImage:[[UIImage alloc] initWithData:imageData]];
+        [self.graphImageView setImage:self.graphImage];
     }
 
 	// Do any additional setup after loading the view.

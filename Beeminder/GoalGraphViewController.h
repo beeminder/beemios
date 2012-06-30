@@ -11,5 +11,6 @@
 @interface GoalGraphViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *graphImageView;
 @property (strong, nonatomic) NSString *graphURL;
+@property (strong, nonatomic) UIImage *graphImage;
 
 @end
