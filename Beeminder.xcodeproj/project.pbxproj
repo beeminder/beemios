@@ -26,11 +26,14 @@
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
+		A163B872159DEFE300C48883 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A163B871159DEFE300C48883 /* Datapoint.m */; };
+		A163B875159DEFE300C48883 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A163B874159DEFE300C48883 /* Goal.m */; };
+		A163B878159DEFE400C48883 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A163B877159DEFE400C48883 /* User.m */; };
+		A163B87B159DF13100C48883 /* Goal+Find.m in Sources */ = {isa = PBXBuildFile; fileRef = A163B87A159DF13100C48883 /* Goal+Find.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
+		A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D94159EC7EF00B1639D /* DejalActivityView.m */; };
+		A17F4D98159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D97159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
-		A186B1E81599F80E00A6F60C /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E71599F80E00A6F60C /* Datapoint.m */; };
-		A186B1EB1599F80E00A6F60C /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1EA1599F80E00A6F60C /* Goal.m */; };
-		A186B1EE1599F80E00A6F60C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1ED1599F80E00A6F60C /* User.m */; };
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
@@ -113,16 +116,22 @@
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
+		A163B870159DEFE300C48883 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A163B871159DEFE300C48883 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A163B873159DEFE300C48883 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A163B874159DEFE300C48883 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A163B876159DEFE400C48883 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A163B877159DEFE400C48883 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A163B879159DF13100C48883 /* Goal+Find.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Find.h"; sourceTree = "<group>"; };
+		A163B87A159DF13100C48883 /* Goal+Find.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Goal+Find.m"; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
+		A17F4D93159EC7EF00B1639D /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		A17F4D94159EC7EF00B1639D /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
+		A17F4D96159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NSURLConnectionDelegate.h"; sourceTree = "<group>"; };
+		A17F4D97159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NSURLConnectionDelegate.m"; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		A186B1E61599F80E00A6F60C /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A186B1E71599F80E00A6F60C /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
-		A186B1E91599F80E00A6F60C /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A186B1EA1599F80E00A6F60C /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A186B1EC1599F80E00A6F60C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A186B1ED1599F80E00A6F60C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -223,16 +232,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A17F4D92159EC7D000B1639D /* Dejal */ = {
+			isa = PBXGroup;
+			children = (
+				A17F4D93159EC7EF00B1639D /* DejalActivityView.h */,
+				A17F4D94159EC7EF00B1639D /* DejalActivityView.m */,
+			);
+			name = Dejal;
+			sourceTree = "<group>";
+		};
+		A17F4D99159ECAF400B1639D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */,
+				A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */,
+				A17F4D96159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.h */,
+				A17F4D97159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		A19D7C24159760860031ABED /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				A163B870159DEFE300C48883 /* Datapoint.h */,
+				A163B876159DEFE400C48883 /* User.h */,
+				A163B877159DEFE400C48883 /* User.m */,
+				A163B873159DEFE300C48883 /* Goal.h */,
+				A163B874159DEFE300C48883 /* Goal.m */,
+				A163B871159DEFE300C48883 /* Datapoint.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A186B1E61599F80E00A6F60C /* Datapoint.h */,
-				A186B1E71599F80E00A6F60C /* Datapoint.m */,
-				A186B1E91599F80E00A6F60C /* Goal.h */,
-				A186B1EA1599F80E00A6F60C /* Goal.m */,
-				A186B1EC1599F80E00A6F60C /* User.h */,
-				A186B1ED1599F80E00A6F60C /* User.m */,
 				A19D7C2115975FF10031ABED /* Goal+Create.h */,
 				A19D7C2215975FF10031ABED /* Goal+Create.m */,
 				A19D7C371597810C0031ABED /* User+CreateGoal.h */,
@@ -241,6 +270,8 @@
 				A19D7C481597EE650031ABED /* User+Create.m */,
 				A1283EFC159B4F6800DA7DFF /* User+Find.h */,
 				A1283EFD159B4F6800DA7DFF /* User+Find.m */,
+				A163B879159DF13100C48883 /* Goal+Find.h */,
+				A163B87A159DF13100C48883 /* Goal+Find.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -291,6 +322,8 @@
 		A1F03D56158E9A850075D5DA /* Beeminder */ = {
 			isa = PBXGroup;
 			children = (
+				A17F4D99159ECAF400B1639D /* Categories */,
+				A17F4D92159EC7D000B1639D /* Dejal */,
 				A19D7C24159760860031ABED /* CoreData */,
 				A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */,
 				A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */,
@@ -318,8 +351,6 @@
 				A186B1E41599F58C00A6F60C /* SignUpViewController.m */,
 				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
 				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
-				A1B31645159D1A6700998C76 /* UIViewController+ManagedObjectContext.h */,
-				A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 				A1782811159D567E00F3336F /* GoalGraphViewController.h */,
@@ -454,14 +485,17 @@
 				A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */,
 				A19D7C491597EE660031ABED /* User+Create.m in Sources */,
 				A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */,
-				A186B1E81599F80E00A6F60C /* Datapoint.m in Sources */,
-				A186B1EB1599F80E00A6F60C /* Goal.m in Sources */,
-				A186B1EE1599F80E00A6F60C /* User.m in Sources */,
 				A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */,
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
 				A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */,
+				A163B872159DEFE300C48883 /* Datapoint.m in Sources */,
+				A163B875159DEFE300C48883 /* Goal.m in Sources */,
+				A163B878159DEFE400C48883 /* User.m in Sources */,
+				A163B87B159DF13100C48883 /* Goal+Find.m in Sources */,
+				A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */,
+				A17F4D98159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

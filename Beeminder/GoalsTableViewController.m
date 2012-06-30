@@ -11,6 +11,7 @@
 #import "GoalSummaryViewController.h"
 #import "constants.h"
 #import "Goal+Create.h"
+#import "DejalActivityView.h"
 
 @interface GoalsTableViewController () <NSURLConnectionDelegate>
 
@@ -48,6 +49,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalsRequest delegate:self];
     
     if (connection) {
+        [DejalBezelActivityView activityViewForView:self.view];
         self.title = @"Fetching goals...";
         self.responseData = [NSMutableData data];
     }
@@ -165,31 +167,15 @@
             [segue.destinationViewController setGraphURL:graphURL];
         }
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
+        [segue.destinationViewController setSlug:slug];
     }    
 }
 
 #pragma mark - NSURLConnection delegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseStatus = [httpResponse statusCode];
-    
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.responseData appendData:d];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-                                message:[error localizedDescription]
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                      otherButtonTitles:nil] show];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [DejalBezelActivityView removeView];
     if (self.responseStatus == 200) {
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
         

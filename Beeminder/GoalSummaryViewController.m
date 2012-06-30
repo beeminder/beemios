@@ -32,11 +32,29 @@
         
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
         [self.graphButton setBackgroundImage:[[UIImage alloc] initWithData:imageData] forState:UIControlStateNormal];
-        [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2)];
+        [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
         
 //        [self.imageView setFrame:self.view.frame];
 //        [self.imageView setImage:[[UIImage alloc] initWithData:imageData]];
     }
+    
+    self.goalObject = [Goal findBySlug:self.slug forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:[self managedObjectContext]];
+    
+    if (YES) {//([self.goalObject.units isEqualToString:@"times"]) {
+        [self addCheckinButton];
+    }
+                       
+}
+
+- (void)addCheckinButton
+{
+    CGRect buttonRect = CGRectMake(self.view.frame.size.width/3, self.view.frame.size.height/2.5, self.view.frame.size.width/3, self.view.frame.size.height/8);
+
+    UIButton *checkinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    checkinButton.frame = buttonRect;
+    [checkinButton setTitle:@"Done!" forState:UIControlStateNormal];
+    
+    [self.view addSubview:checkinButton];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

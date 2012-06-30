@@ -90,6 +90,7 @@
     
     // save goal
     self.goalObject.rate = [self weeklyRate];
+    self.goalObject.units = self.goalRateNumeratorUnits;
     [self.managedObjectContext save:nil];
     
     // post to server if the user is already logged in

@@ -9,7 +9,6 @@
 #import "SignInViewController.h"
 #import "constants.h"
 #import "User+Create.h"
-#import "UIViewController+ManagedObjectContext.h"
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -71,7 +70,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
     
     if (connection) {
-        self.title = @"Authenticating...";
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Authenticating..."];
         self.responseData = [NSMutableData data];
     }    
 }
@@ -80,26 +79,8 @@
     [self formSubmitted];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseStatus = [httpResponse statusCode];
-    
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.responseData appendData:d];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-                                 message:[error localizedDescription]
-                                delegate:nil
-                       cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                       otherButtonTitles:nil] show];
-}
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [DejalBezelActivityView removeViewAnimated:YES];
     if (self.responseStatus == 200) {
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
 

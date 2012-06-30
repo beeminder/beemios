@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SBJson.h"
 #import "UIViewController+ManagedObjectContext.h"
+#import "UIViewController+NSURLConnectionDelegate.h"
 
 @interface GoalsTableViewController : UITableViewController
 
