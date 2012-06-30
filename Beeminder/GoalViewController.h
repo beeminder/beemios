@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
+#import "UIViewController+ManagedObjectContext.h"
+#import "constants.h"
+#import "SBJson.h"
+#import "UIViewController+NSURLConnectionDelegate.h"
 
 @interface GoalViewController : UIViewController <CPTPlotSpaceDelegate,
     CPTPlotDataSource,

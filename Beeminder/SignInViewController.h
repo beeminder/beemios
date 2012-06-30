@@ -10,7 +10,8 @@
 #import "SBJson.h"
 #import "UIViewController+ManagedObjectContext.h"
 #import "UIViewController+NSURLConnectionDelegate.h"
-#import "DejalActivityView.h"
+#import "constants.h"
+#import "User+Create.h"
 
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;

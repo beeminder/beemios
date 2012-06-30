@@ -7,8 +7,6 @@
 //
 
 #import "SignInViewController.h"
-#import "constants.h"
-#import "User+Create.h"
 
 @interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -55,7 +53,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)formSubmitted {
+- (void)formSubmitted
+{
     NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/sign_in.json", kBaseURL];
     
     NSURL *loginUrl = [NSURL URLWithString:urlString];
@@ -75,11 +74,13 @@
     }    
 }
 
-- (IBAction)signInButtonPressed:(UIButton *)sender {
+- (IBAction)signInButtonPressed:(UIButton *)sender
+{
     [self formSubmitted];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
     [DejalBezelActivityView removeViewAnimated:YES];
     if (self.responseStatus == 200) {
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];

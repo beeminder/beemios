@@ -7,11 +7,6 @@
 //
 
 #import "GoalsTableViewController.h"
-#import "GoalViewController.h"
-#import "GoalSummaryViewController.h"
-#import "constants.h"
-#import "Goal+Create.h"
-#import "DejalActivityView.h"
 
 @interface GoalsTableViewController () <NSURLConnectionDelegate>
 

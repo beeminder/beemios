@@ -7,9 +7,6 @@
 //
 
 #import "GoalViewController.h"
-#import "constants.h"
-#import "SBJson.h"
-#import "UIViewController+ManagedObjectContext.h"
 
 @interface GoalViewController () <NSURLConnectionDelegate>
 
@@ -57,6 +54,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:datapointsRequest delegate:self];
     
     if (connection) {
+        [DejalBezelActivityView activityViewForView:self.view];
         self.responseData = [NSMutableData data];
     }
 	// Do any additional setup after loading the view.
@@ -75,26 +73,9 @@
 
 #pragma mark - NSURLConnection delegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseStatus = [httpResponse statusCode];
-    
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.responseData appendData:d];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-                                message:[error localizedDescription]
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                      otherButtonTitles:nil] show];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
     if (self.responseStatus == 200) {
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
         
@@ -113,14 +94,16 @@
     }
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setGraphHostingView:nil];
     [super viewDidUnload];
 }
 
 #pragma mark - Core Plot related methods
 
-- (double)extrema:(NSString *)extrema ForAxis:(NSString *)axis {
+- (double)extrema:(NSString *)extrema ForAxis:(NSString *)axis
+{
     NSArray *copy = [self.datapoints copy];
     
     NSArray *sortedCopy = [copy sortedArrayUsingComparator:^(id a, id b){
@@ -136,16 +119,18 @@
     }
 }
 
-- (double)minYValue {
+- (double)minYValue
+{
     return [self extrema:@"min" ForAxis:@"value"];
 }
 
-- (double)maxYValue {
+- (double)maxYValue
+{
     return [self extrema:@"max" ForAxis:@"value"];
 }
 
-
-- (void)setupGraph {
+- (void)setupGraph
+{
     self.graph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
     CPTTheme *theme = [CPTTheme themeNamed:kCPTPlainWhiteTheme];
     [self.graph applyTheme:theme];
@@ -163,7 +148,8 @@
     self.graph.paddingBottom = 0.0;
 }
 
--(void) setupPlotSpace {
+-(void) setupPlotSpace
+{
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     
     plotSpace.allowsUserInteraction = YES;
@@ -185,7 +171,8 @@
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(startY) length:CPTDecimalFromDouble(yLength)];
 }
 
-- (void)setupAxes {
+- (void)setupAxes
+{
     NSDate *refDate = [NSDate dateWithTimeIntervalSince1970:0];
     
     // style the graph with white text and lines
@@ -229,7 +216,8 @@
     y.axisLineStyle = grayLineStyle;
 }
 
-- (void)setupScatterPlots {
+- (void)setupScatterPlots
+{
     CPTScatterPlot *scatterPlot = [[CPTScatterPlot alloc] init];
     
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
@@ -291,11 +279,13 @@
 
 #pragma mark - CPTPlotDataSource delegate methods
 
-- (NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
+- (NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
+{
     return self.datapoints.count;
 }
 
-- (double)doubleForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
+- (double)doubleForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
+{
     NSString *key = (fieldEnum == CPTScatterPlotFieldX) ? @"measured_at" : @"value";
     
     return [[[self.datapoints objectAtIndex:index] objectForKey:key] doubleValue];

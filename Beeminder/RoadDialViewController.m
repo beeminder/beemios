@@ -7,8 +7,7 @@
 //
 
 #import "RoadDialViewController.h"
-#import "GoalsTableViewController.h"
-#import "constants.h"
+
 
 @interface RoadDialViewController () <NSURLConnectionDelegate>
 
@@ -114,6 +113,7 @@
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalRequest delegate:self];
         
         if (connection) {
+            [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
             self.responseData = [NSMutableData data];
         }
     }
@@ -206,26 +206,9 @@
 
 #pragma mark NSURLConnectionDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseStatus = [httpResponse statusCode];
-    
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.responseData appendData:d];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-                                message:[error localizedDescription]
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                      otherButtonTitles:nil] show];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
     if (self.responseStatus == 200) {
         [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
     }

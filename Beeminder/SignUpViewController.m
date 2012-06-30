@@ -7,11 +7,7 @@
 //
 
 #import "SignUpViewController.h"
-#import "User+Create.h"
-#import "User+Find.h"
-#import "constants.h"
-#import "Goal.h"
-#import "GoalsTableViewController.h"
+
 
 @interface SignUpViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
 
@@ -108,6 +104,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:userRequest delegate:self];
     
     if (connection) {
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
         self.responseData = [NSMutableData data];
     }
 }
@@ -171,25 +168,6 @@
 }
 
 #pragma mark NSURLConnectionDelegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseStatus = [httpResponse statusCode];
-    
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.responseData appendData:d];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-                                message:[error localizedDescription]
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                      otherButtonTitles:nil] show];
-}
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (self.responseStatus == 200) {

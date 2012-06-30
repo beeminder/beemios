@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Goal.h"
 #import "UIViewController+ManagedObjectContext.h"
+#import "GoalsTableViewController.h"
+#import "constants.h"
+#import "UIViewController+NSURLConnectionDelegate.h"
 
-@interface RoadDialViewController : UIViewController 
+@interface RoadDialViewController : UIViewController
     <UIPickerViewDataSource,
      UIPickerViewDelegate>
 

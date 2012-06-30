@@ -10,6 +10,10 @@
 #import "SBJson.h"
 #import "UIViewController+ManagedObjectContext.h"
 #import "UIViewController+NSURLConnectionDelegate.h"
+#import "GoalViewController.h"
+#import "GoalSummaryViewController.h"
+#import "constants.h"
+#import "Goal+Create.h"
 
 @interface GoalsTableViewController : UITableViewController
 

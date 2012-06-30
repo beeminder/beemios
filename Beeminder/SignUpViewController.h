@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User+Create.h"
+#import "User+Find.h"
+#import "constants.h"
+#import "Goal.h"
+#import "GoalsTableViewController.h"
+#import "UIViewController+NSURLConnectionDelegate.h"
 
 @interface SignUpViewController : UIViewController
 
