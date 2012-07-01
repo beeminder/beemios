@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+ManagedObjectContext.h"
-#import "Goal+Find.h"
+#import "Goal+Resource.h"
 #import "GoalGraphViewController.h"
 #import "DejalActivityView.h"
 

@@ -79,7 +79,7 @@
     }
     
     // save user
-    User *user = [User findByUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  withContext:self.managedObjectContext];
+    User *user = [User findByUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  inContext:self.managedObjectContext];
     
     user.username = self.usernameTextField.text;
     user.email = self.emailTextField.text;

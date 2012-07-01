@@ -97,7 +97,9 @@
         
         [defaults setObject:username forKey:@"username"];
         
-        [User userWithUserDict:[NSDictionary dictionaryWithObject:username forKey:@"username"] withContext:self.managedObjectContext];
+        NSDictionary *userDict = [NSDictionary dictionaryWithObject:username forKey:@"username"];
+        
+        [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
         
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }

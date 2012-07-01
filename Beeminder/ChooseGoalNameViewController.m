@@ -7,7 +7,7 @@
 //
 
 #import "ChooseGoalNameViewController.h"
-#import "Goal+Create.h"
+#import "Goal+Resource.h"
 #import "RoadDialViewController.h"
 #import "constants.h"
 #import "UIViewController+ManagedObjectContext.h"
@@ -179,7 +179,7 @@
     
     NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:self.goalNameTextField.text, @"title", slug, @"slug", nil];    
     
-    Goal *goal = [Goal goalWithDictionary:goalDict forUserWithUsername:username inManagedObjectContext:self.managedObjectContext];
+    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username inContext:self.managedObjectContext];
     [segue.destinationViewController setTitle:self.goalNameTextField.text];
     [segue.destinationViewController setGoalObject:goal];
     

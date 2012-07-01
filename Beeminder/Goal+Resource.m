@@ -1,0 +1,45 @@
+//
+//  Goal+Resource.m
+//  Beeminder
+//
+//  Created by Andy Brett on 6/30/12.
+//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//
+
+#import "Goal+Resource.h"
+
+@implementation Goal (Resource)
+
++ (Goal *)findBySlug:(NSString *)slug forUserWithUsername:(NSString *)username inContext:(NSManagedObjectContext *)context
+{
+    Goal *goal = nil;
+    
+    NSFetchRequest *goalRequest = [NSFetchRequest fetchRequestWithEntityName:@"Goal"];
+    
+    goalRequest.predicate = [NSPredicate predicateWithFormat:@"user.username = %@ and slug = %@", username, slug];
+    
+    NSArray *goals = [context executeFetchRequest:goalRequest error:NULL];
+    
+    if (!goals || goals.count > 1) {
+        // error
+    }
+    else {
+        goal = [goals lastObject];
+    }
+    return goal;
+}
+
++ (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
+    forUserWithUsername:(NSString *)username
+    inContext:(NSManagedObjectContext *)context
+{
+    Goal *goal = nil;
+    User *user = [User findByUsername:username inContext:context];
+    
+    goal = [user writeToGoalWithDictionary:goalDict inContext:context];
+    [context save:nil];
+    return goal;
+}
+
+
+@end

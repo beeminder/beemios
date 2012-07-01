@@ -11,7 +11,7 @@
 #import "UIViewController+ManagedObjectContext.h"
 #import "UIViewController+NSURLConnectionDelegate.h"
 #import "constants.h"
-#import "User+Create.h"
+#import "User+Resource.h"
 
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */ = {isa = PBXBuildFile; fileRef = A1283EFD159B4F6800DA7DFF /* User+Find.m */; };
+		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
+		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A12E48EE1591953B0014624E /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48ED1591953B0014624E /* logo-text.png */; };
 		A12E48F1159195480014624E /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48F0159195480014624E /* bee.png */; };
 		A12E48F4159197400014624E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E48F3159197400014624E /* GoalViewController.m */; };
@@ -26,7 +27,6 @@
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
-		A163B87B159DF13100C48883 /* Goal+Find.m in Sources */ = {isa = PBXBuildFile; fileRef = A163B87A159DF13100C48883 /* Goal+Find.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D94159EC7EF00B1639D /* DejalActivityView.m */; };
 		A17F4D98159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D97159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m */; };
@@ -39,9 +39,6 @@
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
-		A19D7C2315975FF10031ABED /* Goal+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C2215975FF10031ABED /* Goal+Create.m */; };
-		A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C381597810C0031ABED /* User+CreateGoal.m */; };
-		A19D7C491597EE660031ABED /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = A19D7C481597EE650031ABED /* User+Create.m */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31646159D1A6700998C76 /* UIViewController+ManagedObjectContext.m */; };
@@ -79,9 +76,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
+		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
+		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
+		A1253A85159FDB350058B495 /* Goal+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Goal+Resource.m"; sourceTree = "<group>"; };
 		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		A1283EFC159B4F6800DA7DFF /* User+Find.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Find.h"; sourceTree = "<group>"; };
-		A1283EFD159B4F6800DA7DFF /* User+Find.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Find.m"; sourceTree = "<group>"; };
 		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
 		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -116,8 +115,6 @@
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
-		A163B879159DF13100C48883 /* Goal+Find.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Find.h"; sourceTree = "<group>"; };
-		A163B87A159DF13100C48883 /* Goal+Find.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Goal+Find.m"; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A17F4D93159EC7EF00B1639D /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
@@ -138,12 +135,6 @@
 		A1993CC1159007B700011568 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		A19D7BE11596DC3B0031ABED /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
-		A19D7C2115975FF10031ABED /* Goal+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Create.h"; sourceTree = "<group>"; };
-		A19D7C2215975FF10031ABED /* Goal+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Goal+Create.m"; sourceTree = "<group>"; };
-		A19D7C371597810C0031ABED /* User+CreateGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CreateGoal.h"; sourceTree = "<group>"; };
-		A19D7C381597810C0031ABED /* User+CreateGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CreateGoal.m"; sourceTree = "<group>"; };
-		A19D7C471597EE650031ABED /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
-		A19D7C481597EE650031ABED /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
 		A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalSummaryViewController.m; sourceTree = "<group>"; };
 		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
@@ -262,16 +253,10 @@
 				A17F4D9E159F3E6900B1639D /* Datapoint.m */,
 				A17F4DA0159F3E6A00B1639D /* Goal.h */,
 				A17F4DA1159F3E6A00B1639D /* Goal.m */,
-				A19D7C2115975FF10031ABED /* Goal+Create.h */,
-				A19D7C2215975FF10031ABED /* Goal+Create.m */,
-				A19D7C371597810C0031ABED /* User+CreateGoal.h */,
-				A19D7C381597810C0031ABED /* User+CreateGoal.m */,
-				A19D7C471597EE650031ABED /* User+Create.h */,
-				A19D7C481597EE650031ABED /* User+Create.m */,
-				A1283EFC159B4F6800DA7DFF /* User+Find.h */,
-				A1283EFD159B4F6800DA7DFF /* User+Find.m */,
-				A163B879159DF13100C48883 /* Goal+Find.h */,
-				A163B87A159DF13100C48883 /* Goal+Find.m */,
+				A1253A81159FCDCF0058B495 /* User+Resource.h */,
+				A1253A82159FCDCF0058B495 /* User+Resource.m */,
+				A1253A84159FDB350058B495 /* Goal+Resource.h */,
+				A1253A85159FDB350058B495 /* Goal+Resource.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -481,21 +466,18 @@
 				A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */,
 				A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */,
 				A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */,
-				A19D7C2315975FF10031ABED /* Goal+Create.m in Sources */,
-				A19D7C391597810C0031ABED /* User+CreateGoal.m in Sources */,
-				A19D7C491597EE660031ABED /* User+Create.m in Sources */,
 				A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */,
-				A1283EFE159B4F6800DA7DFF /* User+Find.m in Sources */,
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1B31647159D1A6700998C76 /* UIViewController+ManagedObjectContext.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
 				A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */,
-				A163B87B159DF13100C48883 /* Goal+Find.m in Sources */,
 				A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */,
 				A17F4D98159ECAE600B1639D /* UIViewController+NSURLConnectionDelegate.m in Sources */,
 				A17F4D9C159F3E6800B1639D /* User.m in Sources */,
 				A17F4D9F159F3E6A00B1639D /* Datapoint.m in Sources */,
 				A17F4DA2159F3E6B00B1639D /* Goal.m in Sources */,
+				A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */,
+				A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

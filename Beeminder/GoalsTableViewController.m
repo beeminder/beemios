@@ -181,7 +181,7 @@
         NSDictionary *goalDict = nil;
         
         for (goalDict in self.goals) {
-            [Goal goalWithDictionary:goalDict forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] inManagedObjectContext:self.managedObjectContext];
+            [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] inContext:self.managedObjectContext];
         }
         
         self.title = @"Your goals";

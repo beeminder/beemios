@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "User+Create.h"
-#import "User+Find.h"
+#import "User+Resource.h"
 #import "constants.h"
 #import "Goal.h"
 #import "GoalsTableViewController.h"

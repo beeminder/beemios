@@ -8,7 +8,7 @@
 
 #import "SplashViewController.h"
 #import "BeeminderViewController.h"
-#import "User+Create.h"
+#import "User+Resource.h"
 
 @interface SplashViewController ()
 
@@ -47,7 +47,7 @@
         
         NSDictionary *userDict = [NSDictionary dictionaryWithObject:s forKey:@"username"];
         
-        [User userWithUserDict:userDict withContext:[self managedObjectContext]];
+        [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     }
     
     else if (authToken) {
