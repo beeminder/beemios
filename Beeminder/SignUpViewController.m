@@ -79,34 +79,10 @@
     }
     
     // save user
-    User *user = [User findByUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  inContext:self.managedObjectContext];
+    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField, @"email", nil];
     
-    user.username = self.usernameTextField.text;
-    user.email = self.emailTextField.text;
-    
-    [self.managedObjectContext save:nil];
+    User *user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
 
-    Goal *goal = [[user.goals allObjects] objectAtIndex:0];
-    
-    // post to server
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users.json", kBaseURL];
-    
-    NSURL *userURL = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *userRequest = [NSMutableURLRequest requestWithURL:userURL];
-    
-    NSString *userData = [NSString stringWithFormat:@"email=%@&username=%@&password=%@&goal[gtype]=hustler&goal[slug]=%@&goal[title]=%@", user.email, user.username, self.passwordTextField.text, goal.slug, goal.title];
-    
-    [userRequest setHTTPMethod:@"POST"];
-    [userRequest setHTTPBody:[userData dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:userRequest delegate:self];
-    
-    if (connection) {
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
-        self.responseData = [NSMutableData data];
-    }
 }
 
 #pragma mark Keyboard notifications

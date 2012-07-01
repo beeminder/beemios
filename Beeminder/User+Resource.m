@@ -104,24 +104,23 @@
 
 - (void)syncToRemote
 {
-    
+    [UserSyncRequest requestForUser:self];
 }
 
-+ (NSString *)createURL
+- (NSString *)createURL
 {
     return [NSString stringWithFormat:@"%@/%@/users.json", kBaseURL, kAPIPrefix];
 }
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%i.json", kBaseURL, kAPIPrefix, 4];
+    return [NSString stringWithFormat:@"%@/%@/users/%llu.json", kBaseURL, kAPIPrefix, self.serverId];
 }
 
 - (NSString *)updateURL
 {
     return [self readURL];
 }
-
 
 - (NSString *)deleteURL
 {

@@ -16,7 +16,7 @@
 @property (nonatomic) int64_t comment;
 @property (nonatomic) int64_t measured_at;
 @property (nonatomic, retain) NSDecimalNumber * value;
-@property UNKNOWN_TYPE UNKNOWN_TYPE serverId;
+@property (nonatomic) int64_t serverId;
 @property (nonatomic, retain) Goal *goal;
 
 @end

@@ -41,5 +41,30 @@
     return goal;
 }
 
+- (void)syncToRemote
+{
+    [GoalSyncRequest requestForGoal:self];
+}
+
+- (NSString *)createURL
+{
+    return [NSString stringWithFormat:@"%@/%@/users/%@/goals.json", kBaseURL, kAPIPrefix, self.user.username];
+}
+
+- (NSString *)readURL
+{
+    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%llu.json", kBaseURL, kAPIPrefix, self.user.username, self.serverId];
+}
+
+- (NSString *)updateURL
+{
+    return [self readURL];
+}
+
+- (NSString *)deleteURL
+{
+    return [self readURL];
+}
+
 
 @end

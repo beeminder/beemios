@@ -9,6 +9,7 @@
 #import "User.h"
 #import "constants.h"
 #import "Goal.h"
+#import "UserSyncRequest.h"
 
 @interface User (Resource)
 
@@ -16,7 +17,7 @@
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict inContext:(NSManagedObjectContext *)context;
 - (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict inContext:(NSManagedObjectContext *)context;
 - (void)syncToRemote;
-+ (NSString *)createURL;
+- (NSString *)createURL;
 - (NSString *)readURL;
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
