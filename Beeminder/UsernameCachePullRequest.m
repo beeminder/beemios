@@ -18,10 +18,18 @@
     
     NSArray *results = [context executeFetchRequest:cacheRequest error:nil];
     
-    usernameCachePullRequest.usernameCache = [results lastObject];
     usernameCachePullRequest.context = context;
 
-    NSString *urlString = [[results lastObject] readURL];
+    NSString *urlString;
+    
+    if ([results lastObject]) {
+        urlString = [[results lastObject] readURL];
+        usernameCachePullRequest.usernameCache = [results lastObject];
+    }
+    else {
+        urlString = [UsernameCache readURL];
+        usernameCachePullRequest.usernameCache = [NSEntityDescription insertNewObjectForEntityForName:@"UsernameCache" inManagedObjectContext:context];
+    }
     
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -31,6 +39,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:usernameCachePullRequest];
     
     if (connection) {
+        usernameCachePullRequest.responseData = [NSMutableData data];
         usernameCachePullRequest.status = @"sent";
     }
     

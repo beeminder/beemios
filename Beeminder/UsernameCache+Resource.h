@@ -12,5 +12,6 @@
 @interface UsernameCache (Resource)
 
 - (NSString *)readURL;
++ (NSString *)readURL;
 
 @end

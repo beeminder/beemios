@@ -21,4 +21,9 @@
     return [NSString stringWithFormat:@"%@/%@/usernames.json?timestamp=%@", kBaseURL, kPrivateAPIPrefix, timestamp];
 }
 
++ (NSString *)readURL
+{
+    return [NSString stringWithFormat:@"%@/%@/usernames.json", kBaseURL, kPrivateAPIPrefix];
+}
+
 @end
