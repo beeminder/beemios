@@ -9,14 +9,14 @@
 #import "User.h"
 #import "constants.h"
 #import "Goal.h"
-#import "UserSyncRequest.h"
+#import "UserPushRequest.h"
 
 @interface User (Resource)
 
 + (User *)findByUsername:(NSString *)username inContext:(NSManagedObjectContext *)context;
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict inContext:(NSManagedObjectContext *)context;
 - (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict inContext:(NSManagedObjectContext *)context;
-- (void)syncToRemote;
+- (void)pushToRemote;
 - (NSString *)createURL;
 - (NSString *)readURL;
 - (NSString *)updateURL;

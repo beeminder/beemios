@@ -33,17 +33,16 @@
     forUserWithUsername:(NSString *)username
     inContext:(NSManagedObjectContext *)context
 {
-    Goal *goal = nil;
     User *user = [User findByUsername:username inContext:context];
     
-    goal = [user writeToGoalWithDictionary:goalDict inContext:context];
+    Goal *goal = [user writeToGoalWithDictionary:goalDict inContext:context];
     [context save:nil];
     return goal;
 }
 
-- (void)syncToRemote
+- (void)pushToRemote
 {
-    [GoalSyncRequest requestForGoal:self];
+    [GoalPushRequest requestForGoal:self];
 }
 
 - (NSString *)createURL

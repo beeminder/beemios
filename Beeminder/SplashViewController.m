@@ -35,7 +35,8 @@
     
     if (!username) {
         // random string for the temporary username.
-        NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
+        [UsernameCachePullRequest requestInContext:[self managedObjectContext]];
+        NSString *alphabet = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
         NSMutableString *s = [NSMutableString stringWithCapacity:20];
         for (NSUInteger i = 0U; i < 20; i++) {
             u_int32_t r = arc4random() % [alphabet length];

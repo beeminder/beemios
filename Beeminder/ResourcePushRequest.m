@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "ResourceSyncRequest.h"
+#import "ResourcePushRequest.h"
 
-@implementation ResourceSyncRequest
+@implementation ResourcePushRequest
 
 @synthesize status = _status;
 @synthesize responseData = _responseData;
@@ -41,6 +41,8 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    self.status = @"failed";
+    
 //    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
 //        message:[error localizedDescription]
 //        delegate:nil

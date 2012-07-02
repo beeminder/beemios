@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface ResourceSyncRequest : NSObject <NSURLConnectionDelegate>
+@interface ResourcePushRequest : NSObject <NSURLConnectionDelegate>
 
 @property NSUInteger responseStatus;
 @property (strong, nonatomic) NSMutableData *responseData;

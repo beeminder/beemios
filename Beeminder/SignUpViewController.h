@@ -12,6 +12,7 @@
 #import "Goal.h"
 #import "GoalsTableViewController.h"
 #import "UIViewController+NSURLConnectionDelegate.h"
+#import "UserPushRequest.h"
 
 @interface SignUpViewController : UIViewController
 

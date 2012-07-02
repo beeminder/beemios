@@ -82,6 +82,10 @@
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField, @"email", nil];
     
     User *user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
+    
+    [UserPushRequest requestForUser:user syncAssociations:YES];
+    
+    
 
 }
 

@@ -26,9 +26,14 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="user" inverseEntity="Goal" syncable="YES"/>
     </entity>
+    <entity name="UsernameCache" representedClassName="UsernameCache" syncable="YES">
+        <attribute name="lastFetched" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="usernameList" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="User" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Datapoint" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Goal" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="UsernameCache" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

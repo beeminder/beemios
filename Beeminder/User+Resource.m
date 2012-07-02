@@ -102,9 +102,9 @@
     return goal;
 }
 
-- (void)syncToRemote
+- (void)pushToRemote
 {
-    [UserSyncRequest requestForUser:self];
+    [UserPushRequest requestForUser:self syncAssociations:NO];
 }
 
 - (NSString *)createURL
