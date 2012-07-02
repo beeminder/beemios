@@ -27,4 +27,6 @@
 @property (nonatomic, strong) UITextField *activeField;
 @property (strong, nonatomic) IBOutlet UILabel *validationWarningLabel;
 
+- (IBAction)usernameValueChanged;
+
 @end

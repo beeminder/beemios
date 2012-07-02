@@ -151,26 +151,50 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (self.responseStatus == 200) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.usernameTextField.text forKey:@"username"];
         NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
         
         NSDictionary *responseJSON = [responseString JSONValue];
-        
-        NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
-        
-        if (!authenticationToken) {
-            self.validationWarningLabel.text = @"Could not create account - username already taken";
+
+        if ([[responseJSON objectForKey:@"exists"] isEqualToString:@"true"]) {
+            // username check - taken
+            self.validationWarningLabel.text = @"Username already taken";
             self.validationWarningLabel.hidden = NO;
-            return;
         }
         
-        [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
+        else if ([responseJSON objectForKey:@"authentication_token"]) {
+            // successful form submission
+            NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.usernameTextField.text forKey:@"username"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
+            
+            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        }
         
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        else {
+            // username check - valid
+            self.validationWarningLabel.hidden = YES;
+        }
     }
     else {
         self.validationWarningLabel.text = @"Could not create account";
         self.validationWarningLabel.hidden = NO;
+    }
+}
+
+- (IBAction)usernameValueChanged 
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/private/usernames.json?search=%@", kBaseURL, self.usernameTextField.text];
+    
+    NSURL *usernameUrl = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *usernameRequest = [NSMutableURLRequest requestWithURL:usernameUrl];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:usernameRequest delegate:self];
+    
+    if (connection) {
+        self.responseData = [NSMutableData data];
     }
 }
 
