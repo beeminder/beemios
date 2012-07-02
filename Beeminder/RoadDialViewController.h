@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Goal.h"
+#import "Goal+Resource.h"
 #import "UIViewController+ManagedObjectContext.h"
 #import "GoalsTableViewController.h"
 #import "constants.h"

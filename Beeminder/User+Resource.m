@@ -53,7 +53,7 @@
     
     [userDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
-        NSString *selectorString = [NSString stringWithFormat:@"set%@", [key capitalizedString] ];
+        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key capitalizedString] ];
         if ([user respondsToSelector:NSSelectorFromString(selectorString)]) {
             [user performSelector:NSSelectorFromString(selectorString) withObject:obj];
             }
@@ -86,7 +86,7 @@
     
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
-        NSString *selectorString = [NSString stringWithFormat:@"set%@", [key capitalizedString] ];
+        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key capitalizedString] ];
         if ([goal respondsToSelector:NSSelectorFromString(selectorString)]) {
             [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
         }

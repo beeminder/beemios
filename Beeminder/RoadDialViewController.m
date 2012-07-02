@@ -88,35 +88,17 @@
 - (IBAction)nextButtonPressed:(UIBarButtonItem *)sender {
     
     // save goal
-    self.goalObject.rate = [self weeklyRate];
-    self.goalObject.units = self.goalRateNumeratorUnits;
-    self.goalObject.gtype = @"hustler";
-    [self.managedObjectContext save:nil];
     
-    // post to server if the user is already logged in
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:[self weeklyRate]], @"rate", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
 
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
+    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username inContext:[self  managedObjectContext]];
+    
     if (authToken) {
-        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        
-        NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json", kBaseURL, username];
-        
-        NSURL *goalURL = [NSURL URLWithString:urlString];
-        
-        NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalURL];
-        
-        NSString *goalData = [NSString stringWithFormat:@"auth_token=%@&slug=%@&title=%@&gtype=%@", authToken, self.goalObject.slug, self.goalObject.title, @"hustler"];
-
-        [goalRequest setHTTPMethod:@"POST"];
-        [goalRequest setHTTPBody:[goalData dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalRequest delegate:self];
-        
-        if (connection) {
-            [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
-            self.responseData = [NSMutableData data];
-        }
+        [goal pushToRemote];
     }
     else {
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];
