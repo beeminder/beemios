@@ -15,7 +15,7 @@
     NSString *timestamp = @"";
     
     if (self.lastFetched) {
-        timestamp = [NSString stringWithFormat:@"%llu", self.lastFetched];
+        timestamp = [NSString stringWithFormat:@"%@", self.lastFetched];
     }
 
     return [NSString stringWithFormat:@"%@/%@/usernames.json?timestamp=%@", kBaseURL, kPrivateAPIPrefix, timestamp];

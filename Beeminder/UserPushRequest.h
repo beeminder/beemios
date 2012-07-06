@@ -8,9 +8,10 @@
 
 #import "ResourcePushRequest.h"
 #import "User+Resource.h"
+#import "SBJson.h"
 
 @interface UserPushRequest : ResourcePushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user syncAssociations:(BOOL)syncAssociations;
++ (UserPushRequest *)requestForUser:(User *)user syncAssociations:(BOOL)syncAssociations additionalParams:(NSDictionary *)additionalParams;
 
 @end

@@ -27,6 +27,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    [DejalBezelActivityView removeView];    
     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
         message:[error localizedDescription]
         delegate:nil

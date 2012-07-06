@@ -2,7 +2,7 @@
 //  Datapoint.h
 //  Beeminder
 //
-//  Created by Andy Brett on 7/1/12.
+//  Created by Andy Brett on 7/5/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 
 @interface Datapoint : NSManagedObject
 
-@property (nonatomic) int64_t comment;
-@property (nonatomic) int64_t measured_at;
-@property (nonatomic) int64_t serverId;
+@property (nonatomic, retain) NSNumber * comment;
+@property (nonatomic, retain) NSNumber * measured_at;
+@property (nonatomic, retain) NSNumber * serverId;
 @property (nonatomic, retain) NSDecimalNumber * value;
 @property (nonatomic, retain) Goal *goal;
 

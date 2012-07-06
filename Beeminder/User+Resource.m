@@ -104,7 +104,7 @@
 
 - (void)pushToRemote
 {
-    [UserPushRequest requestForUser:self syncAssociations:NO];
+    [UserPushRequest requestForUser:self syncAssociations:NO additionalParams:nil];
 }
 
 - (NSString *)createURL
@@ -114,7 +114,7 @@
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%llu.json", kBaseURL, kAPIPrefix, self.serverId];
+    return [NSString stringWithFormat:@"%@/%@/users/%@.json", kBaseURL, kAPIPrefix, self.serverId];
 }
 
 - (NSString *)updateURL

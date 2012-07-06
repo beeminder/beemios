@@ -16,11 +16,11 @@
     goalPushRequest.resource = goal;
     NSString *urlString;
     
-    if (goal.serverId) {
-        urlString = [goal updateURL];
+    if ([goal.serverId intValue] == 0) {
+        urlString = [goal createURL];
     }
     else {
-        urlString = [goal createURL];
+        urlString = [goal updateURL];
     }
     
     NSURL *url = [NSURL URLWithString:urlString];

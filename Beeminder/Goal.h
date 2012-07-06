@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 7/1/12.
+//  Created by Andy Brett on 7/5/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -13,12 +13,12 @@
 
 @interface Goal : NSManagedObject
 
-@property (nonatomic) int64_t date;
-@property (nonatomic) double goal;
+@property (nonatomic, retain) NSNumber * date;
+@property (nonatomic, retain) NSNumber * target;
 @property (nonatomic, retain) NSString * gtype;
-@property (nonatomic) double rate;
-@property (nonatomic) int64_t safebuf;
-@property (nonatomic) int64_t serverId;
+@property (nonatomic, retain) NSNumber * rate;
+@property (nonatomic, retain) NSNumber * safebuf;
+@property (nonatomic, retain) NSNumber * serverId;
 @property (nonatomic, retain) NSString * slug;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;

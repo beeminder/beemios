@@ -73,15 +73,15 @@
     [super viewDidUnload];
 }
 
-- (double)weeklyRate {
+- (NSNumber *)weeklyRate {
     if ([self.goalRateDenominatorUnits isEqualToString:@"week"]) {
-        return (double)self.goalRateNumerator;
+        return [NSNumber numberWithInt:self.goalRateNumerator];
     }
     else if ([self.goalRateDenominatorUnits isEqualToString:@"day"]) {
-        return (double)self.goalRateNumerator*7;
+        return [NSNumber numberWithInt: self.goalRateNumerator*7];
     }
     else { // "month"
-        return (double)self.goalRateNumerator/4.3f;
+        return [NSNumber numberWithFloat:self.goalRateNumerator/4.3f];
     }
 }
 
@@ -89,7 +89,7 @@
     
     // save goal
     
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:[self weeklyRate]], @"rate", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
 
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     

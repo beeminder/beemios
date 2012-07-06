@@ -17,11 +17,13 @@
 
 - (NSString *)paramString
 {
-    NSString *pString = @"?";
+    NSString *pString = @"";
     
     for (NSString *key in [[self.resource.entity attributesByName] allKeys]) {
-        pString = [pString stringByAppendingString:[NSString stringWithFormat:@"%@=%@?", key, [self performSelector:NSSelectorFromString(key)]]];
-        
+        NSString * val = [self.resource performSelector:NSSelectorFromString(key)];
+        if (val) {
+            pString = [pString stringByAppendingString:[NSString stringWithFormat:@"%@=%@&", key, val]];
+        }
     }
     return pString;
 }

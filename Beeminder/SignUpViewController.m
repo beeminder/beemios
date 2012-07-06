@@ -79,14 +79,15 @@
     }
     
     // save user
-    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField, @"email", nil];
+    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", nil];
+    
+    NSDictionary *paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
     
     User *user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     
-    [UserPushRequest requestForUser:user syncAssociations:YES];
+    [UserPushRequest requestForUser:user syncAssociations:YES additionalParams:paramsDict];
     
-    
-
+    [self performSegueWithIdentifier:@"segueToDashboard" sender:self];    
 }
 
 #pragma mark Keyboard notifications
@@ -161,25 +162,10 @@
             self.validationWarningLabel.hidden = NO;
         }
         
-        else if ([responseJSON objectForKey:@"authentication_token"]) {
-            // successful form submission
-            NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:self.usernameTextField.text forKey:@"username"];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
-            
-            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
-        }
-        
         else {
             // username check - valid
             self.validationWarningLabel.hidden = YES;
         }
-    }
-    else {
-        self.validationWarningLabel.text = @"Could not create account";
-        self.validationWarningLabel.hidden = NO;
     }
 }
 
