@@ -34,21 +34,35 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
-    
     NSString *username = [defaults objectForKey:@"username"];
     
-    NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@", kBaseURL, username, authenticationToken]];
-    
-    NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalsRequest delegate:self];
-    
-    if (connection) {
-        [DejalBezelActivityView activityViewForView:self.view];
-        self.title = @"Fetching goals...";
-        self.responseData = [NSMutableData data];
+    if (authenticationToken) {
+        
+        NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@", kBaseURL, username, authenticationToken]];
+        
+        NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalsRequest delegate:self];
+        
+        if (connection) {
+            [DejalBezelActivityView activityViewForView:self.view];
+            self.title = @"Fetching goals...";
+            self.responseData = [NSMutableData data];
+        }
     }
-    
+    else {
+        User *user = [User findByUsername:username inContext:[self managedObjectContext]];
+        
+        NSArray *arrayOfGoalObjects = [user.goals allObjects];
+        NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
+        Goal *g;
+        for (g in arrayOfGoalObjects) {
+            NSDictionary *dict = [g dictionary];
+            [arrayOfDicts addObject:dict];
+        }
+        self.goals = arrayOfDicts;
+
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

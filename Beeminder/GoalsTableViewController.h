@@ -14,6 +14,7 @@
 #import "GoalSummaryViewController.h"
 #import "constants.h"
 #import "Goal+Resource.h"
+#import "User+Resource.h"
 
 @interface GoalsTableViewController : UITableViewController
 

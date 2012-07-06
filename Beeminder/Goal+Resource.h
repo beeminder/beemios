@@ -23,5 +23,6 @@
 - (NSString *)readURL;
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
+- (NSDictionary *)dictionary;
 
 @end
