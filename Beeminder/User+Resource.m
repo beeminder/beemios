@@ -87,7 +87,7 @@
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
         NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key capitalizedString] ];
-        if ([goal respondsToSelector:NSSelectorFromString(selectorString)]) {
+        if ([goal respondsToSelector:NSSelectorFromString(selectorString)] && obj != [NSNull null]) {
             [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
         }
     }

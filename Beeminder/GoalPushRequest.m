@@ -25,9 +25,12 @@
     
     NSURL *url = [NSURL URLWithString:urlString];
     
+    NSString *pString = [goalPushRequest paramString];
+    pString = [pString stringByAppendingFormat:@"auth_token=%@&", [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]];
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[[goalPushRequest paramString] dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:goalPushRequest];
     
