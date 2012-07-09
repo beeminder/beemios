@@ -70,7 +70,10 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     for (NSString *key in [[self.entity attributesByName] allKeys]) {
         NSString * val = [self performSelector:NSSelectorFromString(key)];
-        [dict setObject:val forKey:key];
+        if (val) {
+            [dict setObject:val forKey:key];
+        }
+
     }
     return dict;
 }

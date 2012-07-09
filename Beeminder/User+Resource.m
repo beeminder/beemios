@@ -104,7 +104,7 @@
 
 - (void)pushToRemote
 {
-    [UserPushRequest requestForUser:self syncAssociations:NO additionalParams:nil];
+    [UserPushRequest requestForUser:self pushAssociations:NO additionalParams:nil];
 }
 
 - (NSString *)createURL

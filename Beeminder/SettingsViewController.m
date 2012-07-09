@@ -55,7 +55,7 @@
     
     [defaults setObject:s forKey:@"username"];
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[self navigationController] popToRootViewControllerAnimated:YES];
 }
 
 @end

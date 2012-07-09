@@ -51,7 +51,7 @@
         [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     }
     
-    else if (authToken) {
+    else {//if (authToken) {
         [[self.navigationController navigationBar] setHidden:YES];
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }

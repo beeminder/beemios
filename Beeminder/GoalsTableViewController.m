@@ -36,6 +36,17 @@
     NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
     NSString *username = [defaults objectForKey:@"username"];
     
+    User *user = [User findByUsername:username inContext:[self managedObjectContext]];
+    
+    NSArray *arrayOfGoalObjects = [user.goals allObjects];
+    NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
+    Goal *g;
+    for (g in arrayOfGoalObjects) {
+        NSDictionary *dict = [g dictionary];
+        [arrayOfDicts addObject:dict];
+    }
+    self.goals = arrayOfDicts;
+    
     if (authenticationToken) {
         
         NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@", kBaseURL, username, authenticationToken]];
@@ -49,19 +60,6 @@
             self.title = @"Fetching goals...";
             self.responseData = [NSMutableData data];
         }
-    }
-    else {
-        User *user = [User findByUsername:username inContext:[self managedObjectContext]];
-        
-        NSArray *arrayOfGoalObjects = [user.goals allObjects];
-        NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
-        Goal *g;
-        for (g in arrayOfGoalObjects) {
-            NSDictionary *dict = [g dictionary];
-            [arrayOfDicts addObject:dict];
-        }
-        self.goals = arrayOfDicts;
-
     }
     
     // Uncomment the following line to preserve selection between presentations.

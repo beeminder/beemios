@@ -99,6 +99,7 @@
     
     if (authToken) {
         [goal pushToRemote];
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
     }
     else {
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];

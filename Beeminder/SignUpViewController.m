@@ -85,7 +85,7 @@
     
     User *user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     
-    [UserPushRequest requestForUser:user syncAssociations:YES additionalParams:paramsDict];
+    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict];
     
     [self performSegueWithIdentifier:@"segueToDashboard" sender:self];    
 }

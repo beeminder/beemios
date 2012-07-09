@@ -10,7 +10,7 @@
 
 @implementation UserPushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user syncAssociations:(BOOL)syncAssociations additionalParams:(NSDictionary *)additionalParams
++ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams
 {
     UserPushRequest *userPushRequest = [[UserPushRequest alloc] init];
     userPushRequest.resource = user;
@@ -44,6 +44,13 @@
     
     if (connection) {
         userPushRequest.status = @"sent";
+    }
+    
+    if (pushAssociations) {
+        Goal *g;
+        for (g in user.goals) {
+            [GoalPushRequest requestForGoal:g];
+        }
     }
     
     return userPushRequest;

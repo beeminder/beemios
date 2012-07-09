@@ -11,6 +11,9 @@
 
 @interface GoalPushRequest : ResourcePushRequest
 
+@property NSUInteger responseStatus;
+@property (strong, nonatomic) NSMutableData *responseData;
+
 + (GoalPushRequest *)requestForGoal:(Goal *)goal;
 
 @end
