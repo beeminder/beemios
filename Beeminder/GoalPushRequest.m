@@ -35,6 +35,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:goalPushRequest];
     
     if (connection) {
+        goalPushRequest.responseData = [NSMutableData data];
         goalPushRequest.status = @"sent";
     }
     

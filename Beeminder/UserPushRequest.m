@@ -43,6 +43,7 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:userPushRequest];
     
     if (connection) {
+        userPushRequest.responseData = [[NSMutableData alloc] init];
         userPushRequest.status = @"sent";
     }
     

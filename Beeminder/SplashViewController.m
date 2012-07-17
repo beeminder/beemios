@@ -28,14 +28,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+        
+	// Do any additional setup after loading the view.
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     if (!username) {
         // random string for the temporary username.
-//        [UsernameCachePullRequest requestInContext:[self managedObjectContext]];
+        //        [UsernameCachePullRequest requestInContext:[self managedObjectContext]];
         NSString *alphabet = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
         NSMutableString *s = [NSMutableString stringWithCapacity:20];
         for (NSUInteger i = 0U; i < 20; i++) {
@@ -51,12 +56,11 @@
         [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     }
     
-    else {//if (authToken) {
+    if (authToken && username) {
         [[self.navigationController navigationBar] setHidden:YES];
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }
-    
-	// Do any additional setup after loading the view.
+
 }
 
 - (void)viewDidUnload
