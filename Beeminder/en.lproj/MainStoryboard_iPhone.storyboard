@@ -67,7 +67,7 @@
             <objects>
                 <viewController id="law-yH-2rS" customClass="ChooseGoalNameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bhb-KQ-j4i" customClass="UIScrollView">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="Tck-4q-Zwq">
@@ -125,7 +125,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="Xgv-aN-lSx" customClass="RoadDialViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08g-UL-qPc">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" text="How often do you want to do this goal?" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="fv6-lt-xGn">
@@ -193,7 +193,7 @@
             <objects>
                 <viewController id="8SH-KL-GEY" customClass="SignUpViewController" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vLo-lI-q7c">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="F1v-t9-Sw0">
@@ -389,7 +389,7 @@
             <objects>
                 <tableViewController id="cvO-9O-ffT" customClass="GoalsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Csp-MU-lBV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Zmh-vr-Jy3">
@@ -459,7 +459,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="GSH-K4-VbA" customClass="GoalSummaryViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0yh-Bs-AsC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7bq-At-vl4">
@@ -540,7 +540,7 @@
             <objects>
                 <viewController id="E0E-N1-huo" customClass="GoalGraphViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="faZ-oE-sdo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bee.png" id="Rtt-fP-NIj">
@@ -623,6 +623,89 @@
         <image name="bee.png" width="107" height="104"/>
         <image name="logo-text.png" width="261" height="30"/>
     </resources>
+    <classes>
+        <class className="BeeminderViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BeeminderViewController.h"/>
+        </class>
+        <class className="CPTGraphHostingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
+        </class>
+        <class className="ChooseGoalNameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalNameViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="goalNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="DashboardNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
+        </class>
+        <class className="GoalGraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="GoalSummaryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="graphHostingView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="GoalsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
+        </class>
+        <class className="RoadDialViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="signOutButtonPressed"/>
+            </relationships>
+        </class>
+        <class className="SignInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="SignUpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="usernameValueChanged"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordConfirmationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -630,6 +713,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Agq-0d-xWn"/>
-        <segue reference="tH0-Uv-eBt"/>
+        <segue reference="5bu-Oa-s61"/>
     </inferredMetricsTieBreakers>
 </document>

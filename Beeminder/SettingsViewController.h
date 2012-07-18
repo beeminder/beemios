@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+ManagedObjectContext.h"
+#import "BeeminderViewController.h"
 
 @interface SettingsViewController : UIViewController
 
