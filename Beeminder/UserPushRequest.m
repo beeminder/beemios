@@ -10,10 +10,14 @@
 
 @implementation UserPushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams
++ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams performSegueWithIdentifier:(NSString *)identifier fromViewController:(UIViewController *)viewController
 {
     UserPushRequest *userPushRequest = [[UserPushRequest alloc] init];
+    userPushRequest.pushAssociations = pushAssociations;
     userPushRequest.resource = user;
+    userPushRequest.segueIdentifier = identifier;
+    userPushRequest.segueFromViewController = viewController;
+    
     NSString *urlString;
     
     if ([user.serverId intValue] == 0) {
@@ -47,19 +51,13 @@
         userPushRequest.status = @"sent";
     }
     
-    if (pushAssociations) {
-        Goal *g;
-        for (g in user.goals) {
-            [GoalPushRequest requestForGoal:g];
-        }
-    }
-    
     return userPushRequest;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     self.status = @"returned";
+
     NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     
     NSDictionary *responseJSON = [responseString JSONValue];
@@ -69,6 +67,17 @@
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
     
     [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
+    
+    if (self.pushAssociations) {
+        Goal *g;
+        for (g in [(User *)self.resource goals]) {
+            [GoalPushRequest requestForGoal:g];
+        }
+    }
+    
+    if (self.segueFromViewController && self.segueIdentifier) {
+        [self.segueFromViewController performSegueWithIdentifier:self.segueIdentifier sender:self.segueFromViewController];
+    }
 }
 
 @end

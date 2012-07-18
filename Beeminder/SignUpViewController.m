@@ -78,16 +78,21 @@
         return;
     }
     
-    // save user
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    User *user = [User findByUsername:username inContext:self.managedObjectContext];
+    
+    user.username = self.usernameTextField.text;
+    
+    [self.managedObjectContext save:nil];
+    
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", nil];
     
     NSDictionary *paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
     
-    User *user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
+    user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     
-    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict];
-    
-    [self performSegueWithIdentifier:@"segueToDashboard" sender:self];    
+    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict performSegueWithIdentifier:@"segueToDashboard" fromViewController:self];
 }
 
 #pragma mark Keyboard notifications

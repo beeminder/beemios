@@ -28,7 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    if (authToken && username) {
+        [[self.navigationController navigationBar] setHidden:YES];
+        [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
+    }
 	// Do any additional setup after loading the view.
 }
 
@@ -55,12 +61,6 @@
         
         [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
     }
-    
-    if (authToken && username) {
-        [[self.navigationController navigationBar] setHidden:YES];
-        [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
-    }
-
 }
 
 - (void)viewDidUnload

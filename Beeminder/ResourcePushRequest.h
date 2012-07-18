@@ -15,6 +15,9 @@
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) NSManagedObject *resource;
 @property (strong, nonatomic) NSString *status;
+@property BOOL pushAssociations;
+@property (strong, nonatomic) NSString *segueIdentifier;
+@property (strong, nonatomic) UIViewController *segueFromViewController;
 
 - (NSString *)paramString;
 
