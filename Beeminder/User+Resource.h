@@ -7,7 +7,6 @@
 //
 
 #import "User.h"
-#import "constants.h"
 #import "Goal.h"
 #import "UserPushRequest.h"
 

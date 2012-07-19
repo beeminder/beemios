@@ -7,7 +7,6 @@
 //
 
 #import "Goal.h"
-#import "constants.h"
 #import "User+Resource.h"
 #import "GoalPushRequest.h"
 
@@ -16,7 +15,7 @@
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
                 forUserWithUsername:(NSString *)username;
 
-- (void)pushToRemote;
+- (void)pushToRemoteWithCompletionBlock:(CompletionBlock)completionBlock;
 - (NSString *)createURL;
 - (NSString *)readURL;
 - (NSString *)updateURL;

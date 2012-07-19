@@ -20,5 +20,6 @@ typedef void (^CompletionBlock)();
 @property (strong, nonatomic) CompletionBlock completionBlock;
 
 - (NSString *)paramString;
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
 @end

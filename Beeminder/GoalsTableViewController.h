@@ -11,7 +11,6 @@
 #import "UIViewController+NSURLConnectionDelegate.h"
 #import "GoalViewController.h"
 #import "GoalSummaryViewController.h"
-#import "constants.h"
 #import "Goal+Resource.h"
 #import "User+Resource.h"
 

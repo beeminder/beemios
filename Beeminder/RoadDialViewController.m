@@ -96,8 +96,12 @@
     Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
     
     if (authToken) {
-        [goal pushToRemote];
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        CompletionBlock completionBlock = ^() {
+            NSLog(@"in block");
+            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+        };
+        [goal pushToRemoteWithCompletionBlock:completionBlock];
+
     }
     else {
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];
@@ -183,19 +187,6 @@
     }
     else {
         return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
-    }
-}
-
-#pragma mark NSURLConnectionDelegate
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [DejalBezelActivityView removeViewAnimated:YES];
-    if (self.responseStatus == 200) {
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
-    }
-    else {
-        self.title = @"Could not save goal";
     }
 }
 

@@ -9,7 +9,6 @@
 #import "ChooseGoalNameViewController.h"
 #import "Goal+Resource.h"
 #import "RoadDialViewController.h"
-#import "constants.h"
 
 @interface ChooseGoalNameViewController ()
 

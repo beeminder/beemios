@@ -55,8 +55,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self.status = @"returned";
 
+    
     NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     
     NSDictionary *responseJSON = [responseString JSONValue];
@@ -70,11 +70,10 @@
     if (self.pushAssociations) {
         Goal *g;
         for (g in [(User *)self.resource goals]) {
-            [GoalPushRequest requestForGoal:g];
+            [GoalPushRequest requestForGoal:g withCompletionBlock:nil];
         }
     }
-    
-    dispatch_async(dispatch_get_current_queue(), self.completionBlock);
+    [super connectionDidFinishLoading:connection];
 }
 
 @end

@@ -14,6 +14,6 @@
 @property NSUInteger responseStatus;
 @property (strong, nonatomic) NSMutableData *responseData;
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal;
++ (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock;
 
 @end

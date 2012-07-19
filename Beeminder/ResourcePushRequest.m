@@ -55,6 +55,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     self.status = @"returned";
+    dispatch_async(dispatch_get_current_queue(), self.completionBlock);
 }
 
 

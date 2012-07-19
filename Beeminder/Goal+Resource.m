@@ -21,9 +21,9 @@
     return goal;
 }
 
-- (void)pushToRemote
+- (void)pushToRemoteWithCompletionBlock:(CompletionBlock)completionBlock
 {
-    [GoalPushRequest requestForGoal:self];
+    [GoalPushRequest requestForGoal:self withCompletionBlock:completionBlock];
 }
 
 - (NSString *)createURL

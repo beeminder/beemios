@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "User+Resource.h"
-#import "constants.h"
 #import "Goal.h"
 #import "GoalsTableViewController.h"
 #import "UIViewController+NSURLConnectionDelegate.h"

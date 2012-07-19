@@ -10,10 +10,11 @@
 
 @implementation GoalPushRequest
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal
++ (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock
 {
     GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
     goalPushRequest.resource = goal;
+    goalPushRequest.completionBlock = completionBlock;
     NSString *urlString;
     
     if ([goal.serverId intValue] == 0) {
