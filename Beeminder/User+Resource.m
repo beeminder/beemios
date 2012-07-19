@@ -10,46 +10,11 @@
 
 @implementation User (Resource)
 
-+ (User *)findByUsername:(NSString *)username inContext:(NSManagedObjectContext *)context
++ (User *)writeToUserWithDictionary:(NSDictionary *)userDict
 {
-    User *user = nil;
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:[userDict objectForKey:@"username"]];
     
-    NSFetchRequest *userRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    
-    userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", username];
-    
-    NSArray *users = [context executeFetchRequest:userRequest error:NULL];
-    
-    if (!users || users.count > 1) {
-        // error
-    }
-    else {
-        user = [users lastObject];
-    }
-    return user;
-}
-
-+ (User *)writeToUserWithDictionary:(NSDictionary *)userDict inContext:(NSManagedObjectContext *)context
-{
-    User *user = nil;
-    
-    NSFetchRequest *userRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    
-    userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", [userDict objectForKey:@"username"]];
-    NSSortDescriptor *userSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
-    userRequest.sortDescriptors = [NSArray arrayWithObject:userSortDescriptor];
-    
-    NSArray *users = [context executeFetchRequest:userRequest error:NULL];
-    
-    if (!users || users.count > 1) {
-        // error
-    }
-    else if (users.count == 0) {
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-    }
-    else {
-        user = [users lastObject];
-    }
+    if (!user) user = [User MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
     
     [userDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
@@ -60,18 +25,18 @@
     }
     ];
     
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     return user;
 }
 
-- (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict inContext:(NSManagedObjectContext *)context
+- (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
 {
     Goal *goal;
     Goal *g;
+    
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
+    
     NSSet *goals = self.goals;
     for (g in goals) {
         if ([g.slug isEqualToString:[goalDict objectForKey:@"slug"]]) {
@@ -80,7 +45,7 @@
     }
     
     if (!goal) {
-        goal = [NSEntityDescription insertNewObjectForEntityForName:@"Goal" inManagedObjectContext:context];
+        goal = [Goal MR_createInContext:localContext];
         [self addGoalsObject:goal];
     }
     
@@ -93,12 +58,7 @@
     }
     ];
     
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    
-    [context save:nil];
+    [localContext MR_save];
     return goal;
 }
 

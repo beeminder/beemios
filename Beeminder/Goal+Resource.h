@@ -13,11 +13,9 @@
 
 @interface Goal (Resource)
 
-+ (Goal *)findBySlug:(NSString *)slug forUserWithUsername:(NSString *)username inContext:(NSManagedObjectContext *)context;
-
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
-              forUserWithUsername:(NSString *)username
-                        inContext:(NSManagedObjectContext *)context;
+                forUserWithUsername:(NSString *)username;
+
 - (void)pushToRemote;
 - (NSString *)createURL;
 - (NSString *)readURL;

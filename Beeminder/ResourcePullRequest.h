@@ -14,7 +14,6 @@
 @property NSUInteger responseStatus;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) NSString *status;
-@property (strong, nonatomic) NSManagedObjectContext *context;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 

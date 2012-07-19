@@ -13,9 +13,8 @@
 
 @interface User (Resource)
 
-+ (User *)findByUsername:(NSString *)username inContext:(NSManagedObjectContext *)context;
-+ (User *)writeToUserWithDictionary:(NSDictionary *)userDict inContext:(NSManagedObjectContext *)context;
-- (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict inContext:(NSManagedObjectContext *)context;
++ (User *)writeToUserWithDictionary:(NSDictionary *)userDict;
+- (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict;
 - (void)pushToRemote;
 - (NSString *)createURL;
 - (NSString *)readURL;

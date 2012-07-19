@@ -10,7 +10,6 @@
 #import "Goal+Resource.h"
 #import "RoadDialViewController.h"
 #import "constants.h"
-#import "UIViewController+ManagedObjectContext.h"
 
 @interface ChooseGoalNameViewController ()
 
@@ -77,14 +76,9 @@
 
 - (void)fetchGoalSlugs
 {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Goal"];
-    
-    request.predicate = [NSPredicate predicateWithFormat:@"user.username = %@", username];
-    
-    NSError *error;
-    NSArray *goals = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *goals = [Goal MR_findByAttribute:@"user.username" withValue:username];
     
     Goal *g = nil;
     NSMutableArray *slugs = [[NSMutableArray alloc] init];
@@ -176,10 +170,16 @@
 {
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *slug = [self slugFromTitle:self.goalNameTextField.text];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext]; 
     
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:self.goalNameTextField.text, @"title", slug, @"slug", nil];    
+    Goal *goal = [Goal MR_createEntity];
+    goal.title = self.goalNameTextField.text;
+    goal.slug = slug;
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+    goal.user = user;
     
-    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username inContext:self.managedObjectContext];
+    [localContext MR_save];
+    
     [segue.destinationViewController setTitle:self.goalNameTextField.text];
     [segue.destinationViewController setGoalObject:goal];
     

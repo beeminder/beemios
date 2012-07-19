@@ -10,33 +10,14 @@
 
 @implementation Goal (Resource)
 
-+ (Goal *)findBySlug:(NSString *)slug forUserWithUsername:(NSString *)username inContext:(NSManagedObjectContext *)context
-{
-    Goal *goal = nil;
-    
-    NSFetchRequest *goalRequest = [NSFetchRequest fetchRequestWithEntityName:@"Goal"];
-    
-    goalRequest.predicate = [NSPredicate predicateWithFormat:@"user.username = %@ and slug = %@", username, slug];
-    
-    NSArray *goals = [context executeFetchRequest:goalRequest error:NULL];
-    
-    if (!goals || goals.count > 1) {
-        // error
-    }
-    else {
-        goal = [goals lastObject];
-    }
-    return goal;
-}
-
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
     forUserWithUsername:(NSString *)username
-    inContext:(NSManagedObjectContext *)context
 {
-    User *user = [User findByUsername:username inContext:context];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username inContext:localContext];
     
-    Goal *goal = [user writeToGoalWithDictionary:goalDict inContext:context];
-    [context save:nil];
+    Goal *goal = [user writeToGoalWithDictionary:goalDict];
+    [localContext save:nil];
     return goal;
 }
 

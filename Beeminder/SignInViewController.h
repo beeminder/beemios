@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SBJson.h"
-#import "UIViewController+ManagedObjectContext.h"
 #import "UIViewController+NSURLConnectionDelegate.h"
 #import "constants.h"
 #import "User+Resource.h"

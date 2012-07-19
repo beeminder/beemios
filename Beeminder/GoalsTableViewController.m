@@ -36,7 +36,7 @@
     NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
     NSString *username = [defaults objectForKey:@"username"];
     
-    User *user = [User findByUsername:username inContext:[self managedObjectContext]];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     
     NSArray *arrayOfGoalObjects = [user.goals allObjects];
     NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
@@ -192,8 +192,10 @@
         
         NSDictionary *goalDict = nil;
         
+        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
         for (goalDict in self.goals) {
-            [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] inContext:self.managedObjectContext];
+            [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
         }
         
         self.title = @"Your goals";

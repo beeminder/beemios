@@ -10,6 +10,4 @@
 
 @interface BeeminderViewController : UINavigationController
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
 @end

@@ -93,7 +93,7 @@
     
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username inContext:[self managedObjectContext]];
+    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
     
     if (authToken) {
         [goal pushToRemote];

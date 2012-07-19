@@ -80,17 +80,17 @@
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
-    User *user = [User findByUsername:username inContext:self.managedObjectContext];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     
     user.username = self.usernameTextField.text;
     
-    [self.managedObjectContext save:nil];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", nil];
     
     NSDictionary *paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
     
-    user = [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
+    user = [User writeToUserWithDictionary:userDict];
     
     [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict performSegueWithIdentifier:@"segueToDashboard" fromViewController:self];
 }

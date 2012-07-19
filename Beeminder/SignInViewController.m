@@ -99,7 +99,7 @@
         
         NSDictionary *userDict = [NSDictionary dictionaryWithObject:username forKey:@"username"];
         
-        [User writeToUserWithDictionary:userDict inContext:[self managedObjectContext]];
+        [User writeToUserWithDictionary:userDict];
         
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }

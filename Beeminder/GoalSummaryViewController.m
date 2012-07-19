@@ -37,7 +37,10 @@
         [DejalBezelActivityView activityViewForView:self.view withLabel:@"Fetching graph..."];
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
-    self.goalObject = [Goal findBySlug:self.slug forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]  inContext:[self managedObjectContext]];
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
     if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
         self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
