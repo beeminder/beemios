@@ -13,6 +13,6 @@
 
 @interface UserPushRequest : ResourcePushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams performSegueWithIdentifier:(NSString *)identifier fromViewController:(UIViewController *)viewController;
++ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams completionBlock:(CompletionBlock)completionBlock;
 
 @end

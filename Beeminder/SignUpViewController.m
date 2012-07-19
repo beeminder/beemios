@@ -92,7 +92,11 @@
     
     user = [User writeToUserWithDictionary:userDict];
     
-    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict performSegueWithIdentifier:@"segueToDashboard" fromViewController:self];
+    CompletionBlock completionBlock = ^() {
+        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+    };
+    
+    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict completionBlock:completionBlock];
 }
 
 #pragma mark Keyboard notifications

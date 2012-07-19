@@ -64,7 +64,7 @@
 
 - (void)pushToRemote
 {
-    [UserPushRequest requestForUser:self pushAssociations:NO additionalParams:nil performSegueWithIdentifier:nil fromViewController:nil];
+    [UserPushRequest requestForUser:self pushAssociations:NO additionalParams:nil completionBlock:nil];
 }
 
 - (NSString *)createURL

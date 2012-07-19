@@ -10,13 +10,12 @@
 
 @implementation UserPushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams performSegueWithIdentifier:(NSString *)identifier fromViewController:(UIViewController *)viewController
++ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams completionBlock:(CompletionBlock)completionBlock
 {
     UserPushRequest *userPushRequest = [[UserPushRequest alloc] init];
     userPushRequest.pushAssociations = pushAssociations;
     userPushRequest.resource = user;
-    userPushRequest.segueIdentifier = identifier;
-    userPushRequest.segueFromViewController = viewController;
+    userPushRequest.completionBlock = completionBlock;
     
     NSString *urlString;
     
@@ -75,9 +74,7 @@
         }
     }
     
-    if (self.segueFromViewController && self.segueIdentifier) {
-        [self.segueFromViewController performSegueWithIdentifier:self.segueIdentifier sender:self.segueFromViewController];
-    }
+    dispatch_async(dispatch_get_current_queue(), self.completionBlock);
 }
 
 @end
