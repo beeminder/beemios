@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) UIImage *graphImage;
+@property (strong, nonatomic) IBOutlet UILabel *dataSavedLabel;
 
 @end

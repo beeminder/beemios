@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SBJson.h"
-#import "UIViewController+NSURLConnectionDelegate.h"
 #import "User+Resource.h"
 
 @interface SignInViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
-@property (strong, nonatomic) NSMutableData *responseData;
-@property NSInteger responseStatus;
 
 @end

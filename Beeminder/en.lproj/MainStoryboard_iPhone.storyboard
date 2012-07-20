@@ -488,6 +488,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="uJi-Wm-z0p"/>
+                                </connections>
                             </button>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="YcL-8d-VDM">
                                 <rect key="frame" x="113" y="280" width="94" height="27"/>
@@ -516,6 +519,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                             </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Data saved!" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="zdA-Ui-dGD">
+                                <rect key="frame" x="107" y="375" width="107" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.0" green="0.47273596938775508" blue="0.074632874814890102" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -523,6 +533,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="dataSavedLabel" destination="zdA-Ui-dGD" id="82p-A6-c08"/>
                         <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
                         <outlet property="inputStepper" destination="YcL-8d-VDM" id="8Wg-p7-jsM"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
@@ -651,6 +662,7 @@
         <class className="GoalSummaryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="dataSavedLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>

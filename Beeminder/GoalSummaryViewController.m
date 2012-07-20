@@ -8,12 +8,12 @@
 
 #import "GoalSummaryViewController.h"
 
-
 @interface GoalSummaryViewController ()
 
 @end
 
 @implementation GoalSummaryViewController
+@synthesize dataSavedLabel = _dataSavedLabel;
 @synthesize unitsLabel = _unitsLabel;
 @synthesize instructionLabel = _instructionLabel;
 @synthesize inputTextField = _inputTextField;
@@ -45,12 +45,12 @@
     if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
         self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
         if ([self.goalObject.units isEqualToString:@"times"]) {
-            self.inputStepper.hidden = YES;
-            self.inputTextField.hidden = YES;
-            self.unitsLabel.hidden = YES;
-            self.instructionLabel.text = @"Check off this goal:";
+//            self.inputStepper.hidden = YES;
+//            self.inputTextField.hidden = YES;
+//            self.unitsLabel.hidden = YES;
+//            self.instructionLabel.text = @"Check off this goal:";
         }
-        else if (self.goalObject.units) {
+        if (self.goalObject.units) {
             self.unitsLabel.text = self.goalObject.units;            
         }
     }
@@ -78,6 +78,31 @@
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 }
 
+- (IBAction)submitButtonPressed
+{
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, username, self.goalObject.slug]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%f&measured_at=%i", authenticationToken, self.inputStepper.value, (int)[[NSDate date]timeIntervalSince1970]];
+    
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.dataSavedLabel.hidden = NO;
+        [DejalBezelActivityView removeViewAnimated:YES];
+        if (JSON) {
+            //foo
+        }
+            
+    } failure:nil];
+    [operation start];
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
@@ -102,6 +127,7 @@
     [self setInputTextField:nil];
     [self setInputStepper:nil];
     [self setSubmitButton:nil];
+    [self setDataSavedLabel:nil];
     [super viewDidUnload];
 }
 

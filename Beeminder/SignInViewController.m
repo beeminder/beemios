@@ -18,8 +18,6 @@
 
 @synthesize email = _email;
 @synthesize password = _password;
-@synthesize responseData = _responseData;
-@synthesize responseStatus = _responseStatus;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +41,6 @@
 {
     [self setEmail:nil];
     [self setPassword:nil];
-    [self setResponseData:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -66,12 +63,15 @@
     [loginRequest setHTTPMethod:@"POST"];
     [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulLoginJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self invalidLogin];
+    }];
     
-    if (connection) {
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Authenticating..."];
-        self.responseData = [NSMutableData data];
-    }    
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Authenticating..."];
+    
+    [operation start];
 }
 
 - (IBAction)signInButtonPressed:(UIButton *)sender
@@ -79,33 +79,32 @@
     [self formSubmitted];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)successfulLoginJSON:(NSDictionary *)responseJSON
 {
     [DejalBezelActivityView removeViewAnimated:YES];
-    if (self.responseStatus == 200) {
-        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+    
+    NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+    
+    NSString *username = [responseJSON objectForKey:@"username"];
 
-        NSDictionary *responseJSON = [responseString JSONValue];
-        
-        NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
-        
-        NSString *username = [responseJSON objectForKey:@"username"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
+    
+    [defaults setObject:username forKey:@"username"];
+    
+    NSDictionary *userDict = [NSDictionary dictionaryWithObject:username forKey:@"username"];
+    
+    [User writeToUserWithDictionary:userDict];
+    
+    [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
+    
+}
 
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
-        
-        [defaults setObject:username forKey:@"username"];
-        
-        NSDictionary *userDict = [NSDictionary dictionaryWithObject:username forKey:@"username"];
-        
-        [User writeToUserWithDictionary:userDict];
-        
-        [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
-    }
-    else {
-        self.title = @"Bad Login";
-    }
+- (void)invalidLogin
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    self.title = @"Bad Login";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
