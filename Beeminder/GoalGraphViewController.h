@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GoalGraphViewController : UIViewController
+@interface GoalGraphViewController : UIViewController <UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *graphImageView;
 @property (strong, nonatomic) NSString *graphURL;
 @property (strong, nonatomic) UIImage *graphImage;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

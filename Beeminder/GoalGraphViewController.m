@@ -15,6 +15,7 @@
 @implementation GoalGraphViewController
 @synthesize graphImageView;
 @synthesize graphImage = _graphImage;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,11 @@
     if (self.graphImage) {
         [self.graphImageView setFrame:self.view.frame];
         [self.graphImageView setImage:self.graphImage];
+        self.scrollView.minimumZoomScale = 0.5;
+        self.scrollView.maximumZoomScale = 6.0;
+        self.scrollView.clipsToBounds = YES;
+        self.scrollView.contentSize = self.view.frame.size;
+        self.scrollView.delegate = self;
     }
 
 	// Do any additional setup after loading the view.
@@ -42,13 +48,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [self.graphImageView setFrame:self.view.frame];
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.height, self.view.frame.size.width);
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setGraphImageView:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.graphImageView;
+}
+
 @end

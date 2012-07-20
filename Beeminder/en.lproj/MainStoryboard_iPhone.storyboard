@@ -554,16 +554,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bee.png" id="Rtt-fP-NIj">
-                                <rect key="frame" x="13" y="175" width="295" height="66"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.29999999999999999" maximumZoomScale="5" id="1dV-di-Z9W">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bee.png" id="Rtt-fP-NIj">
+                                        <rect key="frame" x="13" y="175" width="295" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="faZ-oE-sdo" id="GSj-ZR-6tN"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="84w-kf-fst"/>
                     <connections>
                         <outlet property="graphImageView" destination="Rtt-fP-NIj" id="EWA-a3-XaQ"/>
+                        <outlet property="scrollView" destination="1dV-di-Z9W" id="xia-UE-ZT6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoA-hp-mVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -657,6 +667,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="GoalSummaryViewController" superclassName="UIViewController">
