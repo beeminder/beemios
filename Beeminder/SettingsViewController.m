@@ -13,6 +13,7 @@
 @end
 
 @implementation SettingsViewController
+@synthesize loggedInAsLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,4 +56,8 @@
     [navCon popToRootViewControllerAnimated:YES];
 }
 
+- (void)viewDidUnload {
+    [self setLoggedInAsLabel:nil];
+    [super viewDidUnload];
+}
 @end

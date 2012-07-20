@@ -13,6 +13,7 @@
 @end
 
 @implementation GoalSummaryViewController
+@synthesize timerLabel = _timerLabel;
 @synthesize unitsLabel = _unitsLabel;
 @synthesize instructionLabel = _instructionLabel;
 @synthesize inputTextField = _inputTextField;
@@ -37,29 +38,27 @@
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
     
+    [self startTimer];
+    
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
-    if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
-        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
-        if ([self.goalObject.units isEqualToString:@"times"]) {
-//            self.inputStepper.hidden = YES;
-//            self.inputTextField.hidden = YES;
-//            self.unitsLabel.hidden = YES;
-//            self.instructionLabel.text = @"Check off this goal:";
-        }
-        if (self.goalObject.units) {
-            self.unitsLabel.text = self.goalObject.units;            
-        }
-    }
-    else {
+    self.unitsLabel.text = self.goalObject.units;
+    
+    if ([self.goalObject.gtype isEqualToString:@"hustler"] && [self.goalObject.units isEqualToString:@"times"]) {
         self.inputStepper.hidden = YES;
         self.inputTextField.hidden = YES;
         self.unitsLabel.hidden = YES;
-        self.instructionLabel.hidden = YES;
-        self.submitButton.hidden = YES;
+        self.instructionLabel.text = @"Check off this goal:";
     }
+
+    if (![self.goalObject.gtype isEqualToString:@"hustler"]) {
+
+        Datapoint *datapoint = [[self.goalObject.datapoints allObjects] lastObject];
+        self.inputStepper.value = [datapoint.value doubleValue];
+    }
+    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -111,6 +110,35 @@
     [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
 }
 
+- (void)updateTimer
+{
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.goalObject.losedate doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        
+        int hours = (seconds % (3600*24))/3600;
+        int minutes = (seconds % 3600)/60;
+        int leftoverSeconds = seconds % 60;
+        int days = seconds/(3600*24);
+        
+        if (days > 0) {
+            self.timerLabel.text = [NSString stringWithFormat:@"%i days, %i:%02i:%02i", days, hours, minutes,leftoverSeconds];
+        }
+        else {
+            self.timerLabel.text = [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
+        }
+
+    }
+    else {
+        self.timerLabel.text = [NSString stringWithFormat:@"Time's up!"];
+    }
+}
+
+- (IBAction)startTimer {
+    [self updateTimer];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
@@ -135,6 +163,7 @@
     [self setInputTextField:nil];
     [self setInputStepper:nil];
     [self setSubmitButton:nil];
+    [self setTimerLabel:nil];
     [super viewDidUnload];
 }
 

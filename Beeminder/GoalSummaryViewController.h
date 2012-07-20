@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Goal+Resource.h"
 #import "GoalGraphViewController.h"
-#import "DejalActivityView.h"
+#import "Datapoint.h"
 
 @interface GoalSummaryViewController : UIViewController
 @property (strong, nonatomic) NSString *graphURL;
@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) UIImage *graphImage;
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 
 @end

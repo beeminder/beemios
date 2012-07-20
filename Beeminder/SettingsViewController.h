@@ -12,5 +12,6 @@
 @interface SettingsViewController : UIViewController
 
 - (IBAction)signOutButtonPressed;
+@property (strong, nonatomic) IBOutlet UILabel *loggedInAsLabel;
 
 @end
