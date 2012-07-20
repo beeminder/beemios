@@ -478,7 +478,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RjJ-3S-8pz">
-                                <rect key="frame" x="124" y="323" width="72" height="44"/>
+                                <rect key="frame" x="228" y="348" width="72" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Done!">
@@ -493,38 +493,31 @@
                                 </connections>
                             </button>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="YcL-8d-VDM">
-                                <rect key="frame" x="113" y="280" width="94" height="27"/>
+                                <rect key="frame" x="112" y="384" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="inputStepperValueChanged" destination="GSH-K4-VbA" eventType="valueChanged" id="kLN-RQ-LSr"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="units" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="AOw-jA-Vsi">
-                                <rect key="frame" x="173" y="241" width="127" height="21"/>
+                                <rect key="frame" x="173" y="348" width="127" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Giw-L8-CSA">
-                                <rect key="frame" x="111" y="234" width="54" height="31"/>
+                                <rect key="frame" x="112" y="345" width="54" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Add data:" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="5Hq-O5-i1s">
-                                <rect key="frame" x="20" y="196" width="280" height="36"/>
+                                <rect key="frame" x="0.0" y="354" width="104" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Data saved!" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="zdA-Ui-dGD">
-                                <rect key="frame" x="107" y="375" width="107" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="highlightedColor"/>
-                                <color key="textColor" red="0.0" green="0.47273596938775508" blue="0.074632874814890102" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -533,7 +526,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="dataSavedLabel" destination="zdA-Ui-dGD" id="82p-A6-c08"/>
                         <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
                         <outlet property="inputStepper" destination="YcL-8d-VDM" id="8Wg-p7-jsM"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>

@@ -13,7 +13,6 @@
 @end
 
 @implementation GoalSummaryViewController
-@synthesize dataSavedLabel = _dataSavedLabel;
 @synthesize unitsLabel = _unitsLabel;
 @synthesize instructionLabel = _instructionLabel;
 @synthesize inputTextField = _inputTextField;
@@ -92,13 +91,22 @@
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.dataSavedLabel.hidden = NO;
-        [DejalBezelActivityView removeViewAnimated:YES];
-        if (JSON) {
-            //foo
+        if ([JSON objectForKey:@"success"]) {
+            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
         }
+        else {
+            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Error";            
+        }
+        [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            [DejalBezelActivityView removeViewAnimated:YES];
+        });
+
+
             
-    } failure:nil];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+    }];
     [operation start];
     [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
 }
@@ -127,7 +135,6 @@
     [self setInputTextField:nil];
     [self setInputStepper:nil];
     [self setSubmitButton:nil];
-    [self setDataSavedLabel:nil];
     [super viewDidUnload];
 }
 
