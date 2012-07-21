@@ -9,7 +9,7 @@
 #import "RoadDialViewController.h"
 
 
-@interface RoadDialViewController () <NSURLConnectionDelegate>
+@interface RoadDialViewController ()
 
 @property (nonatomic, strong) NSArray *goalRateNumeratorUnitsOptions;
 @property (nonatomic, strong) NSArray *goalRateDenominatorUnitsOptions;
@@ -27,9 +27,6 @@
 @synthesize goalObject = _goalObject;
 @synthesize goalRateNumeratorPickerView = _goalRateNumeratorPickerView;
 @synthesize goalRateDenominatorPickerView = _goalRateDenominatorPickerView;
-@synthesize responseData = _responseData;
-@synthesize responseStatus = _responseStatus;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

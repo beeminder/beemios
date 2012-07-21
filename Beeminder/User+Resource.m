@@ -35,7 +35,7 @@
     Goal *goal;
     Goal *g;
     
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     
     NSSet *goals = self.goals;
     for (g in goals) {
@@ -45,7 +45,7 @@
     }
     
     if (!goal) {
-        goal = [Goal MR_createInContext:localContext];
+        goal = [Goal MR_createInContext:defaultContext];
         [self addGoalsObject:goal];
     }
     
@@ -58,7 +58,7 @@
     }
     ];
     
-    [localContext MR_save];
+    [defaultContext MR_save];
     return goal;
 }
 

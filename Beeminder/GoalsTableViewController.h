@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SBJson.h"
-#import "UIViewController+NSURLConnectionDelegate.h"
 #import "GoalViewController.h"
 #import "GoalSummaryViewController.h"
 #import "Goal+Resource.h"

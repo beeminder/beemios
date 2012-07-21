@@ -38,9 +38,25 @@
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
     
-    [self startTimer];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
+    
+    NSString *username = [defaults objectForKey:@"username"];
+    
+    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, username, self.slug, authenticationToken]];
+    
+    NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:datapointsRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulDatapointsFetchJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self failedDatapointsFetch];
+    }];
+    
+    [operation start];
+    
+    [self startTimer];
     
     self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
@@ -53,11 +69,6 @@
         self.instructionLabel.text = @"Check off this goal:";
     }
 
-    if (![self.goalObject.gtype isEqualToString:@"hustler"]) {
-
-        Datapoint *datapoint = [[self.goalObject.datapoints allObjects] lastObject];
-        self.inputStepper.value = [datapoint.value doubleValue];
-    }
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 }
 
@@ -69,6 +80,34 @@
         [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
         [DejalBezelActivityView removeViewAnimated:YES];
     }
+}
+
+- (void)successfulDatapointsFetchJSON:(id)responseJSON
+{
+    self.goalObject.datapoints = [[NSSet alloc] init];
+    for (NSDictionary *datapointDict in responseJSON) {
+        // add datapoints to goal - nuke all existing.
+        NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+        Datapoint *datapoint = [Datapoint MR_createInContext:defaultContext];
+        datapoint.value = [datapointDict objectForKey:@"value"];
+        datapoint.comment = [datapointDict objectForKey:@"comment"];
+        datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
+        datapoint.goal = self.goalObject;
+        [defaultContext MR_save];
+        
+    }
+    
+    if (![self.goalObject.gtype isEqualToString:@"hustler"]) {
+        
+        Datapoint *datapoint = [[self.goalObject.datapoints allObjects] lastObject];
+        self.inputStepper.value = [datapoint.value doubleValue];
+        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
+    }
+}
+
+- (void)failedDatapointsFetch
+{
+    
 }
 
 - (IBAction)inputStepperValueChanged

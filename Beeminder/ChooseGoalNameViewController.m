@@ -169,7 +169,7 @@
 {
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *slug = [self slugFromTitle:self.goalNameTextField.text];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext]; 
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext]; 
     
     Goal *goal = [Goal MR_createEntity];
     goal.title = self.goalNameTextField.text;
@@ -177,7 +177,7 @@
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     goal.user = user;
     
-    [localContext MR_save];
+    [defaultContext MR_save];
     
     [segue.destinationViewController setTitle:self.goalNameTextField.text];
     [segue.destinationViewController setGoalObject:goal];

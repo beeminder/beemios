@@ -13,11 +13,11 @@
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
     forUserWithUsername:(NSString *)username
 {
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:username inContext:localContext];
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username inContext:defaultContext];
     
     Goal *goal = [user writeToGoalWithDictionary:goalDict];
-    [localContext save:nil];
+    [defaultContext save:nil];
     return goal;
 }
 

@@ -9,7 +9,7 @@
 #import "SignUpViewController.h"
 
 
-@interface SignUpViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
+@interface SignUpViewController () <UITextFieldDelegate>
 
 @end
 
@@ -157,25 +157,22 @@
     return YES;
 }
 
-#pragma mark NSURLConnectionDelegate
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    if (self.responseStatus == 200) {
-        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-        
-        NSDictionary *responseJSON = [responseString JSONValue];
-
-        if ([[responseJSON objectForKey:@"exists"] isEqualToString:@"true"]) {
-            // username check - taken
-            self.validationWarningLabel.text = @"Username already taken";
-            self.validationWarningLabel.hidden = NO;
-        }
-        
-        else {
-            // username check - valid
-            self.validationWarningLabel.hidden = YES;
-        }
+- (void)usernameCheckSuccessJSON:(id)responseJSON
+{
+    if ([[responseJSON objectForKey:@"exists"] isEqualToString:@"true"]) {
+        self.validationWarningLabel.text = @"Username already taken";
+        self.validationWarningLabel.hidden = NO;
     }
+    
+    else {
+        self.validationWarningLabel.hidden = YES;
+    }
+}
+
+- (void)usernameCheckFailed
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not reach server" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (IBAction)usernameValueChanged 
@@ -186,11 +183,13 @@
     
     NSMutableURLRequest *usernameRequest = [NSMutableURLRequest requestWithURL:usernameUrl];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:usernameRequest delegate:self];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:usernameRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self usernameCheckSuccessJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self usernameCheckFailed];
+    }];
     
-    if (connection) {
-        self.responseData = [NSMutableData data];
-    }
+    [operation start];
 }
 
 @end

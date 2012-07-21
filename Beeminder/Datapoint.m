@@ -2,7 +2,7 @@
 //  Datapoint.m
 //  Beeminder
 //
-//  Created by Andy Brett on 7/20/12.
+//  Created by Andy Brett on 7/21/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 @implementation Datapoint
 
 @dynamic comment;
-@dynamic measured_at;
+@dynamic timestamp;
 @dynamic serverId;
 @dynamic value;
 @dynamic goal;

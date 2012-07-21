@@ -8,7 +8,7 @@
 
 #import "GoalsTableViewController.h"
 
-@interface GoalsTableViewController () <NSURLConnectionDelegate>
+@interface GoalsTableViewController ()
 
 @end
 
@@ -53,27 +53,20 @@
         
         NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
         
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:goalsRequest delegate:self];
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalsRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            [self successfulGoalsJSON:JSON];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            [self failedFetch];
+        }];
         
-        if (connection) {
-            [DejalBezelActivityView activityViewForView:self.view];
-            self.title = @"Fetching goals...";
-            self.responseData = [NSMutableData data];
-        }
+        [operation start];
+        [DejalBezelActivityView activityViewForView:self.view];
     }
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -104,45 +97,6 @@
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -178,35 +132,31 @@
     }    
 }
 
-#pragma mark - NSURLConnection delegate
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)successfulGoalsJSON:(NSDictionary *)responseJSON
 {
     [DejalBezelActivityView removeView];
-    if (self.responseStatus == 200) {
-        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-        
-        NSDictionary *responseJSON = [responseString JSONValue];
-        
-        self.goals = [responseJSON objectForKey:@"goals"];
-        
-        NSDictionary *goalDict = nil;
-        
-        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        
-        for (goalDict in self.goals) {
-            [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
-        }
-        
-        self.title = @"Your goals";
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [self.tableView reloadData];
-
+    
+    self.goals = [responseJSON objectForKey:@"goals"];
+    
+    NSDictionary *goalDict = nil;
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    for (goalDict in self.goals) {
+        [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
     }
-    else {
-        self.title = @"Bad Login";
-    }
+    
+    self.title = @"Your goals";
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView reloadData];
+}
+    
+- (void)failedFetch
+{
+    [DejalBezelActivityView removeViewAnimated:YES];    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

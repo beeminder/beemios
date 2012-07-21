@@ -8,7 +8,7 @@
 
 #import "SignInViewController.h"
 
-@interface SignInViewController () <NSURLConnectionDelegate, UITextFieldDelegate>
+@interface SignInViewController () <UITextFieldDelegate>
 
 - (void)formSubmitted;
 
@@ -104,7 +104,8 @@
 - (void)invalidLogin
 {
     [DejalBezelActivityView removeViewAnimated:YES];
-    self.title = @"Bad Login";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Login" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

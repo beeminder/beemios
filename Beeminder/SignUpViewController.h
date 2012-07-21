@@ -10,7 +10,6 @@
 #import "User+Resource.h"
 #import "Goal.h"
 #import "GoalsTableViewController.h"
-#import "UIViewController+NSURLConnectionDelegate.h"
 #import "UserPushRequest.h"
 
 @interface SignUpViewController : UIViewController
@@ -19,8 +18,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordConfirmationTextField;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
-@property NSInteger responseStatus;
-@property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) UITextField *activeField;

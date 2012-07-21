@@ -8,7 +8,7 @@
 
 #import "GoalViewController.h"
 
-@interface GoalViewController () <NSURLConnectionDelegate>
+@interface GoalViewController ()
 
 @property (nonatomic, strong) CPTXYGraph *graph;
 
@@ -21,8 +21,6 @@
 
 @implementation GoalViewController
 
-@synthesize responseData = _responseData;
-@synthesize responseStatus = _responseStatus;
 @synthesize datapoints = _datapoints;
 @synthesize slug = _slug;
 @synthesize graphHostingView = _graphHostingView;
@@ -51,13 +49,15 @@
     
     NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:datapointsRequest delegate:self];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:datapointsRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulFetchJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self failedFetch];
+    }];
     
-    if (connection) {
-        [DejalBezelActivityView activityViewForView:self.view];
-        self.responseData = [NSMutableData data];
-    }
-	// Do any additional setup after loading the view.
+    [operation start];
+    
+    [DejalBezelActivityView activityViewForView:self.view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,27 +71,23 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - NSURLConnection delegate
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)successfulFetchJSON:(id)responseJSON
 {
     [DejalBezelActivityView removeViewAnimated:YES];
-    if (self.responseStatus == 200) {
-        NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-        
-        NSArray *responseJSON = [responseString JSONValue];
 
-        self.datapoints = [NSMutableArray arrayWithArray:responseJSON];
-        
-        [self setupGraph];
-        [self setupPlotSpace];
-        [self setupAxes];
-        [self setupScatterPlots];
+    self.datapoints = [NSMutableArray arrayWithArray:responseJSON];
+    
+    [self setupGraph];
+    [self setupPlotSpace];
+    [self setupAxes];
+    [self setupScatterPlots];
+}
 
-    }
-    else {
-        self.title = @"Bad Login";
-    }
+- (void)failedFetch
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch data for goal" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)viewDidUnload
