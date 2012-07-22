@@ -93,8 +93,9 @@
     Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
     
     if (authToken) {
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
         CompletionBlock completionBlock = ^() {
-            NSLog(@"in block");
+            [DejalBezelActivityView removeView];
             [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
         };
         [goal pushToRemoteWithCompletionBlock:completionBlock];

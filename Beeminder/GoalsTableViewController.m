@@ -129,7 +129,7 @@
         }
         [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
         [segue.destinationViewController setSlug:slug];
-    }    
+    }
 }
 
 - (void)successfulGoalsJSON:(NSDictionary *)responseJSON

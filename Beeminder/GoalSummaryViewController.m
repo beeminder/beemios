@@ -34,7 +34,6 @@
 {
     [super viewDidLoad];
     if (self.graphURL) {
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Fetching graph..."];
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
     
@@ -44,19 +43,17 @@
     
     NSString *username = [defaults objectForKey:@"username"];
     
-    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, username, self.slug, authenticationToken]];
+    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@.json?auth_token=%@&datapoints=true", kBaseURL, username, self.slug, authenticationToken]];
     
-    NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
+    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:datapointsRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulDatapointsFetchJSON:JSON];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulGoalFetchJSON:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedDatapointsFetch];
     }];
-    
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Fetching data..."];
     [operation start];
-    
-    [self startTimer];
     
     self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
@@ -74,18 +71,23 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self loadGraphImage];
+}
+
+- (void)loadGraphImage
+{
     if (self.graphURL) {
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
         self.graphImage = [[UIImage alloc] initWithData:imageData];
         [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
-        [DejalBezelActivityView removeViewAnimated:YES];
     }
 }
 
-- (void)successfulDatapointsFetchJSON:(id)responseJSON
+- (void)successfulGoalFetchJSON:(id)responseJSON
 {
+    [DejalBezelActivityView removeView];
     self.goalObject.datapoints = [[NSSet alloc] init];
-    for (NSDictionary *datapointDict in responseJSON) {
+    for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
         // add datapoints to goal - nuke all existing.
         NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
         Datapoint *datapoint = [Datapoint MR_createInContext:defaultContext];
@@ -94,15 +96,23 @@
         datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
         datapoint.goal = self.goalObject;
         [defaultContext MR_save];
-        
     }
     
+    NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:responseJSON];
+    
+    [mutableResponse removeObjectForKey:@"datapoints"];
+    
+    [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
+    
     if (![self.goalObject.gtype isEqualToString:@"hustler"]) {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
         
-        Datapoint *datapoint = [[self.goalObject.datapoints allObjects] lastObject];
+        Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+
         self.inputStepper.value = [datapoint.value doubleValue];
-        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];        
+        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     }
+    [self startTimer];
 }
 
 - (void)failedDatapointsFetch
@@ -129,7 +139,9 @@
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
         if ([JSON objectForKey:@"success"]) {
+            [self loadGraphImage];            
             [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
         }
         else {
@@ -138,10 +150,7 @@
         [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
             [DejalBezelActivityView removeViewAnimated:YES];
-        });
-
-
-            
+        });            
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [DejalBezelActivityView removeViewAnimated:YES];
     }];
@@ -151,7 +160,7 @@
 
 - (void)updateTimer
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.goalObject.losedate doubleValue]] timeIntervalSinceNow];
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.goalObject.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A105AD3415BB339D00BB07FD /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A105AD3315BB339D00BB07FD /* Goal.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -31,7 +32,6 @@
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
 		A16DB3C615BA19E900843374 /* UsernameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3C515BA19E900843374 /* UsernameCache.m */; };
-		A16DB3CC15BA19E900843374 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3CB15BA19E900843374 /* Goal.m */; };
 		A16DB3CF15BA19EA00843374 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3CE15BA19EA00843374 /* User.m */; };
 		A16DB3D515BB035E00843374 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3D415BB035E00843374 /* Datapoint.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
@@ -69,6 +69,7 @@
 		A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D69158E9A850075D5DA /* BeeminderViewController.m */; };
 		A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D71158E9BE60075D5DA /* SplashViewController.m */; };
 		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
+		A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F0C7BC15BB77530044E01B /* graph-processing.png */; };
 		A1FCBF1E15B7602700E5C955 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */; };
 		A1FCBF1F15B7602700E5C955 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE815B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.m */; };
 		A1FCBF2015B7602700E5C955 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEEA15B7602600E5C955 /* NSEntityDescription+MagicalDataImport.m */; };
@@ -115,6 +116,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A105AD3215BB339D00BB07FD /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A105AD3315BB339D00BB07FD /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -162,8 +165,6 @@
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
 		A16DB3C415BA19E900843374 /* UsernameCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsernameCache.h; sourceTree = "<group>"; };
 		A16DB3C515BA19E900843374 /* UsernameCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsernameCache.m; sourceTree = "<group>"; };
-		A16DB3CA15BA19E900843374 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A16DB3CB15BA19E900843374 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A16DB3CD15BA19EA00843374 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		A16DB3CE15BA19EA00843374 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A16DB3D315BB035E00843374 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
@@ -229,6 +230,7 @@
 		A1F03D71158E9BE60075D5DA /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		A1F03D76158EA2690075D5DA /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		A1F03D77158EA2690075D5DA /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		A1F0C7BC15BB77530044E01B /* graph-processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph-processing.png"; sourceTree = "<group>"; };
 		A1FCBEE515B7602600E5C955 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		A1FCBEE715B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -388,10 +390,10 @@
 				A16DB3D315BB035E00843374 /* Datapoint.h */,
 				A16DB3D415BB035E00843374 /* Datapoint.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
+				A105AD3215BB339D00BB07FD /* Goal.h */,
+				A105AD3315BB339D00BB07FD /* Goal.m */,
 				A16DB3CD15BA19EA00843374 /* User.h */,
 				A16DB3CE15BA19EA00843374 /* User.m */,
-				A16DB3CA15BA19E900843374 /* Goal.h */,
-				A16DB3CB15BA19E900843374 /* Goal.m */,
 				A16DB3C415BA19E900843374 /* UsernameCache.h */,
 				A16DB3C515BA19E900843374 /* UsernameCache.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
@@ -420,6 +422,7 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1F0C7BC15BB77530044E01B /* graph-processing.png */,
 				A1DB65151599880E002239DE /* add.png */,
 				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
 				A1993CBC158FFE0A00011568 /* Icon.png */,
@@ -692,6 +695,7 @@
 				A12E48EE1591953B0014624E /* logo-text.png in Resources */,
 				A12E48F1159195480014624E /* bee.png in Resources */,
 				A1DB65161599880E002239DE /* add.png in Resources */,
+				A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,9 +777,9 @@
 				A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */,
 				A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */,
 				A16DB3C615BA19E900843374 /* UsernameCache.m in Sources */,
-				A16DB3CC15BA19E900843374 /* Goal.m in Sources */,
 				A16DB3CF15BA19EA00843374 /* User.m in Sources */,
 				A16DB3D515BB035E00843374 /* Datapoint.m in Sources */,
+				A105AD3415BB339D00BB07FD /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
