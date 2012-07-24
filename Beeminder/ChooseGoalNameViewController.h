@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSArray *goalSlugs;
 @property (strong, nonatomic) IBOutlet UILabel *goalSlugExistsWarningLabel;
 @property (strong, nonatomic) UILabel *helperLabel;
+@property (strong, nonatomic) IBOutlet UISwitch *ephemSwitch;
 
 @end

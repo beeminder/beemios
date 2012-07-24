@@ -146,7 +146,7 @@
         [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
     }
     
-    self.title = @"Your goals";
+    self.title = @"Your Goals";
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self.tableView reloadData];

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A105AD3415BB339D00BB07FD /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A105AD3315BB339D00BB07FD /* Goal.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -50,6 +49,7 @@
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
+		A19B156515BEE53500BD8AA3 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19B156415BEE53500BD8AA3 /* Goal.m */; };
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
@@ -116,8 +116,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A105AD3215BB339D00BB07FD /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A105AD3315BB339D00BB07FD /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -200,6 +198,8 @@
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		A1993CC1159007B700011568 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		A19B156315BEE53500BD8AA3 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A19B156415BEE53500BD8AA3 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A19D7BE11596DC3B0031ABED /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
@@ -389,9 +389,9 @@
 				A1B2687215A121F300859EDD /* Sync */,
 				A16DB3D315BB035E00843374 /* Datapoint.h */,
 				A16DB3D415BB035E00843374 /* Datapoint.m */,
+				A19B156315BEE53500BD8AA3 /* Goal.h */,
+				A19B156415BEE53500BD8AA3 /* Goal.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A105AD3215BB339D00BB07FD /* Goal.h */,
-				A105AD3315BB339D00BB07FD /* Goal.m */,
 				A16DB3CD15BA19EA00843374 /* User.h */,
 				A16DB3CE15BA19EA00843374 /* User.m */,
 				A16DB3C415BA19E900843374 /* UsernameCache.h */,
@@ -779,7 +779,7 @@
 				A16DB3C615BA19E900843374 /* UsernameCache.m in Sources */,
 				A16DB3CF15BA19EA00843374 /* User.m in Sources */,
 				A16DB3D515BB035E00843374 /* Datapoint.m in Sources */,
-				A105AD3415BB339D00BB07FD /* Goal.m in Sources */,
+				A19B156515BEE53500BD8AA3 /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

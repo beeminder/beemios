@@ -25,6 +25,7 @@
 @synthesize goalSlugs = _goalSlugs;
 @synthesize goalSlugExistsWarningLabel = _goalSlugExitsWarningLabel;
 @synthesize helperLabel = _helperLabel;
+@synthesize ephemSwitch = _ephemSwitch;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,6 +66,7 @@
     [self setSubmitButton:nil];
     [self setScrollView:nil];
     [self setGoalSlugExistsWarningLabel:nil];
+    [self setEphemSwitch:nil];
     [super viewDidUnload];
 }
 
@@ -176,6 +178,7 @@
     goal.slug = slug;
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     goal.user = user;
+    goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
     
     [defaultContext MR_save];
     

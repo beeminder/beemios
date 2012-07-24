@@ -10,6 +10,7 @@
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="countdown" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="ephem" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="gtype" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -32,7 +33,7 @@
     </entity>
     <elements>
         <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="Goal" positionX="0" positionY="0" width="128" height="225"/>
         <element name="User" positionX="0" positionY="0" width="128" height="105"/>
         <element name="UsernameCache" positionX="0" positionY="0" width="128" height="75"/>
     </elements>
