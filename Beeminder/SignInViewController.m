@@ -52,7 +52,7 @@
 
 - (void)formSubmitted
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/v1/users/sign_in.json", kBaseURL];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
     
     NSURL *loginUrl = [NSURL URLWithString:urlString];
     

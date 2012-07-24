@@ -150,9 +150,9 @@
     
     plotSpace.allowsUserInteraction = YES;
     
-    double startX = [[[self.datapoints objectAtIndex:0] objectForKey:@"measured_at"] doubleValue];
+    double startX = [[[self.datapoints objectAtIndex:0] objectForKey:@"timestamp"] doubleValue];
     
-    double endX = [[[self.datapoints lastObject] objectForKey:@"measured_at"] doubleValue];
+    double endX = [[[self.datapoints lastObject] objectForKey:@"timestamp"] doubleValue];
     
     double xLength = endX - startX;
     
@@ -253,7 +253,7 @@
     hitAnnotationTextStyle.fontName = @"Helvetica-Bold";
     
     // Determine point of symbol in plot coordinates
-    NSNumber *x          = [[self.datapoints objectAtIndex:index] valueForKey:@"measured_at"];
+    NSNumber *x          = [[self.datapoints objectAtIndex:index] valueForKey:@"timestamp"];
     NSNumber *y          = [[self.datapoints objectAtIndex:index] valueForKey:@"value"];
     NSArray *anchorPoint = [NSArray arrayWithObjects:x, y, nil];
     
@@ -282,7 +282,7 @@
 
 - (double)doubleForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSString *key = (fieldEnum == CPTScatterPlotFieldX) ? @"measured_at" : @"value";
+    NSString *key = (fieldEnum == CPTScatterPlotFieldX) ? @"timestamp" : @"value";
     
     return [[[self.datapoints objectAtIndex:index] objectForKey:key] doubleValue];
     

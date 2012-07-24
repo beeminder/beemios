@@ -135,7 +135,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%f&measured_at=%i", authenticationToken, self.inputStepper.value, (int)[[NSDate date]timeIntervalSince1970]];
+    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%f&timestamp=%i", authenticationToken, self.inputStepper.value, (int)[[NSDate date]timeIntervalSince1970]];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
