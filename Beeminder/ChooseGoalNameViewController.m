@@ -57,7 +57,7 @@
     
     [welcome setNumberOfLines:0];
     [self.view addSubview:welcome];
-    [self registerForKeyboardNotifications];    
+    [self registerForKeyboardNotifications];
 }
 
 - (void)viewDidUnload

@@ -13,6 +13,7 @@
 @end
 
 @implementation GoalSummaryViewController
+@synthesize scrollView = _scrollView;
 @synthesize timerLabel = _timerLabel;
 @synthesize unitsLabel = _unitsLabel;
 @synthesize instructionLabel = _instructionLabel;
@@ -33,6 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
+
     if (self.graphURL) {
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
@@ -69,6 +72,7 @@
     }
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
+    [self registerForKeyboardNotifications];    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -126,9 +130,17 @@
 {
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 }
+- (IBAction)inputTextFieldValueChanged
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    self.inputStepper.value = [[numberFormatter numberFromString:self.inputTextField.text] doubleValue];
+}
 
 - (IBAction)submitButtonPressed
 {
+    [self.inputTextField resignFirstResponder];
+
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
@@ -137,7 +149,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%f&timestamp=%i", authenticationToken, self.inputStepper.value, (int)[[NSDate date]timeIntervalSince1970]];
+    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%@&timestamp=%i", authenticationToken, self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -223,6 +235,46 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
+#pragma mark Keyboard notifications
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    CGPoint origin = self.inputStepper.frame.origin;
+    CGFloat height = self.inputStepper.frame.size.height;
+    CGFloat buffer = 10.0;
+    origin.y -= self.scrollView.contentOffset.y;
+    origin.y += height;
+    origin.y += buffer;
+    if (!CGRectContainsPoint(aRect, origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.inputStepper.frame.origin.y - (aRect.size.height) + height + buffer);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
@@ -248,6 +300,7 @@
     [self setInputStepper:nil];
     [self setSubmitButton:nil];
     [self setTimerLabel:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 

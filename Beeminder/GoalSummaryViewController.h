@@ -25,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property BOOL graphIsUpdating;
 @property (strong, nonatomic) NSTimer *graphPoller;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
