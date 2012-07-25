@@ -23,5 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) UIImage *graphImage;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property BOOL graphIsUpdating;
+@property (strong, nonatomic) NSTimer *graphPoller;
 
 @end

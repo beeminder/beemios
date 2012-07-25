@@ -326,7 +326,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email or username" minimumFontSize="17" textAlignment="center" id="AR1-lZ-qpt">
                                 <rect key="frame" x="39" y="37" width="242" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <connections>
                                     <outlet property="delegate" destination="cow-QV-CvW" id="ceH-fT-NYQ"/>
@@ -500,7 +500,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RjJ-3S-8pz">
-                                <rect key="frame" x="228" y="348" width="72" height="44"/>
+                                <rect key="frame" x="228" y="304" width="72" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Done!">
@@ -515,27 +515,27 @@
                                 </connections>
                             </button>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="YcL-8d-VDM">
-                                <rect key="frame" x="123" y="384" width="94" height="27"/>
+                                <rect key="frame" x="123" y="340" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="inputStepperValueChanged" destination="GSH-K4-VbA" eventType="valueChanged" id="kLN-RQ-LSr"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" text="units" autoshrinkMode="minimumScaleFactor" id="AOw-jA-Vsi">
-                                <rect key="frame" x="184" y="352" width="41" height="21"/>
+                                <rect key="frame" x="184" y="308" width="33" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Giw-L8-CSA">
-                                <rect key="frame" x="123" y="345" width="54" height="31"/>
+                                <rect key="frame" x="123" y="301" width="54" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Add data:" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="5Hq-O5-i1s">
-                                <rect key="frame" x="20" y="354" width="280" height="36"/>
+                                <rect key="frame" x="20" y="310" width="280" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -576,7 +576,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.29999999999999999" maximumZoomScale="5" id="1dV-di-Z9W">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1dV-di-Z9W">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -667,93 +667,6 @@
         <image name="graph-processing.png" width="371" height="121"/>
         <image name="logo-text.png" width="261" height="30"/>
     </resources>
-    <classes>
-        <class className="BeeminderViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BeeminderViewController.h"/>
-        </class>
-        <class className="CPTGraphHostingView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
-        </class>
-        <class className="ChooseGoalNameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalNameViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ephemSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="goalNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="DashboardNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
-        </class>
-        <class className="GoalGraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="GoalSummaryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GoalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphHostingView" candidateClass="CPTGraphHostingView"/>
-            </relationships>
-        </class>
-        <class className="GoalsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
-        </class>
-        <class className="RoadDialViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signOutButtonPressed"/>
-                <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SignInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SignUpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="usernameValueChanged"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordConfirmationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

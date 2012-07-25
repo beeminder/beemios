@@ -148,13 +148,50 @@
     
     self.title = @"Your Goals";
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    [self resetAllLocalNotifications];
     [self.tableView reloadData];
+}
+
+- (void)resetAllLocalNotifications
+{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    for (NSDictionary *goalDict in self.goals) {
+        NSDate *emergencyTime;
+        NSDate *wrongLaneTime;
+        if ([[goalDict objectForKey:@"slug"] isEqualToString:@"weightstable"]) {
+            emergencyTime = [[NSDate date]
+                         dateByAddingTimeInterval:20];
+            wrongLaneTime = [[NSDate date] dateByAddingTimeInterval:10];
+        }
+        else {
+            double countdown = [[goalDict objectForKey:@"countdown"] doubleValue];
+            emergencyTime = [NSDate dateWithTimeIntervalSince1970:countdown - 24*3600];
+            wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:countdown - 48*3600];
+        }
+        UIApplication* app = [UIApplication sharedApplication];
+        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+        if (notifyAlarm)
+        {
+            notifyAlarm.fireDate = emergencyTime;
+            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+            notifyAlarm.repeatInterval = 0;
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"Emergency day today for %@!", [goalDict objectForKey:@"title"]];
+            [app scheduleLocalNotification:notifyAlarm];
+            
+            notifyAlarm = [[UILocalNotification alloc] init];
+            notifyAlarm.fireDate = wrongLaneTime;
+            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+            notifyAlarm.repeatInterval = 0;
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"In the wrong lane for %@!", [goalDict objectForKey:@"title"]];
+            [app scheduleLocalNotification:notifyAlarm];
+        }
+    }
+
 }
     
 - (void)failedFetch
 {
-    [DejalBezelActivityView removeViewAnimated:YES];    
+    [DejalBezelActivityView removeViewAnimated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }

@@ -35,7 +35,7 @@
         self.scrollView.minimumZoomScale = 0.5;
         self.scrollView.maximumZoomScale = 2.0;
         self.scrollView.clipsToBounds = YES;
-        self.scrollView.contentSize = self.view.frame.size;
+        self.scrollView.contentSize = self.graphImage.size;
         self.scrollView.delegate = self;
     }
 

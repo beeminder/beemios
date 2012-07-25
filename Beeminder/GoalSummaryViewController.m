@@ -57,7 +57,9 @@
     
     self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
-    self.unitsLabel.text = self.goalObject.units;
+    if (self.goalObject.units) {
+        self.unitsLabel.text = self.goalObject.units;
+    }
     
     if ([self.goalObject.gtype isEqualToString:@"hustler"] && [self.goalObject.units isEqualToString:@"times"]) {
         self.inputStepper.hidden = YES;
@@ -77,7 +79,7 @@
 - (void)loadGraphImage
 {
     if (self.graphURL) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL]];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL] options:NSDataReadingUncached error:nil];
         self.graphImage = [[UIImage alloc] initWithData:imageData];
         [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
     }
@@ -148,14 +150,48 @@
             [DejalBezelActivityView currentActivityView].activityLabel.text = @"Error";            
         }
         [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
+
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-            [DejalBezelActivityView removeViewAnimated:YES];
-        });            
+            [DejalBezelActivityView removeViewAnimated:NO];
+            [self pollUntilGraphIsNotUpdating];
+        });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [DejalBezelActivityView removeViewAnimated:YES];
     }];
     [operation start];
     [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+}
+
+- (void)pollUntilGraphIsNotUpdating
+{
+    // guilty until proven innocent
+    self.graphIsUpdating = YES;
+    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];    
+    
+    self.graphPoller = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkIfGraphIsUpdating) userInfo:nil repeats:YES];
+}
+
+- (void)checkIfGraphIsUpdating
+{
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, username, self.goalObject.slug, authenticationToken]];
+    
+    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
+    
+    AFJSONRequestOperation *goalOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.graphIsUpdating = [[JSON objectForKey:@"graph_queued_for_update"] boolValue];
+        if (!self.graphIsUpdating) {
+            [self.graphPoller invalidate];
+            [self loadGraphImage];
+            [DejalBezelActivityView removeView];
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        // nothing...
+    }];
+    
+    [goalOperation start];
 }
 
 - (void)updateTimer
