@@ -2,7 +2,7 @@
 //  Goal.m
 //  Beeminder
 //
-//  Created by Andy Brett on 7/24/12.
+//  Created by Andy Brett on 7/26/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -14,15 +14,15 @@
 @implementation Goal
 
 @dynamic countdown;
-@dynamic date;
+@dynamic goaldate;
+@dynamic ephem;
 @dynamic gtype;
 @dynamic rate;
 @dynamic serverId;
 @dynamic slug;
-@dynamic target;
+@dynamic goalval;
 @dynamic title;
 @dynamic units;
-@dynamic ephem;
 @dynamic datapoints;
 @dynamic user;
 

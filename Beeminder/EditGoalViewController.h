@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIToolbar *dismissToolbar;
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFieldCollection;
+@property (strong, nonatomic) IBOutletCollection(UISwitch) NSArray *switchCollection;
 
 - (IBAction)cancel;
 

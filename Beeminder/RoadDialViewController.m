@@ -87,7 +87,7 @@
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:365*24*3600];
     NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
     
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"date", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"goaldate", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
 
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
