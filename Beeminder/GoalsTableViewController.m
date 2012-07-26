@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad
 {
+    Goal *goal = [Goal MR_createEntity];
+    
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -49,7 +51,7 @@
     
     if (authenticationToken) {
         
-        NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@", kBaseURL, username, authenticationToken]];
+        NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@&active=true", kBaseURL, username, authenticationToken]];
         
         NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
         

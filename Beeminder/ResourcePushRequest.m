@@ -20,7 +20,7 @@
     NSString *pString = @"";
     
     for (NSString *key in [[self.resource.entity attributesByName] allKeys]) {
-        NSString * val = [self.resource performSelector:NSSelectorFromString(key)];
+        id val = [self.resource performSelector:NSSelectorFromString(key)];
         if (val) {
             pString = [pString stringByAppendingString:[NSString stringWithFormat:@"%@=%@&", key, val]];
         }

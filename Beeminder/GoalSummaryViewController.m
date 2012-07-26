@@ -64,12 +64,12 @@
         self.unitsLabel.text = self.goalObject.units;
     }
     
-    if ([self.goalObject.gtype isEqualToString:@"hustler"] && [self.goalObject.units isEqualToString:@"times"]) {
-        self.inputStepper.hidden = YES;
-        self.inputTextField.hidden = YES;
-        self.unitsLabel.hidden = YES;
-        self.instructionLabel.text = @"Check off this goal:";
-    }
+//    if ([self.goalObject.gtype isEqualToString:@"hustler"] && [self.goalObject.units isEqualToString:@"times"]) {
+//        self.inputStepper.hidden = YES;
+//        self.inputTextField.hidden = YES;
+//        self.unitsLabel.hidden = YES;
+//        self.instructionLabel.text = @"Check off this goal:";
+//    }
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self registerForKeyboardNotifications];    

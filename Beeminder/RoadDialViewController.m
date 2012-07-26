@@ -83,14 +83,18 @@
 }
 
 - (IBAction)nextButtonPressed:(UIBarButtonItem *)sender
-{    
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:365*24*3600];
+    NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+    
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"date", self.goalRateNumeratorUnits, @"units", @"hustler", @"gtype", self.goalObject.slug, @"slug", nil];
 
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
     Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
+    
     
     if (authToken) {
         [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
