@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Goal+Resource.h"
 #import "GoalGraphViewController.h"
-#import "Datapoint.h"
+#import "EditGoalViewController.h"
+
 
 @interface GoalSummaryViewController : UIViewController
 @property (strong, nonatomic) NSString *graphURL;

@@ -56,6 +56,7 @@
 		A1B2687115A121EA00859EDD /* ResourcePullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2687015A121EA00859EDD /* ResourcePullRequest.m */; };
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
+		A1C5DEE715C0C83E0088FDE5 /* EditGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* EditGoalViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
@@ -210,6 +211,8 @@
 		A1B31643159D16E000998C76 /* DashboardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardNavigationController.m; sourceTree = "<group>"; };
 		A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoadDialViewController.h; sourceTree = "<group>"; };
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
+		A1C5DEE515C0C83D0088FDE5 /* EditGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGoalViewController.h; sourceTree = "<group>"; };
+		A1C5DEE615C0C83D0088FDE5 /* EditGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGoalViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1DB65151599880E002239DE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,6 +503,8 @@
 				A1F03D70158E9BE60075D5DA /* SplashViewController.h */,
 				A1F03D71158E9BE60075D5DA /* SplashViewController.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
+				A1C5DEE515C0C83D0088FDE5 /* EditGoalViewController.h */,
+				A1C5DEE615C0C83D0088FDE5 /* EditGoalViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 				A16DB3CF15BA19EA00843374 /* User.m in Sources */,
 				A16DB3D515BB035E00843374 /* Datapoint.m in Sources */,
 				A19B156515BEE53500BD8AA3 /* Goal.m in Sources */,
+				A1C5DEE715C0C83E0088FDE5 /* EditGoalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

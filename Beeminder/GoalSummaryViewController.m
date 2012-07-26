@@ -63,13 +63,6 @@
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
-    
-//    if ([self.goalObject.gtype isEqualToString:@"hustler"] && [self.goalObject.units isEqualToString:@"times"]) {
-//        self.inputStepper.hidden = YES;
-//        self.inputTextField.hidden = YES;
-//        self.unitsLabel.hidden = YES;
-//        self.instructionLabel.text = @"Check off this goal:";
-//    }
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self registerForKeyboardNotifications];    
@@ -277,8 +270,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
-    ggvCon.graphImage = self.graphImage;
+    if ([segue.identifier isEqualToString:@"segueToGraphView"]) {
+        GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
+        ggvCon.graphImage = self.graphImage;
+    }
+    else {
+        [(EditGoalViewController *)segue.destinationViewController setGoalObject: self.goalObject];
+    }
 }
 
 - (void)didReceiveMemoryWarning

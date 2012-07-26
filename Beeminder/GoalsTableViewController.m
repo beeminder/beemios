@@ -28,9 +28,7 @@
 }
 
 - (void)viewDidLoad
-{
-    Goal *goal = [Goal MR_createEntity];
-    
+{    
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

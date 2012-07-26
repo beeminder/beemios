@@ -16,4 +16,7 @@
     #import "AFJSONRequestOperation.h"
     #import "AFHTTPClient.h"
     #import "DejalActivityView.h"
+    #import "Goal+Resource.h"
+    #import "User+Resource.h"
+    #import "Datapoint.h"
 #endif
