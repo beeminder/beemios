@@ -34,38 +34,66 @@
     self.textFieldCollection = [self.textFieldCollection sortedArrayUsingComparator:compareTags];
     self.switchCollection = [self.switchCollection sortedArrayUsingComparator:compareTags];
     
-    self.rateTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.rate];
-
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/YY"];
-    self.goalDateTextField.text = [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self.goalObject.goaldate doubleValue]]];
-    
     if (self.goalObject.goalval) {
+        [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
+        self.goalValueSwitch.on = YES;
         self.goalValueTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.goalval];
+
+    }
+    else {
+        [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
+        self.goalValueSwitch.on = NO;
     }
     
-    BOOL rate = ((id)self.goalObject.rate != [NSNull null]);
-    self.rateSwitch.on = rate;
-    self.rateTextField.enabled = rate;
+    if (self.goalObject.rate) {
+        self.rateTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.rate];
+        [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
+        self.rateSwitch.on = YES;
+    }
+    else {
+        [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
+        self.rateSwitch.on = NO;
+    }
     
-    BOOL date = ((id)self.goalObject.goaldate != [NSNull null]);
-    self.goalDateSwitch.on = date;
-    self.goalDateTextField.enabled = date;
-    
-    BOOL val = [self.goalObject.goalval boolValue];
-    self.goalValueSwitch.on = val;
-    self.goalValueTextField.enabled = val;
+    if (self.goalObject.goaldate) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[self.goalObject.goaldate doubleValue]];
+        self.goalDateTextField.text = [formatter stringFromDate:date];
+        self.datePicker.date = date;
+        [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalDateSwitch]];
+        self.goalDateSwitch.on = YES;
+    }
+    else {
+        [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalDateSwitch]];
+        self.goalDateSwitch.on = NO;
+    }
     
     self.goalDateTextField.inputView = self.datePicker;
     self.rateTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.goalValueTextField.keyboardType = UIKeyboardTypeDecimalPad;
-	// Do any additional setup after loading the view.
+    
+    [self recalculateValues];
+}
+
+- (IBAction)recalculateValues
+{
+    int offSwitchIndex = [self offSwitchIndexExcludingIndex:-1];
+    
+    if ([self.switchCollection indexOfObject:self.rateSwitch] == offSwitchIndex) {
+        [self setRateValue];
+    }
+    else if ([self.switchCollection indexOfObject:self.goalValueSwitch] == offSwitchIndex) {
+        [self setGoalValueValue];
+    }
+    else {
+        [self setGoalDateValue];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidUnload {
@@ -80,6 +108,74 @@
     [self setSwitchCollection:nil];
     [self setTextFieldCollection:nil];
     [super viewDidUnload];
+}
+
+- (void)setGoalValueValue
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    
+    
+    NSDate *date = [formatter dateFromString:self.goalDateTextField.text];
+    
+    NSTimeInterval interval = [date timeIntervalSinceNow];
+    
+    double weeks = interval/(3600*24*7);
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
+    
+    double diff = weeks*rate;
+
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+
+    double goalVal = [datapoint.value doubleValue] + diff;
+    
+    self.goalValueTextField.text = [NSString stringWithFormat:@"%.0f", goalVal];
+}
+
+- (void)setGoalDateValue
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double goalVal = [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue];
+    
+    double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
+    
+    double interval = (3600*24*7)*goalVal/rate;
+    
+    NSDate *gDate = [NSDate dateWithTimeIntervalSinceNow:interval];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    self.goalDateTextField.text = [formatter stringFromDate:gDate];
+    self.datePicker.date = gDate;
+}
+
+- (void)setRateValue
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    
+    NSDate *date = [formatter dateFromString:self.goalDateTextField.text];
+    
+    NSTimeInterval interval = [date timeIntervalSinceNow];
+
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double diff = [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue] - [datapoint.value doubleValue];
+    
+    double rate = diff*3600*7*24/interval;
+
+    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
 }
 
 - (IBAction)editingDidBegin:(id)sender
@@ -121,23 +217,29 @@
     else {
         [self disableTextFieldAtIndex:senderIndex];
 
-        int offSwitchIndex = [[self.switchCollection indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-
-            UISwitch *theSwitch = (UISwitch *)obj;
-            
-            return (idx != senderIndex && !theSwitch.on);
-        }] lastIndex];
+        int offSwitchIndex = [self offSwitchIndexExcludingIndex:senderIndex];
         
         [self enableTextFieldAtIndex:offSwitchIndex];
         [[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES];
     }
 }
 
+- (int)offSwitchIndexExcludingIndex:(int)excludedIndex
+{
+    return [[self.switchCollection indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        UISwitch *theSwitch = (UISwitch *)obj;
+        
+        return (idx != excludedIndex && !theSwitch.on);
+    }] lastIndex];
+}
+
 - (IBAction)datePickerValueChanged
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/YY"];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
     self.goalDateTextField.text = [formatter stringFromDate:self.datePicker.date];
+    [self recalculateValues];
 }
 
 - (IBAction)cancel

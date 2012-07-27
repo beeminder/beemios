@@ -657,6 +657,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="vPA-0i-93l"/>
+                                    <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="pzE-2E-mQK"/>
                                     <outlet property="delegate" destination="Fnl-aH-b4C" id="eGh-pU-qM7"/>
                                 </connections>
                             </textField>
@@ -668,6 +669,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="fLE-rR-IQO"/>
+                                    <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="OHd-qP-ugH"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" text="" id="0Eb-ps-Dq7">
@@ -678,6 +680,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="r9S-WW-6Om"/>
+                                    <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="d5m-7f-yNn"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Edit Goal Targets" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="EW2-Ca-mdS">

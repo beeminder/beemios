@@ -223,7 +223,7 @@
     }
 }
 
-- (IBAction)startTimer {
+- (void)startTimer {
     [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
