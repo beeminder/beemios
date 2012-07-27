@@ -602,15 +602,15 @@
                                     <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="lMu-V3-WaM"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="jiv-yX-3Uk">
-                                <rect key="frame" x="121" y="163" width="79" height="27"/>
+                            <switch opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="jiv-yX-3Uk">
+                                <rect key="frame" x="221" y="163" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="Un9-g4-dzV"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="H0m-ze-u3Q">
-                                <rect key="frame" x="221" y="163" width="79" height="27"/>
+                            <switch opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="H0m-ze-u3Q">
+                                <rect key="frame" x="121" y="163" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="gpd-Zf-jZf"/>
@@ -628,22 +628,22 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Date" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="8tV-Ht-q7P">
-                                <rect key="frame" x="42" y="128" width="36" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Goal date" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="8tV-Ht-q7P">
+                                <rect key="frame" x="23" y="128" width="74" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Per week" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="SgN-fC-pAk">
-                                <rect key="frame" x="125" y="128" width="71" height="21"/>
+                                <rect key="frame" x="225" y="128" width="71" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Value" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="jt8-HY-CHY">
-                                <rect key="frame" x="238" y="128" width="44" height="21"/>
+                                <rect key="frame" x="138" y="128" width="44" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -661,8 +661,8 @@
                                     <outlet property="delegate" destination="Fnl-aH-b4C" id="eGh-pU-qM7"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" text="" id="VYb-oD-b4s">
-                                <rect key="frame" x="120" y="85" width="80" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" text="" id="VYb-oD-b4s">
+                                <rect key="frame" x="220" y="85" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -672,8 +672,8 @@
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="OHd-qP-ugH"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" text="" id="0Eb-ps-Dq7">
-                                <rect key="frame" x="220" y="85" width="80" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" text="" id="0Eb-ps-Dq7">
+                                <rect key="frame" x="120" y="85" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -683,8 +683,8 @@
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="d5m-7f-yNn"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Edit Goal Targets" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="EW2-Ca-mdS">
-                                <rect key="frame" x="69" y="20" width="183" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Road Dial" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="EW2-Ca-mdS">
+                                <rect key="frame" x="109" y="20" width="102" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -732,14 +732,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="cancel" destination="YqE-9n-0QD" id="TEN-xy-t0Z"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="159" style="plain" systemItem="fixedSpace" id="KnB-z5-mQN"/>
-                                    <barButtonItem style="done" systemItem="save" id="LrR-NY-bwS">
+                                    <barButtonItem width="126" style="plain" systemItem="fixedSpace" id="KnB-z5-mQN"/>
+                                    <barButtonItem title="MAKEITSO" style="done" id="LrR-NY-bwS">
                                         <connections>
                                             <action selector="save:" destination="YqE-9n-0QD" id="mdm-OC-Tj7"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Updates take effect in one week" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="afE-aq-rfi">
+                                <rect key="frame" x="58" y="48" width="204" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -887,9 +894,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="action" name="switchValueChanged:" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="goalDateSwitch" candidateClass="UISwitch"/>
