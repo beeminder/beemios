@@ -17,18 +17,18 @@
     userPushRequest.resource = user;
     userPushRequest.completionBlock = completionBlock;
     
-    NSString *urlString;
-    
-    if ([user.serverId intValue] == 0) {
-        urlString = [user createURL];
+    NSURL *url;
+    NSMutableURLRequest *request;
+    if (user.serverId) {
+        url = [NSURL URLWithString:[user updateURL]];
+        request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"PUT"];
     }
     else {
-        urlString = [user updateURL];
+        url = [NSURL URLWithString:[user createURL]];
+        request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
     }
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
 
     __block NSString *pString = [userPushRequest paramString];
 
@@ -55,8 +55,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-
-    
     NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     
     NSDictionary *responseJSON = [responseString JSONValue];

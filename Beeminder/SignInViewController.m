@@ -93,7 +93,7 @@
     
     [defaults setObject:username forKey:@"username"];
     
-    NSDictionary *userDict = [NSDictionary dictionaryWithObject:username forKey:@"username"];
+    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", [responseJSON objectForKey:@"id"], @"serverId", nil];
     
     [User writeToUserWithDictionary:userDict];
     

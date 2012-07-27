@@ -93,6 +93,7 @@
         datapoint.value = [datapointDict objectForKey:@"value"];
         datapoint.comment = [datapointDict objectForKey:@"comment"];
         datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
+        datapoint.serverId = [datapointDict objectForKey:@"id"];
         datapoint.goal = self.goalObject;
         [defaultContext MR_save];
     }

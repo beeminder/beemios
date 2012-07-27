@@ -14,13 +14,13 @@
 @implementation Goal
 
 @dynamic countdown;
-@dynamic goaldate;
 @dynamic ephem;
+@dynamic goaldate;
+@dynamic goalval;
 @dynamic gtype;
 @dynamic rate;
 @dynamic serverId;
 @dynamic slug;
-@dynamic goalval;
 @dynamic title;
 @dynamic units;
 @dynamic datapoints;

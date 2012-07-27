@@ -33,7 +33,7 @@
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json", kBaseURL, kAPIPrefix, self.user.username, self.serverId];
+    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json", kBaseURL, kAPIPrefix, self.user.username, self.slug];
 }
 
 - (NSString *)updateURL

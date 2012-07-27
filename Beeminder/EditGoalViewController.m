@@ -70,6 +70,7 @@
     }
     
     self.goalDateTextField.inputView = self.datePicker;
+    self.datePicker.minimumDate = [NSDate date];
     self.rateTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.goalValueTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
@@ -249,7 +250,26 @@
 
 - (IBAction)save:(id)sender
 {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    if (self.goalDateSwitch.on) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        NSNumber *timestamp = [NSNumber numberWithDouble:[[formatter dateFromString:self.goalDateTextField.text] timeIntervalSince1970]];
+        self.goalObject.goaldate = timestamp;
+    }
     
+    if (self.rateSwitch.on) {
+        self.goalObject.rate = [numberFormatter numberFromString:self.rateTextField.text];
+    }
+    
+    if (self.goalValueSwitch.on) {
+        self.goalObject.goalval = [numberFormatter numberFromString:self.goalValueTextField.text];
+    }
+    
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    
+    [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:nil];
 }
 
 @end

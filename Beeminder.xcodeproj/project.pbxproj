@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1123D5115C183D900208C5B /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1123D5015C183D900208C5B /* Goal.m */; };
+		A100AFCA15C255D200211669 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFC915C255D200211669 /* Goal.m */; };
+		A100AFCD15C255D300211669 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCC15C255D300211669 /* User.m */; };
+		A100AFD015C255D300211669 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCF15C255D300211669 /* Datapoint.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -31,9 +33,6 @@
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
-		A16DB3C615BA19E900843374 /* UsernameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3C515BA19E900843374 /* UsernameCache.m */; };
-		A16DB3CF15BA19EA00843374 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3CE15BA19EA00843374 /* User.m */; };
-		A16DB3D515BB035E00843374 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A16DB3D415BB035E00843374 /* Datapoint.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D94159EC7EF00B1639D /* DejalActivityView.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
@@ -117,8 +116,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A1123D4F15C183D900208C5B /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A1123D5015C183D900208C5B /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A100AFC815C255D200211669 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A100AFC915C255D200211669 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A100AFCB15C255D300211669 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A100AFCC15C255D300211669 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A100AFCE15C255D300211669 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A100AFCF15C255D300211669 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -164,12 +167,6 @@
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
-		A16DB3C415BA19E900843374 /* UsernameCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsernameCache.h; sourceTree = "<group>"; };
-		A16DB3C515BA19E900843374 /* UsernameCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsernameCache.m; sourceTree = "<group>"; };
-		A16DB3CD15BA19EA00843374 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A16DB3CE15BA19EA00843374 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A16DB3D315BB035E00843374 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A16DB3D415BB035E00843374 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A17F4D93159EC7EF00B1639D /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
@@ -390,15 +387,13 @@
 			isa = PBXGroup;
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
-				A16DB3D315BB035E00843374 /* Datapoint.h */,
-				A16DB3D415BB035E00843374 /* Datapoint.m */,
+				A100AFC815C255D200211669 /* Goal.h */,
+				A100AFCE15C255D300211669 /* Datapoint.h */,
+				A100AFCF15C255D300211669 /* Datapoint.m */,
+				A100AFCB15C255D300211669 /* User.h */,
+				A100AFCC15C255D300211669 /* User.m */,
+				A100AFC915C255D200211669 /* Goal.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A1123D4F15C183D900208C5B /* Goal.h */,
-				A1123D5015C183D900208C5B /* Goal.m */,
-				A16DB3CD15BA19EA00843374 /* User.h */,
-				A16DB3CE15BA19EA00843374 /* User.m */,
-				A16DB3C415BA19E900843374 /* UsernameCache.h */,
-				A16DB3C515BA19E900843374 /* UsernameCache.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -482,6 +477,8 @@
 				A126C9301592EE1700FE8CF8 /* constants.h */,
 				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
 				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
+				A1C5DEE515C0C83D0088FDE5 /* EditGoalViewController.h */,
+				A1C5DEE615C0C83D0088FDE5 /* EditGoalViewController.m */,
 				A1782811159D567E00F3336F /* GoalGraphViewController.h */,
 				A1782812159D567E00F3336F /* GoalGraphViewController.m */,
 				A133F97D158FA32D002F151A /* GoalsTableViewController.h */,
@@ -503,8 +500,6 @@
 				A1F03D70158E9BE60075D5DA /* SplashViewController.h */,
 				A1F03D71158E9BE60075D5DA /* SplashViewController.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
-				A1C5DEE515C0C83D0088FDE5 /* EditGoalViewController.h */,
-				A1C5DEE615C0C83D0088FDE5 /* EditGoalViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -781,11 +776,10 @@
 				A188E00F15B8BB71009CBA60 /* AFURLConnectionOperation.m in Sources */,
 				A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */,
 				A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */,
-				A16DB3C615BA19E900843374 /* UsernameCache.m in Sources */,
-				A16DB3CF15BA19EA00843374 /* User.m in Sources */,
-				A16DB3D515BB035E00843374 /* Datapoint.m in Sources */,
 				A1C5DEE715C0C83E0088FDE5 /* EditGoalViewController.m in Sources */,
-				A1123D5115C183D900208C5B /* Goal.m in Sources */,
+				A100AFCA15C255D200211669 /* Goal.m in Sources */,
+				A100AFCD15C255D300211669 /* User.m in Sources */,
+				A100AFD015C255D300211669 /* Datapoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

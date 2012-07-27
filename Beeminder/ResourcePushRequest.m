@@ -44,18 +44,12 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     self.status = @"failed";
-    
-//    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
-//        message:[error localizedDescription]
-//        delegate:nil
-//        cancelButtonTitle:NSLocalizedString(@"OK", @"")
-//                      otherButtonTitles:nil] show];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     self.status = @"returned";
-    dispatch_async(dispatch_get_current_queue(), self.completionBlock);
+    if (self.completionBlock) dispatch_async(dispatch_get_current_queue(), self.completionBlock);
 }
 
 

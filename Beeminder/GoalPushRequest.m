@@ -15,23 +15,25 @@
     GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
     goalPushRequest.resource = goal;
     goalPushRequest.completionBlock = completionBlock;
-    NSString *urlString;
-    
-    if ([goal.serverId intValue] == 0) {
-        urlString = [goal createURL];
-    }
-    else {
-        urlString = [goal updateURL];
-    }
-    
-    NSURL *url = [NSURL URLWithString:urlString];
-    
+
     NSString *pString = [goalPushRequest paramString];
     pString = [pString stringByAppendingFormat:@"auth_token=%@&", [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *url;
+    NSMutableURLRequest *request;
+    if (goal.serverId) {
+        url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
+        request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"PUT"];
+    }
+    else {
+        url = [NSURL URLWithString:[goal createURL]];
+        request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
+    }
+    
+
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:goalPushRequest];
     

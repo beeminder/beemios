@@ -14,13 +14,13 @@
 @interface Goal : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * countdown;
-@property (nonatomic, retain) NSNumber * goaldate;
 @property (nonatomic, retain) NSNumber * ephem;
+@property (nonatomic, retain) NSNumber * goaldate;
+@property (nonatomic, retain) NSNumber * goalval;
 @property (nonatomic, retain) NSString * gtype;
 @property (nonatomic, retain) NSNumber * rate;
-@property (nonatomic, retain) NSNumber * serverId;
+@property (nonatomic, retain) NSString * serverId;
 @property (nonatomic, retain) NSString * slug;
-@property (nonatomic, retain) NSNumber * goalval;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
 @property (nonatomic, retain) NSSet *datapoints;

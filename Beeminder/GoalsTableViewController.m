@@ -143,7 +143,9 @@
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     for (goalDict in self.goals) {
-        [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
+        NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
+        [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
+        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username];
     }
     
     self.title = @"Your Goals";

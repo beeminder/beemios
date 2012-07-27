@@ -51,7 +51,7 @@
     
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
-        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key capitalizedString] ];
+        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
         if ([goal respondsToSelector:NSSelectorFromString(selectorString)] && obj != [NSNull null]) {
             [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
         }
@@ -74,7 +74,7 @@
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%@.json", kBaseURL, kAPIPrefix, self.serverId];
+    return [NSString stringWithFormat:@"%@/%@/users/%@.json", kBaseURL, kAPIPrefix, self.username];
 }
 
 - (NSString *)updateURL
