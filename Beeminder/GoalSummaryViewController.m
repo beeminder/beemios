@@ -7,6 +7,7 @@
 //
 
 #import "GoalSummaryViewController.h"
+#import "EditGoalViewController.h"
 
 @interface GoalSummaryViewController ()
 
@@ -172,13 +173,14 @@
 {
     // guilty until proven innocent
     self.graphIsUpdating = YES;
-    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];    
+    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];
     
     self.graphPoller = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkIfGraphIsUpdating) userInfo:nil repeats:YES];
 }
 
 - (void)checkIfGraphIsUpdating
 {
+    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
@@ -277,6 +279,7 @@
     }
     else {
         [(EditGoalViewController *)segue.destinationViewController setGoalObject: self.goalObject];
+        [(EditGoalViewController *)segue.destinationViewController setGoalSummaryViewController: self];
     }
 }
 

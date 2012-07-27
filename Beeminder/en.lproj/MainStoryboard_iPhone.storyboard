@@ -563,7 +563,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YqE-9n-0QD" kind="modal" id="gct-cz-0tA"/>
+                                    <segue destination="YqE-9n-0QD" kind="modal" identifier="segueToEditGoal" id="gct-cz-0tA"/>
                                 </connections>
                             </button>
                         </subviews>

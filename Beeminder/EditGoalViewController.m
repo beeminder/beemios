@@ -258,18 +258,37 @@
         NSNumber *timestamp = [NSNumber numberWithDouble:[[formatter dateFromString:self.goalDateTextField.text] timeIntervalSince1970]];
         self.goalObject.goaldate = timestamp;
     }
+    else {
+        self.goalObject.goaldate = nil;
+    }
     
     if (self.rateSwitch.on) {
         self.goalObject.rate = [numberFormatter numberFromString:self.rateTextField.text];
+    }
+    else {
+        self.goalObject.rate = nil;
     }
     
     if (self.goalValueSwitch.on) {
         self.goalObject.goalval = [numberFormatter numberFromString:self.goalValueTextField.text];
     }
+    else {
+        self.goalObject.goalval = nil;
+    }
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:nil];
+    [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
+        [self.goalSummaryViewController pollUntilGraphIsNotUpdating];
+        [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
+        [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            [DejalBezelActivityView removeViewAnimated:NO];
+            [self.presentingViewController dismissModalViewControllerAnimated:YES];
+        });
+    }];
+    
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
 }
 
 @end

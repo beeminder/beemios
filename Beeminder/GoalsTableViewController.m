@@ -32,8 +32,7 @@
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
+
     NSString *username = [defaults objectForKey:@"username"];
     
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
@@ -46,9 +45,14 @@
         [arrayOfDicts addObject:dict];
     }
     self.goals = arrayOfDicts;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
     if (authenticationToken) {
-        
+        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
         NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@&active=true", kBaseURL, username, authenticationToken]];
         
         NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];

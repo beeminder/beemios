@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GoalGraphViewController.h"
-#import "EditGoalViewController.h"
 
+@class EditGoalViewController;
 
 @interface GoalSummaryViewController : UIViewController
 @property (strong, nonatomic) NSString *graphURL;
@@ -26,5 +26,7 @@
 @property BOOL graphIsUpdating;
 @property (strong, nonatomic) NSTimer *graphPoller;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
+- (void)pollUntilGraphIsNotUpdating;
 
 @end
