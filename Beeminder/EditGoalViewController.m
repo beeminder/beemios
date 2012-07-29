@@ -232,7 +232,7 @@
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
     textField.backgroundColor = [UIColor whiteColor];
     textField.textColor = [UIColor blackColor];
-    [textField becomeFirstResponder];
+//    [textField becomeFirstResponder];
 }
 
 - (void)disableTextFieldAtIndex:(int)index
@@ -240,7 +240,7 @@
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
     textField.backgroundColor = [UIColor lightGrayColor];
     textField.textColor = [UIColor whiteColor];
-    [textField resignFirstResponder];
+//    [textField resignFirstResponder];
 }
 
 - (IBAction)switchValueChanged:(DCRoundSwitch *)sender
@@ -252,6 +252,7 @@
         [self enableTextFieldAtIndex:senderIndex];
         [self disableTextFieldAtIndex:turnOffIndex];
         [(DCRoundSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
+        [[self.textFieldCollection objectAtIndex:senderIndex] becomeFirstResponder];
     }
     else {
         [self disableTextFieldAtIndex:senderIndex];
@@ -260,6 +261,8 @@
         
         [self enableTextFieldAtIndex:offSwitchIndex];
         [(DCRoundSwitch *)[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES ignoreControlEvents:YES];
+        [[self.textFieldCollection objectAtIndex:senderIndex] resignFirstResponder];
+        [[self.textFieldCollection objectAtIndex:offSwitchIndex] becomeFirstResponder];
     }
 }
 
