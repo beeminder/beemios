@@ -10,11 +10,10 @@
 
 @interface EditGoalViewController ()
 
+
 @end
 
 @implementation EditGoalViewController
-@synthesize textFieldCollection;
-@synthesize switchCollection;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,31 +27,56 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.switchCollection = [[NSMutableArray alloc] init];
+    
+    self.goalDateSwitch = [[DCRoundSwitch alloc] init];
+    self.goalDateSwitch.onText = @"EDIT";
+    self.goalDateSwitch.offText = @"INFER";
+    CGRect defaultFrame = self.goalDateSwitch.frame;
+    self.goalDateSwitch.frame = CGRectMake(20, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.goalDateSwitch.tag = 0;
+    [self.view addSubview:self.goalDateSwitch];
+    [self.switchCollection addObject:self.goalDateSwitch];
+    
+    self.goalValueSwitch = [[DCRoundSwitch alloc] init];
+    self.goalValueSwitch.onText = @"EDIT";
+    self.goalValueSwitch.offText = @"INFER";
+    self.goalValueSwitch.frame = CGRectMake(120, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.goalValueSwitch.tag = 1;
+    [self.view addSubview:self.goalValueSwitch];
+    [self.switchCollection addObject:self.goalValueSwitch];
+    
+    self.rateSwitch = [[DCRoundSwitch alloc] init];
+    self.rateSwitch.onText = @"EDIT";
+    self.rateSwitch.offText = @"INFER";
+    self.rateSwitch.frame = CGRectMake(220, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.rateSwitch.tag = 2;
+    [self.view addSubview:self.rateSwitch];
+    [self.switchCollection addObject:self.rateSwitch];    
     
     NSComparator compareTags = ^(id a, id b) { return [a tag] - [b tag]; };
     
     self.textFieldCollection = [self.textFieldCollection sortedArrayUsingComparator:compareTags];
-    self.switchCollection = [self.switchCollection sortedArrayUsingComparator:compareTags];
+    self.switchCollection = [NSMutableArray arrayWithArray:[self.switchCollection sortedArrayUsingComparator:compareTags]];
     
     if (self.goalObject.goalval) {
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
-        self.goalValueSwitch.on = YES;
+        [self.goalValueSwitch setOn:YES animated:NO ignoreControlEvents:YES];
         self.goalValueTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.goalval];
-
     }
     else {
         [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
-        self.goalValueSwitch.on = NO;
+        [self.goalValueSwitch setOn:NO animated:NO ignoreControlEvents:YES];
     }
     
     if (self.goalObject.rate) {
         self.rateTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.rate];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
-        self.rateSwitch.on = YES;
+        [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
     else {
         [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
-        self.rateSwitch.on = NO;
+        [self.rateSwitch setOn:NO animated:NO ignoreControlEvents:YES];
     }
     
     if (self.goalObject.goaldate) {
@@ -62,19 +86,25 @@
         self.goalDateTextField.text = [formatter stringFromDate:date];
         self.datePicker.date = date;
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalDateSwitch]];
-        self.goalDateSwitch.on = YES;
+        [self.goalDateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
     else {
         [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalDateSwitch]];
-        self.goalDateSwitch.on = NO;
+        [self.goalDateSwitch setOn:NO animated:NO ignoreControlEvents:YES];
     }
     
     self.goalDateTextField.inputView = self.datePicker;
     self.datePicker.minimumDate = [NSDate date];
     self.rateTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.goalValueTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    
     [self recalculateValues];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.goalValueSwitch addTarget:nil action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.goalDateSwitch addTarget:nil action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.rateSwitch addTarget:nil action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (IBAction)recalculateValues
@@ -181,16 +211,25 @@
 
 - (IBAction)editingDidBegin:(id)sender
 {
-    self.dismissToolbar.hidden = NO;
     if (sender == self.goalDateTextField) {
         self.datePicker.hidden = NO;
+    }
+    int senderIndex = [self.textFieldCollection indexOfObject:sender];
+    
+    DCRoundSwitch *senderSwitch = [self.switchCollection objectAtIndex:senderIndex];
+    
+    if (!senderSwitch.on) {
+        [self enableTextFieldAtIndex:senderIndex];
+        int turnOffIndex = (self.switchCollection.count == senderIndex + 1) ? 0 : senderIndex + 1;
+        [self disableTextFieldAtIndex:turnOffIndex];
+        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
+        [senderSwitch setOn:YES animated:YES ignoreControlEvents:YES];
     }
 }
 
 - (void)enableTextFieldAtIndex:(int)index
 {
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
-    textField.enabled = YES;
     textField.backgroundColor = [UIColor whiteColor];
     textField.textColor = [UIColor blackColor];
     [textField becomeFirstResponder];
@@ -199,13 +238,12 @@
 - (void)disableTextFieldAtIndex:(int)index
 {
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
-    textField.enabled = NO;
     textField.backgroundColor = [UIColor lightGrayColor];
     textField.textColor = [UIColor whiteColor];
     [textField resignFirstResponder];
 }
 
-- (IBAction)switchValueChanged:(UISwitch *)sender
+- (IBAction)switchValueChanged:(DCRoundSwitch *)sender
 {
     int senderIndex = [self.switchCollection indexOfObject:sender];
     if (sender.on) {
@@ -213,7 +251,7 @@
 
         [self enableTextFieldAtIndex:senderIndex];
         [self disableTextFieldAtIndex:turnOffIndex];
-        [(UISwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES];
+        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
     }
     else {
         [self disableTextFieldAtIndex:senderIndex];
@@ -221,7 +259,7 @@
         int offSwitchIndex = [self offSwitchIndexExcludingIndex:senderIndex];
         
         [self enableTextFieldAtIndex:offSwitchIndex];
-        [[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES];
+        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES ignoreControlEvents:YES];
     }
 }
 
@@ -229,7 +267,7 @@
 {
     return [[self.switchCollection indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
-        UISwitch *theSwitch = (UISwitch *)obj;
+        DCRoundSwitch *theSwitch = (DCRoundSwitch *)obj;
         
         return (idx != excludedIndex && !theSwitch.on);
     }] lastIndex];

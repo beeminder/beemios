@@ -19,4 +19,5 @@
     #import "Goal+Resource.h"
     #import "User+Resource.h"
     #import "Datapoint.h"
+    #import "DCRoundSwitch.h"
 #endif

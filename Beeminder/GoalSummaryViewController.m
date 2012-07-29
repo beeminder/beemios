@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
 
     if (self.graphURL) {

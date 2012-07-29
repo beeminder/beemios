@@ -595,27 +595,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="U0x-Qu-7Mc">
-                                <rect key="frame" x="21" y="163" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="lMu-V3-WaM"/>
-                                </connections>
-                            </switch>
-                            <switch opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="jiv-yX-3Uk">
-                                <rect key="frame" x="221" y="163" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="Un9-g4-dzV"/>
-                                </connections>
-                            </switch>
-                            <switch opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="H0m-ze-u3Q">
-                                <rect key="frame" x="121" y="163" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="switchValueChanged:" destination="YqE-9n-0QD" eventType="valueChanged" id="gpd-Zf-jZf"/>
-                                </connections>
-                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="dJo-MZ-f4e">
                                 <rect key="frame" x="168" y="320" width="132" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -753,18 +732,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="datePicker" destination="Fnl-aH-b4C" id="Hmc-ox-yD3"/>
                         <outlet property="dismissToolbar" destination="MQc-z4-lDo" id="csH-xd-u5h"/>
-                        <outlet property="goalDateSwitch" destination="U0x-Qu-7Mc" id="yh3-N1-wG0"/>
                         <outlet property="goalDateTextField" destination="edC-Br-0Se" id="N21-Nq-tks"/>
-                        <outlet property="goalValueSwitch" destination="H0m-ze-u3Q" id="IAZ-U8-TJt"/>
                         <outlet property="goalValueTextField" destination="0Eb-ps-Dq7" id="EKQ-0Q-zwV"/>
-                        <outlet property="rateSwitch" destination="jiv-yX-3Uk" id="VcL-w0-BFL"/>
                         <outlet property="rateTextField" destination="VYb-oD-b4s" id="tAS-4P-8Ft"/>
                         <outletCollection property="textFieldCollection" destination="edC-Br-0Se" id="fvf-cJ-WFe"/>
                         <outletCollection property="textFieldCollection" destination="VYb-oD-b4s" id="LZg-SI-x1J"/>
                         <outletCollection property="textFieldCollection" destination="0Eb-ps-Dq7" id="hZb-27-KCf"/>
-                        <outletCollection property="switchCollection" destination="U0x-Qu-7Mc" id="01s-m5-o1e"/>
-                        <outletCollection property="switchCollection" destination="jiv-yX-3Uk" id="FTc-gt-4E6"/>
-                        <outletCollection property="switchCollection" destination="H0m-ze-u3Q" id="mIL-5f-9pa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ac0-FJ-Mpq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -887,6 +860,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
             </relationships>
         </class>
+        <class className="DCRoundSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
+        </class>
         <class className="DashboardNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
         </class>
@@ -894,13 +870,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="goalDateSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="goalDateSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="goalDateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalValueSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="goalValueSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rateSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
                 <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
                 <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>

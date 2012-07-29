@@ -10,6 +10,10 @@
 		A100AFCA15C255D200211669 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFC915C255D200211669 /* Goal.m */; };
 		A100AFCD15C255D300211669 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCC15C255D300211669 /* User.m */; };
 		A100AFD015C255D300211669 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCF15C255D300211669 /* Datapoint.m */; };
+		A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -122,6 +126,14 @@
 		A100AFCC15C255D300211669 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A100AFCE15C255D300211669 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
 		A100AFCF15C255D300211669 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A106F6E615C45BEB00D8C4E1 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
+		A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
+		A106F6E815C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
+		A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
+		A106F6EA15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
+		A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
+		A106F6EC15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
+		A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -304,6 +316,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				A106F6E615C45BEB00D8C4E1 /* DCRoundSwitch.h */,
+				A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */,
+				A106F6E815C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.h */,
+				A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */,
+				A106F6EA15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.h */,
+				A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */,
+				A106F6EC15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.h */,
+				A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */,
+			);
+			path = DCRoundSwitch;
+			sourceTree = "<group>";
+		};
 		A133F9FD158FB40E002F151A /* SBJson */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +491,7 @@
 		A1F03D56158E9A850075D5DA /* Beeminder */ = {
 			isa = PBXGroup;
 			children = (
+				A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */,
 				A188DFF215B8BB71009CBA60 /* AFNetworking */,
 				A1FCBEE215B7602600E5C955 /* MagicalRecord */,
 				A19D7C24159760860031ABED /* CoreData */,
@@ -780,6 +808,10 @@
 				A100AFCA15C255D200211669 /* Goal.m in Sources */,
 				A100AFCD15C255D300211669 /* User.m in Sources */,
 				A100AFD015C255D300211669 /* Datapoint.m in Sources */,
+				A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */,
+				A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */,
+				A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

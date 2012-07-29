@@ -51,9 +51,23 @@
     
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
-        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
-        if ([goal respondsToSelector:NSSelectorFromString(selectorString)] && obj != [NSNull null]) {
-            [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
+        if ([key isEqualToString:@"datapoints"]) {
+            NSDictionary *datapointDict;
+            for (datapointDict in obj) {
+                Datapoint *datapoint = [Datapoint MR_createInContext:defaultContext];
+                datapoint.goal = goal;
+                datapoint.comment = [datapointDict objectForKey:@"comment"];
+                datapoint.value = [datapointDict objectForKey:@"value"];
+                datapoint.serverId = [datapointDict objectForKey:@"id"];
+                datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
+                [defaultContext MR_save];
+            }
+        }
+        else {
+            NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
+            if ([goal respondsToSelector:NSSelectorFromString(selectorString)] && obj != [NSNull null]) {
+                [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
+            }
         }
     }
     ];

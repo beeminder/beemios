@@ -10,9 +10,9 @@
 #import "GoalSummaryViewController.h"
 
 @interface EditGoalViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UISwitch *goalDateSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *rateSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *goalValueSwitch;
+@property (strong, nonatomic) IBOutlet DCRoundSwitch *goalDateSwitch;
+@property (strong, nonatomic) IBOutlet DCRoundSwitch *rateSwitch;
+@property (strong, nonatomic) IBOutlet DCRoundSwitch *goalValueSwitch;
 @property (strong, nonatomic) IBOutlet UITextField *goalDateTextField;
 @property (strong, nonatomic) IBOutlet UITextField *rateTextField;
 @property (strong, nonatomic) IBOutlet UITextField *goalValueTextField;
@@ -20,7 +20,7 @@
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIToolbar *dismissToolbar;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFieldCollection;
-@property (strong, nonatomic) IBOutletCollection(UISwitch) NSArray *switchCollection;
+@property (strong, nonatomic) IBOutletCollection(UISwitch) NSMutableArray *switchCollection;
 @property (strong, nonatomic) GoalSummaryViewController *goalSummaryViewController;
 
 - (IBAction)cancel;

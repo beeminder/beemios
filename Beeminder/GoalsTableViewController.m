@@ -45,27 +45,76 @@
         [arrayOfDicts addObject:dict];
     }
     self.goals = arrayOfDicts;
+    [self checkTimestamp];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    if (authenticationToken) {
-        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        NSURL *goalsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals.json?auth_token=%@&active=true", kBaseURL, username, authenticationToken]];
-        
-        NSMutableURLRequest *goalsRequest = [NSMutableURLRequest requestWithURL:goalsUrl];
-        
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalsRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            [self successfulGoalsJSON:JSON];
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            [self failedFetch];
-        }];
-        
-        [operation start];
-        [DejalBezelActivityView activityViewForView:self.view];
+    if (!authenticationToken) [self failedFetch]; return;
+    
+    [self checkTimestamp];
+}
+
+- (void)fetchEverything
+{
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    if (!authenticationToken) {
+        [self failedFetch];
+        return;
     }
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&auth_token=%@", kBaseURL, kAPIPrefix, username, authenticationToken]];
+    
+    NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
+    
+    AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulFetchEverythingJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self failedFetch];
+    }];
+    
+    [fetchOperation start];
+    [DejalBezelActivityView activityViewForView:self.view];
+  
+}
+
+- (void)checkTimestamp
+{
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    if (!authenticationToken) {
+        [self failedFetch];
+        return;
+    }
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    NSURL *checkUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, username, authenticationToken]];
+    
+    NSURLRequest *checkRequest = [NSURLRequest requestWithURL:checkUrl];
+    
+    int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
+    
+    AFJSONRequestOperation *checkOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:checkRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        if ([[JSON objectForKey:@"updated_at"] intValue] > lastUpdatedAt) {
+            [self fetchEverything];
+        }
+        else {
+            [DejalBezelActivityView removeView];
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self failedFetch];
+    }];
+    
+    [checkOperation start];
+    [DejalBezelActivityView activityViewForView:self.view];
 }
 
 - (void)viewDidUnload
@@ -136,7 +185,7 @@
     }
 }
 
-- (void)successfulGoalsJSON:(NSDictionary *)responseJSON
+- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON
 {
     [DejalBezelActivityView removeView];
     
