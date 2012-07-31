@@ -14,8 +14,6 @@
 
 @interface GoalsTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSMutableData *responseData;
-@property NSInteger responseStatus;
 @property (strong, nonatomic) NSMutableArray *goals;
 
 @end

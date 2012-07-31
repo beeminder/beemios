@@ -8,7 +8,6 @@
 
 #import "RoadDialViewController.h"
 
-
 @interface RoadDialViewController ()
 
 @property (nonatomic, strong) NSArray *goalRateNumeratorUnitsOptions;
@@ -50,6 +49,11 @@
     [self.goalRateNumeratorPickerView selectRow:5 inComponent:0 animated:YES];
     [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
     [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // potentially rearrange/reword things based on gtype
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +118,9 @@
     if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
         [[self.navigationController navigationBar] setHidden:YES];
     }
+    else if ([segue.identifier isEqualToString:@"segueToChooseGoalType"]) {
+        [segue.destinationViewController setGoalObject:self.goalObject];
+    }
 }
 
 #pragma mark UIPickerViewDataSource methods
@@ -175,11 +182,6 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
 { 
     if (pickerView.tag == 0) {
-//        NSUInteger i = [[pickerView subviews] count];
-//        [(UIView*)[[pickerView subviews] objectAtIndex:0] setHidden:YES];
-//        [(UIView*)[[pickerView subviews] objectAtIndex:14] setHidden:YES];
-        
-
         if (component == 0) {
             return [NSString stringWithFormat:@"%i", row];
         }
@@ -191,5 +193,26 @@
         return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
     }
 }
+
+- (IBAction)showAdvanced:(UIBarButtonItem *)sender
+{
+    AdvancedRoalDialViewController *advCon = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
+    
+    advCon.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    self.goalObject.rate = [self weeklyRate];
+    self.goalObject.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSince1970: [[NSDate date] timeIntervalSince1970] + 365*24*3600] timeIntervalSince1970]];
+    advCon.goalObject = self.goalObject;
+    advCon.rdvCon = self;
+    [self presentViewController:advCon animated:YES completion:nil];
+    
+}
+
+- (void)modalDidSaveRoadDial
+{
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    NSString *identifier = authToken ? @"segueToDashboard" : @"segueToSignup";
+    [self performSegueWithIdentifier:identifier sender:self];
+}
+
 
 @end

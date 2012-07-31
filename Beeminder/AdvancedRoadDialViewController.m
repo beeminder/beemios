@@ -1,19 +1,19 @@
 //
-//  EditGoalViewController.m
+//  AdvancedRoalDialViewController.m
 //  Beeminder
 //
 //  Created by Andy Brett on 7/25/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "EditGoalViewController.h"
+#import "AdvancedRoadDialViewController.h"
+#import "RoadDialViewController.h"
 
-@interface EditGoalViewController ()
-
+@interface AdvancedRoalDialViewController ()
 
 @end
 
-@implementation EditGoalViewController
+@implementation AdvancedRoalDialViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.switchCollection = [[NSMutableArray alloc] init];
-    
+    if (self.rdvCon) {
+        self.delayLabel.hidden = YES;
+    }
     self.goalDateSwitch = [[DCRoundSwitch alloc] init];
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
@@ -94,7 +97,7 @@
     }
     
     self.goalDateTextField.inputView = self.datePicker;
-    self.datePicker.minimumDate = [NSDate date];
+    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970: [[NSDate date] timeIntervalSince1970] + 7*24*3600];
     self.rateTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.goalValueTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [self recalculateValues];
@@ -138,6 +141,7 @@
     [self setDismissToolbar:nil];
     [self setSwitchCollection:nil];
     [self setTextFieldCollection:nil];
+    [self setDelayLabel:nil];
     [super viewDidUnload];
 }
 
@@ -319,17 +323,22 @@
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
-        [self.goalSummaryViewController pollUntilGraphIsNotUpdating];
-        [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
-        [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-            [DejalBezelActivityView removeViewAnimated:NO];
-            [self.presentingViewController dismissModalViewControllerAnimated:YES];
-        });
-    }];
+    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+    if (authenticationToken) {        
+        [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
+            [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
+            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+                [DejalBezelActivityView removeViewAnimated:NO];
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                    [self.presentingViewController modalDidSaveRoadDial];
+                }];
+            });
+        }];
+        
+        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+    }
 }
 
 @end

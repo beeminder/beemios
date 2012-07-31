@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Goal+Resource.h"
 #import "GoalsTableViewController.h"
-
+#import "AdvancedRoadDialViewController.h"
+#import "UIViewController+saveRoadDial.h"
 
 @interface RoadDialViewController : UIViewController
     <UIPickerViewDataSource,
@@ -22,5 +23,7 @@
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
+
+- (IBAction)showAdvanced:(UIBarButtonItem *)sender;
 
 @end

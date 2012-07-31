@@ -7,7 +7,7 @@
 //
 
 #import "GoalSummaryViewController.h"
-#import "EditGoalViewController.h"
+#import "AdvancedRoadDialViewController.h"
 
 @interface GoalSummaryViewController ()
 
@@ -232,6 +232,11 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
+- (void)afterSaveAdvancedRoadDial:(Goal *)goal
+{
+    
+}
+
 #pragma mark Keyboard notifications
 
 - (void)registerForKeyboardNotifications
@@ -279,8 +284,8 @@
         ggvCon.graphImage = self.graphImage;
     }
     else {
-        [(EditGoalViewController *)segue.destinationViewController setGoalObject: self.goalObject];
-        [(EditGoalViewController *)segue.destinationViewController setGoalSummaryViewController: self];
+        [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
+//        [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalSummaryViewController: self];
     }
 }
 
@@ -293,6 +298,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)modalDidSaveRoadDial
+{
+    [self pollUntilGraphIsNotUpdating];
 }
 
 - (void)viewDidUnload {

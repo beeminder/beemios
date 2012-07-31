@@ -179,6 +179,7 @@
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     goal.user = user;
     goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
+    goal.gtype = @"hustler";
     
     [defaultContext MR_save];
     

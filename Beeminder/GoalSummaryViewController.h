@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GoalGraphViewController.h"
 
-@class EditGoalViewController;
+@class AdvancedRoalDialViewController;
 
 @interface GoalSummaryViewController : UIViewController
 @property (strong, nonatomic) NSString *graphURL;

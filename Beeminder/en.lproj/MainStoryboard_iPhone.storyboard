@@ -132,6 +132,35 @@
             </objects>
             <point key="canvasLocation" x="591" y="-682"/>
         </scene>
+        <!--Choose Goal Type View Controller-->
+        <scene sceneID="HZg-gX-vu7">
+            <objects>
+                <tableViewController id="Qac-4A-b5B" customClass="ChooseGoalTypeViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AMH-oH-lIg">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Goal Type Cell" id="LJn-ju-dK1">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Qac-4A-b5B" id="TN7-vn-DVI"/>
+                            <outlet property="delegate" destination="Qac-4A-b5B" id="czt-gh-d3u"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I1J-EX-1QT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1131" y="-1990"/>
+        </scene>
         <!--Road Dial View Controller-->
         <scene sceneID="Kzg-i9-IJH">
             <objects>
@@ -151,7 +180,17 @@
                                 <rect key="frame" x="0.0" y="323" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem width="248" style="plain" systemItem="fixedSpace" id="hXw-Wx-re9"/>
+                                    <barButtonItem title="Advanced" id="Uv7-gp-bTw">
+                                        <connections>
+                                            <action selector="showAdvanced:" destination="Xgv-aN-lSx" id="sYb-Sq-Q5H"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Goal Type" id="Imv-xd-CPd">
+                                        <connections>
+                                            <segue destination="Qac-4A-b5B" kind="modal" identifier="segueToChooseGoalType" id="Dib-cl-2lA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="78" style="plain" systemItem="fixedSpace" id="hXw-Wx-re9"/>
                                     <barButtonItem title="Next" style="done" id="31j-lE-Xkm">
                                         <connections>
                                             <action selector="nextButtonPressed:" destination="Xgv-aN-lSx" id="1w1-o4-6eO"/>
@@ -160,7 +199,7 @@
                                 </items>
                             </toolbar>
                             <pickerView contentMode="scaleToFill" id="aUg-wp-yXj">
-                                <rect key="frame" x="0.0" y="156" width="182" height="216"/>
+                                <rect key="frame" x="0.0" y="151" width="182" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Xgv-aN-lSx" id="z88-Hn-zEu"/>
@@ -175,7 +214,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <pickerView tag="1" contentMode="scaleToFill" id="46E-EK-FkE">
-                                <rect key="frame" x="220" y="156" width="100" height="216"/>
+                                <rect key="frame" x="220" y="151" width="100" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Xgv-aN-lSx" id="bzG-aF-voY"/>
@@ -587,10 +626,10 @@
             </objects>
             <point key="canvasLocation" x="2653" y="-104"/>
         </scene>
-        <!--Edit Goal View Controller-->
+        <!--Advanced Roal Dial View Controller-->
         <scene sceneID="hau-yP-90W">
             <objects>
-                <viewController id="YqE-9n-0QD" customClass="EditGoalViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="advancedRoadDialViewController" id="YqE-9n-0QD" customClass="AdvancedRoalDialViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oib-YZ-CCI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -731,6 +770,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="Fnl-aH-b4C" id="Hmc-ox-yD3"/>
+                        <outlet property="delayLabel" destination="afE-aq-rfi" id="UNN-WI-eU1"/>
                         <outlet property="dismissToolbar" destination="MQc-z4-lDo" id="csH-xd-u5h"/>
                         <outlet property="goalDateTextField" destination="edC-Br-0Se" id="N21-Nq-tks"/>
                         <outlet property="goalValueTextField" destination="0Eb-ps-Dq7" id="EKQ-0Q-zwV"/>
@@ -742,7 +782,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ac0-FJ-Mpq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653" y="491"/>
+            <point key="canvasLocation" x="2653" y="481"/>
         </scene>
         <!--Goal Graph View Controller-->
         <scene sceneID="Rtk-RA-fOm">
@@ -843,123 +883,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="graph-processing.png" width="371" height="121"/>
         <image name="logo-text.png" width="261" height="30"/>
     </resources>
-    <classes>
-        <class className="BeeminderViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BeeminderViewController.h"/>
-        </class>
-        <class className="CPTGraphHostingView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
-        </class>
-        <class className="ChooseGoalNameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalNameViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ephemSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="goalNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
-        </class>
-        <class className="DashboardNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
-        </class>
-        <class className="EditGoalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="goalDateSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="goalDateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalValueSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
-                <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
-                <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="GoalGraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="GoalSummaryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GoalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphHostingView" candidateClass="CPTGraphHostingView"/>
-            </relationships>
-        </class>
-        <class className="GoalsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
-        </class>
-        <class className="RoadDialViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signOutButtonPressed"/>
-                <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SignInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SignUpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="usernameValueChanged"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordConfirmationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Agq-0d-xWn"/>
         <segue reference="tH0-Uv-eBt"/>
+        <segue reference="Agq-0d-xWn"/>
     </inferredMetricsTieBreakers>
 </document>

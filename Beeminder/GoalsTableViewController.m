@@ -14,10 +14,6 @@
 
 @implementation GoalsTableViewController
 
-@synthesize responseData = _responseData;
-@synthesize responseStatus = _responseStatus;
-@synthesize goals = _goals;
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
