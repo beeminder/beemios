@@ -23,6 +23,7 @@
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
+@property int pickerOffset;
 
 - (IBAction)showAdvanced:(UIBarButtonItem *)sender;
 

@@ -58,6 +58,7 @@
 {  
     static NSString *CellIdentifier = @"Goal Type Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
 
     cell.textLabel.text = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"publicName"];
     
@@ -70,6 +71,7 @@
     
     return cell;
 }
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -115,12 +117,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.goalObject.gtype = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
-    
-    [self.tableView setNeedsDisplay];
+
+//    [self.tableView reloadData];
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
         [self.presentingViewController dismissModalViewControllerAnimated:YES];
     });
     

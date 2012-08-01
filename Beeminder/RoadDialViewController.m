@@ -17,16 +17,6 @@
 
 @implementation RoadDialViewController
 
-@synthesize pickerToolbar = _pickerToolbar;
-@synthesize goalRateNumerator = _goalRateNumerator;
-@synthesize goalRateNumeratorUnits = _goalRateNumeratorUnits;
-@synthesize goalRateDenominatorUnits = _goalRateDenominatorUnits;
-@synthesize goalRateNumeratorUnitsOptions = _goalRateNumeratorUnitsOptions;
-@synthesize goalRateDenominatorUnitsOptions = _goalRateDenominatorUnitsOptions;
-@synthesize goalObject = _goalObject;
-@synthesize goalRateNumeratorPickerView = _goalRateNumeratorPickerView;
-@synthesize goalRateDenominatorPickerView = _goalRateDenominatorPickerView;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,20 +29,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.pickerOffset = 20;
 
-    self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"lbs lost", @"lbs gained", nil];   
+    self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds", nil];   
     
     self.goalRateDenominatorUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
     self.goalRateNumerator = 5;
     self.goalRateNumeratorUnits = @"times";
     self.goalRateDenominatorUnits = @"week";
-    [self.goalRateNumeratorPickerView selectRow:5 inComponent:0 animated:YES];
+    [self.goalRateNumeratorPickerView selectRow:self.pickerOffset inComponent:0 animated:YES];
     [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
     [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    if ([self.goalObject.gtype isEqualToString:@"fatloser"]) {
+        [self.goalRateNumeratorPickerView selectRow:3 inComponent:1 animated:YES];
+    }
     // potentially rearrange/reword things based on gtype
 }
 
@@ -74,15 +68,20 @@
     [super viewDidUnload];
 }
 
+- (NSInteger)goalRateNumeratorWithOffset
+{
+    return self.goalRateNumerator - self.pickerOffset;
+}
+
 - (NSNumber *)weeklyRate {
     if ([self.goalRateDenominatorUnits isEqualToString:@"week"]) {
-        return [NSNumber numberWithInt:self.goalRateNumerator];
+        return [NSNumber numberWithInt:[self goalRateNumeratorWithOffset]];
     }
     else if ([self.goalRateDenominatorUnits isEqualToString:@"day"]) {
-        return [NSNumber numberWithInt: self.goalRateNumerator*7];
+        return [NSNumber numberWithInt: [self goalRateNumeratorWithOffset]*7];
     }
     else { // "month"
-        return [NSNumber numberWithFloat:self.goalRateNumerator/4.3f];
+        return [NSNumber numberWithFloat:[self goalRateNumeratorWithOffset]/4.3f];
     }
 }
 
@@ -119,6 +118,7 @@
         [[self.navigationController navigationBar] setHidden:YES];
     }
     else if ([segue.identifier isEqualToString:@"segueToChooseGoalType"]) {
+        self.goalObject.rate = [self weeklyRate];
         [segue.destinationViewController setGoalObject:self.goalObject];
     }
 }
@@ -183,7 +183,7 @@
 { 
     if (pickerView.tag == 0) {
         if (component == 0) {
-            return [NSString stringWithFormat:@"%i", row];
+            return [NSString stringWithFormat:@"%i", row - 20];
         }
         else {
             return [self.goalRateNumeratorUnitsOptions objectAtIndex:row];
@@ -209,9 +209,13 @@
 
 - (void)modalDidSaveRoadDial
 {
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    NSString *identifier = authToken ? @"segueToDashboard" : @"segueToSignup";
-    [self performSegueWithIdentifier:identifier sender:self];
+//    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+//    NSString *identifier = authToken ? @"segueToDashboard" : @"segueToSignup";
+//    [self performSegueWithIdentifier:identifier sender:self];
+    
+    [self.goalRateNumeratorPickerView selectRow:[self.goalObject.rate integerValue] + self.pickerOffset inComponent:0 animated:YES];
+    [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
+
 }
 
 

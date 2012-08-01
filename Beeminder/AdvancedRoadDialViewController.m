@@ -339,6 +339,11 @@
         
         [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
     }
+    else {
+        [self.rdvCon dismissViewControllerAnimated:YES completion:^{
+            [self.rdvCon modalDidSaveRoadDial];
+        }];
+    }
 }
 
 @end
