@@ -105,15 +105,14 @@
     [mutableResponse removeObjectForKey:@"datapoints"];
     
     [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
-    
-    if (![self.goalObject.gtype isEqualToString:@"hustler"]) {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-        
-        Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
 
-        self.inputStepper.value = [datapoint.value doubleValue];
-        self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
-    }
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+
+    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred];
+    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
+    
+    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
+
     [self startTimer];
 }
 
@@ -139,6 +138,14 @@
 
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    
+    Datapoint *datapoint = [Datapoint MR_createEntity];
+
+    datapoint.value = [NSDecimalNumber decimalNumberWithString:self.inputTextField.text];
+    datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    datapoint.goal = self.goalObject;
+    
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, username, self.goalObject.slug]];
     

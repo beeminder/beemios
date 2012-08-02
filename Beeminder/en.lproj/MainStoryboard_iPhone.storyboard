@@ -602,7 +602,7 @@ for this goal:</string>
                                     <action selector="submitButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="uJi-Wm-z0p"/>
                                 </connections>
                             </button>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="YcL-8d-VDM">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="1000" id="YcL-8d-VDM">
                                 <rect key="frame" x="113" y="333" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>

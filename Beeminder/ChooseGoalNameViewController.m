@@ -87,6 +87,7 @@
     for (g in goals) {
         [slugs addObject:g.slug];
     }
+    [slugs addObject:@"new"];
     
     self.goalSlugs = [NSArray arrayWithArray:(NSArray *)slugs];
     

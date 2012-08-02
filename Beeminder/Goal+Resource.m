@@ -148,7 +148,7 @@
             return [UIColor blueColor];
             break;
         default:
-            return [UIColor greenColor];
+            return [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
             break;
     }
 }

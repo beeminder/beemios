@@ -35,13 +35,7 @@
     
     NSArray *arrayOfGoalObjects = [user.goals allObjects];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
-    NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
-    Goal *g;
-    for (g in arrayOfGoalObjects) {
-        NSDictionary *dict = [g dictionary];
-        [arrayOfDicts addObject:dict];
-    }
-    self.goals = arrayOfDicts;
+
     [self checkTimestamp];
 }
 
@@ -97,8 +91,6 @@
     
     NSURLRequest *checkRequest = [NSURLRequest requestWithURL:checkUrl];
     
-
-    
     AFJSONRequestOperation *checkOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:checkRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];        
         if ([[JSON objectForKey:@"updated_at"] intValue] > lastUpdatedAt) {
@@ -134,7 +126,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.goals count];
+    return [self.goalObjects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,14 +135,13 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    NSDictionary *goalDict = [self.goals objectAtIndex:indexPath.row];
-    cell.textLabel.text = [goalDict objectForKey:@"title"];    
+    Goal *goalObject = [self.goalObjects objectAtIndex:indexPath.row];
+    cell.textLabel.text = goalObject.title;
     if (self.goalObjects.count > 0) {
         Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = goal.countdownText;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d days", goal.countdownDays];
         cell.detailTextLabel.textColor = goal.countdownColor;
     }
-
 
     return cell;
 }
@@ -175,16 +166,14 @@
     }
     else {
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        
-        NSDictionary *goalDict = [self.goals objectAtIndex:path.row];
-        
-        NSString *slug = [goalDict objectForKey:@"slug"];
-        id graphURL = [goalDict objectForKey:@"graph_url"];
+        Goal *goalObject = [self.goalObjects objectAtIndex:path.row];
+        NSString *slug = goalObject.slug;
+        id graphURL = goalObject.graph_url;
         
         if (graphURL != [NSNull null]) {
             [segue.destinationViewController setGraphURL:graphURL];
         }
-        [segue.destinationViewController setTitle:[goalDict objectForKey:@"title"]];
+        [segue.destinationViewController setTitle:goalObject.title];
         [segue.destinationViewController setSlug:slug];
     }
 }
@@ -193,16 +182,16 @@
 {
     [DejalBezelActivityView removeView];
     
-    self.goals = [responseJSON objectForKey:@"goals"];
+    NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     NSDictionary *goalDict = nil;
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    
-    for (goalDict in self.goals) {
+    [self.goalObjects removeAllObjects];
+    for (goalDict in goals) {
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
-        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username];
+        [self.goalObjects addObject:[Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username]];
     }
     
     self.title = @"Your Goals";
@@ -214,16 +203,16 @@
 - (void)resetAllLocalNotifications
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    for (NSDictionary *goalDict in self.goals) {
+    for (Goal *goal in self.goalObjects) {
         NSDate *emergencyTime;
         NSDate *wrongLaneTime;
-        if ([[goalDict objectForKey:@"slug"] isEqualToString:@"weightstable"]) {
+        if ([goal.slug isEqualToString:@"weightstable"]) {
             emergencyTime = [[NSDate date]
                          dateByAddingTimeInterval:20];
             wrongLaneTime = [[NSDate date] dateByAddingTimeInterval:10];
         }
         else {
-            double countdown = [[goalDict objectForKey:@"countdown"] doubleValue];
+            double countdown = [goal.countdown doubleValue];
             emergencyTime = [NSDate dateWithTimeIntervalSince1970:countdown - 24*3600];
             wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:countdown - 48*3600];
         }
@@ -234,14 +223,14 @@
             notifyAlarm.fireDate = emergencyTime;
             notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
             notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"Emergency day today for %@!", [goalDict objectForKey:@"title"]];
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"Emergency day today for %@!", goal.title];
             [app scheduleLocalNotification:notifyAlarm];
             
             notifyAlarm = [[UILocalNotification alloc] init];
             notifyAlarm.fireDate = wrongLaneTime;
             notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
             notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"In the wrong lane for %@!", [goalDict objectForKey:@"title"]];
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"In the wrong lane for %@!", goal.title];
             [app scheduleLocalNotification:notifyAlarm];
         }
     }
