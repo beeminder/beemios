@@ -30,6 +30,7 @@
 {
     [super viewDidLoad];
     self.pickerOffset = 20;
+    self.fatLoserIndex = 3;
 
     self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds", nil];   
     
@@ -40,6 +41,9 @@
     [self.goalRateNumeratorPickerView selectRow:self.pickerOffset inComponent:0 animated:YES];
     [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
     [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
+    self.goalRateNumeratorLabel.hidden = YES;
+    self.goalRateNumeratorUnitsLabel.hidden = YES;
+    self.goalRateDenominatorLabel.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -47,7 +51,12 @@
     if ([self.goalObject.gtype isEqualToString:@"fatloser"]) {
         [self.goalRateNumeratorPickerView selectRow:3 inComponent:1 animated:YES];
     }
-    // potentially rearrange/reword things based on gtype
+    else if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
+        [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
+    }
+    else if ([self.goalObject.gtype isEqualToString:@"biker"]) {
+        // ask for today's value
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +74,9 @@
     [self setPickerToolbar:nil];
     [self setGoalRateNumeratorPickerView:nil];
     [self setGoalRateDenominatorPickerView:nil];
+    [self setGoalRateNumeratorLabel:nil];
+    [self setGoalRateDenominatorLabel:nil];
+    [self setGoalRateNumeratorUnitsLabel:nil];
     [super viewDidUnload];
 }
 
@@ -74,6 +86,9 @@
 }
 
 - (NSNumber *)weeklyRate {
+    if (self.goalObject.goaldate && self.goalObject.goalval) {
+        return nil;
+    }
     if ([self.goalRateDenominatorUnits isEqualToString:@"week"]) {
         return [NSNumber numberWithInt:[self goalRateNumeratorWithOffset]];
     }
@@ -172,10 +187,14 @@
     if (pickerView.tag == 0) {
         self.goalRateNumerator = [pickerView selectedRowInComponent:0];
         self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
+        if (row == self.fatLoserIndex) {
+            self.goalObject.gtype = @"fatloser";
+        }
     }
     else {
         self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:0]];
     }
+    self.goalObject.goalval = nil;
     
 }
 
@@ -200,7 +219,9 @@
     
     advCon.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     self.goalObject.rate = [self weeklyRate];
-    self.goalObject.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSince1970: [[NSDate date] timeIntervalSince1970] + 365*24*3600] timeIntervalSince1970]];
+    if (!self.goalObject.goaldate) {
+        self.goalObject.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSince1970: [[NSDate date] timeIntervalSince1970] + 365*24*3600] timeIntervalSince1970]];
+    }
     advCon.goalObject = self.goalObject;
     advCon.rdvCon = self;
     [self presentViewController:advCon animated:YES completion:nil];
@@ -209,11 +230,33 @@
 
 - (void)modalDidSaveRoadDial
 {
-//    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-//    NSString *identifier = authToken ? @"segueToDashboard" : @"segueToSignup";
-//    [self performSegueWithIdentifier:identifier sender:self];
-    
-    [self.goalRateNumeratorPickerView selectRow:[self.goalObject.rate integerValue] + self.pickerOffset inComponent:0 animated:YES];
+    if (self.goalObject.rate && !self.goalRateNumeratorPickerView.hidden) {
+        [self.goalRateNumeratorPickerView selectRow:[self.goalObject.rate integerValue] + self.pickerOffset inComponent:0 animated:YES];
+    }
+    else {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+        Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+        
+        double diff = [self.goalObject.goalval doubleValue] - [datapoint.value doubleValue];
+        
+        double interval = [self.goalObject.goaldate doubleValue] - [[NSDate date] timeIntervalSince1970];
+        
+        double rate = diff*3600*7*24/interval;
+        
+        self.goalRateNumeratorLabel.text = [NSString stringWithFormat:@"%.02f", rate];
+        self.goalRateNumeratorLabel.hidden = NO;
+        
+        self.goalRateNumeratorUnitsLabel.text = [self pickerView:self.goalRateNumeratorPickerView titleForRow:[self.goalRateNumeratorPickerView selectedRowInComponent:1] forComponent:1];
+        self.goalRateNumeratorUnitsLabel.hidden = NO;
+        
+        self.goalRateDenominatorLabel.text = [self pickerView:self.goalRateDenominatorPickerView titleForRow:[self.goalRateDenominatorPickerView selectedRowInComponent:0] forComponent:0];
+        self.goalRateDenominatorLabel.hidden = NO;
+        
+        self.goalRateDenominatorPickerView.hidden = YES;
+        self.goalRateNumeratorPickerView.hidden = YES;
+
+    }
+
     [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
 
 }

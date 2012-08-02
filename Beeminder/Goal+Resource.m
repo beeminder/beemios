@@ -59,4 +59,77 @@
     return dict;
 }
 
+- (int)countdownDays
+{
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        return seconds/(3600*24);
+    }
+    else {
+        return -1;
+    }
+}
+
+- (int)countdownHours
+{
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        return (seconds % (3600*24))/3600;
+    }
+    else {
+        return -1;
+    }
+}
+
+- (int)countdownMinutes
+{
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        return (seconds % 3600)/60;
+    }
+    else {
+        return -1;
+    }
+}
+
+- (int)countdownSeconds
+{
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        return seconds % 60;
+    }
+    else {
+        return -1;
+    }
+}
+
+- (NSString *)countdownText
+{
+    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    
+    if (seconds > 0) {
+        
+        int hours = (seconds % (3600*24))/3600;
+        int minutes = (seconds % 3600)/60;
+        int leftoverSeconds = seconds % 60;
+        int days = seconds/(3600*24);
+        
+        if (days > 0) {
+            return [NSString stringWithFormat:@"%i days, %i:%02i:%02i", days, hours, minutes,leftoverSeconds];
+        }
+        else {
+            return [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
+        }
+        
+    }
+    else {
+        return [NSString stringWithFormat:@"Time's up!"];
+    }
+    
+}
+
 @end

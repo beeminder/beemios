@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A100AFCA15C255D200211669 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFC915C255D200211669 /* Goal.m */; };
-		A100AFCD15C255D300211669 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCC15C255D300211669 /* User.m */; };
-		A100AFD015C255D300211669 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A100AFCF15C255D300211669 /* Datapoint.m */; };
 		A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
+		A10B890815C9F6E6009E75F9 /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10B890715C9F6E6009E75F9 /* GoalCell.xib */; };
+		A10B890B15C9F74C009E75F9 /* GoalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890A15C9F74C009E75F9 /* GoalCell.m */; };
+		A10B891715CA050A009E75F9 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B891615CA050A009E75F9 /* Datapoint.m */; };
+		A10B891A15CA050B009E75F9 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B891915CA050B009E75F9 /* Goal.m */; };
+		A10B891D15CA050C009E75F9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B891C15CA050C009E75F9 /* User.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -122,12 +124,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A100AFC815C255D200211669 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A100AFC915C255D200211669 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A100AFCB15C255D300211669 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A100AFCC15C255D300211669 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A100AFCE15C255D300211669 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A100AFCF15C255D300211669 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A106F6E615C45BEB00D8C4E1 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
 		A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
 		A106F6E815C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
@@ -140,6 +136,15 @@
 		A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+saveRoadDial.m"; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
+		A10B890715C9F6E6009E75F9 /* GoalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
+		A10B890915C9F74C009E75F9 /* GoalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalCell.h; sourceTree = "<group>"; };
+		A10B890A15C9F74C009E75F9 /* GoalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalCell.m; sourceTree = "<group>"; };
+		A10B891515CA050A009E75F9 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A10B891615CA050A009E75F9 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A10B891815CA050B009E75F9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A10B891915CA050B009E75F9 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A10B891B15CA050C009E75F9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A10B891C15CA050C009E75F9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -420,13 +425,13 @@
 			isa = PBXGroup;
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
-				A100AFC815C255D200211669 /* Goal.h */,
-				A100AFCE15C255D300211669 /* Datapoint.h */,
-				A100AFCF15C255D300211669 /* Datapoint.m */,
-				A100AFCB15C255D300211669 /* User.h */,
-				A100AFCC15C255D300211669 /* User.m */,
-				A100AFC915C255D200211669 /* Goal.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
+				A10B891515CA050A009E75F9 /* Datapoint.h */,
+				A10B891815CA050B009E75F9 /* Goal.h */,
+				A10B891B15CA050C009E75F9 /* User.h */,
+				A10B891C15CA050C009E75F9 /* User.m */,
+				A10B891915CA050B009E75F9 /* Goal.m */,
+				A10B891615CA050A009E75F9 /* Datapoint.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -538,6 +543,9 @@
 				A10B88FE15C73FC8009E75F9 /* UIViewController+saveRoadDial.h */,
 				A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
+				A10B890715C9F6E6009E75F9 /* GoalCell.xib */,
+				A10B890915C9F74C009E75F9 /* GoalCell.h */,
+				A10B890A15C9F74C009E75F9 /* GoalCell.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -734,6 +742,7 @@
 				A12E48F1159195480014624E /* bee.png in Resources */,
 				A1DB65161599880E002239DE /* add.png in Resources */,
 				A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */,
+				A10B890815C9F6E6009E75F9 /* GoalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,15 +824,16 @@
 				A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */,
 				A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */,
 				A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */,
-				A100AFCA15C255D200211669 /* Goal.m in Sources */,
-				A100AFCD15C255D300211669 /* User.m in Sources */,
-				A100AFD015C255D300211669 /* Datapoint.m in Sources */,
 				A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */,
 				A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */,
 				A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */,
 				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
 				A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */,
 				A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */,
+				A10B890B15C9F74C009E75F9 /* GoalCell.m in Sources */,
+				A10B891715CA050A009E75F9 /* Datapoint.m in Sources */,
+				A10B891A15CA050B009E75F9 /* Goal.m in Sources */,
+				A10B891D15CA050C009E75F9 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

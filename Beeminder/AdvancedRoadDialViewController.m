@@ -332,7 +332,8 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
                 [DejalBezelActivityView removeViewAnimated:NO];
                 [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-                    [self.presentingViewController modalDidSaveRoadDial];
+                    [self.rdvCon modalDidSaveRoadDial];
+                    [self.gsvCon modalDidSaveRoadDial];
                 }];
             });
         }];
@@ -342,6 +343,9 @@
     else {
         [self.rdvCon dismissViewControllerAnimated:YES completion:^{
             [self.rdvCon modalDidSaveRoadDial];
+        }];
+        [self.gsvCon dismissViewControllerAnimated:YES completion:^{
+            [self.gsvCon modalDidSaveRoadDial];
         }];
     }
 }

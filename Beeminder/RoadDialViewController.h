@@ -24,6 +24,11 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
 @property int pickerOffset;
+@property (strong, nonatomic) IBOutlet UILabel *goalRateNumeratorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goalRateDenominatorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goalRateNumeratorUnitsLabel;
+@property int fatLoserIndex;
+
 
 - (IBAction)showAdvanced:(UIBarButtonItem *)sender;
 

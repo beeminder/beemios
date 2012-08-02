@@ -223,6 +223,27 @@ for this goal:</string>
                                     <outlet property="delegate" destination="Xgv-aN-lSx" id="2Xg-dS-kKy"/>
                                 </connections>
                             </pickerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Label" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="ayH-OG-baC">
+                                <rect key="frame" x="75" y="253" width="59" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Label" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="C1k-k3-KLM">
+                                <rect key="frame" x="122" y="253" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Label" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="2hu-79-RkB">
+                                <rect key="frame" x="223" y="253" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -230,8 +251,11 @@ for this goal:</string>
                         <barButtonItem key="backBarButtonItem" title="Goal" id="8uP-y0-rnm"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="goalRateDenominatorLabel" destination="2hu-79-RkB" id="GHJ-bT-BEP"/>
                         <outlet property="goalRateDenominatorPickerView" destination="46E-EK-FkE" id="FBy-70-7PN"/>
+                        <outlet property="goalRateNumeratorLabel" destination="ayH-OG-baC" id="fOh-bn-QAC"/>
                         <outlet property="goalRateNumeratorPickerView" destination="aUg-wp-yXj" id="4O2-FX-au8"/>
+                        <outlet property="goalRateNumeratorUnitsLabel" destination="C1k-k3-KLM" id="h67-Sd-NQQ"/>
                         <outlet property="pickerToolbar" destination="n6l-dd-c3O" id="QIE-Ft-MXf"/>
                         <segue destination="8SH-KL-GEY" kind="push" identifier="segueToSignup" id="bic-6N-vHj"/>
                         <segue destination="rrU-HL-OPa" kind="push" identifier="segueToDashboard" id="tH0-Uv-eBt"/>
@@ -962,8 +986,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="nextButtonPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="showAdvanced:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="goalRateDenominatorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateNumeratorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalRateNumeratorPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="goalRateNumeratorUnitsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pickerToolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

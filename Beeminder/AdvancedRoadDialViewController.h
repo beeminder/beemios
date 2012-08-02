@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutletCollection(UISwitch) NSMutableArray *switchCollection;
 @property (strong, nonatomic) IBOutlet UILabel *delayLabel;
 @property (strong, nonatomic) RoadDialViewController *rdvCon;
+@property (strong, nonatomic) GoalSummaryViewController *gsvCon;
 
 - (IBAction)cancel;
 

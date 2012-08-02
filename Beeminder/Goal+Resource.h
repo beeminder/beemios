@@ -21,5 +21,10 @@
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
 - (NSDictionary *)dictionary;
+- (NSString *)countdownText;
+- (int)countdownDays;
+- (int)countdownHours;
+- (int)countdownMinutes;
+- (int)countdownSeconds;
 
 @end

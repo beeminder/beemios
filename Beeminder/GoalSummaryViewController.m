@@ -150,12 +150,12 @@
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        if ([JSON objectForKey:@"success"]) {
-            [self loadGraphImage];            
-            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
+        if ([JSON objectForKey:@"errors"]) {
+            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Error";
         }
         else {
-            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Error";            
+            [self loadGraphImage];
+            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
         }
         [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
 
@@ -205,36 +205,12 @@
 
 - (void)updateTimer
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.goalObject.countdown doubleValue]] timeIntervalSinceNow];
-    
-    if (seconds > 0) {
-        
-        int hours = (seconds % (3600*24))/3600;
-        int minutes = (seconds % 3600)/60;
-        int leftoverSeconds = seconds % 60;
-        int days = seconds/(3600*24);
-        
-        if (days > 0) {
-            self.timerLabel.text = [NSString stringWithFormat:@"%i days, %i:%02i:%02i", days, hours, minutes,leftoverSeconds];
-        }
-        else {
-            self.timerLabel.text = [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
-        }
-
-    }
-    else {
-        self.timerLabel.text = [NSString stringWithFormat:@"Time's up!"];
-    }
+    self.timerLabel.text = self.goalObject.countdownText;    
 }
 
 - (void)startTimer {
     [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-}
-
-- (void)afterSaveAdvancedRoadDial:(Goal *)goal
-{
-    
 }
 
 #pragma mark Keyboard notifications
@@ -285,7 +261,7 @@
     }
     else {
         [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
-//        [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalSummaryViewController: self];
+        [(AdvancedRoalDialViewController *)segue.destinationViewController setGsvCon: self];
     }
 }
 
