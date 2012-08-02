@@ -132,4 +132,25 @@
     
 }
 
+- (UIColor *)countdownColor
+{
+    switch (self.countdownDays) {
+        case -1:
+            return [UIColor blackColor];
+            break;
+        case 0:
+            return [UIColor redColor];
+            break;
+        case 1:
+            return [UIColor orangeColor];
+            break;
+        case 2:
+            return [UIColor blueColor];
+            break;
+        default:
+            return [UIColor greenColor];
+            break;
+    }
+}
+
 @end

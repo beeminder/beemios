@@ -26,5 +26,6 @@
 - (int)countdownHours;
 - (int)countdownMinutes;
 - (int)countdownSeconds;
+- (UIColor *)countdownColor;
 
 @end

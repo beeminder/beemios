@@ -34,6 +34,7 @@
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
     
     NSArray *arrayOfGoalObjects = [user.goals allObjects];
+    self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     NSMutableArray *arrayOfDicts = [[NSMutableArray alloc] init];
     Goal *g;
     for (g in arrayOfGoalObjects) {
@@ -96,9 +97,10 @@
     
     NSURLRequest *checkRequest = [NSURLRequest requestWithURL:checkUrl];
     
-    int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
+
     
     AFJSONRequestOperation *checkOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:checkRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];        
         if ([[JSON objectForKey:@"updated_at"] intValue] > lastUpdatedAt) {
             [self fetchEverything];
         }
@@ -138,12 +140,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Goal Cell";
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     NSDictionary *goalDict = [self.goals objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [goalDict objectForKey:@"title"];
-    
+    cell.textLabel.text = [goalDict objectForKey:@"title"];    
+    if (self.goalObjects.count > 0) {
+        Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = goal.countdownText;
+        cell.detailTextLabel.textColor = goal.countdownColor;
+    }
+
+
     return cell;
 }
 

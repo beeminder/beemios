@@ -13,7 +13,7 @@
 
 @interface Goal : NSManagedObject
 
-@property (nonatomic, retain) NSString * countdown;
+@property (nonatomic, retain) NSNumber * countdown;
 @property (nonatomic, retain) NSNumber * ephem;
 @property (nonatomic, retain) NSNumber * goaldate;
 @property (nonatomic, retain) NSNumber * goalval;
