@@ -207,6 +207,15 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self.graphPoller invalidate];
+    }
+    [super viewWillDisappear:animated];
+}
+
 #pragma mark Keyboard notifications
 
 - (void)registerForKeyboardNotifications
