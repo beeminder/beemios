@@ -14,6 +14,7 @@
         <attribute name="goalval" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="graph_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gtype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="panic_threshold" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,8 +30,8 @@
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="user" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="240"/>
-        <element name="User" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Datapoint" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Goal" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

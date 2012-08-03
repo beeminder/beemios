@@ -21,7 +21,8 @@
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
 - (NSDictionary *)dictionary;
-- (NSString *)countdownText;
+- (NSString *)countdownTextBrief:(BOOL)brief;
+- (NSNumber *)panicTime;
 - (int)countdownDays;
 - (int)countdownHours;
 - (int)countdownMinutes;

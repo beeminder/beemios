@@ -61,7 +61,7 @@
 
 - (int)countdownDays
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return seconds/(3600*24);
@@ -73,7 +73,7 @@
 
 - (int)countdownHours
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return (seconds % (3600*24))/3600;
@@ -85,7 +85,7 @@
 
 - (int)countdownMinutes
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return (seconds % 3600)/60;
@@ -97,7 +97,7 @@
 
 - (int)countdownSeconds
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return seconds % 60;
@@ -107,9 +107,14 @@
     }
 }
 
-- (NSString *)countdownText
+- (NSNumber *)panicTime
 {
-    uint seconds = (uint)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    return [NSNumber numberWithDouble:[self.countdown doubleValue] - [self.panic_threshold doubleValue]];
+}
+
+- (NSString *)countdownTextBrief:(BOOL)brief
+{
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         
@@ -119,24 +124,25 @@
         int days = seconds/(3600*24);
         
         if (days > 0) {
+            if (brief) return [NSString stringWithFormat:@"%i days", days];
             return [NSString stringWithFormat:@"%i days, %i:%02i:%02i", days, hours, minutes,leftoverSeconds];
         }
         else {
+            if (brief) return [NSString stringWithFormat:@"%i days", days];
             return [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
         }
         
     }
     else {
-        return [NSString stringWithFormat:@"Time's up!"];
+        return [NSString stringWithFormat:@"Derailed!"];
     }
-    
 }
 
 - (UIColor *)countdownColor
 {
     switch (self.countdownDays) {
         case -1:
-            return [UIColor blackColor];
+            return [UIColor redColor];
             break;
         case 0:
             return [UIColor redColor];

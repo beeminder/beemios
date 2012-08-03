@@ -13,9 +13,6 @@
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
-		A10B892015CA08F9009E75F9 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B891F15CA08F9009E75F9 /* Goal.m */; };
-		A10B892315CA08FA009E75F9 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B892215CA08FA009E75F9 /* Datapoint.m */; };
-		A10B892615CA08FB009E75F9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B892515CA08FB009E75F9 /* User.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -64,6 +61,9 @@
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
+		A1DE0F0215CC28B600DEAD44 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0115CC28B600DEAD44 /* User.m */; };
+		A1DE0F0515CC28B600DEAD44 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0415CC28B600DEAD44 /* Datapoint.m */; };
+		A1DE0F0815CC28B600DEAD44 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0715CC28B600DEAD44 /* Goal.m */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -134,12 +134,6 @@
 		A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+saveRoadDial.m"; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
-		A10B891E15CA08F8009E75F9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A10B891F15CA08F9009E75F9 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A10B892115CA08FA009E75F9 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A10B892215CA08FA009E75F9 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
-		A10B892415CA08FA009E75F9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A10B892515CA08FB009E75F9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -230,6 +224,12 @@
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1DB65151599880E002239DE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		A1DE0F0015CC28B600DEAD44 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A1DE0F0115CC28B600DEAD44 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1DE0F0315CC28B600DEAD44 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A1DE0F0415CC28B600DEAD44 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A1DE0F0615CC28B600DEAD44 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1DE0F0715CC28B600DEAD44 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -420,13 +420,13 @@
 			isa = PBXGroup;
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
+				A1DE0F0015CC28B600DEAD44 /* User.h */,
+				A1DE0F0615CC28B600DEAD44 /* Goal.h */,
+				A1DE0F0715CC28B600DEAD44 /* Goal.m */,
+				A1DE0F0315CC28B600DEAD44 /* Datapoint.h */,
+				A1DE0F0415CC28B600DEAD44 /* Datapoint.m */,
+				A1DE0F0115CC28B600DEAD44 /* User.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A10B892415CA08FA009E75F9 /* User.h */,
-				A10B892515CA08FB009E75F9 /* User.m */,
-				A10B892115CA08FA009E75F9 /* Datapoint.h */,
-				A10B892215CA08FA009E75F9 /* Datapoint.m */,
-				A10B891E15CA08F8009E75F9 /* Goal.h */,
-				A10B891F15CA08F9009E75F9 /* Goal.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -821,9 +821,9 @@
 				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
 				A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */,
 				A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */,
-				A10B892015CA08F9009E75F9 /* Goal.m in Sources */,
-				A10B892315CA08FA009E75F9 /* Datapoint.m in Sources */,
-				A10B892615CA08FB009E75F9 /* User.m in Sources */,
+				A1DE0F0215CC28B600DEAD44 /* User.m in Sources */,
+				A1DE0F0515CC28B600DEAD44 /* Datapoint.m in Sources */,
+				A1DE0F0815CC28B600DEAD44 /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

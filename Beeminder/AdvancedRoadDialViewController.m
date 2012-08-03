@@ -58,7 +58,7 @@
     [self.switchCollection addObject:self.rateSwitch];    
     
     NSComparator compareTags = ^(id a, id b) { return [a tag] - [b tag]; };
-    
+
     self.textFieldCollection = [self.textFieldCollection sortedArrayUsingComparator:compareTags];
     self.switchCollection = [NSMutableArray arrayWithArray:[self.switchCollection sortedArrayUsingComparator:compareTags]];
     

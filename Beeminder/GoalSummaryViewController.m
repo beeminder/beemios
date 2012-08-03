@@ -199,7 +199,7 @@
 
 - (void)updateTimer
 {
-    self.timerLabel.text = self.goalObject.countdownText;    
+    self.timerLabel.text = [self.goalObject countdownTextBrief:NO];
 }
 
 - (void)startTimer {

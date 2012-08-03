@@ -32,8 +32,10 @@
     NSString *username = [defaults objectForKey:@"username"];
     
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+
+    NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
     
-    NSArray *arrayOfGoalObjects = [user.goals allObjects];
+    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
 
     [self checkTimestamp];
@@ -140,7 +142,7 @@
     cell.textLabel.text = goalObject.title;
     if (self.goalObjects.count > 0) {
         Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d days", goal.countdownDays];
+        cell.detailTextLabel.text = [goal countdownTextBrief:YES];
         cell.detailTextLabel.textColor = goal.countdownColor;
     }
 
@@ -189,7 +191,10 @@
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username];
     }
     
-    self.goalObjects = [NSMutableArray arrayWithArray:[[(User *)[User MR_findFirstByAttribute:@"username" withValue:username] goals] allObjects]];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+    NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
+    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
+    self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     
     self.title = @"Your Goals";
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
