@@ -58,8 +58,9 @@
     }
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
     
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&auth_token=%@", kBaseURL, kAPIPrefix, username, authenticationToken]];
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&auth_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, authenticationToken]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
     
@@ -167,14 +168,8 @@
     else {
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
         Goal *goalObject = [self.goalObjects objectAtIndex:path.row];
-        NSString *slug = goalObject.slug;
-        id graphURL = goalObject.graph_url;
-        
-        if (graphURL != [NSNull null]) {
-            [segue.destinationViewController setGraphURL:graphURL];
-        }
         [segue.destinationViewController setTitle:goalObject.title];
-        [segue.destinationViewController setSlug:slug];
+        [segue.destinationViewController setGoalObject:goalObject];
     }
 }
 
@@ -184,15 +179,17 @@
     
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
-    NSDictionary *goalDict = nil;
-    
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
     [self.goalObjects removeAllObjects];
-    for (goalDict in goals) {
+    
+    for (NSDictionary *goalDict in goals) {
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
-        [self.goalObjects addObject:[Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username]];
+        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username];
     }
+    
+    self.goalObjects = [NSMutableArray arrayWithArray:[[(User *)[User MR_findFirstByAttribute:@"username" withValue:username] goals] allObjects]];
     
     self.title = @"Your Goals";
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];

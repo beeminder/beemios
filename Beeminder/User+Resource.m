@@ -54,7 +54,10 @@
         if ([key isEqualToString:@"datapoints"]) {
             NSDictionary *datapointDict;
             for (datapointDict in obj) {
-                Datapoint *datapoint = [Datapoint MR_createInContext:defaultContext];
+                Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"]];
+                if (!datapoint) {
+                    datapoint = [Datapoint MR_createEntity];
+                }
                 datapoint.goal = goal;
                 datapoint.comment = [datapointDict objectForKey:@"comment"];
                 datapoint.value = [datapointDict objectForKey:@"value"];

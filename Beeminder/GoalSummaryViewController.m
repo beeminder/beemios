@@ -38,36 +38,19 @@
     
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
 
-    if (self.graphURL) {
+    if (self.goalObject.graph_url) {
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
-    
-    NSString *username = [defaults objectForKey:@"username"];
-    
-    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@.json?auth_token=%@&datapoints=true", kBaseURL, username, self.slug, authenticationToken]];
-    
-    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulGoalFetchJSON:JSON];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [self failedDatapointsFetch];
-    }];
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Fetching data..."];
-    [operation start];
-    
-    self.goalObject = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"slug = %@ and user.username = %@", self.slug, username]];
     
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
+    
+    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
-    [self registerForKeyboardNotifications];    
+    [self registerForKeyboardNotifications];
+    [self startTimer];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -77,8 +60,8 @@
 
 - (void)loadGraphImage
 {
-    if (self.graphURL) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.graphURL] options:NSDataReadingUncached error:nil];
+    if (self.goalObject.graph_url) {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.goalObject.graph_url] options:NSDataReadingUncached error:nil];
         self.graphImage = [[UIImage alloc] initWithData:imageData];
         [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
     }
@@ -86,12 +69,15 @@
 
 - (void)successfulGoalFetchJSON:(id)responseJSON
 {
-    [DejalBezelActivityView removeView];
-    self.goalObject.datapoints = [[NSSet alloc] init];
     for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
-        // add datapoints to goal - nuke all existing.
+
         NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-        Datapoint *datapoint = [Datapoint MR_createInContext:defaultContext];
+        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"]];
+        
+        if (!datapoint) {
+            datapoint = [Datapoint MR_createEntity];
+        }
+        
         datapoint.value = [datapointDict objectForKey:@"value"];
         datapoint.comment = [datapointDict objectForKey:@"comment"];
         datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
@@ -181,7 +167,7 @@
 {
     // guilty until proven innocent
     self.graphIsUpdating = YES;
-    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];
+    [self checkIfGraphIsUpdating];
     
     self.graphPoller = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkIfGraphIsUpdating) userInfo:nil repeats:YES];
 }
@@ -197,7 +183,8 @@
     NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
     
     AFJSONRequestOperation *goalOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.graphIsUpdating = [[JSON objectForKey:@"graph_queued_for_update"] boolValue];
+        [self successfulGoalFetchJSON:JSON];
+        self.graphIsUpdating = [[JSON objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
             [self loadGraphImage];

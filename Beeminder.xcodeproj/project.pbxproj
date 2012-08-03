@@ -916,6 +916,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Brett (96MUQF6TMK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../andybrett-xcode-45-fixes/framework/**";
@@ -926,6 +927,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "353A28A8-8D19-42F3-8343-9EC5BC9DD546";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -934,6 +936,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Brett (96MUQF6TMK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../andybrett-xcode-45-fixes/framework/**";
@@ -944,6 +947,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "353A28A8-8D19-42F3-8343-9EC5BC9DD546";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
