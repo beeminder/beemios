@@ -60,13 +60,6 @@
     
     cell.textLabel.text = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"publicName"];
     
-//    if ([self.goalObject.gtype isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    }
-//    else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
-    
     return cell;
 }
 
