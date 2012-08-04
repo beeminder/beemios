@@ -878,9 +878,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="graph-processing.png" id="Rtt-fP-NIj">
+                                    <imageView contentMode="scaleAspectFit" image="graph-processing.png" id="Rtt-fP-NIj">
                                         <rect key="frame" x="13" y="175" width="295" height="66"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="onH-GG-N0P" appends="YES" id="H3v-r4-QQJ"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <connections>
@@ -897,6 +901,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoA-hp-mVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="onH-GG-N0P">
+                    <connections>
+                        <outlet property="delegate" destination="E0E-N1-huo" id="IWD-fj-yhV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3088" y="-104"/>
         </scene>
