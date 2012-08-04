@@ -165,10 +165,9 @@
 
 - (void)pollUntilGraphIsNotUpdating
 {
-    // guilty until proven innocent
+    [self.graphPoller invalidate];
     self.graphIsUpdating = YES;
     [self checkIfGraphIsUpdating];
-    
     self.graphPoller = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkIfGraphIsUpdating) userInfo:nil repeats:YES];
 }
 

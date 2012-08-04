@@ -48,7 +48,7 @@
         return;
     }
     
-    [self checkTimestamp];
+    [self fetchEverything];
 }
 
 - (void)fetchEverything
@@ -78,37 +78,6 @@
     [fetchOperation start];
     [DejalBezelActivityView activityViewForView:self.view];
   
-}
-
-- (void)checkTimestamp
-{
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    if (!authenticationToken) {
-        [self failedFetch];
-        return;
-    }
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    
-    NSURL *checkUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, username, authenticationToken]];
-    
-    NSURLRequest *checkRequest = [NSURLRequest requestWithURL:checkUrl];
-    
-    AFJSONRequestOperation *checkOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:checkRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];        
-        if ([[JSON objectForKey:@"updated_at"] intValue] > lastUpdatedAt) {
-            [self fetchEverything];
-        }
-        else {
-            [DejalBezelActivityView removeView];
-        }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [self failedFetch];
-    }];
-    
-    [checkOperation start];
-    [DejalBezelActivityView activityViewForView:self.view];
 }
 
 - (void)viewDidUnload
