@@ -37,15 +37,16 @@
     
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
-
-    [self checkTimestamp];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    if (!authenticationToken) [self failedFetch]; return;
+    if (!authenticationToken) {
+        [self failedFetch];
+        return;
+    }
     
     [self checkTimestamp];
 }
