@@ -27,11 +27,11 @@
 {
     [super viewDidLoad];
     
-    NSDictionary *fatLoser = [NSDictionary dictionaryWithObjectsAndKeys:kFatloserPublic, @"publicName", kFatloserPrivate, @"privateName", nil];
+    NSDictionary *fatLoser = [NSDictionary dictionaryWithObjectsAndKeys:kFatloserPublic, @"publicName", kFatloserPrivate, @"privateName", kFatloserDetails, @"details", nil];
     
-    NSDictionary *hustler = [NSDictionary dictionaryWithObjectsAndKeys:kHustlerPublic, @"publicName", kHustlerPrivate, @"privateName", nil];
+    NSDictionary *hustler = [NSDictionary dictionaryWithObjectsAndKeys:kHustlerPublic, @"publicName", kHustlerPrivate, @"privateName", kHustlerDetails, @"details", nil];
     
-    NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPublic, @"publicName", kBikerPrivate, @"privateName", nil];
+    NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPublic, @"publicName", kBikerPrivate, @"privateName", kBikerDetails, @"details", nil];
     
     self.goalTypes = [NSArray arrayWithObjects:fatLoser, hustler, biker, nil];
 }
@@ -58,17 +58,34 @@
 {    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Goal Type Cell"];
     
-
     cell.textLabel.text = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"publicName"];
     
-    if ([self.goalObject.gtype isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+//    if ([self.goalObject.gtype isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//    }
+//    else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//    }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedAccessoryIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"segueToGoalTypeDetail" sender:self];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if ([self numberOfSectionsInTableView:tableView] == (section+1)){
+        return [UIView new];
+    }
+    return nil;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [(GoalTypeDetailViewController *)segue.destinationViewController setDetailText:[[self.goalTypes objectAtIndex:self.selectedAccessoryIndexPath.row] objectForKey:@"details"]];
 }
 
 #pragma mark - Table view delegate
