@@ -870,11 +870,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3088" y="-104"/>
         </scene>
-        <!--Dashboard Navigation Controller - Goals-->
+        <!--Dashboard Navigation Controller - Your Goals-->
         <scene sceneID="g7X-kD-e6b">
             <objects>
                 <navigationController definesPresentationContext="YES" id="hgb-kz-a4x" customClass="DashboardNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Goals" id="8LS-sR-cd1"/>
+                    <tabBarItem key="tabBarItem" title="Your Goals" id="8LS-sR-cd1"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="JFn-yL-M7U">
@@ -1008,7 +1008,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
             <relationships>
                 <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="RoadDialViewController" superclassName="UIViewController">

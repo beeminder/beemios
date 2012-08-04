@@ -17,7 +17,7 @@
     goalPushRequest.completionBlock = completionBlock;
 
     NSString *pString = [goalPushRequest paramString];
-    pString = [pString stringByAppendingFormat:@"auth_token=%@&", [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]];
+    pString = [pString stringByAppendingFormat:@"auth_token=%@&", [ABCurrentUser authenticationToken]];
     
     NSURL *url;
     NSMutableURLRequest *request;

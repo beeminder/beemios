@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
+    self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,9 +43,7 @@
 }
 
 - (IBAction)signOutButtonPressed {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nil forKey:@"authenticationTokenKey"];
-    [defaults setObject:nil forKey:@"username"];
+    [ABCurrentUser logout];
     
     UINavigationController *navCon = [self navigationController];
     

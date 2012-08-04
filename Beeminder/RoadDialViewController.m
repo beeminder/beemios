@@ -106,15 +106,11 @@
     NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
     
     NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"goaldate", self.goalRateNumeratorUnits, @"units", self.goalObject.slug, @"slug", nil];
-
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:username];
+    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:[ABCurrentUser username]];
     
     
-    if (authToken) {
+    if ([ABCurrentUser authenticationToken]) {
         [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
         CompletionBlock completionBlock = ^() {
             [DejalBezelActivityView removeView];

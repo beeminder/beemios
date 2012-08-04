@@ -60,10 +60,7 @@
     NSDictionary *responseJSON = [responseString JSONValue];
     NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
     NSString *username = [responseJSON objectForKey:@"username"];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:authenticationToken forKey:@"authenticationTokenKey"];
+    [ABCurrentUser loginWithUsername:username authenticationToken:authenticationToken];
     
     if (self.pushAssociations) {
         Goal *g;

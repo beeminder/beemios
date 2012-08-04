@@ -90,7 +90,7 @@
     
     [mutableResponse removeObjectForKey:@"datapoints"];
     
-    [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
+    [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[ABCurrentUser username]];
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
 
@@ -121,9 +121,6 @@
 - (IBAction)submitButtonPressed
 {
     [self.inputTextField resignFirstResponder];
-
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
     Datapoint *datapoint = [Datapoint MR_createEntity];
 
@@ -133,12 +130,12 @@
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, username, self.goalObject.slug]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%@&timestamp=%i", authenticationToken, self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
+    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%@&timestamp=%i", [ABCurrentUser authenticationToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -174,10 +171,8 @@
 - (void)checkIfGraphIsUpdating
 {
     [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
-    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, username, self.goalObject.slug, authenticationToken]];
+    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser authenticationToken]]];
     
     NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
     

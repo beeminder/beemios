@@ -28,11 +28,7 @@
 {    
     [super viewDidLoad];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    NSString *username = [defaults objectForKey:@"username"];
-    
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+    User *user = [ABCurrentUser user];
 
     NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
     
@@ -44,9 +40,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    if (!authenticationToken) {
+    if (![ABCurrentUser authenticationToken]) {
         [self failedFetch];
         return;
     }
@@ -65,17 +59,15 @@
     [self.activityIndicator startAnimating];    
     self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
     
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    if (!authenticationToken) {
+    if (![ABCurrentUser authenticationToken]) {
         [self failedFetch];
         return;
     }
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *username = [ABCurrentUser username];
     int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
     
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&auth_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, authenticationToken]];
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&auth_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser authenticationToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
     
@@ -164,17 +156,15 @@
                           
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    
     [self.goalObjects removeAllObjects];
     
     for (NSDictionary *goalDict in goals) {
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
-        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:username];
+        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
     }
     
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+    User *user = [ABCurrentUser user];
     NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];

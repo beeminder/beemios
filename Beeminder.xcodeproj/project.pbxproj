@@ -58,6 +58,7 @@
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
+		A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */; };
 		A1B2687115A121EA00859EDD /* ResourcePullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2687015A121EA00859EDD /* ResourcePullRequest.m */; };
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
@@ -220,6 +221,8 @@
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
 		A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalSummaryViewController.m; sourceTree = "<group>"; };
+		A1AC0D7915CDA1DF00EFB21E /* ABCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCurrentUser.h; sourceTree = "<group>"; };
+		A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCurrentUser.m; sourceTree = "<group>"; };
 		A1B2686F15A121EA00859EDD /* ResourcePullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePullRequest.h; sourceTree = "<group>"; };
 		A1B2687015A121EA00859EDD /* ResourcePullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcePullRequest.m; sourceTree = "<group>"; };
 		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
@@ -435,6 +438,15 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		A1AC0D7815CDA1AC00EFB21E /* ABCurrentUser */ = {
+			isa = PBXGroup;
+			children = (
+				A1AC0D7915CDA1DF00EFB21E /* ABCurrentUser.h */,
+				A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */,
+			);
+			name = ABCurrentUser;
+			sourceTree = "<group>";
+		};
 		A1B2687215A121F300859EDD /* Sync */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +509,7 @@
 		A1F03D56158E9A850075D5DA /* Beeminder */ = {
 			isa = PBXGroup;
 			children = (
+				A1AC0D7815CDA1AC00EFB21E /* ABCurrentUser */,
 				A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */,
 				A188DFF215B8BB71009CBA60 /* AFNetworking */,
 				A1FCBEE215B7602600E5C955 /* MagicalRecord */,
@@ -824,6 +837,7 @@
 				A161F81515CC9D4200C458A1 /* User.m in Sources */,
 				A161F81815CC9D4300C458A1 /* Goal.m in Sources */,
 				A161F81B15CC9D4300C458A1 /* Datapoint.m in Sources */,
+				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

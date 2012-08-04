@@ -28,10 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    if (authToken && username) {
+
+    if ([ABCurrentUser authenticationToken] && [ABCurrentUser username]) {
         [[self.navigationController navigationBar] setHidden:YES];
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }
@@ -40,9 +38,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    
-    if (!username) {
+    if (![ABCurrentUser username]) {
         NSString *alphabet = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
         NSMutableString *s = [NSMutableString stringWithCapacity:20];
         for (NSUInteger i = 0U; i < 20; i++) {
@@ -51,7 +47,7 @@
             [s appendFormat:@"%C", c];
         }
         
-        [[NSUserDefaults standardUserDefaults] setObject:s forKey:@"username"];
+        [ABCurrentUser setUsername:s];
         
         NSDictionary *userDict = [NSDictionary dictionaryWithObject:s forKey:@"username"];
         

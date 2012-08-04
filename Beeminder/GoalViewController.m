@@ -38,14 +38,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [super viewDidLoad];
     
-    NSString *authenticationToken = [defaults objectForKey:@"authenticationTokenKey"];
-    
-    NSString *username = [defaults objectForKey:@"username"];
-    
-    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, username, self.slug, authenticationToken]];
+    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, [ABCurrentUser username], self.slug, [ABCurrentUser authenticationToken]]];
     
     NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
     

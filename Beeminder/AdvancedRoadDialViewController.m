@@ -323,9 +323,7 @@
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
-    
-    if (authenticationToken) {        
+    if ([ABCurrentUser authenticationToken]) {
         [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
             [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
             [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";

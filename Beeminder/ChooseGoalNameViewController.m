@@ -43,7 +43,7 @@
     
     UILabel *welcome = nil;
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]){
+    if ([ABCurrentUser authenticationToken]){
         welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 146, 280, kLoggedInChooseGoalHeight)];
         
         welcome.text = kLoggedInChooseGoalName;
@@ -77,7 +77,7 @@
 
 - (void)fetchGoalSlugs
 {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *username = [ABCurrentUser username];
     
     NSArray *goals = [Goal MR_findByAttribute:@"user.username" withValue:username];
     
@@ -170,14 +170,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *slug = [self slugFromTitle:self.goalNameTextField.text];
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext]; 
     
     Goal *goal = [Goal MR_createEntity];
     goal.title = self.goalNameTextField.text;
     goal.slug = slug;
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+    User *user = [ABCurrentUser user];
     goal.user = user;
     goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
     goal.gtype = @"hustler";

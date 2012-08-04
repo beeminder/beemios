@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"]) {
+    if ([ABCurrentUser authenticationToken]) {
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
 	// Do any additional setup after loading the view.
@@ -87,11 +87,7 @@
     
     NSString *username = [responseJSON objectForKey:@"username"];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
-    
-    [defaults setObject:username forKey:@"username"];
+    [ABCurrentUser loginWithUsername:username authenticationToken:authenticationToken];
     
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", [responseJSON objectForKey:@"id"], @"serverId", nil];
     

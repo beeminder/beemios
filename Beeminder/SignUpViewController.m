@@ -77,10 +77,8 @@
         self.validationWarningLabel.hidden = NO;
         return;
     }
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:username];
+
+    User *user = [ABCurrentUser user];
     
     user.username = self.usernameTextField.text;
     

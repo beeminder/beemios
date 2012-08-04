@@ -20,4 +20,5 @@
     #import "User+Resource.h"
     #import "Datapoint.h"
     #import "DCRoundSwitch.h"
+    #import "ABCurrentUser.h"
 #endif
