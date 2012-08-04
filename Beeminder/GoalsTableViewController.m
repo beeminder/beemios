@@ -13,6 +13,7 @@
 @end
 
 @implementation GoalsTableViewController
+@synthesize refreshButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,6 +38,8 @@
     
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -51,8 +54,17 @@
     [self fetchEverything];
 }
 
+- (IBAction)refreshPressed:(UIBarButtonItem *)sender
+{
+    [self fetchEverything];
+}
+
 - (void)fetchEverything
 {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.activityIndicator startAnimating];    
+    self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
+    
     NSString *authenticationToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
     
     if (!authenticationToken) {
@@ -75,13 +87,12 @@
         [self failedFetch];
     }];
     
-    [fetchOperation start];
-    [DejalBezelActivityView activityViewForView:self.view];
-  
+    [fetchOperation start];  
 }
 
 - (void)viewDidUnload
 {
+    [self setRefreshButton:nil];
     [super viewDidUnload];
 }
 
@@ -147,8 +158,10 @@
 
 - (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON
 {
-    [DejalBezelActivityView removeView];
-    
+    [self.activityIndicator stopAnimating];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;  
+                          
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];

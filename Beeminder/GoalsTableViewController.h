@@ -15,5 +15,7 @@
 @interface GoalsTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *goalObjects;
+@property (strong, nonatomic) UIBarButtonItem *refreshButton;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
