@@ -109,7 +109,7 @@
 
 - (NSNumber *)panicTime
 {
-    return [NSNumber numberWithDouble:[self.countdown doubleValue] - [self.panic_threshold doubleValue]];
+    return [NSNumber numberWithDouble:[self.countdown doubleValue] - [self.panic doubleValue]];
 }
 
 - (NSString *)countdownTextBrief:(BOOL)brief

@@ -36,6 +36,9 @@
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
+		A161F81515CC9D4200C458A1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A161F81415CC9D4200C458A1 /* User.m */; };
+		A161F81815CC9D4300C458A1 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A161F81715CC9D4300C458A1 /* Goal.m */; };
+		A161F81B15CC9D4300C458A1 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A161F81A15CC9D4300C458A1 /* Datapoint.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D94159EC7EF00B1639D /* DejalActivityView.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
@@ -61,9 +64,6 @@
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
-		A1DE0F0215CC28B600DEAD44 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0115CC28B600DEAD44 /* User.m */; };
-		A1DE0F0515CC28B600DEAD44 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0415CC28B600DEAD44 /* Datapoint.m */; };
-		A1DE0F0815CC28B600DEAD44 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DE0F0715CC28B600DEAD44 /* Goal.m */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -179,6 +179,12 @@
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
+		A161F81315CC9D4200C458A1 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A161F81415CC9D4200C458A1 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A161F81615CC9D4300C458A1 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A161F81715CC9D4300C458A1 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A161F81915CC9D4300C458A1 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A161F81A15CC9D4300C458A1 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A17F4D93159EC7EF00B1639D /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
@@ -224,12 +230,6 @@
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1DB65151599880E002239DE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
-		A1DE0F0015CC28B600DEAD44 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A1DE0F0115CC28B600DEAD44 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A1DE0F0315CC28B600DEAD44 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A1DE0F0415CC28B600DEAD44 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
-		A1DE0F0615CC28B600DEAD44 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A1DE0F0715CC28B600DEAD44 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -420,13 +420,13 @@
 			isa = PBXGroup;
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
-				A1DE0F0015CC28B600DEAD44 /* User.h */,
-				A1DE0F0615CC28B600DEAD44 /* Goal.h */,
-				A1DE0F0715CC28B600DEAD44 /* Goal.m */,
-				A1DE0F0315CC28B600DEAD44 /* Datapoint.h */,
-				A1DE0F0415CC28B600DEAD44 /* Datapoint.m */,
-				A1DE0F0115CC28B600DEAD44 /* User.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
+				A161F81315CC9D4200C458A1 /* User.h */,
+				A161F81415CC9D4200C458A1 /* User.m */,
+				A161F81615CC9D4300C458A1 /* Goal.h */,
+				A161F81715CC9D4300C458A1 /* Goal.m */,
+				A161F81915CC9D4300C458A1 /* Datapoint.h */,
+				A161F81A15CC9D4300C458A1 /* Datapoint.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -821,9 +821,9 @@
 				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
 				A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */,
 				A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */,
-				A1DE0F0215CC28B600DEAD44 /* User.m in Sources */,
-				A1DE0F0515CC28B600DEAD44 /* Datapoint.m in Sources */,
-				A1DE0F0815CC28B600DEAD44 /* Goal.m in Sources */,
+				A161F81515CC9D4200C458A1 /* User.m in Sources */,
+				A161F81815CC9D4300C458A1 /* Goal.m in Sources */,
+				A161F81B15CC9D4300C458A1 /* Datapoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,12 +19,12 @@
 @dynamic goalval;
 @dynamic graph_url;
 @dynamic gtype;
+@dynamic panic;
 @dynamic rate;
 @dynamic serverId;
 @dynamic slug;
 @dynamic title;
 @dynamic units;
-@dynamic panic_threshold;
 @dynamic datapoints;
 @dynamic user;
 

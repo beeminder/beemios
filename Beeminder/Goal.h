@@ -19,12 +19,12 @@
 @property (nonatomic, retain) NSNumber * goalval;
 @property (nonatomic, retain) NSString * graph_url;
 @property (nonatomic, retain) NSString * gtype;
+@property (nonatomic, retain) NSNumber * panic;
 @property (nonatomic, retain) NSNumber * rate;
 @property (nonatomic, retain) NSString * serverId;
 @property (nonatomic, retain) NSString * slug;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
-@property (nonatomic, retain) NSNumber * panic_threshold;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end
