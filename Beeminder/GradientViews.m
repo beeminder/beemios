@@ -10,7 +10,7 @@
 
 @implementation GradientViews
 
-+(void)addGradient:(UIView *)view withColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor
++(void)addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor
 {
     // Add Border
     CALayer *layer = view.layer;
@@ -35,26 +35,30 @@
         CGFloat blue = components[2];
         CGFloat alpha = components[3];
         shineLayer.colors = [NSArray arrayWithObjects:
-                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:0.4f].CGColor,
-                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:0.6f].CGColor,
-//                             (id)[UIColor colorWithWhite:1.0f alpha:0.4f].CGColor,
-//                             (id)[UIColor colorWithWhite:1.0f alpha:0.2f].CGColor,
-//                             (id)[UIColor colorWithWhite:0.75f alpha:0.2f].CGColor,
-//                             (id)[UIColor colorWithWhite:0.4f alpha:0.2f].CGColor,
-//                             (id)[UIColor colorWithWhite:1.0f alpha:0.4f].CGColor,
-//                             (id)[UIColor colorWithWhite:0.0f alpha:0.4f].CGColor,
+                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:alpha + 0.4].CGColor,
+                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:alpha - 0.4].CGColor,
                              nil];
-        shineLayer.locations = [NSArray arrayWithObjects:
-                                [NSNumber numberWithFloat:0.0f],
-//                                [NSNumber numberWithFloat:0.5f],
-//                                [NSNumber numberWithFloat:0.5f],
-//                                [NSNumber numberWithFloat:0.8f],
-                                [NSNumber numberWithFloat:1.0f],
-                                nil];
+    }
+    else if(numComponents == 2) {
+        CGFloat white = components[0];
+        CGFloat alpha = components[1];
+        shineLayer.colors = [NSArray arrayWithObjects:
+                             (id)[UIColor colorWithWhite:white alpha:alpha + 0.4].CGColor,
+                             (id)[UIColor colorWithWhite:white alpha:alpha - 0.4].CGColor,
+                             nil];
+    }
+    
+    if (!startAtTop) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:[shineLayer.colors count]];
+        NSEnumerator *enumerator = [shineLayer.colors reverseObjectEnumerator];
+        for (id element in enumerator) {
+            [array addObject:element];
+        }
+        shineLayer.colors = [NSArray arrayWithArray:array];
     }
     
     if ([view isKindOfClass:[UIButton class]]) {
-        [layer addSublayer:shineLayer];
+        [layer insertSublayer:shineLayer atIndex:2];
     }
     else {
         [layer insertSublayer:shineLayer atIndex:0];

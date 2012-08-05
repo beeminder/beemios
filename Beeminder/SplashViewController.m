@@ -35,9 +35,9 @@
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }
     
-    [GradientViews addGradient:self.view withColor:[UIColor yellowColor] cornerRadius:0.0f borderColor:nil];
+    [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     
-    [GradientViews addGradient:self.startTrackingButton withColor:[UIColor colorWithRed:0.0f green:100.0/255.0f blue:0.0f alpha:1.0f] cornerRadius:8.0 borderColor:[UIColor grayColor]];
+    [GradientViews addGradient:self.startTrackingButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
