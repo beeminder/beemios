@@ -16,6 +16,7 @@
 
 @implementation SplashViewController
 @synthesize startTrackingButton;
+@synthesize signInButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,8 @@
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     
     [GradientViews addGradient:self.startTrackingButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
+    
+    [GradientViews addGradient:self.signInButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:nil];    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,6 +65,7 @@
 - (void)viewDidUnload
 {
     [self setStartTrackingButton:nil];
+    [self setSignInButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

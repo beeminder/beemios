@@ -18,6 +18,7 @@
 
 @synthesize email = _email;
 @synthesize password = _password;
+@synthesize signInButton = _signInButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,15 +35,17 @@
     if ([ABCurrentUser authenticationToken]) {
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
-	// Do any additional setup after loading the view.
+    [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
+    
+    [GradientViews addGradient:self.signInButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
 }
 
 - (void)viewDidUnload
 {
     [self setEmail:nil];
     [self setPassword:nil];
+    [self setSignInButton:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {    
     [super viewDidLoad];
+    [self.tableView setSectionFooterHeight:[self.tableView cellForRowAtIndexPath:[[NSIndexPath alloc] initWithIndex:0]].frame.size.height];
     
     User *user = [ABCurrentUser user];
 
@@ -36,6 +37,7 @@
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,7 +104,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.goalObjects count];
+    return [self.goalObjects count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,14 +113,19 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    Goal *goalObject = [self.goalObjects objectAtIndex:indexPath.row];
-    cell.textLabel.text = goalObject.title;
-    if (self.goalObjects.count > 0) {
-        Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [goal countdownTextBrief:YES];
-        cell.detailTextLabel.textColor = goal.countdownColor;
+    if (indexPath.row >= self.goalObjects.count) {
+        cell.textLabel.text = @"Add New Goal";
+        cell.detailTextLabel.text = @"";
     }
-
+    else {
+        Goal *goalObject = [self.goalObjects objectAtIndex:indexPath.row];
+        cell.textLabel.text = goalObject.title;
+        if (self.goalObjects.count > 0) {
+            Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [goal countdownTextBrief:YES];
+            cell.detailTextLabel.textColor = goal.countdownColor;
+        }
+    }
     return cell;
 }
 
@@ -126,13 +133,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (indexPath.row >= self.goalObjects.count) {
+        [self performSegueWithIdentifier:@"segueToAddGoal" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"segueToGoalSummaryView" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -181,16 +187,10 @@
     for (Goal *goal in self.goalObjects) {
         NSDate *emergencyTime;
         NSDate *wrongLaneTime;
-        if ([goal.slug isEqualToString:@"weightstable"]) {
-            emergencyTime = [[NSDate date]
-                         dateByAddingTimeInterval:20];
-            wrongLaneTime = [[NSDate date] dateByAddingTimeInterval:10];
-        }
-        else {
-            double countdown = [goal.countdown doubleValue];
-            emergencyTime = [NSDate dateWithTimeIntervalSince1970:countdown - 24*3600];
-            wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:countdown - 48*3600];
-        }
+        double countdown = [goal.countdown doubleValue];
+        emergencyTime = [NSDate dateWithTimeIntervalSince1970:countdown - 24*3600];
+        wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:countdown - 48*3600];
+
         UIApplication* app = [UIApplication sharedApplication];
         UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
         if (notifyAlarm)

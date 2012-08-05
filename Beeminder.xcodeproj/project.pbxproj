@@ -18,8 +18,6 @@
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
 		A1253AA115A029F30058B495 /* GoalPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253AA015A029F30058B495 /* GoalPushRequest.m */; };
-		A12E48EE1591953B0014624E /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48ED1591953B0014624E /* logo-text.png */; };
-		A12E48F1159195480014624E /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = A12E48F0159195480014624E /* bee.png */; };
 		A12E48F4159197400014624E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E48F3159197400014624E /* GoalViewController.m */; };
 		A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F97E158FA32D002F151A /* GoalsTableViewController.m */; };
 		A133F9F1158FB27F002F151A /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9D9158FB27F002F151A /* NSObject+SBJson.m */; };
@@ -70,7 +68,6 @@
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
-		A1DB65161599880E002239DE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DB65151599880E002239DE /* add.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -152,8 +149,6 @@
 		A1253A9F15A029F30058B495 /* GoalPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPushRequest.h; sourceTree = "<group>"; };
 		A1253AA015A029F30058B495 /* GoalPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPushRequest.m; sourceTree = "<group>"; };
 		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		A12E48ED1591953B0014624E /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-text.png"; sourceTree = "<group>"; };
-		A12E48F0159195480014624E /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		A12E48F3159197400014624E /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		A133F97D158FA32D002F151A /* GoalsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsTableViewController.h; sourceTree = "<group>"; };
@@ -246,7 +241,6 @@
 		A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedRoadDialViewController.h; sourceTree = "<group>"; };
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A1DB65151599880E002239DE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -484,11 +478,8 @@
 				A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */,
 				A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */,
 				A1F0C7BC15BB77530044E01B /* graph-processing.png */,
-				A1DB65151599880E002239DE /* add.png */,
 				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
 				A1993CBC158FFE0A00011568 /* Icon.png */,
-				A12E48F0159195480014624E /* bee.png */,
-				A12E48ED1591953B0014624E /* logo-text.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -765,9 +756,6 @@
 				A1F03D67158E9A850075D5DA /* MainStoryboard_iPad.storyboard in Resources */,
 				A1993CBD158FFE0A00011568 /* Icon.png in Resources */,
 				A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */,
-				A12E48EE1591953B0014624E /* logo-text.png in Resources */,
-				A12E48F1159195480014624E /* bee.png in Resources */,
-				A1DB65161599880E002239DE /* add.png in Resources */,
 				A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */,
 				A1A7E44E15CE461000711D3A /* ios_logo_bee_110.png in Resources */,
 				A1A7E44F15CE461000711D3A /* ios_logo_bee_220.png in Resources */,

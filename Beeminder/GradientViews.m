@@ -33,18 +33,18 @@
         CGFloat red = components[0];
         CGFloat green = components[1];
         CGFloat blue = components[2];
-        CGFloat alpha = components[3];
+//        CGFloat alpha = components[3];
         shineLayer.colors = [NSArray arrayWithObjects:
-                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:alpha + 0.4].CGColor,
-                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:alpha - 0.4].CGColor,
+                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:1.0].CGColor,
+                             (id)[UIColor colorWithRed:red green:green blue:blue alpha:0.6].CGColor,
                              nil];
     }
     else if(numComponents == 2) {
         CGFloat white = components[0];
-        CGFloat alpha = components[1];
+//        CGFloat alpha = components[1];
         shineLayer.colors = [NSArray arrayWithObjects:
-                             (id)[UIColor colorWithWhite:white alpha:alpha + 0.4].CGColor,
-                             (id)[UIColor colorWithWhite:white alpha:alpha - 0.4].CGColor,
+                             (id)[UIColor colorWithWhite:white alpha:1.0].CGColor,
+                             (id)[UIColor colorWithWhite:white alpha:0.6].CGColor,
                              nil];
     }
     
@@ -58,6 +58,22 @@
     }
     
     if ([view isKindOfClass:[UIButton class]]) {
+
+        
+        UIGraphicsBeginImageContext(CGSizeMake(view.frame.size.width, view.frame.size.height));
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        UIGraphicsPushContext(context);
+        
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        /* Fill the Core Graphics Image with the color defined above given 'progress' the percent value as float between 0  and 1. */
+        CGContextFillRect(context, CGRectMake(0, 0, view.frame.size.width, view.frame.size.height));
+        UIGraphicsPopContext();
+        UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [(UIButton *)view setBackgroundImage:outputImage forState:UIControlStateHighlighted];
+        
+        
         [layer insertSublayer:shineLayer atIndex:2];
     }
     else {

@@ -26,12 +26,12 @@
                                     <segue destination="law-yH-2rS" kind="push" id="jc8-b3-rod"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
                                 <rect key="frame" x="73" y="276" width="175" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign In to Beeminder">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -54,6 +54,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cXI-j0-LNO"/>
                     <connections>
+                        <outlet property="signInButton" destination="Vm4-AT-NEL" id="6rD-Nv-e21"/>
                         <outlet property="startTrackingButton" destination="WrO-Th-DZC" id="H48-NO-1sy"/>
                         <segue destination="rrU-HL-OPa" kind="push" identifier="skipToDashboard" id="T2q-fk-zEO"/>
                     </connections>
@@ -403,12 +404,12 @@ for this goal:</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CqD-QV-7h3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="CqD-QV-7h3">
                                 <rect key="frame" x="39" y="128" width="242" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign In">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -454,7 +455,7 @@ Bee patient!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.91764705879999997" green="0.73725490199999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In to Beeminder" id="fKE-3N-rbk">
                         <barButtonItem key="backBarButtonItem" title="Sign up" id="Rr1-ls-4dL"/>
@@ -462,6 +463,7 @@ Bee patient!</string>
                     <connections>
                         <outlet property="email" destination="AR1-lZ-qpt" id="meW-36-D5z"/>
                         <outlet property="password" destination="b88-32-Ykb" id="O5N-vk-bCo"/>
+                        <outlet property="signInButton" destination="CqD-QV-7h3" id="3AL-kT-g44"/>
                         <segue destination="rrU-HL-OPa" kind="push" identifier="segueFromSigninToDashboard" id="ual-lg-eyK"/>
                     </connections>
                 </viewController>
@@ -519,20 +521,6 @@ Bee patient!</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Zmh-vr-Jy3">
-                            <rect key="frame" x="0.0" y="66" width="320" height="59"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                            <state key="normal" title="  Add Goal   " image="add.png">
-                                <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <segue destination="law-yH-2rS" kind="push" identifier="segueToAddGoal" id="Agq-0d-xWn"/>
-                            </connections>
-                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Goal Cell" textLabel="DVa-uX-BYC" detailTextLabel="Qpc-AN-r71" style="IBUITableViewCellStyleSubtitle" id="I8f-3q-Dgf">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -558,15 +546,19 @@ Bee patient!</string>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="GSH-K4-VbA" kind="push" id="LzV-ej-62l"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="delegate" destination="cvO-9O-ffT" id="CDG-qT-mfL"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Goals" id="6lM-t6-6Ug">
                         <barButtonItem key="backBarButtonItem" title="Goals" id="XyN-NH-wxR"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="law-yH-2rS" kind="push" identifier="segueToAddGoal" id="nAM-Kr-wiV"/>
+                        <segue destination="GSH-K4-VbA" kind="push" identifier="segueToGoalSummaryView" id="vX9-Zn-9Dg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDh-1z-A9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -969,7 +961,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="add.png" width="29" height="30"/>
         <image name="graph-processing.png" width="371" height="121"/>
         <image name="ios_logo_bee_110.png" width="112" height="110"/>
         <image name="ios_logo_bmndr_238.png" width="239" height="29"/>
@@ -1074,8 +1065,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="SignInViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
             <relationships>
+                <relationship kind="action" name="signInButtonPressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="SignUpViewController" superclassName="UIViewController">
@@ -1094,6 +1087,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="SplashViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startTrackingButton" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -1105,6 +1099,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="jc8-b3-rod"/>
-        <segue reference="T2q-fk-zEO"/>
+        <segue reference="ual-lg-eyK"/>
     </inferredMetricsTieBreakers>
 </document>
