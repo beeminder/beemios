@@ -46,7 +46,10 @@
         self.unitsLabel.text = self.goalObject.units;
     }
     
-    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+    
+    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred];
+    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self registerForKeyboardNotifications];
