@@ -50,10 +50,13 @@
         [self.goalNameTextField becomeFirstResponder];
     }
     else {
+        self.title = @"Welcome to Beeminder";
         welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, kWelcomeChooseGoalHeight)];
         
         welcome.text = kWelcomeChooseGoalName;
     }
+    
+    [GradientViews addGradient:self.submitButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
     
     [welcome setNumberOfLines:0];
     [self.view addSubview:welcome];
@@ -143,7 +146,19 @@
     self.activeField = nil;
 }
 
-- (IBAction)checkForExistingSlug 
+- (IBAction)goalNameTextFieldEditingChanged
+{
+    if (self.goalNameTextField.text) {
+        [self checkForExistingSlug];
+        self.submitButton.enabled = YES;
+    }
+    else {
+        self.submitButton.enabled = NO;
+    }
+
+}
+
+- (void)checkForExistingSlug
 {
     BOOL exists = [self slugExistsForTitle:self.goalNameTextField.text];
     self.goalSlugExistsWarningLabel.hidden = !exists;
