@@ -21,4 +21,5 @@
     #import "Datapoint.h"
     #import "DCRoundSwitch.h"
     #import "ABCurrentUser.h"
+    #import "GradientViews.h"
 #endif

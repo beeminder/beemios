@@ -52,12 +52,17 @@
 		A188E00F15B8BB71009CBA60 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A188E00315B8BB71009CBA60 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A188E00515B8BB71009CBA60 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A188E00715B8BB71009CBA60 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A18A487915CE20F600E314B7 /* GradientViews.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A487815CE20F600E314B7 /* GradientViews.m */; };
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
+		A1A7E44E15CE461000711D3A /* ios_logo_bee_110.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */; };
+		A1A7E44F15CE461000711D3A /* ios_logo_bee_220.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */; };
+		A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */; };
+		A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */; };
 		A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */; };
 		A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */; };
 		A1B2687115A121EA00859EDD /* ResourcePullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2687015A121EA00859EDD /* ResourcePullRequest.m */; };
@@ -214,6 +219,8 @@
 		A188E00515B8BB71009CBA60 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		A188E00615B8BB71009CBA60 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		A188E00715B8BB71009CBA60 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		A18A487715CE20F600E314B7 /* GradientViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientViews.h; sourceTree = "<group>"; };
+		A18A487815CE20F600E314B7 /* GradientViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientViews.m; sourceTree = "<group>"; };
 		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -222,6 +229,10 @@
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
 		A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalSummaryViewController.m; sourceTree = "<group>"; };
+		A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bee_110.png; sourceTree = "<group>"; };
+		A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bee_220.png; sourceTree = "<group>"; };
+		A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bmndr_238.png; sourceTree = "<group>"; };
+		A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bmndr_476.png; sourceTree = "<group>"; };
 		A1AC0D7915CDA1DF00EFB21E /* ABCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCurrentUser.h; sourceTree = "<group>"; };
 		A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCurrentUser.m; sourceTree = "<group>"; };
 		A1AC0D7C15CDC8A900EFB21E /* GoalTypeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalTypeDetailViewController.h; sourceTree = "<group>"; };
@@ -468,6 +479,10 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */,
+				A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */,
+				A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */,
+				A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */,
 				A1F0C7BC15BB77530044E01B /* graph-processing.png */,
 				A1DB65151599880E002239DE /* add.png */,
 				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
@@ -535,10 +550,14 @@
 				A1782812159D567E00F3336F /* GoalGraphViewController.m */,
 				A133F97D158FA32D002F151A /* GoalsTableViewController.h */,
 				A133F97E158FA32D002F151A /* GoalsTableViewController.m */,
+				A1AC0D7C15CDC8A900EFB21E /* GoalTypeDetailViewController.h */,
+				A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 				A12E48F2159197400014624E /* GoalViewController.h */,
 				A12E48F3159197400014624E /* GoalViewController.m */,
+				A18A487715CE20F600E314B7 /* GradientViews.h */,
+				A18A487815CE20F600E314B7 /* GradientViews.m */,
 				A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */,
 				A1F03D65158E9A850075D5DA /* MainStoryboard_iPad.storyboard */,
 				A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */,
@@ -554,8 +573,6 @@
 				A10B88FE15C73FC8009E75F9 /* UIViewController+saveRoadDial.h */,
 				A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
-				A1AC0D7C15CDC8A900EFB21E /* GoalTypeDetailViewController.h */,
-				A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -752,6 +769,10 @@
 				A12E48F1159195480014624E /* bee.png in Resources */,
 				A1DB65161599880E002239DE /* add.png in Resources */,
 				A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */,
+				A1A7E44E15CE461000711D3A /* ios_logo_bee_110.png in Resources */,
+				A1A7E44F15CE461000711D3A /* ios_logo_bee_220.png in Resources */,
+				A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */,
+				A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,6 +865,7 @@
 				A161F81B15CC9D4300C458A1 /* Datapoint.m in Sources */,
 				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
 				A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */,
+				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
