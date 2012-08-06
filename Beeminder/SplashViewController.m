@@ -40,7 +40,7 @@
     
     [GradientViews addGradient:self.startTrackingButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
     
-    [GradientViews addGradient:self.signInButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:nil];    
+    [GradientViews addGradient:self.signInButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated

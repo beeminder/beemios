@@ -68,6 +68,8 @@
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
+		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
+		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -241,6 +243,8 @@
 		A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedRoadDialViewController.h; sourceTree = "<group>"; };
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -487,6 +491,8 @@
 		A1F03D41158E9A850075D5DA = {
 			isa = PBXGroup;
 			children = (
+				A1DD32DD15CF4E9F0077B774 /* Default.png */,
+				A1DD32DB15CF4E9B0077B774 /* Default@2x.png */,
 				A1F03D56158E9A850075D5DA /* Beeminder */,
 				A1F03D4F158E9A850075D5DA /* Frameworks */,
 				A1F03D4D158E9A850075D5DA /* Products */,
@@ -761,6 +767,8 @@
 				A1A7E44F15CE461000711D3A /* ios_logo_bee_220.png in Resources */,
 				A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */,
 				A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */,
+				A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */,
+				A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +968,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "353A28A8-8D19-42F3-8343-9EC5BC9DD546";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "353A28A8-8D19-42F3-8343-9EC5BC9DD546";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -982,6 +991,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3E18B4F3-F494-4602-B8D5-0D0B9A5E7D9C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E18B4F3-F494-4602-B8D5-0D0B9A5E7D9C";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
