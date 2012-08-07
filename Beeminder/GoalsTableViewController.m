@@ -74,7 +74,14 @@
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
     
     [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud;
+    if (!lastUpdatedAt || lastUpdatedAt == 0) {
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //    hud.progress = 0.0;
+        //    hud.mode = MBProgressHUDModeAnnularDeterminate;
+        hud.labelText = @"Importing Beeswax";
+    }
+
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self successfulFetchEverythingJSON:JSON hud:hud];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -82,9 +89,6 @@
         [self failedFetch];
     }];
 
-//    hud.progress = 0.0;
-//    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.labelText = @"Importing Beeswax";
     [fetchOperation start];
 }
 

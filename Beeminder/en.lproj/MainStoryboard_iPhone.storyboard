@@ -476,7 +476,7 @@ Bee patient!</string>
             <objects>
                 <viewController id="5GU-h5-Z9o" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wLW-WJ-n5M">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pKD-gz-O4a">
@@ -1031,13 +1031,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="GoalsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="RoadDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
-                <relationship kind="action" name="nextButtonPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="showAdvanced:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="showChooseGoalType:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="goalRateDenominatorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="goalRateNumeratorLabel" candidateClass="UILabel"/>
@@ -1090,6 +1091,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="tH0-Uv-eBt"/>
-        <segue reference="jc8-b3-rod"/>
+        <segue reference="nAM-Kr-wiV"/>
     </inferredMetricsTieBreakers>
 </document>
