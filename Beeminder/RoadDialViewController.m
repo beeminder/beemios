@@ -128,10 +128,6 @@
     if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
         [[self.navigationController navigationBar] setHidden:YES];
     }
-    else if ([segue.identifier isEqualToString:@"segueToChooseGoalType"]) {
-        self.goalObject.rate = [self weeklyRate];
-        [segue.destinationViewController setGoalObject:self.goalObject];
-    }
 }
 
 #pragma mark UIPickerViewDataSource methods
@@ -209,6 +205,16 @@
     }
 }
 
+- (IBAction)showChooseGoalType:(UIBarButtonItem *)sender
+{
+    ChooseGoalTypeViewController *chooseGTController = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"chooseGoalTypeViewController"];
+    chooseGTController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    self.goalObject.rate = [self weeklyRate];
+    chooseGTController.goalObject = self.goalObject;
+    chooseGTController.rdvCon = self;
+    [self presentViewController:chooseGTController animated:YES completion:nil];
+}
+
 - (IBAction)showAdvanced:(UIBarButtonItem *)sender
 {
     AdvancedRoalDialViewController *advCon = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
@@ -222,6 +228,17 @@
     advCon.rdvCon = self;
     [self presentViewController:advCon animated:YES completion:nil];
     
+}
+
+- (void)resetRoadDial
+{
+    self.goalObject.rate = [NSNumber numberWithInt:0];
+    self.goalObject.units = @"times";
+    self.goalRateNumeratorLabel.hidden = YES;
+    self.goalRateNumeratorUnitsLabel.hidden = YES;
+    self.goalRateDenominatorLabel.hidden = YES;
+    self.goalRateDenominatorPickerView.hidden = NO;
+    self.goalRateNumeratorPickerView.hidden = NO;
 }
 
 - (void)modalDidSaveRoadDial

@@ -37,7 +37,7 @@
     }
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     
-    [GradientViews addGradient:self.signInButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
+    [GradientViews addGrayButtonGradient:self.signInButton];
 }
 
 - (void)viewDidUnload

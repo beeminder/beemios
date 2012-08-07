@@ -13,5 +13,6 @@
 
 - (IBAction)signOutButtonPressed;
 @property (strong, nonatomic) IBOutlet UILabel *loggedInAsLabel;
+@property (strong, nonatomic) IBOutlet UIButton *signOutButton;
 
 @end

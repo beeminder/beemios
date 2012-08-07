@@ -14,6 +14,7 @@
 
 @implementation SettingsViewController
 @synthesize loggedInAsLabel;
+@synthesize signOutButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [GradientViews addGrayButtonGradient:self.signOutButton];
     self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
 }
 
@@ -56,6 +58,7 @@
 
 - (void)viewDidUnload {
     [self setLoggedInAsLabel:nil];
+    [self setSignOutButton:nil];
     [super viewDidUnload];
 }
 @end

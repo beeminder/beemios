@@ -10,7 +10,12 @@
 
 @implementation GradientViews
 
-+(void)addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor
++ (void)addGrayButtonGradient:(UIView *)view
+{
+    [GradientViews addGradient:view withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:[UIColor grayColor]];
+}
+
++ (void)addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor
 {
     // Add Border
     CALayer *layer = view.layer;

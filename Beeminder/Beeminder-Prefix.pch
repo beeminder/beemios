@@ -22,4 +22,5 @@
     #import "DCRoundSwitch.h"
     #import "ABCurrentUser.h"
     #import "GradientViews.h"
+    #import "MBProgressHUD.h"
 #endif

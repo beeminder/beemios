@@ -15,6 +15,8 @@
 
 @implementation GoalSummaryViewController
 @synthesize scrollView = _scrollView;
+@synthesize editGoalButton = _editGoalButton;
+@synthesize addDataButton = _addDataButton;
 @synthesize timerLabel = _timerLabel;
 @synthesize unitsLabel = _unitsLabel;
 @synthesize instructionLabel = _instructionLabel;
@@ -37,7 +39,13 @@
     [super viewDidLoad];
     
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
-
+    [GradientViews addGrayButtonGradient:self.editGoalButton];
+    [GradientViews addGrayButtonGradient:self.addDataButton];
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
+    
     if (self.goalObject.graph_url) {
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
@@ -54,6 +62,11 @@
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self registerForKeyboardNotifications];
     [self startTimer];
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)recognizer
+{
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -197,6 +210,7 @@
 - (void)updateTimer
 {
     self.timerLabel.text = [self.goalObject countdownTextBrief:NO];
+    self.timerLabel.textColor = [self.goalObject countdownColor];
 }
 
 - (void)startTimer {
@@ -233,14 +247,14 @@
     
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    CGPoint origin = self.inputStepper.frame.origin;
-    CGFloat height = self.inputStepper.frame.size.height;
+    CGPoint origin = self.addDataButton.frame.origin;
+    CGFloat height = self.addDataButton.frame.size.height;
     CGFloat buffer = 10.0;
     origin.y -= self.scrollView.contentOffset.y;
     origin.y += height;
     origin.y += buffer;
     if (!CGRectContainsPoint(aRect, origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.inputStepper.frame.origin.y - (aRect.size.height) + height + buffer);
+        CGPoint scrollPoint = CGPointMake(0.0, self.addDataButton.frame.origin.y - (aRect.size.height) + height + buffer);
         [self.scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
@@ -290,6 +304,8 @@
     [self setSubmitButton:nil];
     [self setTimerLabel:nil];
     [self setScrollView:nil];
+    [self setEditGoalButton:nil];
+    [self setAddDataButton:nil];
     [super viewDidUnload];
 }
 

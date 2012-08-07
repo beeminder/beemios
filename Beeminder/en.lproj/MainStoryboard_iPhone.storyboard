@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2818" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yLj-Mj-Rxe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2829" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yLj-Mj-Rxe">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1900"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1914"/>
     </dependencies>
     <scenes>
         <!--Splash View Controller-->
@@ -12,7 +12,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="WrO-Th-DZC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WrO-Th-DZC">
                                 <rect key="frame" x="57" y="219" width="206" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -26,7 +26,7 @@
                                     <segue destination="law-yH-2rS" kind="push" id="jc8-b3-rod"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
                                 <rect key="frame" x="73" y="276" width="175" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -81,7 +81,7 @@
                                     <outlet property="delegate" destination="law-yH-2rS" id="wQZ-bH-MxL"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="L9J-Yo-Q1s">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L9J-Yo-Q1s">
                                 <rect key="frame" x="211" y="204" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -136,7 +136,7 @@
         <!--Choose Goal Type View Controller-->
         <scene sceneID="HZg-gX-vu7">
             <objects>
-                <tableViewController id="Qac-4A-b5B" customClass="ChooseGoalTypeViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="chooseGoalTypeViewController" id="Qac-4A-b5B" customClass="ChooseGoalTypeViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AMH-oH-lIg">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -220,7 +220,7 @@ for this goal:</string>
                                     </barButtonItem>
                                     <barButtonItem title="Goal Type" id="Imv-xd-CPd">
                                         <connections>
-                                            <segue destination="Qac-4A-b5B" kind="modal" identifier="segueToChooseGoalType" id="Dib-cl-2lA"/>
+                                            <action selector="showChooseGoalType:" destination="Xgv-aN-lSx" id="fjF-3b-smY"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="78" style="plain" systemItem="fixedSpace" id="hXw-Wx-re9"/>
@@ -352,7 +352,7 @@ for this goal:</string>
                                             <outlet property="delegate" destination="8SH-KL-GEY" id="4X7-Yf-RkZ"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="6Xl-9h-ngA">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6Xl-9h-ngA">
                                         <rect key="frame" x="92" y="280" width="135" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -404,7 +404,7 @@ for this goal:</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="CqD-QV-7h3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CqD-QV-7h3">
                                 <rect key="frame" x="39" y="128" width="242" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -484,7 +484,7 @@ Bee patient!</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign Out of Beeminder">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -507,6 +507,7 @@ Bee patient!</string>
                     <tabBarItem key="tabBarItem" title="Settings" id="Bkk-Jd-6Yr"/>
                     <connections>
                         <outlet property="loggedInAsLabel" destination="vsw-7h-nsG" id="PGW-lY-fj2"/>
+                        <outlet property="signOutButton" destination="pKD-gz-O4a" id="k8Q-Fm-F9S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sp3-SB-SKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -597,8 +598,8 @@ Bee patient!</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="1 day, 00:00:00" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="nmH-hs-lbB">
-                                <rect key="frame" x="20" y="217" width="194" height="52"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" text="1 day, 00:00:00" adjustsFontSizeToFit="NO" autoshrinkMode="none" preferredMaxLayoutWidth="141" id="nmH-hs-lbB">
+                                <rect key="frame" x="20" y="222" width="141" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="highlightedColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -620,11 +621,11 @@ Bee patient!</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RjJ-3S-8pz">
-                                <rect key="frame" x="228" y="309" width="72" height="44"/>
+                                <rect key="frame" x="190" y="316" width="110" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Done!">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Add data">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -635,21 +636,14 @@ Bee patient!</string>
                                 </connections>
                             </button>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="1000" id="YcL-8d-VDM">
-                                <rect key="frame" x="113" y="333" width="94" height="27"/>
+                                <rect key="frame" x="198" y="268" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="inputStepperValueChanged" destination="GSH-K4-VbA" eventType="valueChanged" id="kLN-RQ-LSr"/>
                                 </connections>
                             </stepper>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" text="units" autoshrinkMode="minimumScaleFactor" id="AOw-jA-Vsi">
-                                <rect key="frame" x="174" y="294" width="33" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="highlightedColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Giw-L8-CSA">
-                                <rect key="frame" x="113" y="294" width="54" height="31"/>
+                                <rect key="frame" x="198" y="222" width="94" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -657,19 +651,12 @@ Bee patient!</string>
                                     <action selector="inputTextFieldValueChanged" destination="GSH-K4-VbA" eventType="editingChanged" id="rTV-kC-b8t"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Add data:" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="5Hq-O5-i1s">
-                                <rect key="frame" x="20" y="309" width="280" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="highlightedColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="Xgj-3b-5Fn">
-                                <rect key="frame" x="219" y="221" width="90" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xgj-3b-5Fn">
+                                <rect key="frame" x="20" y="316" width="110" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Edit Goal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -686,14 +673,14 @@ Bee patient!</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="addDataButton" destination="RjJ-3S-8pz" id="xim-X2-BzY"/>
+                        <outlet property="editGoalButton" destination="Xgj-3b-5Fn" id="s7t-l1-Cbj"/>
                         <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
                         <outlet property="inputStepper" destination="YcL-8d-VDM" id="8Wg-p7-jsM"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
-                        <outlet property="instructionLabel" destination="5Hq-O5-i1s" id="mT1-qg-gBV"/>
                         <outlet property="scrollView" destination="10a-Hy-Xhw" id="NKI-tc-9lM"/>
                         <outlet property="submitButton" destination="RjJ-3S-8pz" id="x5p-pS-zKZ"/>
                         <outlet property="timerLabel" destination="nmH-hs-lbB" id="tQx-gx-NlZ"/>
-                        <outlet property="unitsLabel" destination="AOw-jA-Vsi" id="ImE-kd-sd2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XqH-GM-EaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -708,7 +695,7 @@ Bee patient!</string>
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="dJo-MZ-f4e">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dJo-MZ-f4e">
                                 <rect key="frame" x="168" y="320" width="132" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1018,6 +1005,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="GoalSummaryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="addDataButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
@@ -1046,7 +1035,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="RoadDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
             <relationships>
+                <relationship kind="action" name="nextButtonPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="showAdvanced:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="showChooseGoalType:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="goalRateDenominatorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalRateDenominatorPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="goalRateNumeratorLabel" candidateClass="UILabel"/>
@@ -1060,6 +1051,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="signOutButtonPressed"/>
                 <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="signOutButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="SignInViewController" superclassName="UIViewController">
@@ -1097,7 +1089,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5bu-Oa-s61"/>
+        <segue reference="tH0-Uv-eBt"/>
         <segue reference="jc8-b3-rod"/>
     </inferredMetricsTieBreakers>
 </document>

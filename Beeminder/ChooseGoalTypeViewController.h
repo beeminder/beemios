@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "GoalTypeDetailViewController.h"
+#import "RoadDialViewController.h"
 
 @interface ChooseGoalTypeViewController : UITableViewController
 
 @property (nonatomic, strong) Goal *goalObject;
 @property (nonatomic, strong) NSArray *goalTypes;
 @property (nonatomic, strong) NSIndexPath *selectedAccessoryIndexPath;
+@property (nonatomic, strong) RoadDialViewController *rdvCon;
 
 @end

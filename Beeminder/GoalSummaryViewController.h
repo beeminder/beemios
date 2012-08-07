@@ -11,7 +11,7 @@
 
 @class AdvancedRoalDialViewController;
 
-@interface GoalSummaryViewController : UIViewController
+@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *graphButton;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UILabel *unitsLabel;
@@ -24,6 +24,8 @@
 @property BOOL graphIsUpdating;
 @property (strong, nonatomic) NSTimer *graphPoller;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIButton *editGoalButton;
+@property (strong, nonatomic) IBOutlet UIButton *addDataButton;
 
 - (void)pollUntilGraphIsNotUpdating;
 

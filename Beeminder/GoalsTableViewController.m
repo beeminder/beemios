@@ -25,7 +25,7 @@
 }
 
 - (void)viewDidLoad
-{    
+{
     [super viewDidLoad];
     [self.tableView setSectionFooterHeight:[self.tableView cellForRowAtIndexPath:[[NSIndexPath alloc] initWithIndex:0]].frame.size.height];
     
@@ -74,14 +74,18 @@
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
     
     [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulFetchEverythingJSON:JSON];
+        [self successfulFetchEverythingJSON:JSON hud:hud];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
     }];
-    
-    [fetchOperation start];  
+
+//    hud.progress = 0.0;
+//    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"Importing Beeswax";
+    [fetchOperation start];
 }
 
 - (void)viewDidUnload
@@ -154,17 +158,18 @@
     }
 }
 
-- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON
+- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON hud:(MBProgressHUD *)hud
 {
     [self.activityIndicator stopAnimating];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
-    self.navigationItem.rightBarButtonItem = self.refreshButton;  
-                          
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
+    
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     [self.goalObjects removeAllObjects];
     
     for (NSDictionary *goalDict in goals) {
+        hud.progress += 1.0/goals.count;
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];

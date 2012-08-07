@@ -10,6 +10,8 @@
 
 @interface GradientViews : NSObject
 
-+(void) addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor;
++ (void)addGrayButtonGradient:(UIView *)view;
+
++ (void)addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor;
 
 @end

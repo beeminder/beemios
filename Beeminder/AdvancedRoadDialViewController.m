@@ -36,7 +36,7 @@
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
     CGRect defaultFrame = self.goalDateSwitch.frame;
-    self.goalDateSwitch.frame = CGRectMake(20, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.goalDateSwitch.frame = CGRectMake(15, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalDateSwitch.tag = 0;
     [self.view addSubview:self.goalDateSwitch];
     [self.switchCollection addObject:self.goalDateSwitch];
@@ -44,7 +44,7 @@
     self.goalValueSwitch = [[DCRoundSwitch alloc] init];
     self.goalValueSwitch.onText = @"EDIT";
     self.goalValueSwitch.offText = @"INFER";
-    self.goalValueSwitch.frame = CGRectMake(120, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.goalValueSwitch.frame = CGRectMake(115, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalValueSwitch.tag = 1;
     [self.view addSubview:self.goalValueSwitch];
     [self.switchCollection addObject:self.goalValueSwitch];
@@ -52,7 +52,7 @@
     self.rateSwitch = [[DCRoundSwitch alloc] init];
     self.rateSwitch.onText = @"EDIT";
     self.rateSwitch.offText = @"INFER";
-    self.rateSwitch.frame = CGRectMake(220, 150, defaultFrame.size.width + 12, defaultFrame.size.height);
+    self.rateSwitch.frame = CGRectMake(215, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.rateSwitch.tag = 2;
     [self.view addSubview:self.rateSwitch];
     [self.switchCollection addObject:self.rateSwitch];    

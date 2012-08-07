@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
-    [GradientViews addGradient:self.submitButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:nil];
+    [GradientViews addGrayButtonGradient:self.submitButton];
 }
 
 - (void)viewDidUnload

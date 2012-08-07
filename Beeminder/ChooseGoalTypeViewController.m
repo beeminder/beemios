@@ -85,10 +85,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.goalObject.gtype = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
-    
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
-    
+    if (![self.goalObject.gtype isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
+        self.goalObject.gtype = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
+        
+        [self.rdvCon resetRoadDial];
+        
+        [[NSManagedObjectContext MR_defaultContext] MR_save];
+    }
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.4 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
         [self.presentingViewController dismissModalViewControllerAnimated:YES];
     });

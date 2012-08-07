@@ -11,6 +11,7 @@
 #import "GoalsTableViewController.h"
 #import "AdvancedRoadDialViewController.h"
 #import "UIViewController+saveRoadDial.h"
+#import "ChooseGoalTypeViewController.h"
 
 @interface RoadDialViewController : UIViewController
     <UIPickerViewDataSource,
@@ -29,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *goalRateNumeratorUnitsLabel;
 @property int fatLoserIndex;
 
-
+- (void)resetRoadDial;
 - (IBAction)showAdvanced:(UIBarButtonItem *)sender;
 
 @end
