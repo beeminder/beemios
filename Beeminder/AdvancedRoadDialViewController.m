@@ -236,7 +236,6 @@
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
     textField.backgroundColor = [UIColor whiteColor];
     textField.textColor = [UIColor blackColor];
-//    [textField becomeFirstResponder];
 }
 
 - (void)disableTextFieldAtIndex:(int)index
@@ -244,7 +243,6 @@
     UITextField *textField = [self.textFieldCollection objectAtIndex:[[NSNumber numberWithInt:index] unsignedIntegerValue]];
     textField.backgroundColor = [UIColor lightGrayColor];
     textField.textColor = [UIColor whiteColor];
-//    [textField resignFirstResponder];
 }
 
 - (IBAction)switchValueChanged:(DCRoundSwitch *)sender
@@ -322,7 +320,9 @@
     }
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
-    
+    [self.view endEditing:YES];
+    self.datePicker.hidden = YES;
+    self.dismissToolbar.hidden = YES;
     if ([ABCurrentUser authenticationToken]) {
         [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
             MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
