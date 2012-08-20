@@ -223,7 +223,7 @@
     
 - (void)failedFetch
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }

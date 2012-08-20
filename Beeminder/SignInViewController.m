@@ -72,7 +72,8 @@
         [self invalidLogin];
     }];
     
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Authenticating..."];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Authenticating...";
     
     [operation start];
 }
@@ -84,7 +85,7 @@
 
 - (void)successfulLoginJSON:(NSDictionary *)responseJSON
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
     
@@ -102,7 +103,7 @@
 
 - (void)invalidLogin
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Login" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }

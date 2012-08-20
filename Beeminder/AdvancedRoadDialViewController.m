@@ -325,18 +325,19 @@
     
     if ([ABCurrentUser authenticationToken]) {
         [GoalPushRequest requestForGoal:self.goalObject withCompletionBlock:^{
-            [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
-            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
+            MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+            hud.labelText = @"Saved";
+            hud.mode = MBProgressHUDModeText;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-                [DejalBezelActivityView removeViewAnimated:NO];
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
                 [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
                     [self.rdvCon modalDidSaveRoadDial];
                     [self.gsvCon modalDidSaveRoadDial];
                 }];
             });
         }];
-        
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Saving...";
     }
     else {
         [self.rdvCon dismissViewControllerAnimated:YES completion:^{

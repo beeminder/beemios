@@ -79,7 +79,7 @@
         [(UIButton *)view setBackgroundImage:outputImage forState:UIControlStateHighlighted];
         
         
-        [layer insertSublayer:shineLayer atIndex:2];
+        [layer insertSublayer:shineLayer atIndex:layer.sublayers.count - 1];
     }
     else {
         [layer insertSublayer:shineLayer atIndex:0];

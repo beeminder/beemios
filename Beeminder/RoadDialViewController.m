@@ -111,9 +111,10 @@
     
     
     if ([ABCurrentUser authenticationToken]) {
-        [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Saving...";
         CompletionBlock completionBlock = ^() {
-            [DejalBezelActivityView removeView];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
         };
         [goal pushToRemoteWithCompletionBlock:completionBlock];

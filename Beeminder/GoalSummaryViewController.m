@@ -155,25 +155,26 @@
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
         if ([JSON objectForKey:@"errors"]) {
-            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Error";
+            hud.labelText = @"Error";
         }
         else {
             [self loadGraphImage];
-            [DejalBezelActivityView currentActivityView].activityLabel.text = @"Saved";
+            hud.labelText = @"Saved";
         }
-        [DejalBezelActivityView currentActivityView].activityIndicator.hidden = YES;
+        hud.mode = MBProgressHUDModeText;
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-            [DejalBezelActivityView removeViewAnimated:NO];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self pollUntilGraphIsNotUpdating];
         });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [DejalBezelActivityView removeViewAnimated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     [operation start];
-    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Saving..."];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Saving...";
 }
 
 - (void)pollUntilGraphIsNotUpdating
@@ -186,7 +187,8 @@
 
 - (void)checkIfGraphIsUpdating
 {
-    [DejalBezelActivityView activityViewForView:self.graphButton withLabel:@"Updating Graph..."];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
+    hud.labelText = @"Updating Graph...";
     
     NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser authenticationToken]]];
     
@@ -198,7 +200,7 @@
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
             [self loadGraphImage];
-            [DejalBezelActivityView removeView];
+            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         // nothing...

@@ -38,7 +38,6 @@
 		A161F81815CC9D4300C458A1 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A161F81715CC9D4300C458A1 /* Goal.m */; };
 		A161F81B15CC9D4300C458A1 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A161F81A15CC9D4300C458A1 /* Datapoint.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
-		A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D94159EC7EF00B1639D /* DejalActivityView.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A188E00815B8BB71009CBA60 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A188DFF415B8BB71009CBA60 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A188E00915B8BB71009CBA60 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A188DFF615B8BB71009CBA60 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -192,8 +191,6 @@
 		A161F81A15CC9D4300C458A1 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
-		A17F4D93159EC7EF00B1639D /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
-		A17F4D94159EC7EF00B1639D /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A188DFF315B8BB71009CBA60 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -396,15 +393,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A17F4D92159EC7D000B1639D /* Dejal */ = {
-			isa = PBXGroup;
-			children = (
-				A17F4D93159EC7EF00B1639D /* DejalActivityView.h */,
-				A17F4D94159EC7EF00B1639D /* DejalActivityView.m */,
-			);
-			name = Dejal;
-			sourceTree = "<group>";
-		};
 		A188DFF215B8BB71009CBA60 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,7 +530,6 @@
 				A188DFF215B8BB71009CBA60 /* AFNetworking */,
 				A1FCBEE215B7602600E5C955 /* MagicalRecord */,
 				A19D7C24159760860031ABED /* CoreData */,
-				A17F4D92159EC7D000B1639D /* Dejal */,
 				A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */,
 				A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */,
 				A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */,
@@ -820,7 +807,6 @@
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
 				A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */,
-				A17F4D95159EC7EF00B1639D /* DejalActivityView.m in Sources */,
 				A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */,
 				A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */,
 				A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */,

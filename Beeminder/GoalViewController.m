@@ -52,7 +52,7 @@
     
     [operation start];
     
-    [DejalBezelActivityView activityViewForView:self.view];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +68,7 @@
 
 - (void)successfulFetchJSON:(id)responseJSON
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     self.datapoints = [NSMutableArray arrayWithArray:responseJSON];
     
@@ -80,7 +80,7 @@
 
 - (void)failedFetch
 {
-    [DejalBezelActivityView removeViewAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch data for goal" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
