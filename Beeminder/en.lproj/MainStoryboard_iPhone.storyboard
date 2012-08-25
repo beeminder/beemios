@@ -945,9 +945,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>

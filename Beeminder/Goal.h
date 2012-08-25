@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 8/3/12.
+//  Created by Andy Brett on 8/25/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * ephem;
 @property (nonatomic, retain) NSNumber * goaldate;
 @property (nonatomic, retain) NSNumber * goalval;
-@property (nonatomic, retain) NSString * graph_url;
+@property (nonatomic, retain) NSString * gurl;
 @property (nonatomic, retain) NSString * gtype;
 @property (nonatomic, retain) NSNumber * panic;
 @property (nonatomic, retain) NSNumber * rate;

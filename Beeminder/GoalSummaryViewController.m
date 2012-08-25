@@ -46,7 +46,7 @@
     recognizer.delegate = self;
     [self.view addGestureRecognizer:recognizer];
     
-    if (self.goalObject.graph_url) {
+    if (self.goalObject.gurl) {
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
     
@@ -76,8 +76,8 @@
 
 - (void)loadGraphImage
 {
-    if (self.goalObject.graph_url) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.goalObject.graph_url] options:NSDataReadingUncached error:nil];
+    if (self.goalObject.gurl) {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.goalObject.gurl] options:NSDataReadingUncached error:nil];
         self.graphImage = [[UIImage alloc] initWithData:imageData];
         [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
     }
