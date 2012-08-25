@@ -20,6 +20,7 @@
 - (NSString *)readURL;
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
+- (NSString *)roadDialURL;
 - (NSDictionary *)dictionary;
 - (NSString *)losedateTextBrief:(BOOL)brief;
 - (NSNumber *)panicTime;

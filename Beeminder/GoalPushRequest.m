@@ -10,7 +10,13 @@
 
 @implementation GoalPushRequest
 
+
 + (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock
+{
+    return [GoalPushRequest requestForGoal:goal roadDial:NO withCompletionBlock:completionBlock];
+}
+
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withCompletionBlock:(CompletionBlock)completionBlock
 {
     GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
     goalPushRequest.resource = goal;
@@ -22,9 +28,16 @@
     NSURL *url;
     NSMutableURLRequest *request;
     if (goal.serverId) {
-        url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
-        request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"PUT"];
+        if (roadDial) {
+            url = [NSURL URLWithString:[[goal roadDialURL] stringByAppendingFormat:@"?%@", pString]];
+            request = [NSMutableURLRequest requestWithURL:url];
+            [request setHTTPMethod:@"POST"];
+        }
+        else {
+            url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
+            request = [NSMutableURLRequest requestWithURL:url];
+            [request setHTTPMethod:@"PUT"];
+        }
     }
     else {
         url = [NSURL URLWithString:[goal createURL]];
@@ -32,8 +45,6 @@
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
     }
-    
-
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:goalPushRequest];
     
@@ -45,5 +56,9 @@
     return goalPushRequest;
 }
 
++ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock
+{
+    return [GoalPushRequest requestForGoal:goal roadDial:YES withCompletionBlock:completionBlock];
+}
 
 @end

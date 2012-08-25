@@ -26,6 +26,11 @@
     [GoalPushRequest requestForGoal:self withCompletionBlock:completionBlock];
 }
 
+- (void)pushRoadDialToRemoteWithCompletionBlock:(CompletionBlock)completionBlock
+{
+    [GoalPushRequest roadDialRequestForGoal:self withCompletionBlock:completionBlock];
+}
+
 - (NSString *)createURL
 {
     return [NSString stringWithFormat:@"%@/%@/users/%@/goals.json", kBaseURL, kAPIPrefix, self.user.username];
@@ -44,6 +49,11 @@
 - (NSString *)deleteURL
 {
     return [self readURL];
+}
+
+- (NSString *)roadDialURL
+{
+    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/dial_road.json", kBaseURL, kAPIPrefix, self.user.username, self.slug];
 }
 
 - (NSDictionary *)dictionary

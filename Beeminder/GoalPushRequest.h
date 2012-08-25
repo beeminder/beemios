@@ -16,4 +16,8 @@
 
 + (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock;
 
++ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock;
+
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withCompletionBlock:(CompletionBlock)completionBlock;
+
 @end
