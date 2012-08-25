@@ -105,10 +105,9 @@
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:365*24*3600];
     NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
     
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"goaldate", self.goalRateNumeratorUnits, @"units", self.goalObject.slug, @"slug", nil];
+    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"goaldate", self.goalRateNumeratorUnits, @"units", nil];
     
     Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:[ABCurrentUser username]];
-    
     
     if ([ABCurrentUser authenticationToken]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

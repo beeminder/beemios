@@ -21,12 +21,12 @@
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
 - (NSDictionary *)dictionary;
-- (NSString *)countdownTextBrief:(BOOL)brief;
+- (NSString *)losedateTextBrief:(BOOL)brief;
 - (NSNumber *)panicTime;
-- (int)countdownDays;
-- (int)countdownHours;
-- (int)countdownMinutes;
-- (int)countdownSeconds;
-- (UIColor *)countdownColor;
+- (int)losedateDays;
+- (int)losedateHours;
+- (int)losedateMinutes;
+- (int)losedateSeconds;
+- (UIColor *)losedateColor;
 
 @end

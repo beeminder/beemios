@@ -130,8 +130,8 @@
         cell.textLabel.text = goalObject.title;
         if (self.goalObjects.count > 0) {
             Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [goal countdownTextBrief:YES];
-            cell.detailTextLabel.textColor = goal.countdownColor;
+            cell.detailTextLabel.text = [goal losedateTextBrief:YES];
+            cell.detailTextLabel.textColor = goal.losedateColor;
         }
     }
     return cell;
@@ -196,9 +196,9 @@
     for (Goal *goal in self.goalObjects) {
         NSDate *emergencyTime;
         NSDate *wrongLaneTime;
-        double countdown = [goal.countdown doubleValue];
-        emergencyTime = [NSDate dateWithTimeIntervalSince1970:countdown - 24*3600];
-        wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:countdown - 48*3600];
+        double losedate = [goal.losedate doubleValue];
+        emergencyTime = [NSDate dateWithTimeIntervalSince1970:losedate - 24*3600];
+        wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:losedate - 48*3600];
 
         UIApplication* app = [UIApplication sharedApplication];
         UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];

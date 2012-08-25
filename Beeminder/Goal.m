@@ -13,7 +13,7 @@
 
 @implementation Goal
 
-@dynamic countdown;
+@dynamic losedate;
 @dynamic ephem;
 @dynamic goaldate;
 @dynamic goalval;

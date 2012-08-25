@@ -67,9 +67,9 @@
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
-		A1E6D9EF15E8BC1C00CFAF61 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9EE15E8BC1C00CFAF61 /* Goal.m */; };
-		A1E6D9F215E8BC1C00CFAF61 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9F115E8BC1C00CFAF61 /* User.m */; };
-		A1E6D9F515E8BC1C00CFAF61 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9F415E8BC1C00CFAF61 /* Datapoint.m */; };
+		A1E6D9F815E8D09600CFAF61 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9F715E8D09600CFAF61 /* Datapoint.m */; };
+		A1E6D9FB15E8D09600CFAF61 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9FA15E8D09600CFAF61 /* User.m */; };
+		A1E6D9FE15E8D09700CFAF61 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E6D9FD15E8D09700CFAF61 /* Goal.m */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -238,12 +238,12 @@
 		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A1DD32E115D074C30077B774 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		A1E6D9ED15E8BC1C00CFAF61 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A1E6D9EE15E8BC1C00CFAF61 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A1E6D9F015E8BC1C00CFAF61 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A1E6D9F115E8BC1C00CFAF61 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A1E6D9F315E8BC1C00CFAF61 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A1E6D9F415E8BC1C00CFAF61 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A1E6D9F615E8D09600CFAF61 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A1E6D9F715E8D09600CFAF61 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A1E6D9F915E8D09600CFAF61 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A1E6D9FA15E8D09600CFAF61 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1E6D9FC15E8D09700CFAF61 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1E6D9FD15E8D09700CFAF61 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -423,14 +423,14 @@
 		A19D7C24159760860031ABED /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				A1E6D9FC15E8D09700CFAF61 /* Goal.h */,
+				A1E6D9FD15E8D09700CFAF61 /* Goal.m */,
+				A1E6D9F915E8D09600CFAF61 /* User.h */,
+				A1E6D9FA15E8D09600CFAF61 /* User.m */,
+				A1E6D9F615E8D09600CFAF61 /* Datapoint.h */,
+				A1E6D9F715E8D09600CFAF61 /* Datapoint.m */,
 				A1B2687215A121F300859EDD /* Sync */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A1E6D9F315E8BC1C00CFAF61 /* Datapoint.h */,
-				A1E6D9F415E8BC1C00CFAF61 /* Datapoint.m */,
-				A1E6D9F015E8BC1C00CFAF61 /* User.h */,
-				A1E6D9F115E8BC1C00CFAF61 /* User.m */,
-				A1E6D9ED15E8BC1C00CFAF61 /* Goal.h */,
-				A1E6D9EE15E8BC1C00CFAF61 /* Goal.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -855,9 +855,9 @@
 				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
 				A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */,
 				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,
-				A1E6D9EF15E8BC1C00CFAF61 /* Goal.m in Sources */,
-				A1E6D9F215E8BC1C00CFAF61 /* User.m in Sources */,
-				A1E6D9F515E8BC1C00CFAF61 /* Datapoint.m in Sources */,
+				A1E6D9F815E8D09600CFAF61 /* Datapoint.m in Sources */,
+				A1E6D9FB15E8D09600CFAF61 /* User.m in Sources */,
+				A1E6D9FE15E8D09700CFAF61 /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

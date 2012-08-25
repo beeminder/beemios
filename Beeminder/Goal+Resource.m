@@ -59,9 +59,9 @@
     return dict;
 }
 
-- (int)countdownDays
+- (int)losedateDays
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return seconds/(3600*24);
@@ -71,9 +71,9 @@
     }
 }
 
-- (int)countdownHours
+- (int)losedateHours
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return (seconds % (3600*24))/3600;
@@ -83,9 +83,9 @@
     }
 }
 
-- (int)countdownMinutes
+- (int)losedateMinutes
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return (seconds % 3600)/60;
@@ -95,9 +95,9 @@
     }
 }
 
-- (int)countdownSeconds
+- (int)losedateSeconds
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         return seconds % 60;
@@ -109,12 +109,12 @@
 
 - (NSNumber *)panicTime
 {
-    return [NSNumber numberWithDouble:[self.countdown doubleValue] - [self.panic doubleValue]];
+    return [NSNumber numberWithDouble:[self.losedate doubleValue] - [self.panic doubleValue]];
 }
 
-- (NSString *)countdownTextBrief:(BOOL)brief
+- (NSString *)losedateTextBrief:(BOOL)brief
 {
-    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.countdown doubleValue]] timeIntervalSinceNow];
+    int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
     
     if (seconds > 0) {
         
@@ -138,9 +138,9 @@
     }
 }
 
-- (UIColor *)countdownColor
+- (UIColor *)losedateColor
 {
-    switch (self.countdownDays) {
+    switch (self.losedateDays) {
         case -1:
             return [UIColor redColor];
             break;

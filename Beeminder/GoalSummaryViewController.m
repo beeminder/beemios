@@ -211,8 +211,8 @@
 
 - (void)updateTimer
 {
-    self.timerLabel.text = [self.goalObject countdownTextBrief:NO];
-    self.timerLabel.textColor = [self.goalObject countdownColor];
+    self.timerLabel.text = [self.goalObject losedateTextBrief:NO];
+    self.timerLabel.textColor = [self.goalObject losedateColor];
 }
 
 - (void)startTimer {
