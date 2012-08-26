@@ -7,6 +7,7 @@
 //
 
 #import "User+Resource.h"
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
 
 @implementation User (Resource)
 
@@ -68,8 +69,9 @@
         }
         else {
             NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
-            if ([goal respondsToSelector:NSSelectorFromString(selectorString)] && obj != [NSNull null]) {
-                [goal performSelector:NSSelectorFromString(selectorString) withObject:obj];
+            
+            if ([goal respondsToSelector:NSSelectorFromString(selectorString)]) {
+                [goal performSelector:NSSelectorFromString(selectorString) withObject:NULL_TO_NIL(obj)];
             }
         }
     }
