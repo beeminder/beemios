@@ -77,14 +77,17 @@
 - (void)loadGraphImage
 {
     if (self.goalObject.graph_url) {
-        NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        
-        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
-            self.graphImage = image;
-            [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
-        }];
-        [operation start];
+//        NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//
+//        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+//            self.graphImage = image;
+//            [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
+//        }];
+//        [operation start];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.goalObject.graph_url] options:NSDataReadingUncached error:nil];
+        self.graphImage = [[UIImage alloc] initWithData:imageData];
+        [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
     }
 }
 
