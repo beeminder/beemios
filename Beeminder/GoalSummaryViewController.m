@@ -80,10 +80,11 @@
         NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         
-        [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
             self.graphImage = image;
             [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
         }];
+        [operation start];
     }
 }
 
