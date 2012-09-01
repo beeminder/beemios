@@ -89,8 +89,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![self.goalObject.gtype isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
-        self.goalObject.gtype = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
+    if (![self.goalObject.goal_type isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
+        self.goalObject.goal_type = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
         
         [self.rdvCon resetRoadDial];
         

@@ -49,13 +49,13 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if ([self.goalObject.gtype isEqualToString:@"fatloser"]) {
+    if ([self.goalObject.goal_type isEqualToString:@"fatloser"]) {
         [self.goalRateNumeratorPickerView selectRow:3 inComponent:1 animated:YES];
     }
-    else if ([self.goalObject.gtype isEqualToString:@"hustler"]) {
+    else if ([self.goalObject.goal_type isEqualToString:@"hustler"]) {
         [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
     }
-    else if ([self.goalObject.gtype isEqualToString:@"biker"]) {
+    else if ([self.goalObject.goal_type isEqualToString:@"biker"]) {
         // ask for today's value
     }
 }
@@ -182,7 +182,7 @@
         self.goalRateNumeratorIndex = [pickerView selectedRowInComponent:0];
         self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
         if (row == self.fatLoserIndex) {
-            self.goalObject.gtype = @"fatloser";
+            self.goalObject.goal_type = @"fatloser";
         }
     }
     else {

@@ -194,7 +194,7 @@
     User *user = [ABCurrentUser user];
     goal.user = user;
     goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
-    goal.gtype = @"hustler";
+    goal.goal_type = @"hustler";
     
     [defaultContext MR_save];
     
