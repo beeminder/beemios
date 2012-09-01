@@ -35,7 +35,7 @@
     self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds", nil];   
     
     self.goalRateDenominatorUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
-    self.goalRateNumerator = 5;
+    self.goalRateNumeratorIndex =  self.pickerOffset + 5;
     self.goalRateNumeratorUnits = @"times";
     self.goalRateDenominatorUnits = @"week";
     [self.goalRateNumeratorPickerView selectRow:self.pickerOffset inComponent:0 animated:YES];
@@ -83,7 +83,7 @@
 
 - (NSInteger)goalRateNumeratorWithOffset
 {
-    return self.goalRateNumerator - self.pickerOffset;
+    return self.goalRateNumeratorIndex - self.pickerOffset;
 }
 
 - (NSNumber *)weeklyRate {
@@ -105,10 +105,11 @@
 {
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:365*24*3600];
     NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
-    
-    NSDictionary *goalDict = [NSDictionary dictionaryWithObjectsAndKeys:[self weeklyRate], @"rate", timestamp, @"goaldate", self.goalRateNumeratorUnits, @"units", nil];
-    
-    Goal *goal = [Goal writeToGoalWithDictionary:goalDict forUserWithUsername:[ABCurrentUser username]];
+
+    self.goalObject.rate = [self weeklyRate];
+    self.goalObject.goaldate = timestamp;
+    self.goalObject.units = self.goalRateNumeratorUnits;
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     if ([ABCurrentUser authenticationToken]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -117,7 +118,7 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
         };
-        [goal pushToRemoteWithCompletionBlock:completionBlock];
+        [self.goalObject pushToRemoteWithCompletionBlock:completionBlock];
 
     }
     else {
@@ -178,7 +179,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component 
 {
     if (pickerView.tag == 0) {
-        self.goalRateNumerator = [pickerView selectedRowInComponent:0];
+        self.goalRateNumeratorIndex = [pickerView selectedRowInComponent:0];
         self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
         if (row == self.fatLoserIndex) {
             self.goalObject.gtype = @"fatloser";

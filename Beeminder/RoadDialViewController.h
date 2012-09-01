@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) NSString *goalRateDenominatorUnits;
 @property (nonatomic, strong) NSString *goalRateNumeratorUnits;
-@property NSInteger goalRateNumerator;
+@property NSInteger goalRateNumeratorIndex;
 @property (strong, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
