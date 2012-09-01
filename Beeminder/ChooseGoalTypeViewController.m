@@ -33,7 +33,11 @@
     
     NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPublic, @"publicName", kBikerPrivate, @"privateName", kBikerDetails, @"details", nil];
     
-    self.goalTypes = [NSArray arrayWithObjects:fatLoser, hustler, biker, nil];
+    NSDictionary *inboxer = [NSDictionary dictionaryWithObjectsAndKeys:kInboxerPublic, @"publicName", kInboxerPrivate, @"privateName", kInboxerDetails, @"details", nil];
+    
+    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:kCustomPublic, @"publicName", kCustomPrivate, @"privateName", kCustomDetails, @"details", nil];
+    
+    self.goalTypes = [NSArray arrayWithObjects:fatLoser, hustler, biker, inboxer, custom, nil];
 }
 
 - (void)didReceiveMemoryWarning

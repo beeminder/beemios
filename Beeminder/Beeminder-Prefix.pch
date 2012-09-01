@@ -14,6 +14,7 @@
     #import "CoreData+MagicalRecord.h"
     #import "constants.h"
     #import "AFJSONRequestOperation.h"
+    #import "AFImageRequestOperation.h"
     #import "AFHTTPClient.h"
     #import "Goal+Resource.h"
     #import "User+Resource.h"

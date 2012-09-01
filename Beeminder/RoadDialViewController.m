@@ -40,6 +40,7 @@
     self.goalRateDenominatorUnits = @"week";
     [self.goalRateNumeratorPickerView selectRow:self.pickerOffset inComponent:0 animated:YES];
     [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
+    [self.goalRateNumeratorPickerView selectRow:self.pickerOffset + 5 inComponent:0 animated:YES];
     [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
     self.goalRateNumeratorLabel.hidden = YES;
     self.goalRateNumeratorUnitsLabel.hidden = YES;
