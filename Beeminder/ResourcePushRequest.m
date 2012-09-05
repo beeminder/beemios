@@ -36,9 +36,9 @@
     [self.responseData setLength:0];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [self.responseData appendData:d];
+    [self.responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
