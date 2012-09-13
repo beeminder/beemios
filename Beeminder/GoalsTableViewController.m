@@ -68,7 +68,7 @@
     
     NSString *username = [ABCurrentUser username];
     int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
-    
+    NSLog(@"%@", [ABCurrentUser authenticationToken]);
     NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&auth_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser authenticationToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
@@ -223,7 +223,8 @@
     
 - (void)failedFetch
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self.activityIndicator stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }

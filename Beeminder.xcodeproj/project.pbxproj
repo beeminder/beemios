@@ -81,6 +81,7 @@
 		A1F41C7315F2071A00C30ED4 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F41C7215F2071A00C30ED4 /* Datapoint.m */; };
 		A1F41C7615F2071A00C30ED4 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F41C7515F2071A00C30ED4 /* Goal.m */; };
 		A1F41C7915F2071B00C30ED4 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F41C7815F2071B00C30ED4 /* User.m */; };
+		A1F82ACA1601791B000E56DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F82AC91601791B000E56DA /* Default-568h@2x.png */; };
 		A1FCBF1E15B7602700E5C955 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */; };
 		A1FCBF1F15B7602700E5C955 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE815B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.m */; };
 		A1FCBF2015B7602700E5C955 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEEA15B7602600E5C955 /* NSEntityDescription+MagicalDataImport.m */; };
@@ -262,6 +263,7 @@
 		A1F41C7515F2071A00C30ED4 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F41C7715F2071B00C30ED4 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		A1F41C7815F2071B00C30ED4 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1F82AC91601791B000E56DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		A1FCBEE515B7602600E5C955 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		A1FCBEE715B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				A1DD32DD15CF4E9F0077B774 /* Default.png */,
+				A1F82AC91601791B000E56DA /* Default-568h@2x.png */,
 				A1DD32DB15CF4E9B0077B774 /* Default@2x.png */,
 				A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */,
 				A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */,
@@ -765,6 +768,7 @@
 				A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */,
 				A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */,
 				A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */,
+				A1F82ACA1601791B000E56DA /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
