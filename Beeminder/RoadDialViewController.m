@@ -111,7 +111,7 @@
     self.goalObject.units = self.goalRateNumeratorUnits;
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    if ([ABCurrentUser authenticationToken]) {
+    if ([ABCurrentUser accessToken]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Saving...";
         CompletionBlock completionBlock = ^() {

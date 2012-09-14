@@ -41,6 +41,7 @@
          ];
 
     }
+    pString = [pString stringByAppendingFormat:@"%@=%@&", @"beemios_secret", kBeemiosSecret];
     [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:userPushRequest];
@@ -58,9 +59,9 @@
     NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     
     NSDictionary *responseJSON = [responseString JSONValue];
-    NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+    NSString *accessToken = [responseJSON objectForKey:@"access_token"];
     NSString *username = [responseJSON objectForKey:@"username"];
-    [ABCurrentUser loginWithUsername:username authenticationToken:authenticationToken];
+    [ABCurrentUser loginWithUsername:username accessToken:accessToken];
     
     if (self.pushAssociations) {
         Goal *g;

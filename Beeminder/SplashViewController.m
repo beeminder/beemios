@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
 
-    if ([ABCurrentUser authenticationToken] && [ABCurrentUser username]) {
+    if ([ABCurrentUser accessToken] && [ABCurrentUser username]) {
         [[self.navigationController navigationBar] setHidden:YES];
         [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
     }

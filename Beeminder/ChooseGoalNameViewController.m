@@ -43,7 +43,7 @@
     
     UILabel *welcome = nil;
     
-    if ([ABCurrentUser authenticationToken]){
+    if ([ABCurrentUser accessToken]){
         welcome = [[UILabel alloc] initWithFrame:CGRectMake(20, 146, 280, kLoggedInChooseGoalHeight)];
         
         welcome.text = kLoggedInChooseGoalName;

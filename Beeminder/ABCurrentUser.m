@@ -20,23 +20,24 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
 }
 
-+ (NSString *)authenticationToken
++ (NSString *)accessToken
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationTokenKey"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
 }
 
 + (void)logout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nil forKey:@"authenticationTokenKey"];
+    [defaults setObject:nil forKey:@"accessToken"];
     [defaults setObject:nil forKey:@"username"];
+    [defaults setInteger:0 forKey:@"lastUpdatedAt"];
 }
 
-+ (void)loginWithUsername:(NSString *)username authenticationToken:(NSString *)authenticationToken
++ (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setObject:authenticationToken forKey:@"authenticationTokenKey"];
+    [defaults setObject:accessToken forKey:@"accessToken"];
     
     [defaults setObject:username forKey:@"username"];
     

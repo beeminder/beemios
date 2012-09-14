@@ -159,7 +159,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"auth_token=%@&value=%@&timestamp=%i", [ABCurrentUser authenticationToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
+    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%i", [ABCurrentUser accessToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -198,7 +198,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
     hud.labelText = @"Updating Graph...";
     
-    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?auth_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser authenticationToken]]];
+    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
     
     NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
     

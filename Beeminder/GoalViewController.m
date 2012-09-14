@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?auth_token=%@", kBaseURL, [ABCurrentUser username], self.slug, [ABCurrentUser authenticationToken]]];
+    NSURL *datapointsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/v1/users/%@/goals/%@/datapoints.json?access_token=%@", kBaseURL, [ABCurrentUser username], self.slug, [ABCurrentUser accessToken]]];
     
     NSMutableURLRequest *datapointsRequest = [NSMutableURLRequest requestWithURL:datapointsUrl];
     

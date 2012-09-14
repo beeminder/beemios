@@ -42,7 +42,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (![ABCurrentUser authenticationToken]) {
+    if (![ABCurrentUser accessToken]) {
         [self failedFetch];
         return;
     }
@@ -61,15 +61,15 @@
     [self.activityIndicator startAnimating];    
     self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
     
-    if (![ABCurrentUser authenticationToken]) {
+    if (![ABCurrentUser accessToken]) {
         [self failedFetch];
         return;
     }
     
     NSString *username = [ABCurrentUser username];
     int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
-    NSLog(@"%@", [ABCurrentUser authenticationToken]);
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&auth_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser authenticationToken]]];
+
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&access_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser accessToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
     

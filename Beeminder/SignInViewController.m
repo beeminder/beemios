@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([ABCurrentUser authenticationToken]) {
+    if ([ABCurrentUser accessToken]) {
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
@@ -61,7 +61,7 @@
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
-    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@", self.email.text, self.password.text];
+    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", self.email.text, self.password.text, kBeemiosSecret];
 
     [loginRequest setHTTPMethod:@"POST"];
     [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -87,11 +87,11 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
-    NSString *authenticationToken = [responseJSON objectForKey:@"authentication_token"];
+    NSString *accessToken = [responseJSON objectForKey:@"access_token"];
     
     NSString *username = [responseJSON objectForKey:@"username"];
 
-    [ABCurrentUser loginWithUsername:username authenticationToken:authenticationToken];
+    [ABCurrentUser loginWithUsername:username accessToken:accessToken];
     
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", [responseJSON objectForKey:@"id"], @"serverId", nil];
     

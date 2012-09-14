@@ -12,9 +12,9 @@
 
 + (User *)user;
 + (NSString *)username;
-+ (NSString *)authenticationToken;
++ (NSString *)accessToken;
 + (void)logout;
-+ (void)loginWithUsername:(NSString *)username authenticationToken:(NSString *)authenticationToken;
++ (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken;
 + (void)setUsername:(NSString *)username;
 
 @end

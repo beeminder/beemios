@@ -323,7 +323,7 @@
     [self.view endEditing:YES];
     self.datePicker.hidden = YES;
     self.dismissToolbar.hidden = YES;
-    if ([ABCurrentUser authenticationToken]) {
+    if ([ABCurrentUser accessToken]) {
         [GoalPushRequest roadDialRequestForGoal:self.goalObject withCompletionBlock:^{
             MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
             hud.labelText = @"Saved";
