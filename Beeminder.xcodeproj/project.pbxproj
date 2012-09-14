@@ -32,7 +32,6 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
-		A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1445579159A62FB00134BAF /* libCorePlot-CocoaTouch.a */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
@@ -325,7 +324,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A144557C159A631300134BAF /* libCorePlot-CocoaTouch.a in Frameworks */,
 				A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */,
 				A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
