@@ -19,10 +19,6 @@
 {
     // Override point for customization after application launch.
     [MagicalRecord setupCoreDataStack];
-//    UIApplication* app = [UIApplication sharedApplication];
-//    NSArray*    notifications = [app scheduledLocalNotifications];
-//    if ([notifications count] > 0)
-//        [app presentLocalNotificationNow:[notifications objectAtIndex:0]];
     return YES;
 }
 							
