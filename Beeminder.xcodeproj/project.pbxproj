@@ -18,7 +18,6 @@
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
 		A1253AA115A029F30058B495 /* GoalPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253AA015A029F30058B495 /* GoalPushRequest.m */; };
-		A12E48F4159197400014624E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E48F3159197400014624E /* GoalViewController.m */; };
 		A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F97E158FA32D002F151A /* GoalsTableViewController.m */; };
 		A133F9F1158FB27F002F151A /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9D9158FB27F002F151A /* NSObject+SBJson.m */; };
 		A133F9F2158FB27F002F151A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9DC158FB27F002F151A /* SBJsonParser.m */; };
@@ -150,8 +149,6 @@
 		A1253A9F15A029F30058B495 /* GoalPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPushRequest.h; sourceTree = "<group>"; };
 		A1253AA015A029F30058B495 /* GoalPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPushRequest.m; sourceTree = "<group>"; };
 		A126C9301592EE1700FE8CF8 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		A12E48F2159197400014624E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
-		A12E48F3159197400014624E /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		A133F97D158FA32D002F151A /* GoalsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsTableViewController.h; sourceTree = "<group>"; };
 		A133F97E158FA32D002F151A /* GoalsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsTableViewController.m; sourceTree = "<group>"; };
 		A133F9D8158FB27F002F151A /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -550,8 +547,6 @@
 				A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
-				A12E48F2159197400014624E /* GoalViewController.h */,
-				A12E48F3159197400014624E /* GoalViewController.m */,
 				A18A487715CE20F600E314B7 /* GradientViews.h */,
 				A18A487815CE20F600E314B7 /* GradientViews.m */,
 				A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */,
@@ -797,7 +792,6 @@
 				A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */,
 				A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */,
 				A1993CC2159007B700011568 /* SettingsViewController.m in Sources */,
-				A12E48F4159197400014624E /* GoalViewController.m in Sources */,
 				A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */,
 				A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */,
 				A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */,

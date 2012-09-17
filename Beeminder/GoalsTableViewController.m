@@ -27,13 +27,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.goalComparator = ^(id a, id b) {
+        double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
+        double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
+        if ([[a panicTime] doubleValue] + aBackburnerPenalty - ([[b panicTime] doubleValue] + bBackburnerPenalty) > 0) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    };
     [self.tableView setSectionFooterHeight:[self.tableView cellForRowAtIndexPath:[[NSIndexPath alloc] initWithIndex:0]].frame.size.height];
     
     User *user = [ABCurrentUser user];
 
-    NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
-    
-    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
+    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
@@ -180,17 +188,8 @@
     }
     
     User *user = [ABCurrentUser user];
-    NSComparator comparePanicTimes = ^(id a, id b) {
-        double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
-        double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
-        if ([[a panicTime] doubleValue] + aBackburnerPenalty - ([[b panicTime] doubleValue] + bBackburnerPenalty) > 0) {
-            return 1;
-        }
-        else {
-            return -1;
-        }
-        };
-    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
+
+    NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     
     self.title = @"Your Goals";

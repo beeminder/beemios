@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GoalViewController.h"
 #import "GoalSummaryViewController.h"
 #import "Goal+Resource.h"
 #import "User+Resource.h"
@@ -17,5 +16,6 @@
 @property (strong, nonatomic) NSMutableArray *goalObjects;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) NSComparator goalComparator;
 
 @end
