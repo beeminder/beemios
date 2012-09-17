@@ -180,7 +180,16 @@
     }
     
     User *user = [ABCurrentUser user];
-    NSComparator comparePanicTimes = ^(id a, id b) { return [[a panicTime] integerValue] - [[b panicTime] integerValue]; };
+    NSComparator comparePanicTimes = ^(id a, id b) {
+        double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
+        double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
+        if ([[a panicTime] doubleValue] + aBackburnerPenalty - ([[b panicTime] doubleValue] + bBackburnerPenalty) > 0) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+        };
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:comparePanicTimes];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     

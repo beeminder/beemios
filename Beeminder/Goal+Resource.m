@@ -143,6 +143,9 @@
         }
         
     }
+    else if (self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970]) {
+        return @"Success!";
+    }
     else {
         return [NSString stringWithFormat:@"Derailed!"];
     }
@@ -152,7 +155,12 @@
 {
     switch (self.losedateDays) {
         case -1:
-            return [UIColor redColor];
+            if ([[self losedateTextBrief:YES] isEqualToString:@"Derailed!"]) {
+                return [UIColor redColor];
+            }
+            else {
+                return [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
+            }
             break;
         case 0:
             return [UIColor redColor];

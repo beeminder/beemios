@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 9/1/12.
+//  Created by Andy Brett on 9/16/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -14,9 +14,9 @@
 @interface Goal : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * ephem;
+@property (nonatomic, retain) NSString * goal_type;
 @property (nonatomic, retain) NSNumber * goaldate;
 @property (nonatomic, retain) NSNumber * goalval;
-@property (nonatomic, retain) NSString * goal_type;
 @property (nonatomic, retain) NSString * graph_url;
 @property (nonatomic, retain) NSNumber * losedate;
 @property (nonatomic, retain) NSNumber * panic;
@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSString * slug;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
+@property (nonatomic, retain) NSString * burner;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end
