@@ -76,18 +76,28 @@
 
 - (void)loadGraphImage
 {
+    [self loadGraphImageIgnoringCache:NO];
+}
+
+- (void)loadGraphImageIgnoringCache:(BOOL)ignoreCache
+{
     if (self.goalObject.graph_url) {
-//        NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
-//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//
-//        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
-//            self.graphImage = image;
-//            [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
-//        }];
-//        [operation start];
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.goalObject.graph_url] options:NSDataReadingUncached error:nil];
-        self.graphImage = [[UIImage alloc] initWithData:imageData];
-        [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
+        NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
+        NSURLRequest *request;
+        if (ignoreCache) {
+            request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:3600];
+        }
+        else {
+             request = [NSURLRequest requestWithURL:url];
+        }
+
+        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+            self.graphImage = image;
+            [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
+            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+        }];
+        [operation start];
+        [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
     }
 }
 
@@ -168,7 +178,7 @@
             hud.labelText = @"Error";
         }
         else {
-            [self loadGraphImage];
+            [self loadGraphImageIgnoringCache:YES];
             hud.labelText = @"Saved";
         }
         hud.mode = MBProgressHUDModeText;
@@ -207,7 +217,7 @@
         self.graphIsUpdating = [[JSON objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
-            [self loadGraphImage];
+            [self loadGraphImageIgnoringCache:YES];
             [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
