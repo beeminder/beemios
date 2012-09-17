@@ -7,6 +7,7 @@
 //
 
 #import "GoalsTableViewController.h"
+#import "AFJSONRequestOperation.h"
 
 @interface GoalsTableViewController ()
 
