@@ -57,6 +57,7 @@
     }
     
     [welcome setNumberOfLines:0];
+    welcome.backgroundColor = [UIColor clearColor];
     [self.view addSubview:welcome];
     [self registerForKeyboardNotifications];
 }

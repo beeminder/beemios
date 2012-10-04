@@ -16,6 +16,7 @@
         <attribute name="graph_image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="graph_image_thumb" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="graph_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="initval" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="losedate" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="panic" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Double" syncable="YES"/>
@@ -35,7 +36,7 @@
     </entity>
     <elements>
         <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="315"/>
+        <element name="Goal" positionX="0" positionY="0" width="128" height="330"/>
         <element name="User" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>

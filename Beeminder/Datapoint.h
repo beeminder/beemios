@@ -2,7 +2,7 @@
 //  Datapoint.h
 //  Beeminder
 //
-//  Created by Andy Brett on 10/2/12.
+//  Created by Andy Brett on 10/4/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 

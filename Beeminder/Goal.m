@@ -2,7 +2,7 @@
 //  Goal.m
 //  Beeminder
 //
-//  Created by Andy Brett on 10/2/12.
+//  Created by Andy Brett on 10/4/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -18,17 +18,18 @@
 @dynamic goal_type;
 @dynamic goaldate;
 @dynamic goalval;
+@dynamic graph_image;
+@dynamic graph_image_thumb;
 @dynamic graph_url;
 @dynamic losedate;
 @dynamic panic;
 @dynamic rate;
 @dynamic serverId;
 @dynamic slug;
+@dynamic thumb_url;
 @dynamic title;
 @dynamic units;
-@dynamic thumb_url;
-@dynamic graph_image;
-@dynamic graph_image_thumb;
+@dynamic initval;
 @dynamic datapoints;
 @dynamic user;
 
