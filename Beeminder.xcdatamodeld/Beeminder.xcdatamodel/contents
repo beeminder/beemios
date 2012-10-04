@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="12A269" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="12C54" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Datapoint" representedClassName="Datapoint" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,12 +13,15 @@
         <attribute name="goal_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="goaldate" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="goalval" optional="YES" attributeType="Double" syncable="YES"/>
+        <attribute name="graph_image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="graph_image_thumb" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="graph_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="losedate" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="panic" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumb_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="units" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="datapoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Datapoint" inverseName="goal" inverseEntity="Datapoint" syncable="YES"/>
@@ -32,7 +35,7 @@
     </entity>
     <elements>
         <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="Goal" positionX="0" positionY="0" width="128" height="315"/>
         <element name="User" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>

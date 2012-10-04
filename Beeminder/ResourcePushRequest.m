@@ -10,11 +10,6 @@
 
 @implementation ResourcePushRequest
 
-@synthesize status = _status;
-@synthesize responseData = _responseData;
-@synthesize responseStatus = _responseStatus;
-@synthesize resource = _resource;
-
 - (NSString *)paramString
 {
     NSString *pString = @"";
@@ -33,6 +28,14 @@
     self.status = @"received response";
     NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
     self.responseStatus = [httpResponse statusCode];
+    if (self.responseStatus != 200 && [self.resource isKindOfClass:[Goal class]]) {
+        Goal *goal = (Goal *)self.resource;
+        if (!goal.serverId) {
+            [[NSManagedObjectContext MR_defaultContext] deleteObject:self.resource];
+            [[NSManagedObjectContext MR_defaultContext] MR_save];
+        }
+
+    }
     [self.responseData setLength:0];
 }
 

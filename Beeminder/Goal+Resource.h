@@ -29,5 +29,8 @@
 - (int)losedateMinutes;
 - (int)losedateSeconds;
 - (UIColor *)losedateColor;
+- (void)updateGraphImages;
+- (void)updateGraphImage;
+- (void)updateGraphImageThumb;
 
 @end

@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.rowHeight = 92.0f;
     self.goalComparator = ^(id a, id b) {
         double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
         double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
@@ -46,7 +47,9 @@
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
-    
+    for (Goal *goal in self.goalObjects) {
+        [goal updateGraphImageThumb];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -94,6 +97,7 @@
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self successfulFetchEverythingJSON:JSON hud:hud];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.tableView reloadData];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
     }];
@@ -126,21 +130,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Goal Cell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+//    static NSString *CellIdentifier = @"Goal Cell";
+//
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    
     if (indexPath.row >= self.goalObjects.count) {
         cell.textLabel.text = @"Add New Goal";
         cell.detailTextLabel.text = @"";
     }
     else {
-        Goal *goalObject = [self.goalObjects objectAtIndex:indexPath.row];
-        cell.textLabel.text = goalObject.title;
         if (self.goalObjects.count > 0) {
             Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
+            cell.textLabel.text = goal.title;
             cell.detailTextLabel.text = [goal losedateTextBrief:YES];
             cell.detailTextLabel.textColor = goal.losedateColor;
+            cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+            cell.indentationLevel = 3.0;
+            cell.indentationWidth = 40.0;
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 10, 106, 70)];
+            if (goal.graph_image_thumb) {
+                imageView.image = goal.graph_image_thumb;
+            }
+            else {
+                [MBProgressHUD showHUDAddedTo:imageView animated:YES];
+            }
+
+            [cell addSubview:imageView];
         }
     }
     return cell;
@@ -236,6 +253,13 @@
     [self.activityIndicator stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)refreshThumbnails
+{
+    for (Goal *goal in self.goalObjects) {
+        [goal updateGraphImages];
+    }
 }
 
 @end

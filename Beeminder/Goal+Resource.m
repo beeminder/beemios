@@ -177,4 +177,32 @@
     }
 }
 
+- (void)updateGraphImages
+{
+    [self updateGraphImage];
+    [self updateGraphImageThumb];
+}
+
+- (void)updateGraphImage
+{
+    NSURL *url = [NSURL URLWithString:self.graph_url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+        self.graph_image = image;
+    }];
+    [operation start];
+}
+
+- (void)updateGraphImageThumb
+{
+    NSURL *url = [NSURL URLWithString:self.thumb_url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+        self.graph_image_thumb = image;
+    }];
+    [operation start];
+}
+
 @end

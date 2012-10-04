@@ -13,6 +13,9 @@
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
+		A121927A161B664700902841 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1219279161B664700902841 /* Goal.m */; };
+		A121927D161B664700902841 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A121927C161B664700902841 /* User.m */; };
+		A1219280161B664800902841 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A121927F161B664800902841 /* Datapoint.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
@@ -51,9 +54,6 @@
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
-		A1A6424F1606D2A00035F172 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A6424E1606D2A00035F172 /* Datapoint.m */; };
-		A1A642521606D2A00035F172 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A642511606D2A00035F172 /* Goal.m */; };
-		A1A642551606D2A00035F172 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A642541606D2A00035F172 /* User.m */; };
 		A1A7E44E15CE461000711D3A /* ios_logo_bee_110.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */; };
 		A1A7E44F15CE461000711D3A /* ios_logo_bee_220.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */; };
 		A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */; };
@@ -138,6 +138,12 @@
 		A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+saveRoadDial.m"; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
+		A1219278161B664700902841 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1219279161B664700902841 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A121927B161B664700902841 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A121927C161B664700902841 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A121927E161B664800902841 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A121927F161B664800902841 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -214,12 +220,6 @@
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
 		A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalSummaryViewController.m; sourceTree = "<group>"; };
-		A1A6424D1606D2A00035F172 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A1A6424E1606D2A00035F172 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
-		A1A642501606D2A00035F172 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A1A642511606D2A00035F172 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A1A642531606D2A00035F172 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A1A642541606D2A00035F172 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bee_110.png; sourceTree = "<group>"; };
 		A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bee_220.png; sourceTree = "<group>"; };
 		A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bmndr_238.png; sourceTree = "<group>"; };
@@ -422,12 +422,12 @@
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A1A6424D1606D2A00035F172 /* Datapoint.h */,
-				A1A6424E1606D2A00035F172 /* Datapoint.m */,
-				A1A642501606D2A00035F172 /* Goal.h */,
-				A1A642511606D2A00035F172 /* Goal.m */,
-				A1A642531606D2A00035F172 /* User.h */,
-				A1A642541606D2A00035F172 /* User.m */,
+				A1219278161B664700902841 /* Goal.h */,
+				A1219279161B664700902841 /* Goal.m */,
+				A121927B161B664700902841 /* User.h */,
+				A121927C161B664700902841 /* User.m */,
+				A121927E161B664800902841 /* Datapoint.h */,
+				A121927F161B664800902841 /* Datapoint.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -851,9 +851,9 @@
 				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
 				A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */,
 				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,
-				A1A6424F1606D2A00035F172 /* Datapoint.m in Sources */,
-				A1A642521606D2A00035F172 /* Goal.m in Sources */,
-				A1A642551606D2A00035F172 /* User.m in Sources */,
+				A121927A161B664700902841 /* Goal.m in Sources */,
+				A121927D161B664700902841 /* User.m in Sources */,
+				A1219280161B664800902841 /* Datapoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
