@@ -12,7 +12,12 @@
 
 + (void)addGrayButtonGradient:(UIView *)view
 {
-    [GradientViews addGradient:view withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:[UIColor grayColor]];
+//    [GradientViews addGradient:view withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0f borderColor:[UIColor grayColor]];
+    view.backgroundColor = [UIColor grayColor];
+    view.layer.backgroundColor = [UIColor grayColor].CGColor;
+    view.layer.cornerRadius = 8.0f;
+    view.layer.borderColor = [UIColor grayColor].CGColor;
+    
 }
 
 + (void)addGradient:(UIView *)view withColor:(UIColor *)color startAtTop:(BOOL)startAtTop cornerRadius:(CGFloat)cornerRadius borderColor:(UIColor *)borderColor

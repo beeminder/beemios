@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     [self fetchGoalSlugs];
-    
+    self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
     UILabel *welcome = nil;
     
     if ([ABCurrentUser accessToken]){
@@ -55,8 +55,6 @@
         
         welcome.text = kWelcomeChooseGoalName;
     }
-    
-    [GradientViews addGradient:self.submitButton withColor:[UIColor grayColor] startAtTop:NO cornerRadius:8.0 borderColor:[UIColor grayColor]];
     
     [welcome setNumberOfLines:0];
     [self.view addSubview:welcome];

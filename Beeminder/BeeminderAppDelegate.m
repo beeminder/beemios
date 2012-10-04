@@ -13,7 +13,21 @@
 
 @implementation BeeminderAppDelegate
 
-@synthesize window = _window;
++ (UIButton *)standardGrayButtonWith:(UIButton *)button
+{
+    button.backgroundColor = [BeeminderAppDelegate grayButtonColor];
+    [button.layer setBorderWidth:1.0f];
+    [button.layer setBorderColor:[UIColor darkGrayColor].CGColor];
+    button.layer.cornerRadius = 5.0f;
+
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    return button;
+}
+
++ (UIColor *)grayButtonColor
+{
+    return [UIColor colorWithRed:184.0f/255.0 green:184.0f/255.0 blue:184.0f/255.0 alpha:1.0];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -29,7 +29,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [GradientViews addGrayButtonGradient:self.signOutButton];
+    self.signOutButton = [BeeminderAppDelegate standardGrayButtonWith:self.signOutButton];
+
     self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
 }
 

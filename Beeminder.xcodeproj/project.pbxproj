@@ -34,6 +34,10 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
+		A14A1FA7161E0B0000E2F3BB /* cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA5161E0B0000E2F3BB /* cell-noise.png */; };
+		A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */; };
+		A14A1FAB161E0F4200E2F3BB /* bg-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA9161E0F4200E2F3BB /* bg-noise.png */; };
+		A14A1FAC161E0F4200E2F3BB /* bg-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */; };
 		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
 		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
@@ -183,6 +187,10 @@
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		A14A1FA5161E0B0000E2F3BB /* cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise.png"; sourceTree = "<group>"; };
+		A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise@2x.png"; sourceTree = "<group>"; };
+		A14A1FA9161E0F4200E2F3BB /* bg-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-noise.png"; sourceTree = "<group>"; };
+		A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-noise@2x.png"; sourceTree = "<group>"; };
 		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
 		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
 		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
@@ -463,6 +471,10 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
+				A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */,
+				A14A1FA5161E0B0000E2F3BB /* cell-noise.png */,
+				A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */,
 				A1DD32DD15CF4E9F0077B774 /* Default.png */,
 				A1F82AC91601791B000E56DA /* Default-568h@2x.png */,
 				A1DD32DB15CF4E9B0077B774 /* Default@2x.png */,
@@ -762,6 +774,10 @@
 				A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */,
 				A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */,
 				A1F82ACA1601791B000E56DA /* Default-568h@2x.png in Resources */,
+				A14A1FA7161E0B0000E2F3BB /* cell-noise.png in Resources */,
+				A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */,
+				A14A1FAB161E0F4200E2F3BB /* bg-noise.png in Resources */,
+				A14A1FAC161E0F4200E2F3BB /* bg-noise@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

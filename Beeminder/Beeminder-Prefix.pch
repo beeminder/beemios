@@ -23,4 +23,5 @@
     #import "ABCurrentUser.h"
     #import "GradientViews.h"
     #import "MBProgressHUD.h"
+    #import "BeeminderAppDelegate.h"
 #endif

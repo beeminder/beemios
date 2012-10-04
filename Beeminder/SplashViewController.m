@@ -37,8 +37,8 @@
     }
     
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
-    [GradientViews addGrayButtonGradient:self.startTrackingButton];
-    [GradientViews addGrayButtonGradient:self.signInButton];
+    self.startTrackingButton = [BeeminderAppDelegate standardGrayButtonWith:self.startTrackingButton];
+    self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated

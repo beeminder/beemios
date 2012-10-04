@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
-    [GradientViews addGrayButtonGradient:self.submitButton];
+    self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
 }
 
 - (void)viewDidUnload

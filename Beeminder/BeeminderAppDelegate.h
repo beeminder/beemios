@@ -14,4 +14,7 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 
++ (UIButton *)standardGrayButtonWith:(UIButton *)button;
++ (UIColor *)grayButtonColor;
+
 @end

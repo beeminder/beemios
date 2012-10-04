@@ -36,8 +36,7 @@
         [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
     }
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
-    
-    [GradientViews addGrayButtonGradient:self.signInButton];
+    self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
 }
 
 - (void)viewDidUnload

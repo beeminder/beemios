@@ -37,10 +37,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     [self loadGraphImageIgnoreCache:NO];
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    [GradientViews addGrayButtonGradient:self.editGoalButton];
-    [GradientViews addGrayButtonGradient:self.addDataButton];
+    self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
+    self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     recognizer.delegate = self;

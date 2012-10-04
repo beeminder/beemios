@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     self.tableView.rowHeight = 92.0f;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.goalComparator = ^(id a, id b) {
         double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
         double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
@@ -156,6 +157,9 @@
             [cell addSubview:imageView];
         }
     }
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
+    cell.backgroundColor = [UIColor blueColor];
+    cell.layer.borderColor = [UIColor blueColor].CGColor;
     return cell;
 }
 
