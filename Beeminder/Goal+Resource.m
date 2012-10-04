@@ -185,22 +185,40 @@
 
 - (void)updateGraphImage
 {
-    NSURL *url = [NSURL URLWithString:self.graph_url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
-    
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
-        self.graph_image = image;
-    }];
-    [operation start];
+    [self updateGraphImageWithCompletionBlock:nil];
 }
 
 - (void)updateGraphImageThumb
+{
+    [self updateGraphImageThumbWithCompletionBlock:nil];
+}
+
+- (void)updateGraphImagesWithCompletionBlock:(void (^)())block
+{
+    [self updateGraphImageThumbWithCompletionBlock:nil];
+    [self updateGraphImageWithCompletionBlock:block];
+}
+
+- (void)updateGraphImageThumbWithCompletionBlock:(void (^)())block
 {
     NSURL *url = [NSURL URLWithString:self.thumb_url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
         self.graph_image_thumb = image;
+        if (block) block();
+    }];
+    [operation start];
+}
+
+- (void)updateGraphImageWithCompletionBlock:(void (^)())block
+{
+    NSURL *url = [NSURL URLWithString:self.graph_url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+        self.graph_image = image;
+        if (block) block();
     }];
     [operation start];
 }

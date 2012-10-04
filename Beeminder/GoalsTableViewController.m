@@ -130,10 +130,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    static NSString *CellIdentifier = @"Goal Cell";
-//
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
     if (indexPath.row >= self.goalObjects.count) {
@@ -214,6 +210,7 @@
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self resetAllLocalNotifications];
     [self.tableView reloadData];
+    [self refreshThumbnails];
 }
 
 - (void)resetAllLocalNotifications
@@ -258,7 +255,9 @@
 - (void)refreshThumbnails
 {
     for (Goal *goal in self.goalObjects) {
-        [goal updateGraphImages];
+        [goal updateGraphImageThumbWithCompletionBlock:^{
+            [self.tableView reloadData];
+        }];
     }
 }
 

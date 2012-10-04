@@ -19,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
-@property (strong, nonatomic) UIImage *graphImage;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property BOOL graphIsUpdating;
 @property (strong, nonatomic) NSTimer *graphPoller;

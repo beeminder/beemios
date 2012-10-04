@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self loadGraphImageIgnoreCache:NO];
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [GradientViews addGrayButtonGradient:self.editGoalButton];
     [GradientViews addGrayButtonGradient:self.addDataButton];
@@ -76,28 +76,19 @@
 
 - (void)loadGraphImage
 {
-    [self loadGraphImageIgnoringCache:NO];
+    [self loadGraphImageIgnoreCache:NO];
 }
 
-- (void)loadGraphImageIgnoringCache:(BOOL)ignoreCache
+- (void)loadGraphImageIgnoreCache:(BOOL)ignoreCache
 {
-    if (self.goalObject.graph_url) {
-        NSURL *url = [NSURL URLWithString:self.goalObject.graph_url];
-        NSURLRequest *request;
-        if (ignoreCache) {
-            request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:3600];
-        }
-        else {
-             request = [NSURLRequest requestWithURL:url];
-        }
-
-        AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
-            self.graphImage = image;
-            [self.graphButton setBackgroundImage:self.graphImage forState:UIControlStateNormal];
-            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+    if (ignoreCache || !self.goalObject.graph_image) {
+        [self.goalObject updateGraphImageWithCompletionBlock:^(void){
+            [self loadGraphImageIgnoreCache:NO];
         }];
-        [operation start];
-        [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
+    }
+    else {
+        [self.graphButton setBackgroundImage:self.goalObject.graph_image forState:UIControlStateNormal];
+        [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
     }
 }
 
@@ -178,7 +169,7 @@
             hud.labelText = @"Error";
         }
         else {
-            [self loadGraphImageIgnoringCache:YES];
+            [self loadGraphImageIgnoreCache:YES];
             hud.labelText = @"Saved";
         }
         hud.mode = MBProgressHUDModeText;
@@ -217,7 +208,7 @@
         self.graphIsUpdating = [[JSON objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
-            [self loadGraphImageIgnoringCache:YES];
+            [self loadGraphImageIgnoreCache:YES];
             [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -291,7 +282,7 @@
 {
     if ([segue.identifier isEqualToString:@"segueToGraphView"]) {
         GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
-        ggvCon.graphImage = self.graphImage;
+        ggvCon.graphImage = self.goalObject.graph_image;
     }
     else {
         [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
