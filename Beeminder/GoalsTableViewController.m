@@ -230,8 +230,8 @@
         [self.tableView reloadData];
         [self refreshThumbnails];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    });
-    [self resetAllLocalNotifications];
+        [self resetAllLocalNotifications];
+    }); 
 }
 
 - (void)resetAllLocalNotifications
