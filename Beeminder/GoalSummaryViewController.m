@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 
-    [self loadGraphImageIgnoreCache:NO];
+    [self loadGraphImageIgnoreCache:YES];
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
@@ -84,7 +84,9 @@
     }
     else {
         [self.graphButton setBackgroundImage:self.goalObject.graph_image forState:UIControlStateNormal];
-        [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+        if (!self.graphPoller || ![self.graphPoller isValid]) {
+            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+        }
     }
 }
 
@@ -259,12 +261,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)modalDidSaveRoadDial
-{
-    [self pollUntilGraphIsNotUpdating];
-}
-
 
 - (void)viewDidUnload {
     [self setGraphButton:nil];
