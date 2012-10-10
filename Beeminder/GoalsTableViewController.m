@@ -90,7 +90,7 @@
 
     NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&access_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser accessToken]]];
     
-    NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl];
+    NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
     
     [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
     MBProgressHUD *hud;
