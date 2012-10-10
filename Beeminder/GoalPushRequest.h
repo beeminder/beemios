@@ -6,18 +6,18 @@
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "ResourcePushRequest.h"
 #import "Goal+Resource.h"
 
-@interface GoalPushRequest : ResourcePushRequest
+@interface GoalPushRequest : NSObject
 
-@property NSUInteger responseStatus;
-@property (strong, nonatomic) NSMutableData *responseData;
+typedef void(^CompletionBlock)();
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock;
++ (GoalPushRequest *)requestForGoal:(Goal *)goal;
 
-+ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock;
++ (GoalPushRequest *)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock;
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withCompletionBlock:(CompletionBlock)completionBlock;
++ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock;
+
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
 
 @end

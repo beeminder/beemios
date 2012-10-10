@@ -19,5 +19,6 @@
 - (NSString *)readURL;
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
+- (NSString *)paramString;
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoalGraphViewController.h"
 
 @interface DashboardNavigationController : UINavigationController
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

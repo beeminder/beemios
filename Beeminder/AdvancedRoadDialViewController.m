@@ -8,6 +8,8 @@
 
 #import "AdvancedRoadDialViewController.h"
 #import "RoadDialViewController.h"
+#import "MainTabBarViewController.h"
+#import "NewGoalViewController.h"
 
 @interface AdvancedRoalDialViewController ()
 
@@ -24,9 +26,22 @@
     return self;
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *gType = self.goalObject.goal_type;
+    if ([[[[BeeminderAppDelegate goalTypesInfo] objectForKey:gType] objectForKey:kKyoomKey] boolValue]) {
+        self.goalValLabel.text = @"Goal total";
+    }
+    else {
+        self.goalValLabel.text = @"Value";
+    }
 
     self.switchCollection = [[NSMutableArray alloc] init];
     if (self.rdvCon) {
@@ -62,6 +77,20 @@
     self.textFieldCollection = [self.textFieldCollection sortedArrayUsingComparator:compareTags];
     self.switchCollection = [NSMutableArray arrayWithArray:[self.switchCollection sortedArrayUsingComparator:compareTags]];
     
+    if (!self.goalObject) {
+        self.goalObject = [BeeminderAppDelegate sharedSessionGoal];
+    }
+    
+    if (self.goalObject.goalval && self.goalObject.rate && self.goalObject.goaldate) {
+        NSLog(@"Should not have all three dial params set.");
+    }
+    
+    if (!self.goalObject.goalval && !self.goalObject.rate && !self.goalObject.goaldate) {
+        NSLog(@"Zero dial params set");
+        self.goalObject.rate = [NSNumber numberWithDouble:0];
+        self.goalObject.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSinceNow:365*24*3600] timeIntervalSince1970]];
+    }
+
     if (self.goalObject.goalval) {
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
         [self.goalValueSwitch setOn:YES animated:NO ignoreControlEvents:YES];
@@ -142,6 +171,7 @@
     [self setSwitchCollection:nil];
     [self setTextFieldCollection:nil];
     [self setDelayLabel:nil];
+    [self setGoalValLabel:nil];
     [super viewDidUnload];
 }
 
@@ -165,7 +195,7 @@
     double diff = weeks*rate;
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO inContext:[NSManagedObjectContext MR_defaultContext]];
 
     double goalVal = [datapoint.value doubleValue] + diff;
     
@@ -201,7 +231,7 @@
     NSTimeInterval interval = [date timeIntervalSinceNow];
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
+    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO inContext:[NSManagedObjectContext MR_defaultContext]];
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -319,33 +349,38 @@
         self.goalObject.goalval = nil;
     }
     
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
     [self.view endEditing:YES];
     self.datePicker.hidden = YES;
     self.dismissToolbar.hidden = YES;
-    if ([ABCurrentUser accessToken]) {
-        [GoalPushRequest roadDialRequestForGoal:self.goalObject withCompletionBlock:^{
+    if (![self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
+        [GoalPushRequest requestForGoal:self.goalObject roadDial:YES withSuccessBlock:^{
             MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
             hud.labelText = @"Saved";
             hud.mode = MBProgressHUDModeText;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
                 [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
-                [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-                    [self.rdvCon modalDidSaveRoadDial];
-                    [self.gsvCon modalDidSaveRoadDial];
-                }];
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                if ([self.presentingViewController isMemberOfClass:[MainTabBarViewController class]]) {
+                    MainTabBarViewController *mtvCon = (MainTabBarViewController *)self.presentingViewController;
+                    UINavigationController *navCon = [mtvCon.viewControllers objectAtIndex:kGoalsTableControllerIndex];
+                    GoalSummaryViewController *gsvCon = (GoalSummaryViewController *)navCon.topViewController;
+                    [gsvCon pollUntilGraphIsNotUpdating];
+                }
+            });
+        } withErrorBlock:^{
+            MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+            hud.labelText = @"Could not save";
+            hud.mode = MBProgressHUDModeText;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             });
         }];
+        
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Saving...";
     }
     else {
-        [self.rdvCon dismissViewControllerAnimated:YES completion:^{
-            [self.rdvCon modalDidSaveRoadDial];
-        }];
-        [self.gsvCon dismissViewControllerAnimated:YES completion:^{
-            [self.gsvCon modalDidSaveRoadDial];
-        }];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GoalGraphViewController.h"
 
 @class AdvancedRoalDialViewController;
 
@@ -27,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *addDataButton;
 
 - (void)pollUntilGraphIsNotUpdating;
+- (NSUInteger)supportedInterfaceOrientations;
 
 @end

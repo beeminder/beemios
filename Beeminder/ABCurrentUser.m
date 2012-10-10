@@ -12,7 +12,7 @@
 
 + (User *)user
 {
-    return [User MR_findFirstByAttribute:@"username" withValue:[ABCurrentUser username]];
+    return [User MR_findFirstByAttribute:@"username" withValue:[ABCurrentUser username] inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
 + (NSString *)username

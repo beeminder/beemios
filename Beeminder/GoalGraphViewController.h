@@ -13,5 +13,5 @@
 @property (strong, nonatomic) NSString *graphURL;
 @property (strong, nonatomic) UIImage *graphImage;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

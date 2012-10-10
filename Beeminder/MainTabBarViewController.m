@@ -1,19 +1,18 @@
 //
-//  DashboardNavigationController.m
+//  MainTabBarViewController.m
 //  Beeminder
 //
-//  Created by Andy Brett on 6/28/12.
+//  Created by Andy Brett on 10/7/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "DashboardNavigationController.h"
+#import "MainTabBarViewController.h"
 
-@interface DashboardNavigationController ()
+@interface MainTabBarViewController ()
 
 @end
 
-@implementation DashboardNavigationController
-
+@implementation MainTabBarViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,11 +33,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

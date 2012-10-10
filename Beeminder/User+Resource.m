@@ -13,7 +13,7 @@
 
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict
 {
-    User *user = [User MR_findFirstByAttribute:@"username" withValue:[userDict objectForKey:@"username"]];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:[userDict objectForKey:@"username"] inContext:[NSManagedObjectContext MR_defaultContext]];
     
     if (!user) user = [User MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
     
@@ -55,9 +55,9 @@
         if ([key isEqualToString:@"datapoints"]) {
             NSDictionary *datapointDict;
             for (datapointDict in obj) {
-                Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"]];
+                Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
                 if (!datapoint) {
-                    datapoint = [Datapoint MR_createEntity];
+                    datapoint = [Datapoint MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
                 }
                 datapoint.goal = goal;
                 datapoint.comment = [datapointDict objectForKey:@"comment"];
@@ -83,7 +83,7 @@
 
 - (void)pushToRemote
 {
-    [UserPushRequest requestForUser:self pushAssociations:NO additionalParams:nil completionBlock:nil];
+    [UserPushRequest requestForUser:self pushAssociations:NO additionalParams:nil successBlock:nil errorBlock:nil];
 }
 
 - (NSString *)createURL
@@ -104,6 +104,11 @@
 - (NSString *)deleteURL
 {
     return [self readURL];
+}
+
+- (NSString *)paramString
+{
+    return [NSString stringWithFormat:@"username=%@&email=%@", self.username, self.email];
 }
 
 @end

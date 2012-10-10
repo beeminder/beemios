@@ -15,10 +15,6 @@
 
 @implementation SignUpViewController
 
-@synthesize validationWarningLabel = _validationWarningLabel;
-@synthesize usernameTextField = _usernameTextField;
-@synthesize scrollView = _scrollView;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerForKeyboardNotifications];
     self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
 }
 
@@ -47,9 +42,9 @@
     [self setSubmitButton:nil];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -90,47 +85,22 @@
     NSDictionary *paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
     
     user = [User writeToUserWithDictionary:userDict];
+    user.goals = [NSSet setWithObject:[BeeminderAppDelegate sharedSessionGoal]];
     
-    CompletionBlock completionBlock = ^() {
-        [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+    CompletionBlock successBlock = ^{
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];        
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     };
     
-    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict completionBlock:completionBlock];
-}
-
-#pragma mark Keyboard notifications
-
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    CompletionBlock errorBlock = ^{
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        self.validationWarningLabel.text = @"Username already taken";
+        self.validationWarningLabel.hidden = NO;
+    };
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    CGRect rect = [[self.scrollView.subviews objectAtIndex:0] frame];
-    [self.scrollView setContentSize:CGSizeMake(rect.size.width, rect.size.height + kbSize.height)];
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    CGRect aRect = [[self.scrollView.subviews objectAtIndex:0] frame];
-    aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y-kbSize.height);
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
-    }
-
-}
-
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    [self.scrollView setContentOffset:CGPointMake(0.0, 0.0)animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.view endEditing:YES];
+    [UserPushRequest requestForUser:user pushAssociations:YES additionalParams:paramsDict successBlock:successBlock errorBlock:errorBlock];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

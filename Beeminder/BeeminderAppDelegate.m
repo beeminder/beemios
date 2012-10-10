@@ -8,7 +8,6 @@
 
 #import "BeeminderAppDelegate.h"
 #import <CoreData/CoreData.h>
-#import "BeeminderViewController.h"
 #import "CoreData+MagicalRecord.h"
 
 @implementation BeeminderAppDelegate
@@ -27,6 +26,56 @@
 + (UIColor *)grayButtonColor
 {
     return [UIColor colorWithRed:184.0f/255.0 green:184.0f/255.0 blue:184.0f/255.0 alpha:1.0];
+}
+
+- (Goal *)sessionGoal
+{
+    if (!_sessionGoal) {
+        self.sessionGoal = [Goal MR_createEntity];
+    }
+    return _sessionGoal;
+}
+
++ (Goal *)sharedSessionGoal
+{
+    BeeminderAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    return delegate.sessionGoal;
+}
+
++ (void)clearSessionGoal
+{
+    BeeminderAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    delegate.sessionGoal = nil;
+}
+
++ (NSString *)slugFromTitle:(NSString *)title
+{
+    NSRegularExpression *whitespaceRegex = [NSRegularExpression regularExpressionWithPattern:@"[\\s]" options:0 error:nil];
+    
+    NSString *noSpaces = [whitespaceRegex stringByReplacingMatchesInString:title options:0 range:NSMakeRange(0, title.length) withTemplate:@"-"];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^A-Za-z0-9\\-\\_]" options:0 error:nil];
+    
+    NSString *slug = [regex stringByReplacingMatchesInString:noSpaces options:0 range:NSMakeRange(0, noSpaces.length) withTemplate:@""];
+    
+    return slug;
+}
+
++ (NSDictionary *)goalTypesInfo
+{
+    NSDictionary *fatLoser = [NSDictionary dictionaryWithObjectsAndKeys:kFatloserPrivate, kPrivateNameKey, kFatloserPublic, kPublicNameKey, kFatloserDetails, kDetailsKey, kFatloserInstructions, kInstructionsKey, [NSNumber numberWithInt:3], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
+    
+    NSDictionary *hustler = [NSDictionary dictionaryWithObjectsAndKeys:kHustlerPrivate, kPrivateNameKey, kHustlerPublic, kPublicNameKey, kHustlerDetails, kDetailsKey, kHustlerInstructions, kInstructionsKey, [NSNumber numberWithInt:1], kSortPriorityKey, [NSNumber numberWithBool:YES], kKyoomKey, nil];
+    
+    NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPrivate, kPrivateNameKey, kBikerPublic, kPublicNameKey, kBikerDetails, kDetailsKey, kBikerInstructions, kInstructionsKey, [NSNumber numberWithInt:2], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
+    
+    NSDictionary *inboxer = [NSDictionary dictionaryWithObjectsAndKeys:kInboxerPrivate, kPrivateNameKey, kInboxerPublic, kPublicNameKey, kInboxerDetails, kDetailsKey, kBikerInstructions, kInstructionsKey, [NSNumber numberWithInt:4], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
+    
+    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:kCustomPrivate, kPrivateNameKey, kCustomPublic, kPublicNameKey, kCustomDetails, kDetailsKey, kCustomInstructions, kInstructionsKey, [NSNumber numberWithInt:6], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
+    
+    NSDictionary *drinker = [NSDictionary dictionaryWithObjectsAndKeys:kDrinkerPrivate, kPrivateNameKey, kDrinkerPublic, kPublicNameKey, kDrinkerDetails, kDetailsKey, kDrinkerInstructions, kInstructionsKey, [NSNumber numberWithInt:5], kSortPriorityKey, [NSNumber numberWithBool:YES], kKyoomKey, nil];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, custom, kCustomPrivate, nil];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

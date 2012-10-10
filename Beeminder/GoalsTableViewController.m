@@ -25,11 +25,17 @@
     return self;
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.rowHeight = 92.0f;
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
     self.goalComparator = ^(id a, id b) {
         double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
         double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
@@ -90,15 +96,25 @@
     MBProgressHUD *hud;
     if (!lastUpdatedAt || lastUpdatedAt == 0) {
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        //    hud.progress = 0.0;
-        //    hud.mode = MBProgressHUDModeAnnularDeterminate;
-        hud.labelText = @"Importing Beeswax";
+        hud.labelText = @"Fetching Beeswax...";
     }
 
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulFetchEverythingJSON:JSON hud:hud];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.tableView reloadData];
+        if (!lastUpdatedAt || lastUpdatedAt == 0) {
+            hud.mode = MBProgressHUDModeDeterminate;
+            hud.progress = 0.0f;
+            hud.labelText = @"Importing Beeswax...";
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [self successfulFetchEverythingJSON:JSON progressCallback:^(float incrementBy){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [hud setProgress:hud.progress + incrementBy];
+                    [self.tableView reloadData];
+                });
+            }];
+        });
+
+
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
     }];
@@ -110,11 +126,6 @@
 {
     [self setRefreshButton:nil];
     [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
@@ -158,8 +169,6 @@
         }
     }
     cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
-    cell.backgroundColor = [UIColor blueColor];
-    cell.layer.borderColor = [UIColor blueColor].CGColor;
     return cell;
 }
 
@@ -168,7 +177,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row >= self.goalObjects.count) {
-        [self performSegueWithIdentifier:@"segueToAddGoal" sender:self];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        UINavigationController *newGoalNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"newGoalNavigationController"];
+        [self presentViewController:newGoalNavigationController animated:YES completion:nil];
     }
     else {
         [self performSegueWithIdentifier:@"segueToGoalSummaryView" sender:self];
@@ -188,33 +199,39 @@
     }
 }
 
-- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON hud:(MBProgressHUD *)hud
+- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON progressCallback:(void(^)(float incrementBy))progressCallback
 {
-    [self.activityIndicator stopAnimating];
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
-    self.navigationItem.rightBarButtonItem = self.refreshButton;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicator stopAnimating];
+        self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+        self.navigationItem.rightBarButtonItem = self.refreshButton;
+    });
     
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     [self.goalObjects removeAllObjects];
     
     for (NSDictionary *goalDict in goals) {
-        hud.progress += 1.0/goals.count;
+        progressCallback(1.0f/[goals count]);
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
-        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
+        Goal *goal = [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
+        [self.goalObjects addObject:goal];
     }
-    
     User *user = [ABCurrentUser user];
-
+    [self.goalObjects removeAllObjects];
+    
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     
     self.title = @"Your Goals";
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [self refreshThumbnails];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    });
     [self resetAllLocalNotifications];
-    [self.tableView reloadData];
-    [self refreshThumbnails];
 }
 
 - (void)resetAllLocalNotifications
@@ -260,6 +277,10 @@
 {
     for (Goal *goal in self.goalObjects) {
         [goal updateGraphImageThumbWithCompletionBlock:^{
+            [self.goalObjects removeAllObjects];
+            User *user = [ABCurrentUser user];
+            NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
+            self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
             [self.tableView reloadData];
         }];
     }

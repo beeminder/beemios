@@ -15,13 +15,13 @@
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
                 forUserWithUsername:(NSString *)username;
 
-- (void)pushToRemoteWithCompletionBlock:(CompletionBlock)completionBlock;
+- (void)pushToRemoteWithSuccessBlock:(CompletionBlock)completionBlock;
 - (NSString *)createURL;
 - (NSString *)readURL;
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
 - (NSString *)roadDialURL;
-- (NSDictionary *)dictionary;
+- (NSString *)paramString;
 - (NSString *)losedateTextBrief:(BOOL)brief;
 - (NSNumber *)panicTime;
 - (int)losedateDays;

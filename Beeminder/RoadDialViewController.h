@@ -10,27 +10,21 @@
 #import "Goal+Resource.h"
 #import "GoalsTableViewController.h"
 #import "AdvancedRoadDialViewController.h"
-#import "UIViewController+saveRoadDial.h"
 #import "ChooseGoalTypeViewController.h"
 
 @interface RoadDialViewController : UIViewController
-    <UIPickerViewDataSource,
-     UIPickerViewDelegate>
 
-@property (nonatomic, strong) NSString *goalRateDenominatorUnits;
-@property (nonatomic, strong) NSString *goalRateNumeratorUnits;
-@property NSInteger goalRateNumeratorIndex;
-@property (strong, nonatomic) IBOutlet UIToolbar *pickerToolbar;
-@property (strong, nonatomic) Goal *goalObject;
-@property (strong, nonatomic) IBOutlet UIPickerView *goalRateNumeratorPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *goalRateDenominatorPickerView;
-@property int pickerOffset;
-@property (strong, nonatomic) IBOutlet UILabel *goalRateNumeratorLabel;
-@property (strong, nonatomic) IBOutlet UILabel *goalRateDenominatorLabel;
-@property (strong, nonatomic) IBOutlet UILabel *goalRateNumeratorUnitsLabel;
-@property int fatLoserIndex;
-
-- (void)resetRoadDial;
-- (IBAction)showAdvanced:(UIBarButtonItem *)sender;
-
+@property (strong, nonatomic) IBOutlet UILabel *goalTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goalDetailsLabel;
+@property (strong, nonatomic) IBOutlet UITextField *firstTextField;
+@property (strong, nonatomic) IBOutlet UILabel *firstLabel;
+@property (strong, nonatomic) IBOutlet UISwitch *startFlatSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *ephemSwitch;
+@property (strong, nonatomic) IBOutlet UIButton *roadDialButton;
+@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) NSArray *goalSlugs;
+@property (strong, nonatomic) IBOutlet UIButton *saveGoalButton;
+@property (strong, nonatomic) IBOutlet UILabel *goalSlugExistsWarningLabel;
+- (NSUInteger)supportedInterfaceOrientations;
 @end

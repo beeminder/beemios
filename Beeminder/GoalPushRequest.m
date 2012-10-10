@@ -10,20 +10,27 @@
 
 @implementation GoalPushRequest
 
-
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock
++ (GoalPushRequest *)requestForGoal:(Goal *)goal
 {
-    return [GoalPushRequest requestForGoal:goal roadDial:NO withCompletionBlock:completionBlock];
+    return [GoalPushRequest requestForGoal:goal withSuccessBlock:nil];
 }
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withCompletionBlock:(CompletionBlock)completionBlock
++ (GoalPushRequest *)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock
+{
+    return [GoalPushRequest requestForGoal:goal roadDial:NO withSuccessBlock:successBlock withErrorBlock:nil];
+}
+
++ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock
+{
+    return [GoalPushRequest requestForGoal:goal roadDial:YES withSuccessBlock:successBlock withErrorBlock:nil];
+}
+
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock
 {
     GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
-    goalPushRequest.resource = goal;
-    goalPushRequest.completionBlock = completionBlock;
 
-    NSString *pString = [goalPushRequest paramString];
-    pString = [pString stringByAppendingFormat:@"access_token=%@&", [ABCurrentUser accessToken]];
+    NSString *pString = [goal paramString];
+    pString = [pString stringByAppendingFormat:@"&access_token=%@", [ABCurrentUser accessToken]];
     
     NSURL *url;
     NSMutableURLRequest *request;
@@ -46,19 +53,28 @@
         [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
     }
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:goalPushRequest];
+    AFJSONRequestOperation *afRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+
+        if (response.statusCode == 200) {
+            [[NSManagedObjectContext MR_defaultContext] MR_save];
+        }
+        else {
+            [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+        }
+        if (successBlock) successBlock();
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@", error);
+        if (errorBlock) errorBlock();
+        if (!goal.serverId) {
+            [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+            [[NSManagedObjectContext MR_defaultContext] MR_save];
+        }
+    }];
     
-    if (connection) {
-        goalPushRequest.responseData = [NSMutableData data];
-        goalPushRequest.status = @"sent";
-    }
+    [afRequest start];
     
     return goalPushRequest;
-}
-
-+ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withCompletionBlock:(CompletionBlock)completionBlock
-{
-    return [GoalPushRequest requestForGoal:goal roadDial:YES withCompletionBlock:completionBlock];
 }
 
 @end

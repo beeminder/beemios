@@ -17,18 +17,18 @@
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username inContext:defaultContext];
     
     Goal *goal = [user writeToGoalWithDictionary:goalDict];
-    [defaultContext save:nil];
+    [defaultContext MR_save];
     return goal;
 }
 
-- (void)pushToRemoteWithCompletionBlock:(CompletionBlock)completionBlock
+- (void)pushToRemoteWithSuccessBlock:(CompletionBlock)successBlock
 {
-    [GoalPushRequest requestForGoal:self withCompletionBlock:completionBlock];
+    [GoalPushRequest requestForGoal:self withSuccessBlock:successBlock];
 }
 
-- (void)pushRoadDialToRemoteWithCompletionBlock:(CompletionBlock)completionBlock
+- (void)pushRoadDialToRemoteWithSuccessBlock:(CompletionBlock)successBlock
 {
-    [GoalPushRequest roadDialRequestForGoal:self withCompletionBlock:completionBlock];
+    [GoalPushRequest roadDialRequestForGoal:self withSuccessBlock:successBlock];
 }
 
 - (NSString *)createURL
@@ -56,17 +56,27 @@
     return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/dial_road.json", kBaseURL, kAPIPrefix, self.user.username, self.slug];
 }
 
-- (NSDictionary *)dictionary
+- (NSString *)paramString
 {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    for (NSString *key in [[self.entity attributesByName] allKeys]) {
-        NSString * val = [self performSelector:NSSelectorFromString(key)];
-        if (val) {
-            [dict setObject:val forKey:key];
-        }
-
+    NSString *pString = [NSString stringWithFormat:@"ephem=%d&goal_type=%@&slug=%@&title=%@", [self.ephem integerValue], self.goal_type, self.slug, self.title];
+    
+    if (self.burner) {
+        pString = [pString stringByAppendingFormat:@"&burner=%@", self.burner];
     }
-    return dict;
+    
+    if (self.goaldate) {
+        pString = [pString stringByAppendingFormat:@"&goaldate=%f", [self.goaldate doubleValue]];
+    }
+    
+    if (self.rate) {
+        pString = [pString stringByAppendingFormat:@"&rate=%f", [self.rate doubleValue]];
+    }
+    
+    if (self.goalval) {
+        pString = [pString stringByAppendingFormat:@"&goalval=%f", [self.goalval doubleValue]];
+    }
+    
+    return pString;
 }
 
 - (int)losedateDays
@@ -143,7 +153,7 @@
         }
         
     }
-    else if (self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970]) {
+    else if (self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue]) {
         return @"Success!";
     }
     else {

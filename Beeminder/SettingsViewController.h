@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BeeminderViewController.h"
 
 @interface SettingsViewController : UIViewController
 
 - (IBAction)signOutButtonPressed;
 @property (strong, nonatomic) IBOutlet UILabel *loggedInAsLabel;
 @property (strong, nonatomic) IBOutlet UIButton *signOutButton;
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

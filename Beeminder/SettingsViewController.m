@@ -40,21 +40,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (IBAction)signOutButtonPressed {
-    [ABCurrentUser logout];
-    
-    UINavigationController *navCon = [self navigationController];
-    
-    while (![navCon isKindOfClass:[BeeminderViewController class]]) {
-        navCon = [navCon navigationController];
-    }
-    
-    [navCon popToRootViewControllerAnimated:YES];
+    [ABCurrentUser logout];    
+    [[[self tabBarController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidUnload {

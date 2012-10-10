@@ -29,34 +29,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.pickerOffset = 20;
-    self.fatLoserIndex = 3;
-
-    self.goalRateNumeratorUnitsOptions = [[NSArray alloc] initWithObjects:@"times", @"minutes", @"hours", @"pounds", nil];   
+    self.goalSlugExistsWarningLabel.hidden = YES;
+    self.roadDialButton.hidden = YES;
+    self.roadDialButton = [BeeminderAppDelegate standardGrayButtonWith:self.roadDialButton];
+    self.saveGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.saveGoalButton];
     
-    self.goalRateDenominatorUnitsOptions = [[NSArray alloc] initWithObjects:@"day", @"week", @"month", nil];
-    self.goalRateNumeratorIndex =  self.pickerOffset + 5;
-    self.goalRateNumeratorUnits = @"times";
-    self.goalRateDenominatorUnits = @"week";
-    [self.goalRateNumeratorPickerView selectRow:self.pickerOffset inComponent:0 animated:YES];
-    [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
-    [self.goalRateNumeratorPickerView selectRow:self.pickerOffset + 5 inComponent:0 animated:YES];
-    [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
-    self.goalRateNumeratorLabel.hidden = YES;
-    self.goalRateNumeratorUnitsLabel.hidden = YES;
-    self.goalRateDenominatorLabel.hidden = YES;
+    [self fetchGoalSlugs];
+    [self setGoalToDefaults];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if ([self.goalObject.goal_type isEqualToString:@"fatloser"]) {
-        [self.goalRateNumeratorPickerView selectRow:3 inComponent:1 animated:YES];
+    NSDictionary *goalTypeInfo = [[BeeminderAppDelegate goalTypesInfo] objectForKey:[BeeminderAppDelegate sharedSessionGoal].goal_type];
+    self.goalTypeLabel.text = [goalTypeInfo objectForKey:kPublicNameKey];
+    self.goalDetailsLabel.text = [goalTypeInfo objectForKey:kDetailsKey];
+    
+    if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
+        [BeeminderAppDelegate sharedSessionGoal].initval = [NSNumber numberWithInt:0];
     }
-    else if ([self.goalObject.goal_type isEqualToString:@"hustler"]) {
-        [self.goalRateNumeratorPickerView selectRow:0 inComponent:1 animated:YES];
+
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
+        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
+        self.firstLabel.text = kWeeklyEstimateText;
     }
-    else if ([self.goalObject.goal_type isEqualToString:@"biker"]) {
-        // ask for today's value
+    else {
+        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:17.0]];
+        self.firstLabel.text = @"Current value:";
+    }
+    
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
+        self.firstLabel.hidden = YES;
+        self.firstTextField.hidden = YES;
     }
 }
 
@@ -66,215 +69,186 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)viewDidUnload {
-    [self setPickerToolbar:nil];
-    [self setGoalRateNumeratorPickerView:nil];
-    [self setGoalRateDenominatorPickerView:nil];
-    [self setGoalRateNumeratorLabel:nil];
-    [self setGoalRateDenominatorLabel:nil];
-    [self setGoalRateNumeratorUnitsLabel:nil];
+    [self setGoalTypeLabel:nil];
+    [self setGoalDetailsLabel:nil];
+    [self setFirstTextField:nil];
+    [self setFirstLabel:nil];
+    [self setStartFlatSwitch:nil];
+    [self setRoadDialButton:nil];
+    [self setTitleTextField:nil];
+    [self setTitleLabel:nil];
+    [self setSaveGoalButton:nil];
+    [self setGoalSlugExistsWarningLabel:nil];
+    [self setEphemSwitch:nil];
     [super viewDidUnload];
 }
 
-- (NSInteger)goalRateNumeratorWithOffset
+- (void)fetchGoalSlugs
 {
-    return self.goalRateNumeratorIndex - self.pickerOffset;
+    NSString *username = [ABCurrentUser username];
+    
+    NSArray *goals = [Goal MR_findByAttribute:@"user.username" withValue:username inContext:[NSManagedObjectContext MR_defaultContext]];
+    
+    Goal *g = nil;
+    NSMutableArray *slugs = [[NSMutableArray alloc] init];
+    
+    for (g in goals) {
+        [slugs addObject:g.slug];
+    }
+    [slugs addObject:@"new"];
+    
+    self.goalSlugs = [NSArray arrayWithArray:(NSArray *)slugs];
+    
 }
 
-- (NSNumber *)weeklyRate {
-    if (self.goalObject.goaldate && self.goalObject.goalval) {
-        return nil;
+- (IBAction)titleTextFieldEditingChanged
+{
+    if (self.titleTextField.text) {
+        self.saveGoalButton.enabled = YES;
+        [self checkForExistingSlug];
     }
-    if ([self.goalRateDenominatorUnits isEqualToString:@"week"]) {
-        return [NSNumber numberWithInt:[self goalRateNumeratorWithOffset]];
-    }
-    else if ([self.goalRateDenominatorUnits isEqualToString:@"day"]) {
-        return [NSNumber numberWithInt: [self goalRateNumeratorWithOffset]*7];
-    }
-    else { // "month"
-        return [NSNumber numberWithFloat:[self goalRateNumeratorWithOffset]/4.3f];
+    else {
+        self.saveGoalButton.enabled = NO;
     }
 }
 
-- (IBAction)nextButtonPressed:(UIBarButtonItem *)sender
+- (void)checkForExistingSlug
 {
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:365*24*3600];
-    NSNumber *timestamp = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+    BOOL exists = [self slugExistsForTitle:self.titleTextField.text];
+    self.goalSlugExistsWarningLabel.hidden = !exists;
+    self.saveGoalButton.enabled = !exists;
+}
 
-    self.goalObject.rate = [self weeklyRate];
-    self.goalObject.goaldate = timestamp;
-    self.goalObject.units = self.goalRateNumeratorUnits;
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+- (BOOL)slugExistsForTitle:(NSString *)title
+{
+    return [self.goalSlugs containsObject:[BeeminderAppDelegate slugFromTitle:title]];
+}
+
+- (IBAction)saveGoalButtonPressed
+{
+    Goal *goal = [BeeminderAppDelegate sharedSessionGoal];
+    goal.user = [ABCurrentUser user];
+    goal.title = self.titleTextField.text;
+    goal.slug = [BeeminderAppDelegate slugFromTitle:goal.title];
+    goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
+    
+    [self parseInitialValue];
+    [self parseWeeklyEstimate];
+    
+    BOOL errors = NO;
+    
+    if (!self.firstTextField.hidden && [self.firstTextField.text isEqualToString:@""]) {
+        self.firstLabel.textColor = [UIColor redColor];
+        self.firstLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+        errors = YES;
+    }
+    else {
+        self.firstLabel.textColor = [UIColor blackColor];
+        self.firstLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+    }
+    
+    if ([self.titleTextField.text isEqualToString:@""]) {
+        self.titleLabel.textColor = [UIColor redColor];
+        self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+        errors = YES;
+    }
+    else {
+        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+    }
+    
+    if (errors) {
+        return;
+    }
     
     if ([ABCurrentUser accessToken]) {
+        [self.view endEditing:YES];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Saving...";
-        CompletionBlock completionBlock = ^() {
+        CompletionBlock successBlock = ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self performSegueWithIdentifier:@"segueToDashboard" sender:self];
+            [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            [[NSManagedObjectContext MR_defaultContext] MR_save];            
         };
-        [self.goalObject pushToRemoteWithCompletionBlock:completionBlock];
-
+        [goal pushToRemoteWithSuccessBlock:successBlock];
+        
     }
     else {
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"segueToDashboard"]) {
-        [[self.navigationController navigationBar] setHidden:YES];
+- (IBAction)startFlatSwitchValueChanged
+{
+    if (self.startFlatSwitch.on) {
+        [self setGoalToDefaults];
+        self.roadDialButton.hidden = YES;
+    }
+    else {
+        [self presentRoadDial];
     }
 }
 
-#pragma mark UIPickerViewDataSource methods
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView 
+- (void)setGoalToDefaults
 {
-    if (pickerView.tag == 0) {
-        return 2;
-    }
-    else {
-        return 1;
-    }
+    Goal *goal = [BeeminderAppDelegate sharedSessionGoal];
+    goal.rate = [NSNumber numberWithDouble:0];
+    goal.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSinceNow:365*24*3600] timeIntervalSince1970]];
+    goal.goalval = nil;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component 
+- (IBAction)roadDialButtonPressed
 {
-    if (pickerView.tag == 0) {
-        if (component == 0) {
-            return 1000;
-        }
-        else {
-            return self.goalRateNumeratorUnitsOptions.count;
-        }
-    }
-    else {
-        return self.goalRateDenominatorUnitsOptions.count;
-    }
+    [self presentRoadDial];
 }
 
-#pragma mark UIPickerViewDelegate methods
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component 
+- (void)presentRoadDial
 {
-    if (pickerView.tag == 0) {
-        if (component == 0) {
-            return 50.0;
-        }
-        else {
-            return 100.0;
-        }
-    }
-    else {
-        return 100.0;
-    }
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component 
-{
-    if (pickerView.tag == 0) {
-        self.goalRateNumeratorIndex = [pickerView selectedRowInComponent:0];
-        self.goalRateNumeratorUnits = [self.goalRateNumeratorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:1]];
-        if (row == self.fatLoserIndex) {
-            self.goalObject.goal_type = @"fatloser";
-        }
-    }
-    else {
-        self.goalRateDenominatorUnits = [self.goalRateDenominatorUnitsOptions objectAtIndex:[pickerView selectedRowInComponent:0]];
-    }
-    self.goalObject.goalval = nil;
+    self.roadDialButton.hidden = NO;
+    self.definesPresentationContext = YES;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    AdvancedRoalDialViewController *advCon = [storyboard instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
     
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
-{ 
-    if (pickerView.tag == 0) {
-        if (component == 0) {
-            return [NSString stringWithFormat:@"%i", row - 20];
-        }
-        else {
-            return [self.goalRateNumeratorUnitsOptions objectAtIndex:row];
-        }
-    }
-    else {
-        return [self.goalRateDenominatorUnitsOptions objectAtIndex:row];
-    }
-}
-
-- (IBAction)showChooseGoalType:(UIBarButtonItem *)sender
-{
-    ChooseGoalTypeViewController *chooseGTController = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"chooseGoalTypeViewController"];
-    chooseGTController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    self.goalObject.rate = [self weeklyRate];
-    chooseGTController.goalObject = self.goalObject;
-    chooseGTController.rdvCon = self;
-    [self presentViewController:chooseGTController animated:YES completion:nil];
-}
-
-- (IBAction)showAdvanced:(UIBarButtonItem *)sender
-{
-    AdvancedRoalDialViewController *advCon = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
+    advCon.goalObject = [BeeminderAppDelegate sharedSessionGoal];
     
-    advCon.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    self.goalObject.rate = [self weeklyRate];
-    if (!self.goalObject.goaldate) {
-        self.goalObject.goaldate = [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSince1970: [[NSDate date] timeIntervalSince1970] + 365*24*3600] timeIntervalSince1970]];
-    }
-    advCon.goalObject = self.goalObject;
-    advCon.rdvCon = self;
     [self presentViewController:advCon animated:YES completion:nil];
+}
+
+- (void)parseWeeklyEstimate
+{
+    NSDictionary *goalTypeInfo = [[BeeminderAppDelegate goalTypesInfo] objectForKey:[BeeminderAppDelegate sharedSessionGoal].goal_type];
     
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        NSNumber *weeklyEstimate = [formatter numberFromString:self.firstTextField.text];
+        [BeeminderAppDelegate sharedSessionGoal].rate = weeklyEstimate;
+    }
 }
 
-- (void)resetRoadDial
+- (void)parseInitialValue
 {
-    self.goalObject.rate = [NSNumber numberWithInt:0];
-    self.goalObject.units = @"times";
-    self.goalRateNumeratorLabel.hidden = YES;
-    self.goalRateNumeratorUnitsLabel.hidden = YES;
-    self.goalRateDenominatorLabel.hidden = YES;
-    self.goalRateDenominatorPickerView.hidden = NO;
-    self.goalRateNumeratorPickerView.hidden = NO;
-}
-
-- (void)modalDidSaveRoadDial
-{
-    if (self.goalObject.rate && !self.goalRateNumeratorPickerView.hidden) {
-        [self.goalRateNumeratorPickerView selectRow:[self.goalObject.rate integerValue] + self.pickerOffset inComponent:0 animated:YES];
+    NSDictionary *goalTypeInfo = [[BeeminderAppDelegate goalTypesInfo] objectForKey:[BeeminderAppDelegate sharedSessionGoal].goal_type];
+    if (![[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        NSNumber *initVal = [formatter numberFromString:self.firstTextField.text];
+        
+        [BeeminderAppDelegate sharedSessionGoal].initval = initVal;
     }
     else {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-        Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO];
-        
-        double diff = [self.goalObject.goalval doubleValue] - [datapoint.value doubleValue];
-        
-        double interval = [self.goalObject.goaldate doubleValue] - [[NSDate date] timeIntervalSince1970];
-        
-        double rate = diff*3600*7*24/interval;
-        
-        self.goalRateNumeratorLabel.text = [NSString stringWithFormat:@"%.02f", rate];
-        self.goalRateNumeratorLabel.hidden = NO;
-        
-        self.goalRateNumeratorUnitsLabel.text = [self pickerView:self.goalRateNumeratorPickerView titleForRow:[self.goalRateNumeratorPickerView selectedRowInComponent:1] forComponent:1];
-        self.goalRateNumeratorUnitsLabel.hidden = NO;
-        
-        self.goalRateDenominatorLabel.text = [self pickerView:self.goalRateDenominatorPickerView titleForRow:[self.goalRateDenominatorPickerView selectedRowInComponent:0] forComponent:0];
-        self.goalRateDenominatorLabel.hidden = NO;
-        
-        self.goalRateDenominatorPickerView.hidden = YES;
-        self.goalRateNumeratorPickerView.hidden = YES;
-
+        [BeeminderAppDelegate sharedSessionGoal].initval = [NSNumber numberWithInt:0];
     }
-
-    [self.goalRateDenominatorPickerView selectRow:1 inComponent:0 animated:YES];
-
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
 
 @end

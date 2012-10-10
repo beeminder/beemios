@@ -11,11 +11,9 @@
 		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
-		A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9A15A009A70058B495 /* ResourcePushRequest.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
 		A1253AA115A029F30058B495 /* GoalPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253AA015A029F30058B495 /* GoalPushRequest.m */; };
 		A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F97E158FA32D002F151A /* GoalsTableViewController.m */; };
@@ -38,8 +36,7 @@
 		A14A1FAF161E312B00E2F3BB /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A14A1FAE161E312B00E2F3BB /* Datapoint.m */; };
 		A14A1FB2161E312D00E2F3BB /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A14A1FB1161E312D00E2F3BB /* Goal.m */; };
 		A14A1FB5161E312E00E2F3BB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A14A1FB4161E312E00E2F3BB /* User.m */; };
-		A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */; };
-		A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1782812159D567E00F3336F /* GoalGraphViewController.m */; };
+		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A188E00815B8BB71009CBA60 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A188DFF415B8BB71009CBA60 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A188E00915B8BB71009CBA60 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A188DFF615B8BB71009CBA60 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -52,6 +49,10 @@
 		A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A188E00515B8BB71009CBA60 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A188E00715B8BB71009CBA60 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A18A487915CE20F600E314B7 /* GradientViews.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A487815CE20F600E314B7 /* GradientViews.m */; };
+		A18ECAD01625DF0B00F603A3 /* your-goals-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECACE1625DF0B00F603A3 /* your-goals-tab.png */; };
+		A18ECAD11625DF0B00F603A3 /* your-goals-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECACF1625DF0B00F603A3 /* your-goals-tab@2x.png */; };
+		A18ECAD41625E22900F603A3 /* settings_tab_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECAD21625E22900F603A3 /* settings_tab_icon.png */; };
+		A18ECAD51625E22900F603A3 /* settings_tab_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */; };
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
@@ -63,12 +64,14 @@
 		A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */; };
 		A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */; };
 		A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */; };
-		A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */; };
-		A1B2687115A121EA00859EDD /* ResourcePullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2687015A121EA00859EDD /* ResourcePullRequest.m */; };
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
+		A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
+		A1CC735D162247AE00E14238 /* NewGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735C162247AE00E14238 /* NewGoalViewController.m */; };
+		A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735F1622493C00E14238 /* MainTabBarViewController.m */; };
+		A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC7366162378DE00E14238 /* GoalGraphViewController.m */; };
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
@@ -79,7 +82,6 @@
 		A1F03D5D158E9A850075D5DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D5C158E9A850075D5DA /* main.m */; };
 		A1F03D61158E9A850075D5DA /* BeeminderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */; };
 		A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */; };
-		A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D69158E9A850075D5DA /* BeeminderViewController.m */; };
 		A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D71158E9BE60075D5DA /* SplashViewController.m */; };
 		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
 		A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F0C7BC15BB77530044E01B /* graph-processing.png */; };
@@ -138,16 +140,12 @@
 		A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
 		A106F6EC15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
 		A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
-		A10B88FE15C73FC8009E75F9 /* UIViewController+saveRoadDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+saveRoadDial.h"; sourceTree = "<group>"; };
-		A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+saveRoadDial.m"; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
 		A1253A85159FDB350058B495 /* Goal+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Goal+Resource.m"; sourceTree = "<group>"; };
-		A1253A9915A009A70058B495 /* ResourcePushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePushRequest.h; sourceTree = "<group>"; };
-		A1253A9A15A009A70058B495 /* ResourcePushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcePushRequest.m; sourceTree = "<group>"; };
 		A1253A9C15A022460058B495 /* UserPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPushRequest.h; sourceTree = "<group>"; };
 		A1253A9D15A022460058B495 /* UserPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPushRequest.m; sourceTree = "<group>"; };
 		A1253A9F15A029F30058B495 /* GoalPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPushRequest.h; sourceTree = "<group>"; };
@@ -191,10 +189,8 @@
 		A14A1FB1161E312D00E2F3BB /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A14A1FB3161E312E00E2F3BB /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		A14A1FB4161E312E00E2F3BB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalNameViewController.h; sourceTree = "<group>"; };
-		A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalNameViewController.m; sourceTree = "<group>"; };
-		A1782811159D567E00F3336F /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
-		A1782812159D567E00F3336F /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
+		A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+autoRotate.h"; sourceTree = "<group>"; };
+		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A188DFF315B8BB71009CBA60 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -220,6 +216,10 @@
 		A188E00715B8BB71009CBA60 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		A18A487715CE20F600E314B7 /* GradientViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientViews.h; sourceTree = "<group>"; };
 		A18A487815CE20F600E314B7 /* GradientViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientViews.m; sourceTree = "<group>"; };
+		A18ECACE1625DF0B00F603A3 /* your-goals-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "your-goals-tab.png"; sourceTree = "<group>"; };
+		A18ECACF1625DF0B00F603A3 /* your-goals-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "your-goals-tab@2x.png"; sourceTree = "<group>"; };
+		A18ECAD21625E22900F603A3 /* settings_tab_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_tab_icon.png; sourceTree = "<group>"; };
+		A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_tab_icon@2x.png"; sourceTree = "<group>"; };
 		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -234,17 +234,21 @@
 		A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bmndr_476.png; sourceTree = "<group>"; };
 		A1AC0D7915CDA1DF00EFB21E /* ABCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCurrentUser.h; sourceTree = "<group>"; };
 		A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCurrentUser.m; sourceTree = "<group>"; };
-		A1AC0D7C15CDC8A900EFB21E /* GoalTypeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalTypeDetailViewController.h; sourceTree = "<group>"; };
-		A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalTypeDetailViewController.m; sourceTree = "<group>"; };
-		A1B2686F15A121EA00859EDD /* ResourcePullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePullRequest.h; sourceTree = "<group>"; };
-		A1B2687015A121EA00859EDD /* ResourcePullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcePullRequest.m; sourceTree = "<group>"; };
 		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
 		A1B31643159D16E000998C76 /* DashboardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardNavigationController.m; sourceTree = "<group>"; };
 		A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoadDialViewController.h; sourceTree = "<group>"; };
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
 		A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedRoadDialViewController.h; sourceTree = "<group>"; };
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
+		A1CA034E16210374000A4E95 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		A1CA215915935AE200AE16FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A1CC735B162247AE00E14238 /* NewGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGoalViewController.h; sourceTree = "<group>"; };
+		A1CC735C162247AE00E14238 /* NewGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGoalViewController.m; sourceTree = "<group>"; };
+		A1CC735E1622493C00E14238 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
+		A1CC735F1622493C00E14238 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		A1CC7365162378DD00E14238 /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
+		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -260,8 +264,6 @@
 		A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeeminderAppDelegate.h; sourceTree = "<group>"; };
 		A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderAppDelegate.m; sourceTree = "<group>"; };
 		A1F03D63158E9A850075D5DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		A1F03D68158E9A850075D5DA /* BeeminderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeeminderViewController.h; sourceTree = "<group>"; };
-		A1F03D69158E9A850075D5DA /* BeeminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeminderViewController.m; sourceTree = "<group>"; };
 		A1F03D70158E9BE60075D5DA /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		A1F03D71158E9BE60075D5DA /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		A1F03D76158EA2690075D5DA /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
@@ -456,21 +458,28 @@
 		A1B2687215A121F300859EDD /* Sync */ = {
 			isa = PBXGroup;
 			children = (
-				A1253A9915A009A70058B495 /* ResourcePushRequest.h */,
-				A1253A9A15A009A70058B495 /* ResourcePushRequest.m */,
 				A1253A9C15A022460058B495 /* UserPushRequest.h */,
 				A1253A9D15A022460058B495 /* UserPushRequest.m */,
 				A1253A9F15A029F30058B495 /* GoalPushRequest.h */,
 				A1253AA015A029F30058B495 /* GoalPushRequest.m */,
-				A1B2686F15A121EA00859EDD /* ResourcePullRequest.h */,
-				A1B2687015A121EA00859EDD /* ResourcePullRequest.m */,
 			);
 			name = Sync;
+			sourceTree = "<group>";
+		};
+		A1CA034D16210354000A4E95 /* TPKeyboardAvoidingView */ = {
+			isa = PBXGroup;
+			children = (
+				A1CA034E16210374000A4E95 /* TPKeyboardAvoidingScrollView.h */,
+				A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */,
+			);
+			name = TPKeyboardAvoidingView;
 			sourceTree = "<group>";
 		};
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A18ECAD21625E22900F603A3 /* settings_tab_icon.png */,
+				A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */,
 				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
 				A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */,
 				A14A1FA5161E0B0000E2F3BB /* cell-noise.png */,
@@ -485,6 +494,8 @@
 				A1F0C7BC15BB77530044E01B /* graph-processing.png */,
 				A1993CBE158FFEDC00011568 /* Icon-Retina.png */,
 				A1993CBC158FFE0A00011568 /* Icon.png */,
+				A18ECACE1625DF0B00F603A3 /* your-goals-tab.png */,
+				A18ECACF1625DF0B00F603A3 /* your-goals-tab@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -532,6 +543,7 @@
 		A1F03D56158E9A850075D5DA /* Beeminder */ = {
 			isa = PBXGroup;
 			children = (
+				A1CA034D16210354000A4E95 /* TPKeyboardAvoidingView */,
 				A1DD32DF15D074A90077B774 /* MBProgressHUD */,
 				A1AC0D7815CDA1AC00EFB21E /* ABCurrentUser */,
 				A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */,
@@ -542,21 +554,15 @@
 				A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */,
 				A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */,
 				A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */,
-				A1F03D68158E9A850075D5DA /* BeeminderViewController.h */,
-				A1F03D69158E9A850075D5DA /* BeeminderViewController.m */,
-				A14B6A721595500500155D0D /* ChooseGoalNameViewController.h */,
-				A14B6A731595500500155D0D /* ChooseGoalNameViewController.m */,
 				A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */,
 				A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */,
 				A126C9301592EE1700FE8CF8 /* constants.h */,
 				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
 				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
-				A1782811159D567E00F3336F /* GoalGraphViewController.h */,
-				A1782812159D567E00F3336F /* GoalGraphViewController.m */,
+				A1CC7365162378DD00E14238 /* GoalGraphViewController.h */,
+				A1CC7366162378DE00E14238 /* GoalGraphViewController.m */,
 				A133F97D158FA32D002F151A /* GoalsTableViewController.h */,
 				A133F97E158FA32D002F151A /* GoalsTableViewController.m */,
-				A1AC0D7C15CDC8A900EFB21E /* GoalTypeDetailViewController.h */,
-				A1AC0D7D15CDC8A900EFB21E /* GoalTypeDetailViewController.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 				A18A487715CE20F600E314B7 /* GradientViews.h */,
@@ -572,9 +578,13 @@
 				A186B1E41599F58C00A6F60C /* SignUpViewController.m */,
 				A1F03D70158E9BE60075D5DA /* SplashViewController.h */,
 				A1F03D71158E9BE60075D5DA /* SplashViewController.m */,
-				A10B88FE15C73FC8009E75F9 /* UIViewController+saveRoadDial.h */,
-				A10B88FF15C73FC8009E75F9 /* UIViewController+saveRoadDial.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
+				A1CC735B162247AE00E14238 /* NewGoalViewController.h */,
+				A1CC735C162247AE00E14238 /* NewGoalViewController.m */,
+				A1CC735E1622493C00E14238 /* MainTabBarViewController.h */,
+				A1CC735F1622493C00E14238 /* MainTabBarViewController.m */,
+				A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */,
+				A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -778,6 +788,10 @@
 				A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */,
 				A14A1FAB161E0F4200E2F3BB /* bg-noise.png in Resources */,
 				A14A1FAC161E0F4200E2F3BB /* bg-noise@2x.png in Resources */,
+				A18ECAD01625DF0B00F603A3 /* your-goals-tab.png in Resources */,
+				A18ECAD11625DF0B00F603A3 /* your-goals-tab@2x.png in Resources */,
+				A18ECAD41625E22900F603A3 /* settings_tab_icon.png in Resources */,
+				A18ECAD51625E22900F603A3 /* settings_tab_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,7 +805,6 @@
 				A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */,
 				A1F03D5D158E9A850075D5DA /* main.m in Sources */,
 				A1F03D61158E9A850075D5DA /* BeeminderAppDelegate.m in Sources */,
-				A1F03D6A158E9A850075D5DA /* BeeminderViewController.m in Sources */,
 				A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */,
 				A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */,
 				A133F97F158FA32D002F151A /* GoalsTableViewController.m in Sources */,
@@ -809,18 +822,14 @@
 				A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */,
 				A1993CC2159007B700011568 /* SettingsViewController.m in Sources */,
 				A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */,
-				A14B6A741595500500155D0D /* ChooseGoalNameViewController.m in Sources */,
 				A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */,
 				A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */,
 				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
-				A1782813159D567E00F3336F /* GoalGraphViewController.m in Sources */,
 				A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */,
 				A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */,
-				A1253A9B15A009A70058B495 /* ResourcePushRequest.m in Sources */,
 				A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */,
 				A1253AA115A029F30058B495 /* GoalPushRequest.m in Sources */,
-				A1B2687115A121EA00859EDD /* ResourcePullRequest.m in Sources */,
 				A1FCBF1E15B7602700E5C955 /* MagicalImportFunctions.m in Sources */,
 				A1FCBF1F15B7602700E5C955 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				A1FCBF2015B7602700E5C955 /* NSEntityDescription+MagicalDataImport.m in Sources */,
@@ -862,14 +871,17 @@
 				A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */,
 				A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */,
 				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
-				A10B890015C73FC8009E75F9 /* UIViewController+saveRoadDial.m in Sources */,
 				A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */,
 				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
-				A1AC0D7E15CDC8AA00EFB21E /* GoalTypeDetailViewController.m in Sources */,
 				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,
 				A14A1FAF161E312B00E2F3BB /* Datapoint.m in Sources */,
 				A14A1FB2161E312D00E2F3BB /* Goal.m in Sources */,
 				A14A1FB5161E312E00E2F3BB /* User.m in Sources */,
+				A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				A1CC735D162247AE00E14238 /* NewGoalViewController.m in Sources */,
+				A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */,
+				A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */,
+				A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

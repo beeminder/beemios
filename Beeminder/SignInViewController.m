@@ -16,10 +16,6 @@
 
 @implementation SignInViewController
 
-@synthesize email = _email;
-@synthesize password = _password;
-@synthesize signInButton = _signInButton;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,24 +28,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([ABCurrentUser accessToken]) {
-        [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
-    }
+    
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
+    self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
 }
 
 - (void)viewDidUnload
 {
-    [self setEmail:nil];
-    [self setPassword:nil];
+    [self setEmailTextField:nil];
+    [self setPasswordTextField:nil];
     [self setSignInButton:nil];
+    [self setSignUpButton:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)formSubmitted
@@ -60,7 +56,7 @@
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
-    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", self.email.text, self.password.text, kBeemiosSecret];
+    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", self.emailTextField.text, self.passwordTextField.text, kBeemiosSecret];
 
     [loginRequest setHTTPMethod:@"POST"];
     [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -82,6 +78,11 @@
     [self formSubmitted];
 }
 
+- (IBAction)signUpButtonPressed
+{
+    [self dismiss];
+}
+
 - (void)successfulLoginJSON:(NSDictionary *)responseJSON
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -95,9 +96,12 @@
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", [responseJSON objectForKey:@"id"], @"serverId", nil];
     
     [User writeToUserWithDictionary:userDict];
-    
-    [self performSegueWithIdentifier:@"segueFromSigninToDashboard" sender:self];
-    
+    [self dismiss];
+}
+
+- (void)dismiss
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];    
 }
 
 - (void)invalidLogin
@@ -107,17 +111,12 @@
     [alert show];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if (theTextField == self.password) {
+    if (theTextField == self.passwordTextField) {
         [theTextField resignFirstResponder];
         [self formSubmitted];
-    } else if (theTextField == self.email) {
-        [self.password becomeFirstResponder];
+    } else if (theTextField == self.emailTextField) {
+        [self.passwordTextField becomeFirstResponder];
     }
     return YES;
 }

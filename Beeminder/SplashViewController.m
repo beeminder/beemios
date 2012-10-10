@@ -7,7 +7,6 @@
 //
 
 #import "SplashViewController.h"
-#import "BeeminderViewController.h"
 #import "User+Resource.h"
 
 @interface SplashViewController ()
@@ -15,8 +14,11 @@
 @end
 
 @implementation SplashViewController
-@synthesize startTrackingButton;
-@synthesize signInButton;
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,12 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    if ([ABCurrentUser accessToken] && [ABCurrentUser username]) {
-        [[self.navigationController navigationBar] setHidden:YES];
-        [self performSegueWithIdentifier:@"skipToDashboard" sender:self];
-    }
-    
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     self.startTrackingButton = [BeeminderAppDelegate standardGrayButtonWith:self.startTrackingButton];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
@@ -43,6 +39,15 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    if ([ABCurrentUser accessToken] && [ABCurrentUser username]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        UITabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabBarController"];
+        
+        mainTabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:mainTabBarController animated:YES completion:nil];
+        return;
+    }
+    
     if (![ABCurrentUser username]) {
         NSString *alphabet = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
         NSMutableString *s = [NSMutableString stringWithCapacity:20];
@@ -66,11 +71,6 @@
     [self setSignInButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)viewWillAppear:(BOOL)animated

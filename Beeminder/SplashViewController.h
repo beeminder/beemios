@@ -11,5 +11,5 @@
 @interface SplashViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIButton *startTrackingButton;
 @property (strong, nonatomic) IBOutlet UIButton *signInButton;
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

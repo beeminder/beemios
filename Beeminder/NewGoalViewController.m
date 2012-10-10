@@ -1,18 +1,23 @@
 //
-//  GoalTypeDetailViewController.m
+//  NewGoalViewController.m
 //  Beeminder
 //
-//  Created by Andy Brett on 8/4/12.
+//  Created by Andy Brett on 10/7/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "GoalTypeDetailViewController.h"
+#import "NewGoalViewController.h"
 
-@interface GoalTypeDetailViewController ()
+@interface NewGoalViewController ()
 
 @end
 
-@implementation GoalTypeDetailViewController
+@implementation NewGoalViewController
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.goalTypeDetailsLabel.text = self.detailText;
+	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,8 +40,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setGoalTypeDetailsLabel:nil];
-    [super viewDidUnload];
-}
 @end

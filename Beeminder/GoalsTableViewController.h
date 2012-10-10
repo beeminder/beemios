@@ -17,5 +17,5 @@
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSComparator goalComparator;
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

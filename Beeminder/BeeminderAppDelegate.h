@@ -11,10 +11,15 @@
 @interface BeeminderAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) Goal* sessionGoal;
 
 - (NSURL *)applicationDocumentsDirectory;
 
 + (UIButton *)standardGrayButtonWith:(UIButton *)button;
 + (UIColor *)grayButtonColor;
++ (NSDictionary *)goalTypesInfo;
++ (Goal *)sharedSessionGoal;
++ (NSString *)slugFromTitle:(NSString *)title;
++ (void)clearSessionGoal;
 
 @end

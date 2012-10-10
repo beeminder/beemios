@@ -27,7 +27,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *delayLabel;
 @property (strong, nonatomic) RoadDialViewController *rdvCon;
 @property (strong, nonatomic) GoalSummaryViewController *gsvCon;
+@property (strong, nonatomic) IBOutlet UILabel *goalValLabel;
 
 - (IBAction)cancel;
+- (NSUInteger)supportedInterfaceOrientations;
 
 @end

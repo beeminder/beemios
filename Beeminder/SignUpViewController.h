@@ -24,5 +24,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *validationWarningLabel;
 
 - (IBAction)usernameValueChanged;
-
+- (NSUInteger)supportedInterfaceOrientations;
 @end

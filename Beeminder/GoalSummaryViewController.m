@@ -7,6 +7,7 @@
 //
 
 #import "GoalSummaryViewController.h"
+#import "GoalGraphViewController.h"
 #import "AdvancedRoadDialViewController.h"
 
 @interface GoalSummaryViewController ()
@@ -14,16 +15,6 @@
 @end
 
 @implementation GoalSummaryViewController
-@synthesize scrollView = _scrollView;
-@synthesize editGoalButton = _editGoalButton;
-@synthesize addDataButton = _addDataButton;
-@synthesize timerLabel = _timerLabel;
-@synthesize unitsLabel = _unitsLabel;
-@synthesize instructionLabel = _instructionLabel;
-@synthesize inputTextField = _inputTextField;
-@synthesize inputStepper = _inputStepper;
-@synthesize submitButton = _submitButton;
-@synthesize graphButton = _graphButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +23,11 @@
         // Custom initialization
     }
     return self;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)viewDidLoad
@@ -57,11 +53,10 @@
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
     
-    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred];
+    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
     self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
-    [self registerForKeyboardNotifications];
     [self startTimer];
 }
 
@@ -98,7 +93,7 @@
     for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
 
         NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"]];
+        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
         
         if (!datapoint) {
             datapoint = [Datapoint MR_createEntity];
@@ -120,7 +115,7 @@
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
 
-    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred];
+    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
     self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
     
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
@@ -239,44 +234,12 @@
     [super viewWillDisappear:animated];
 }
 
-#pragma mark Keyboard notifications
-
-- (void)registerForKeyboardNotifications
+- (IBAction)editGoalButtonPressed
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
-    CGPoint origin = self.addDataButton.frame.origin;
-    CGFloat height = self.addDataButton.frame.size.height;
-    CGFloat buffer = 10.0;
-    origin.y -= self.scrollView.contentOffset.y;
-    origin.y += height;
-    origin.y += buffer;
-    if (!CGRectContainsPoint(aRect, origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.addDataButton.frame.origin.y - (aRect.size.height) + height + buffer);
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
-    }
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    AdvancedRoalDialViewController *advCon = [storyboard instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
+    advCon.goalObject = self.goalObject;
+    [self presentViewController:advCon animated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -297,15 +260,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 - (void)modalDidSaveRoadDial
 {
     [self pollUntilGraphIsNotUpdating];
 }
+
 
 - (void)viewDidUnload {
     [self setGraphButton:nil];

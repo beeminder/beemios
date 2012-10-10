@@ -23,27 +23,55 @@
     return self;
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSDictionary *fatLoser = [NSDictionary dictionaryWithObjectsAndKeys:kFatloserPublic, @"publicName", kFatloserPrivate, @"privateName", kFatloserDetails, @"details", nil];
+    [BeeminderAppDelegate clearSessionGoal];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
+    self.goalTypes = [[NSArray alloc] init];
+    NSDictionary *goalTypesInfo = [BeeminderAppDelegate goalTypesInfo];
+
+    [goalTypesInfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        self.goalTypes = [self.goalTypes arrayByAddingObject:obj];
+    }];
+
+    self.goalTypes = [self.goalTypes sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj1 objectForKey:kSortPriorityKey] doubleValue] > [[obj2 objectForKey:kSortPriorityKey] doubleValue];
+    }];
     
-    NSDictionary *hustler = [NSDictionary dictionaryWithObjectsAndKeys:kHustlerPublic, @"publicName", kHustlerPrivate, @"privateName", kHustlerDetails, @"details", nil];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(80, 30, 160, 50);
+    button = [BeeminderAppDelegate standardGrayButtonWith:button];
+    button.userInteractionEnabled = YES;
+    footerView.userInteractionEnabled = YES;
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0];
     
-    NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPublic, @"publicName", kBikerPrivate, @"privateName", kBikerDetails, @"details", nil];
+    [button addTarget:self action:@selector(cancelButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    NSDictionary *inboxer = [NSDictionary dictionaryWithObjectsAndKeys:kInboxerPublic, @"publicName", kInboxerPrivate, @"privateName", kInboxerDetails, @"details", nil];
+    [footerView addSubview:button];
     
-    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:kCustomPublic, @"publicName", kCustomPrivate, @"privateName", kCustomDetails, @"details", nil];
-    
-    self.goalTypes = [NSArray arrayWithObjects:fatLoser, hustler, biker, inboxer, custom, nil];
+    self.tableView.tableFooterView = footerView;
+    self.tableView.tableFooterView.userInteractionEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)cancelButtonPressed
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -61,47 +89,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Goal Type Cell"];
-    
-    cell.textLabel.text = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"publicName"];
+    NSDictionary *goalTypeInfo = [self.goalTypes objectAtIndex:indexPath.row];
+    cell.textLabel.text = [goalTypeInfo objectForKey:@"publicName"];
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    self.selectedAccessoryIndexPath = indexPath;
-    [self performSegueWithIdentifier:@"segueToGoalTypeDetail" sender:self];
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if ([self numberOfSectionsInTableView:tableView] == (section+1)){
-        return [UIView new];
-    }
-    return nil;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [(GoalTypeDetailViewController *)segue.destinationViewController setDetailText:[[self.goalTypes objectAtIndex:self.selectedAccessoryIndexPath.row] objectForKey:@"details"]];
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![self.goalObject.goal_type isEqualToString:[[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"]]) {
-        self.goalObject.goal_type = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:@"privateName"];
-        
-        [self.rdvCon resetRoadDial];
-        
-        [[NSManagedObjectContext MR_defaultContext] MR_save];
-    }
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.4 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-        [self.presentingViewController dismissModalViewControllerAnimated:YES];
-    });
-    
-
+    [BeeminderAppDelegate sharedSessionGoal].goal_type = [[self.goalTypes objectAtIndex:indexPath.row] objectForKey:kPrivateNameKey];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
 @end

@@ -10,8 +10,9 @@
 #import "User+Resource.h"
 
 @interface SignInViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITextField *email;
-@property (strong, nonatomic) IBOutlet UITextField *password;
+@property (strong, nonatomic) IBOutlet UITextField *emailTextField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *signInButton;
-
+@property (strong, nonatomic) IBOutlet UIButton *signUpButton;
+- (NSUInteger)supportedInterfaceOrientations;
 @end

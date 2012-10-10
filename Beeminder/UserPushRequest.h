@@ -6,13 +6,11 @@
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
-#import "ResourcePushRequest.h"
 #import "User+Resource.h"
 #import "GoalPushRequest.h"
-#import "SBJson.h"
 
-@interface UserPushRequest : ResourcePushRequest
+@interface UserPushRequest : NSObject
 
-+ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams completionBlock:(CompletionBlock)completionBlock;
++ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams successBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock;
 
 @end
