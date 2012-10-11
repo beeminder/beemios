@@ -35,6 +35,7 @@
     [super viewDidLoad];
 
     [self loadGraphImageIgnoreCache:YES];
+    [self loadGraphImageThumbIgnoreCache:YES];
     self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
@@ -78,7 +79,9 @@
 - (void)loadGraphImageIgnoreCache:(BOOL)ignoreCache
 {
     if (ignoreCache || !self.goalObject.graph_image) {
+        [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
         [self.goalObject updateGraphImageWithCompletionBlock:^(void){
+            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
             [self loadGraphImageIgnoreCache:NO];
         }];
     }
@@ -87,6 +90,15 @@
         if (!self.graphPoller || ![self.graphPoller isValid]) {
             [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
         }
+    }
+}
+
+- (void)loadGraphImageThumbIgnoreCache:(BOOL)ignoreCache
+{
+    if (ignoreCache || !self.goalObject.graph_image_thumb) {
+        [self.goalObject updateGraphImageThumbWithCompletionBlock:^(void){
+            [self loadGraphImageThumbIgnoreCache:NO];
+        }];
     }
 }
 

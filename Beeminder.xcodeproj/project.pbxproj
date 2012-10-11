@@ -72,6 +72,7 @@
 		A1CC735D162247AE00E14238 /* NewGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735C162247AE00E14238 /* NewGoalViewController.m */; };
 		A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735F1622493C00E14238 /* MainTabBarViewController.m */; };
 		A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC7366162378DE00E14238 /* GoalGraphViewController.m */; };
+		A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2A2616265409005B3517 /* GoalPullRequest.m */; };
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
@@ -249,6 +250,8 @@
 		A1CC735F1622493C00E14238 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
 		A1CC7365162378DD00E14238 /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
 		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
+		A1CE2A2516265409005B3517 /* GoalPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPullRequest.h; sourceTree = "<group>"; };
+		A1CE2A2616265409005B3517 /* GoalPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPullRequest.m; sourceTree = "<group>"; };
 		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -462,6 +465,8 @@
 				A1253A9D15A022460058B495 /* UserPushRequest.m */,
 				A1253A9F15A029F30058B495 /* GoalPushRequest.h */,
 				A1253AA015A029F30058B495 /* GoalPushRequest.m */,
+				A1CE2A2516265409005B3517 /* GoalPullRequest.h */,
+				A1CE2A2616265409005B3517 /* GoalPullRequest.m */,
 			);
 			name = Sync;
 			sourceTree = "<group>";
@@ -882,6 +887,7 @@
 				A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */,
 				A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */,
 				A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */,
+				A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

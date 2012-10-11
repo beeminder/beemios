@@ -212,23 +212,35 @@
 - (void)updateGraphImageThumbWithCompletionBlock:(void (^)())block
 {
     NSURL *url = [NSURL URLWithString:self.thumb_url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300];
     
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
+        return image;
+    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         self.graph_image_thumb = image;
         if (block) block();
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"223");
+        NSLog(@"%@", self);
+        NSLog(@"%@", request.URL);
+        NSLog(@"%@", error);
     }];
+
     [operation start];
 }
 
 - (void)updateGraphImageWithCompletionBlock:(void (^)())block
 {
     NSURL *url = [NSURL URLWithString:self.graph_url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300];
     
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
+        return image;
+    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         self.graph_image = image;
         if (block) block();
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"%@", error);
     }];
     [operation start];
 }

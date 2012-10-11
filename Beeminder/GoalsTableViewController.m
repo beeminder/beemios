@@ -94,13 +94,14 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
     MBProgressHUD *hud;
-    if (!lastUpdatedAt || lastUpdatedAt == 0) {
+    BOOL initialImport = (!lastUpdatedAt || lastUpdatedAt == 0);
+    if (initialImport) {
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Fetching Beeswax...";
     }
 
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        if (!lastUpdatedAt || lastUpdatedAt == 0) {
+        if (initialImport) {
             hud.mode = MBProgressHUDModeDeterminate;
             hud.progress = 0.0f;
             hud.labelText = @"Importing Beeswax...";
@@ -108,7 +109,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [self successfulFetchEverythingJSON:JSON progressCallback:^(float incrementBy){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [hud setProgress:hud.progress + incrementBy];
+                    if (initialImport) [hud setProgress:hud.progress + incrementBy];
                     [self.tableView reloadData];
                 });
             }];
@@ -118,7 +119,6 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
     }];
-
     [fetchOperation start];
 }
 
@@ -163,6 +163,7 @@
             }
             else {
                 [MBProgressHUD showHUDAddedTo:imageView animated:YES];
+                [self pollUntilThumbnailURLIsPresentForGoal:goal withTimer:nil];
             }
 
             [cell addSubview:imageView];
@@ -207,6 +208,13 @@
         self.navigationItem.rightBarButtonItem = self.refreshButton;
     });
     
+    NSArray *deletedGoals = [responseJSON objectForKey:@"deleted_goals"];
+    
+    for (NSDictionary *goalDict in deletedGoals) {
+        Goal *goal = [Goal MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"serverId = %@", [goalDict objectForKey:@"id"]] inContext:[NSManagedObjectContext MR_defaultContext]];
+        if (goal) [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+    }
+    
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     [self.goalObjects removeAllObjects];
@@ -228,7 +236,6 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
-        [self refreshThumbnails];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self resetAllLocalNotifications];
     }); 
@@ -273,15 +280,27 @@
     [alert show];
 }
 
-- (void)refreshThumbnails
+- (void)pollUntilThumbnailURLIsPresentForGoal:(Goal *)goal withTimer:(NSTimer *)timer
 {
-    for (Goal *goal in self.goalObjects) {
+    if (goal.thumb_url) {
+        [timer invalidate];
         [goal updateGraphImageThumbWithCompletionBlock:^{
-            [self.goalObjects removeAllObjects];
-            User *user = [ABCurrentUser user];
-            NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
-            self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
             [self.tableView reloadData];
+        }];
+    }
+    else {
+        [GoalPullRequest requestForGoal:goal withSuccessBlock:^{
+            if (goal.thumb_url) {
+                [timer invalidate];
+                [goal updateGraphImageThumbWithCompletionBlock:^{
+                    [self.tableView reloadData];
+                }];
+            }
+            else {
+                [self pollUntilThumbnailURLIsPresentForGoal:goal withTimer:timer];
+            }
+        } withErrorBlock:^{
+            NSLog(@"Error pulling goal from server");
         }];
     }
 }

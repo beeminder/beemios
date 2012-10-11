@@ -58,7 +58,7 @@
         if (response.statusCode == 200) {
             [[NSManagedObjectContext MR_defaultContext] MR_save];
         }
-        else {
+        else if (!goal.serverId) {
             [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
         }
         if (successBlock) successBlock();
