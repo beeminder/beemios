@@ -109,7 +109,7 @@
     }
     
     if (self.goalObject.rate) {
-        self.rateTextField.text = [NSString stringWithFormat:@"%@", ABS(self.goalObject.rate)];
+        self.rateTextField.text = [NSString stringWithFormat:@"%f", ABS([self.goalObject.rate doubleValue])];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
         [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
