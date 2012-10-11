@@ -25,9 +25,9 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFieldCollection;
 @property (strong, nonatomic) IBOutletCollection(UISwitch) NSMutableArray *switchCollection;
 @property (strong, nonatomic) IBOutlet UILabel *delayLabel;
-@property (strong, nonatomic) RoadDialViewController *rdvCon;
-@property (strong, nonatomic) GoalSummaryViewController *gsvCon;
+
 @property (strong, nonatomic) IBOutlet UILabel *goalValLabel;
+@property (strong, nonatomic) IBOutlet UILabel *negativeSignLabel;
 
 - (IBAction)cancel;
 - (NSUInteger)supportedInterfaceOrientations;

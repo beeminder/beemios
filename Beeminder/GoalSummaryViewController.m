@@ -264,7 +264,6 @@
     }
     else {
         [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
-        [(AdvancedRoalDialViewController *)segue.destinationViewController setGsvCon: self];
     }
 }
 

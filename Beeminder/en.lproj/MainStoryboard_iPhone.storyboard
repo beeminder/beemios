@@ -179,7 +179,7 @@
                                         </connections>
                                     </switch>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Start flat (leave this on if you're not sure what you want to commit to)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qZy-Qb-cUe">
-                                        <rect key="frame" x="115" y="270" width="185" height="36"/>
+                                        <rect key="frame" x="105" y="270" width="195" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -212,7 +212,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </switch>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Make this a temporary test goal that deletes itself after a few days." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7fr-0g-TLo">
-                                        <rect key="frame" x="115" y="314" width="185" height="31"/>
+                                        <rect key="frame" x="105" y="314" width="195" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -763,6 +763,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RVc-On-rBT">
+                                <rect key="frame" x="211" y="87" width="10" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -773,6 +780,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="goalDateTextField" destination="edC-Br-0Se" id="N21-Nq-tks"/>
                         <outlet property="goalValLabel" destination="jt8-HY-CHY" id="etY-8b-8we"/>
                         <outlet property="goalValueTextField" destination="0Eb-ps-Dq7" id="EKQ-0Q-zwV"/>
+                        <outlet property="negativeSignLabel" destination="RVc-On-rBT" id="Cyf-Ns-P1n"/>
                         <outlet property="rateTextField" destination="VYb-oD-b4s" id="tAS-4P-8Ft"/>
                         <outletCollection property="textFieldCollection" destination="edC-Br-0Se" id="fvf-cJ-WFe"/>
                         <outletCollection property="textFieldCollection" destination="VYb-oD-b4s" id="LZg-SI-x1J"/>
@@ -902,6 +910,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
@@ -910,6 +921,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="goalValLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalValueSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
                 <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>

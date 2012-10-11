@@ -34,6 +34,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    if ([self showingNegativeRateGoal]) {
+        self.negativeSignLabel.hidden = NO;
+    }
+    else {
+        self.negativeSignLabel.hidden = YES;
+    }
     
     NSString *gType = self.goalObject.goal_type;
     if ([[[[BeeminderAppDelegate goalTypesInfo] objectForKey:gType] objectForKey:kKyoomKey] boolValue]) {
@@ -44,7 +51,7 @@
     }
 
     self.switchCollection = [[NSMutableArray alloc] init];
-    if (self.rdvCon) {
+    if ([self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
         self.delayLabel.hidden = YES;
     }
     self.goalDateSwitch = [[DCRoundSwitch alloc] init];
@@ -102,7 +109,7 @@
     }
     
     if (self.goalObject.rate) {
-        self.rateTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.rate];
+        self.rateTextField.text = [NSString stringWithFormat:@"%@", ABS(self.goalObject.rate)];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
         [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
@@ -172,45 +179,37 @@
     [self setTextFieldCollection:nil];
     [self setDelayLabel:nil];
     [self setGoalValLabel:nil];
+    [self setNegativeSignLabel:nil];
     [super viewDidUnload];
+}
+
+- (BOOL)showingNegativeRateGoal
+{
+    NSArray *negativeGoalTypes = [NSArray arrayWithObjects:kFatloserPrivate, kInboxerPrivate, kDrinkerPrivate, nil];
+    return [negativeGoalTypes containsObject:[self goalObject].goal_type];
 }
 
 - (void)setGoalValueValue
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    
-    
-    NSDate *date = [formatter dateFromString:self.goalDateTextField.text];
+    NSDate *date = [self dateFromForm];
     
     NSTimeInterval interval = [date timeIntervalSinceNow];
     
     double weeks = interval/(3600*24*7);
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
+    double rate = [self rateFromForm];
     
     double diff = weeks*rate;
 
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO inContext:[NSManagedObjectContext MR_defaultContext]];
-
-    double goalVal = [datapoint.value doubleValue] + diff;
+    double goalVal = [self currentValue] + diff;
     
     self.goalValueTextField.text = [NSString stringWithFormat:@"%.0f", goalVal];
 }
 
 - (void)setGoalDateValue
 {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    double goalVal = [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue];
-    
-    double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
-    
+    double goalVal = [self valFromForm];
+    double rate = [self rateFromForm];
     double interval = (3600*24*7)*goalVal/rate;
     
     NSDate *gDate = [NSDate dateWithTimeIntervalSinceNow:interval];
@@ -223,24 +222,54 @@
 
 - (void)setRateValue
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    
-    NSDate *date = [formatter dateFromString:self.goalDateTextField.text];
+    NSDate *date = [self dateFromForm];
     
     NSTimeInterval interval = [date timeIntervalSinceNow];
 
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO inContext:[NSManagedObjectContext MR_defaultContext]];
-    
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    double diff = [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue] - [datapoint.value doubleValue];
+    double diff = [self valFromForm] - [self currentValue];
     
     double rate = diff*3600*7*24/interval;
 
     self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
+}
+
+- (double)currentValue
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+    Datapoint *datapoint = [Datapoint MR_findFirstWithPredicate:pred sortedBy:@"timestamp" ascending:NO inContext:[NSManagedObjectContext MR_defaultContext]];
+    if (datapoint) {
+        return [datapoint.value doubleValue];
+    }
+    else if (self.goalObject.initval) {
+        return [self.goalObject.initval doubleValue];
+    }
+    else {
+        return 0;
+    }
+}
+
+- (double)rateFromForm
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
+    if ([self showingNegativeRateGoal]) rate = rate * -1;
+    return rate;
+}
+
+- (NSDate *)dateFromForm
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    
+    return [formatter dateFromString:self.goalDateTextField.text];
+}
+
+- (double)valFromForm
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    return [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue];
 }
 
 - (IBAction)editingDidBegin:(id)sender
