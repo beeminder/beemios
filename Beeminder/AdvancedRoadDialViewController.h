@@ -27,9 +27,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *delayLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *goalValLabel;
-@property (strong, nonatomic) IBOutlet UILabel *negativeSignLabel;
 @property (strong, nonatomic) IBOutlet UIPickerView *valuePickerView;
 @property (strong, nonatomic) UITextField *valuePickerTextField;
+@property int pickerViewMagnitude;
 
 - (IBAction)cancel;
 - (NSUInteger)supportedInterfaceOrientations;

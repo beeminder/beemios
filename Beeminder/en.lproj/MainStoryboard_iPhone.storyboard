@@ -773,13 +773,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RVc-On-rBT">
-                                <rect key="frame" x="211" y="87" width="10" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -790,7 +783,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="goalDateTextField" destination="edC-Br-0Se" id="N21-Nq-tks"/>
                         <outlet property="goalValLabel" destination="jt8-HY-CHY" id="etY-8b-8we"/>
                         <outlet property="goalValueTextField" destination="0Eb-ps-Dq7" id="EKQ-0Q-zwV"/>
-                        <outlet property="negativeSignLabel" destination="RVc-On-rBT" id="Cyf-Ns-P1n"/>
                         <outlet property="rateTextField" destination="VYb-oD-b4s" id="tAS-4P-8Ft"/>
                         <outlet property="valuePickerView" destination="uCh-q7-jjz" id="y7h-BH-ytG"/>
                         <outletCollection property="textFieldCollection" destination="edC-Br-0Se" id="fvf-cJ-WFe"/>
@@ -916,124 +908,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="settings_tab_icon" width="16" height="16"/>
         <image name="your-goals-tab" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="AdvancedRoalDialViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="goalDateSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="goalDateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalValLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalValueSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
-                <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="valuePickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
-                <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ChooseGoalTypeViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalTypeViewController.h"/>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
-        </class>
-        <class className="DashboardNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
-        </class>
-        <class className="GoalGraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="GoalSummaryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GoalsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
-        </class>
-        <class className="MainTabBarViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarViewController.h"/>
-        </class>
-        <class className="NewGoalViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewGoalViewController.h"/>
-        </class>
-        <class className="RoadDialViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ephemSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="firstLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="firstTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalDetailsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="startFlatSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signOutButtonPressed"/>
-                <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="signOutButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SignInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="signUpButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SignUpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="usernameValueChanged"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordConfirmationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="startTrackingButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

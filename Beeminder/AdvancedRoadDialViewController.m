@@ -35,16 +35,6 @@
 {
     [super viewDidLoad];
     
-    [self.valuePickerView selectRow:100 inComponent:0 animated:YES];
-    [self.valuePickerView selectRow:100 inComponent:1 animated:YES];
-
-    if ([self showingNegativeRateGoal]) {
-        self.negativeSignLabel.hidden = NO;
-    }
-    else {
-        self.negativeSignLabel.hidden = YES;
-    }
-    
     NSString *gType = self.goalObject.goal_type;
     if ([[[[BeeminderAppDelegate goalTypesInfo] objectForKey:gType] objectForKey:kKyoomKey] boolValue]) {
         self.goalValLabel.text = @"Goal total";
@@ -167,85 +157,102 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 2;
+    int count;
+    if (self.valuePickerTextField == self.goalValueTextField) {
+        count = [self.goalValueTextField.text length];
+        if ([self.goalValueTextField.text rangeOfString:@"."].location != NSNotFound) {
+            count--;
+        }
+    }
+    else {
+        count = [self.rateTextField.text length];
+        if ([self.rateTextField.text rangeOfString:@"."].location != NSNotFound) {
+            count--;
+        }
+    }
+    return MAX(count, 2);
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (self.valuePickerTextField == self.goalValueTextField) {
-        self.goalObject.goalval = [NSNumber numberWithDouble:[self pickerViewValue]];
-        [self setGoalValueTextFieldTextFromGoalObject];
+        [self setGoalValueTextFieldTextWithDouble:[self pickerViewValue]];
     }
     else {
-        self.goalObject.rate = [NSNumber numberWithDouble:[self pickerViewValue]];
-        [self setRateTextFieldTextFromGoalObject];
+        [self setRateTextFieldTextWithDouble:[self pickerViewValue]];
     }
-    // if we selected the first/last rown in component 1, shift the magnitude
     
-    // if 0 is selected on the left and we selected a value < 5 on the left, shift the magnitude
+    if (self.valuePickerView.numberOfComponents > 7) {
+        self.valuePickerView.hidden = YES;
+        [self.valuePickerTextField becomeFirstResponder];
+    }
+
+    [self.valuePickerView reloadAllComponents];
+    [self updatePickerMagnitude];
+    [self setValuePickerValue];
+    [self recalculateValues];
+}
+
+- (void)updatePickerMagnitude
+{
+    if (self.valuePickerTextField == self.goalValueTextField) {
+        self.pickerViewMagnitude = floor(log10(ABS([self valFromForm]))) + 1;
+    }
+    else {
+        self.pickerViewMagnitude = floor(log10(ABS([self rateFromForm]))) + 1;
+    }
 }
 
 - (double)pickerViewValue
 {
-    return ([self.valuePickerView selectedRowInComponent:0] - 100)*pow(10, [self scalar] - 1) + ([self.valuePickerView selectedRowInComponent:1])*pow(10, [self scalar] - 2);
+    int i = 0;
+    double val = 0;
+    BOOL neg = NO;
+    double componentVal;
+    while (i < self.valuePickerView.numberOfComponents) {
+        neg = (i == 0 && [self.valuePickerView selectedRowInComponent:0] <= 10);
+
+        int offset = i == 0 ? 10 : 0;
+
+        componentVal = [self.valuePickerView selectedRowInComponent:i] - offset;
+
+        val += componentVal*pow(10, self.pickerViewMagnitude - i - 1);
+        i++;
+    }
+    return neg ? -1*val : val;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (component == 0) {
-        return 201;
+        return 21;
     }
     else {
-        return 100;
+        return 10;
     }
-}
-
-- (int)scalar
-{
-    if (self.valuePickerTextField == self.rateTextField) {
-        return [self goalRateScalar];
-    }
-
-    return [self goalValueScalar];
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *label;
+    float width = 320.0f/self.valuePickerView.numberOfComponents - 20.0f;
     
     if (component == 0) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 37)];
-        label.textAlignment = UITextAlignmentRight;
-        int rowValue = row - 100;
-        if ([self scalar] == 1) {
-            label.text = [NSString stringWithFormat:@"%i.", rowValue];
-        }
-        else {
-            label.text = [NSString stringWithFormat:@"%i.", rowValue];
-        }
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 37)];
+        label.text = [NSString stringWithFormat:@"%i", row - 10];
     }
     else {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 37)];
-        label.text = [NSString stringWithFormat:@"%02i", row];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 37)];
+        label.text = [NSString stringWithFormat:@"%i", row];
     }
+    if (component == self.pickerViewMagnitude - 1) {
+        label.text = [label.text stringByAppendingString:@"."];
+    }
+        
+    label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:22.0f];
     return label;
-}
-
-- (int)goalValueScalar
-{
-    int absGoalValue = ABS([self.goalObject.goalval integerValue]);
-    // an integer from one to five inclusive
-
-    return MAX(MIN(floor(log10(absGoalValue)), 5), 1);
-}
-
-- (int)goalRateScalar
-{
-    int absGoalRate = ABS([self.goalObject.rate integerValue]);
-    // an integer from one to five inclusive
-    return MAX(MIN(floor(log10(absGoalRate)), 5), 1);
 }
 
 - (IBAction)recalculateValues
@@ -281,15 +288,8 @@
     [self setTextFieldCollection:nil];
     [self setDelayLabel:nil];
     [self setGoalValLabel:nil];
-    [self setNegativeSignLabel:nil];
     [self setValuePickerView:nil];
     [super viewDidUnload];
-}
-
-- (BOOL)showingNegativeRateGoal
-{
-    NSArray *negativeGoalTypes = [NSArray arrayWithObjects:kFatloserPrivate, kInboxerPrivate, kDrinkerPrivate, nil];
-    return [negativeGoalTypes containsObject:[self goalObject].goal_type];
 }
 
 - (void)setGoalValueTextFieldTextFromForm
@@ -307,7 +307,6 @@
     double goalVal = [self currentValue] + diff;
     
     self.goalValueTextField.text = [NSString stringWithFormat:@"%.0f", goalVal];
-    self.goalObject.goalval = nil;
 }
 
 - (void)setGoalDateDatePickerDateFromForm
@@ -322,7 +321,6 @@
     [formatter setDateStyle:NSDateFormatterShortStyle];
     self.goalDateTextField.text = [formatter stringFromDate:gDate];
     self.datePicker.date = gDate;
-    self.goalObject.goaldate = nil;
 }
 
 - (void)setRateTextFieldTextFromForm
@@ -336,40 +334,73 @@
     double rate = diff*3600*7*24/interval;
 
     self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
-    self.goalObject.rate = nil;
 }
 
 - (void)setGoalValueTextFieldTextFromGoalObject
 {
-    self.goalValueTextField.text = [NSString stringWithFormat:@"%.0f", [self.goalObject.goalval doubleValue]];
+    [self setGoalValueTextFieldTextWithDouble:[self.goalObject.goalval doubleValue]];
 }
 
-- (void)setDatePickerFormObjectsFromGoalObject
+- (void)setGoalValueTextFieldTextWithDouble:(double)goalValue
 {
-    NSDate *gDate = [NSDate dateWithTimeIntervalSince1970:[self.goalObject.goaldate doubleValue]];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    self.goalDateTextField.text = [formatter stringFromDate:gDate];
-    self.datePicker.date = gDate;
+    self.goalValueTextField.text = [NSString stringWithFormat:@"%.2f", goalValue];
 }
 
 - (void)setRateTextFieldTextFromGoalObject
 {
-    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", [self.goalObject.rate doubleValue]];
+    [self setRateTextFieldTextWithDouble:[self.goalObject.rate doubleValue]];
 }
 
-- (void)setValuePickerValueFromRateTextField
+- (void)setRateTextFieldTextWithDouble:(double)rate
 {
-    double rate = [self rateFromForm];
-    [self.valuePickerView reloadAllComponents];
-    [self.valuePickerView selectRow:100 + (int)rate inComponent:0 animated:YES];
+    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
+}
+
+- (void)setValuePickerValue
+{
+    if (self.valuePickerTextField == self.goalValueTextField) {
+        [self setValuePickerValueFromGoalValueTextField];
+    }
+    else {
+        [self setValuePickerValueFromRateTextField];
+    }
 }
 
 - (void)setValuePickerValueFromGoalValueTextField
 {
-    double goalVal = [self valFromForm];
+    [self setValuePickerValueWithDouble:[self valFromForm]];
+}
+
+- (void)setValuePickerValueFromRateTextField
+{
+    [self setValuePickerValueWithDouble:[self rateFromForm]];
+}
+
+- (void)setValuePickerValueWithDouble:(double)value
+{
+    if (value == 0) {
+        self.pickerViewMagnitude = 1;
+    }
+    else {
+        self.pickerViewMagnitude = floor(log10(ABS(value))) + 1;
+    }
     [self.valuePickerView reloadAllComponents];
-    [self.valuePickerView selectRow:100 + (int)goalVal inComponent:0 animated:YES];
+    int i = 0;
+    while (i < self.valuePickerView.numberOfComponents) {
+        int row;
+        int mag = floor(log10(ABS(value))) - i;
+        
+        int val = (int)floor(fmod(value, pow(10, mag + 1))/pow(10, mag));
+        if (i + 1 == self.valuePickerView.numberOfComponents) {
+            val = (int)round(fmod(value, pow(10, mag + 1))/pow(10, mag));
+        }
+        if (value == 0) {
+            val = 0;
+        }
+        row = i == 0 ? val + 10 : val;
+        [self.valuePickerView selectRow:row inComponent:i animated:YES];
+        i++;
+    }
 }
 
 - (double)currentValue
@@ -392,7 +423,6 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
-    if ([self showingNegativeRateGoal]) rate = rate * -1;
     return rate;
 }
 
@@ -411,31 +441,31 @@
     return [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue];
 }
 
--(void)textFieldDidBeginEditing:(UITextField*)textField
-{
-    [textField resignFirstResponder];
-}
-
 - (IBAction)editingDidBegin:(id)sender
 {
-    [sender resignFirstResponder];    
     if (sender == self.goalDateTextField) {
+        [sender resignFirstResponder];
         [self showDatePicker];
     }
     else {
-        [self showValuePicker];
-
-        self.valuePickerTextField = sender;
-
-        if (sender == self.rateTextField) {
-            [self setValuePickerValueFromRateTextField];
+        if (self.valuePickerView.numberOfComponents > 7) {
+            self.valuePickerView.hidden = YES;
+            [sender becomeFirstResponder];
         }
         else {
-            [self setValuePickerValueFromGoalValueTextField];
+            [sender resignFirstResponder];
+            [self showValuePicker];
+
+            self.valuePickerTextField = sender;
+
+            if (sender == self.rateTextField) {
+                [self setValuePickerValueFromRateTextField];
+            }
+            else {
+                [self setValuePickerValueFromGoalValueTextField];
+            }
         }
-
     }
-
 
     int senderIndex = [self.textFieldCollection indexOfObject:sender];
     
@@ -548,8 +578,6 @@
 - (void)dismiss
 {
     [self.view endEditing:YES];
-    self.datePicker.hidden = YES;
-    self.dismissToolbar.hidden = YES;
     if (![self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
         [GoalPushRequest requestForGoal:self.goalObject roadDial:YES withSuccessBlock:^{
             MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];

@@ -32,22 +32,23 @@
     NSString *pString = [goal paramString];
     pString = [pString stringByAppendingFormat:@"&access_token=%@", [ABCurrentUser accessToken]];
     
-    NSURL *url;
     NSMutableURLRequest *request;
     if (goal.serverId) {
         if (roadDial) {
-            url = [NSURL URLWithString:[[goal roadDialURL] stringByAppendingFormat:@"?%@", pString]];
+            NSString *dialURL = [goal roadDialURL];
+            NSString *fullURL = [dialURL stringByAppendingFormat:@"?%@", pString];
+            NSURL *url = [NSURL URLWithString:fullURL];
             request = [NSMutableURLRequest requestWithURL:url];
             [request setHTTPMethod:@"POST"];
         }
         else {
-            url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
+            NSURL *url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
             request = [NSMutableURLRequest requestWithURL:url];
             [request setHTTPMethod:@"PUT"];
         }
     }
     else {
-        url = [NSURL URLWithString:[goal createURL]];
+        NSURL *url = [NSURL URLWithString:[goal createURL]];
         request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
