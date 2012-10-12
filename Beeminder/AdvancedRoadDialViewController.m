@@ -418,20 +418,20 @@
 
 - (IBAction)editingDidBegin:(id)sender
 {
+    [sender resignFirstResponder];    
     if (sender == self.goalDateTextField) {
         [self showDatePicker];
     }
     else {
         [self showValuePicker];
-        [sender resignFirstResponder];
-//        self.valuePickerTextField = sender;
-//        self.valuePickerView.userInteractionEnabled = YES;
-//        [self.valuePickerView becomeFirstResponder];
+
+        self.valuePickerTextField = sender;
+
         if (sender == self.rateTextField) {
-//            [self setValuePickerValueFromRateTextField];
+            [self setValuePickerValueFromRateTextField];
         }
         else {
-//            [self setValuePickerValueFromGoalValueTextField];
+            [self setValuePickerValueFromGoalValueTextField];
         }
 
     }
