@@ -411,22 +411,29 @@
     return [[numberFormatter numberFromString:self.goalValueTextField.text] doubleValue];
 }
 
+-(void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    [textField resignFirstResponder];
+}
+
 - (IBAction)editingDidBegin:(id)sender
 {
     if (sender == self.goalDateTextField) {
         [self showDatePicker];
     }
     else {
+        [self showValuePicker];
+        [sender resignFirstResponder];
+//        self.valuePickerTextField = sender;
+//        self.valuePickerView.userInteractionEnabled = YES;
+//        [self.valuePickerView becomeFirstResponder];
         if (sender == self.rateTextField) {
-            [self setValuePickerValueFromRateTextField];
+//            [self setValuePickerValueFromRateTextField];
         }
         else {
-            [self setValuePickerValueFromGoalValueTextField];
+//            [self setValuePickerValueFromGoalValueTextField];
         }
-        [sender resignFirstResponder];        
-        [self showValuePicker];
 
-        self.valuePickerTextField = sender;
     }
 
 

@@ -687,6 +687,7 @@ Bee patient!</string>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="fLE-rR-IQO"/>
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="OHd-qP-ugH"/>
+                                    <outlet property="delegate" destination="YqE-9n-0QD" id="yzC-X9-7HE"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Eb-ps-Dq7">
@@ -697,6 +698,7 @@ Bee patient!</string>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="r9S-WW-6Om"/>
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="d5m-7f-yNn"/>
+                                    <outlet property="delegate" destination="YqE-9n-0QD" id="CzO-Vz-zxa"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Road Dial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EW2-Ca-mdS">

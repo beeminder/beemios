@@ -11,7 +11,7 @@
 
 @class RoadDialViewController;
 
-@interface AdvancedRoalDialViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface AdvancedRoalDialViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet DCRoundSwitch *goalDateSwitch;
 @property (strong, nonatomic) IBOutlet DCRoundSwitch *rateSwitch;
