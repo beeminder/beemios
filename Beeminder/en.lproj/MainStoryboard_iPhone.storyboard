@@ -683,7 +683,7 @@ Bee patient!</string>
                                 <rect key="frame" x="220" y="85" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="editingDidBegin:" destination="YqE-9n-0QD" eventType="editingDidBegin" id="fLE-rR-IQO"/>
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="OHd-qP-ugH"/>
@@ -738,6 +738,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="datePickerValueChanged" destination="YqE-9n-0QD" eventType="valueChanged" id="C3N-2D-trP"/>
                                 </connections>
                             </datePicker>
+                            <pickerView contentMode="scaleToFill" id="uCh-q7-jjz">
+                                <rect key="frame" x="0.0" y="244" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YqE-9n-0QD" id="8De-iO-MtO"/>
+                                    <outlet property="delegate" destination="YqE-9n-0QD" id="sb6-oR-EZB"/>
+                                </connections>
+                            </pickerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="MQc-z4-lDo">
                                 <rect key="frame" x="0.0" y="200" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -751,7 +759,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <barButtonItem width="126" style="plain" systemItem="fixedSpace" id="KnB-z5-mQN"/>
                                     <barButtonItem title="DIAL-IT-IN" style="done" id="LrR-NY-bwS">
                                         <connections>
-                                            <action selector="save:" destination="YqE-9n-0QD" id="mdm-OC-Tj7"/>
+                                            <action selector="saveAndDismiss:" destination="YqE-9n-0QD" id="LQk-83-3OW"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -782,6 +790,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="goalValueTextField" destination="0Eb-ps-Dq7" id="EKQ-0Q-zwV"/>
                         <outlet property="negativeSignLabel" destination="RVc-On-rBT" id="Cyf-Ns-P1n"/>
                         <outlet property="rateTextField" destination="VYb-oD-b4s" id="tAS-4P-8Ft"/>
+                        <outlet property="valuePickerView" destination="uCh-q7-jjz" id="y7h-BH-ytG"/>
                         <outletCollection property="textFieldCollection" destination="edC-Br-0Se" id="fvf-cJ-WFe"/>
                         <outletCollection property="textFieldCollection" destination="VYb-oD-b4s" id="LZg-SI-x1J"/>
                         <outletCollection property="textFieldCollection" destination="0Eb-ps-Dq7" id="hZb-27-KCf"/>
@@ -911,7 +920,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="cancel"/>
                 <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="saveAndDismiss:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
@@ -924,6 +933,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="valuePickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
                 <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>
             </relationships>

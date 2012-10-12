@@ -11,7 +11,7 @@
 
 @class RoadDialViewController;
 
-@interface AdvancedRoalDialViewController : UIViewController
+@interface AdvancedRoalDialViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet DCRoundSwitch *goalDateSwitch;
 @property (strong, nonatomic) IBOutlet DCRoundSwitch *rateSwitch;
@@ -28,8 +28,15 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *goalValLabel;
 @property (strong, nonatomic) IBOutlet UILabel *negativeSignLabel;
+@property (strong, nonatomic) IBOutlet UIPickerView *valuePickerView;
+@property (strong, nonatomic) UITextField *valuePickerTextField;
 
 - (IBAction)cancel;
 - (NSUInteger)supportedInterfaceOrientations;
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view;
+
 
 @end
