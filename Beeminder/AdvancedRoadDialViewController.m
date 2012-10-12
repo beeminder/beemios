@@ -196,10 +196,10 @@
 - (void)updatePickerMagnitude
 {
     if (self.valuePickerTextField == self.goalValueTextField) {
-        self.pickerViewMagnitude = floor(log10(ABS([self valFromForm]))) + 1;
+        self.pickerViewMagnitude = floor(log10(ABS([self valFromForm])));
     }
     else {
-        self.pickerViewMagnitude = floor(log10(ABS([self rateFromForm]))) + 1;
+        self.pickerViewMagnitude = floor(log10(ABS([self rateFromForm])));
     }
 }
 
@@ -216,7 +216,7 @@
 
         componentVal = [self.valuePickerView selectedRowInComponent:i] - offset;
 
-        val += componentVal*pow(10, self.pickerViewMagnitude - i - 1);
+        val += componentVal*pow(10, self.pickerViewMagnitude - i);
         i++;
     }
     return neg ? -1*val : val;
@@ -245,7 +245,7 @@
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 37)];
         label.text = [NSString stringWithFormat:@"%i", row];
     }
-    if (component == self.pickerViewMagnitude - 1) {
+    if (component == self.pickerViewMagnitude) {
         label.text = [label.text stringByAppendingString:@"."];
     }
         
@@ -379,10 +379,10 @@
 - (void)setValuePickerValueWithDouble:(double)value
 {
     if (value == 0) {
-        self.pickerViewMagnitude = 1;
+        self.pickerViewMagnitude = 0;
     }
     else {
-        self.pickerViewMagnitude = floor(log10(ABS(value))) + 1;
+        self.pickerViewMagnitude = floor(log10(ABS(value)));
     }
     [self.valuePickerView reloadAllComponents];
     int i = 0;
@@ -390,14 +390,14 @@
         int row;
         int mag = floor(log10(ABS(value))) - i;
         
-        int val = (int)floor(fmod(value, pow(10, mag + 1))/pow(10, mag));
+        int componentVal = (int)floor(value/pow(10, mag));
         if (i + 1 == self.valuePickerView.numberOfComponents) {
-            val = (int)round(fmod(value, pow(10, mag + 1))/pow(10, mag));
+            componentVal = (int)round(value/pow(10, mag));
         }
         if (value == 0) {
-            val = 0;
+            componentVal = 0;
         }
-        row = i == 0 ? val + 10 : val;
+        row = i == 0 ? componentVal + 10 : componentVal;
         [self.valuePickerView selectRow:row inComponent:i animated:YES];
         i++;
     }
