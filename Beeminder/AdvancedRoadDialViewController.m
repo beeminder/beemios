@@ -163,10 +163,16 @@
         if ([self.goalValueTextField.text rangeOfString:@"."].location != NSNotFound) {
             count--;
         }
+        if ([self.goalValueTextField.text rangeOfString:@"-"].location != NSNotFound) {
+            count--;
+        }
     }
     else {
         count = [self.rateTextField.text length];
         if ([self.rateTextField.text rangeOfString:@"."].location != NSNotFound) {
+            count--;
+        }
+        if ([self.rateTextField.text rangeOfString:@"-"].location != NSNotFound) {
             count--;
         }
     }
@@ -207,19 +213,17 @@
 {
     int i = 0;
     double val = 0;
-    BOOL neg = NO;
+    BOOL neg = [self.valuePickerView selectedRowInComponent:0] <= 10;
     double componentVal;
     while (i < self.valuePickerView.numberOfComponents) {
-        neg = (i == 0 && [self.valuePickerView selectedRowInComponent:0] <= 10);
-
         int offset = i == 0 ? 10 : 0;
 
         componentVal = [self.valuePickerView selectedRowInComponent:i] - offset;
-
-        val += componentVal*pow(10, self.pickerViewMagnitude - i);
+        val += ABS(componentVal*pow(10, self.pickerViewMagnitude - i));
         i++;
     }
-    return neg ? -1*val : val;
+    
+    return neg ? -1*ABS(val) : val;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -323,6 +327,14 @@
     self.datePicker.date = gDate;
 }
 
+- (NSString *)stringFormatForValue:(double)value
+{
+    if (ABS(value) >= 100) {
+        return @"%.f";
+    }
+    return @"%.2f";
+}
+
 - (void)setRateTextFieldTextFromForm
 {
     NSDate *date = [self dateFromForm];
@@ -333,7 +345,7 @@
     
     double rate = diff*3600*7*24/interval;
 
-    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
+    self.rateTextField.text = [NSString stringWithFormat:[self stringFormatForValue:rate], rate];
 }
 
 - (void)setGoalValueTextFieldTextFromGoalObject
@@ -343,7 +355,7 @@
 
 - (void)setGoalValueTextFieldTextWithDouble:(double)goalValue
 {
-    self.goalValueTextField.text = [NSString stringWithFormat:@"%.2f", goalValue];
+    self.goalValueTextField.text = [NSString stringWithFormat:[self stringFormatForValue:goalValue], goalValue];
 }
 
 - (void)setRateTextFieldTextFromGoalObject
@@ -353,7 +365,7 @@
 
 - (void)setRateTextFieldTextWithDouble:(double)rate
 {
-    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
+    self.rateTextField.text = [NSString stringWithFormat:[self stringFormatForValue:rate], rate];
 }
 
 - (void)setValuePickerValue
@@ -386,16 +398,22 @@
     }
     [self.valuePickerView reloadAllComponents];
     int i = 0;
+
     while (i < self.valuePickerView.numberOfComponents) {
         int row;
         int mag = floor(log10(ABS(value))) - i;
-        
-        int componentVal = (int)floor(value/pow(10, mag));
+        int componentVal;
+
+        componentVal = (int)floor(fmod(ABS(value), pow(10, mag + 1))/pow(10, mag));
+
         if (i + 1 == self.valuePickerView.numberOfComponents) {
-            componentVal = (int)round(value/pow(10, mag));
+            componentVal = (int)round(fmod(ABS(value), pow(10, mag + 1))/pow(10, mag));
         }
         if (value == 0) {
             componentVal = 0;
+        }
+        if (value < 0 && i == 0) {
+            componentVal = componentVal*-1;
         }
         row = i == 0 ? componentVal + 10 : componentVal;
         [self.valuePickerView selectRow:row inComponent:i animated:YES];
@@ -410,8 +428,15 @@
     if (datapoint) {
         return [datapoint.value doubleValue];
     }
-    else if (self.goalObject.initval) {
+    else if ([self.goalObject.initval doubleValue] != 0) {
         return [self.goalObject.initval doubleValue];
+    }
+    else if (![self.goalObject.goal_type isEqualToString:kDrinkerPrivate] && [self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
+        NewGoalViewController *ngvCon = (NewGoalViewController *)self.presentingViewController;
+        RoadDialViewController *rdvCon = (RoadDialViewController *)ngvCon.topViewController;
+        NSString *valueText = rdvCon.firstTextField.text;
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        return [[numberFormatter numberFromString:valueText] doubleValue];
     }
     else {
         return 0;
