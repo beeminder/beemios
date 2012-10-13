@@ -235,6 +235,7 @@
                         <outlet property="goalTypeLabel" destination="ERu-9V-ZQI" id="zwM-oP-qrQ"/>
                         <outlet property="roadDialButton" destination="uPp-vR-WlF" id="QQT-oz-k3T"/>
                         <outlet property="saveGoalButton" destination="oqv-eG-50a" id="JcG-gS-ZYI"/>
+                        <outlet property="startFlatLabel" destination="qZy-Qb-cUe" id="9iT-sv-CY0"/>
                         <outlet property="startFlatSwitch" destination="sZz-do-bWY" id="IZo-jk-J0n"/>
                         <outlet property="titleLabel" destination="ULj-aJ-mR0" id="aam-ex-bGM"/>
                         <outlet property="titleTextField" destination="BZN-Jb-uZJ" id="pMb-J9-LP8"/>
@@ -603,7 +604,7 @@ Bee patient!</string>
                                 <rect key="frame" x="20" y="316" width="110" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Edit Goal">
+                                <state key="normal" title="Dial Road">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -958,9 +959,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="GoalsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="MainTabBarViewController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarViewController.h"/>
@@ -979,6 +977,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startFlatLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="startFlatSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleTextField" candidateClass="UITextField"/>

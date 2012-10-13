@@ -51,6 +51,8 @@
     if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
         [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
         self.firstLabel.text = kWeeklyEstimateText;
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
     }
     else {
         [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:17.0]];
@@ -60,6 +62,11 @@
     if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
         self.firstLabel.hidden = YES;
         self.firstTextField.hidden = YES;
+    }
+    
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
     }
 }
 
@@ -86,6 +93,7 @@
     [self setSaveGoalButton:nil];
     [self setGoalSlugExistsWarningLabel:nil];
     [self setEphemSwitch:nil];
+    [self setStartFlatLabel:nil];
     [super viewDidUnload];
 }
 

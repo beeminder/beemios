@@ -69,15 +69,15 @@
     }
     
     if (self.rate) {
-        pString = [pString stringByAppendingFormat:@"&rate=%f", [self.rate doubleValue]];
+        pString = [pString stringByAppendingFormat:@"&rate=%g", [self.rate doubleValue]];
     }
     
     if (self.goalval) {
-        pString = [pString stringByAppendingFormat:@"&goalval=%f", [self.goalval doubleValue]];
+        pString = [pString stringByAppendingFormat:@"&goalval=%g", [self.goalval doubleValue]];
     }
     
     if (self.initval) {
-        pString = [pString stringByAppendingFormat:@"&initval=%f", [self.initval doubleValue]];
+        pString = [pString stringByAppendingFormat:@"&initval=%g", [self.initval doubleValue]];
     }
     
     return pString;

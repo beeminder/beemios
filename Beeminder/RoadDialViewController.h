@@ -26,5 +26,6 @@
 @property (strong, nonatomic) NSArray *goalSlugs;
 @property (strong, nonatomic) IBOutlet UIButton *saveGoalButton;
 @property (strong, nonatomic) IBOutlet UILabel *goalSlugExistsWarningLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startFlatLabel;
 - (NSUInteger)supportedInterfaceOrientations;
 @end

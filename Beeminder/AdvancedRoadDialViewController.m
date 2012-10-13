@@ -101,7 +101,7 @@
     if (self.goalObject.goalval) {
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
         [self.goalValueSwitch setOn:YES animated:NO ignoreControlEvents:YES];
-        self.goalValueTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.goalval];
+        self.goalValueTextField.text = [NSString stringWithFormat:@"%g", [self.goalObject.goalval doubleValue]];
     }
     else {
         [self disableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
@@ -109,7 +109,7 @@
     }
     
     if (self.goalObject.rate) {
-        self.rateTextField.text = [NSString stringWithFormat:@"%.2f", ABS([self.goalObject.rate doubleValue])];
+        self.rateTextField.text = [NSString stringWithFormat:@"%g", ABS([self.goalObject.rate doubleValue])];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
         [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
@@ -203,7 +203,7 @@
 
     double goalVal = [self currentValue] + diff;
     
-    self.goalValueTextField.text = [NSString stringWithFormat:@"%.0f", goalVal];
+    self.goalValueTextField.text = [NSString stringWithFormat:@"%g", goalVal];
 }
 
 - (void)setGoalDateValue
@@ -237,7 +237,13 @@
     
     double rate = diff*3600*7*24/interval;
 
-    self.rateTextField.text = [NSString stringWithFormat:@"%.2f", rate];
+    self.rateTextField.text = [NSString stringWithFormat:@"%g", ABS(rate)];
+    if (rate > 0) {
+        self.negativeSignLabel.hidden = YES;
+    }
+    else {
+        self.negativeSignLabel.hidden = NO;
+    }
 }
 
 - (double)currentValue
