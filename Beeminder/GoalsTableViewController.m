@@ -167,9 +167,17 @@
             }
 
             [cell addSubview:imageView];
+
+            if ([goal.burner isEqualToString:@"frontburner"]) {
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
+            }
+            else {
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dark-cell-noise"]];
+            }
         }
     }
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
+
+
     return cell;
 }
 
