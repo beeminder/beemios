@@ -88,7 +88,7 @@
     NSString *username = [ABCurrentUser username];
     int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
 
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&access_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser accessToken]]];
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&skinny=true&access_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser accessToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
     

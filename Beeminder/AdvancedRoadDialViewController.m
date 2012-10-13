@@ -109,7 +109,7 @@
     }
     
     if (self.goalObject.rate) {
-        self.rateTextField.text = [NSString stringWithFormat:@"%f", ABS([self.goalObject.rate doubleValue])];
+        self.rateTextField.text = [NSString stringWithFormat:@"%.2f", ABS([self.goalObject.rate doubleValue])];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
         [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
     }
@@ -247,15 +247,22 @@
     if (datapoint) {
         return [datapoint.value doubleValue];
     }
-    else if (self.goalObject.initval) {
+    else if ([self.goalObject.initval doubleValue] != 0) {
         return [self.goalObject.initval doubleValue];
+    }
+    else if (![self.goalObject.goal_type isEqualToString:kDrinkerPrivate] && [self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
+        NewGoalViewController *ngvCon = (NewGoalViewController *)self.presentingViewController;
+        RoadDialViewController *rdvCon = (RoadDialViewController *)ngvCon.topViewController;
+        NSString *valueText = rdvCon.firstTextField.text;
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        return [[numberFormatter numberFromString:valueText] doubleValue];
     }
     else {
         return 0;
     }
 }
 
-- (double)rateFromForm2
+- (double)rateFromForm
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 //    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -372,7 +379,7 @@
     }
     
     if (self.rateSwitch.on) {
-        self.goalObject.rate = [numberFormatter numberFromString:self.rateTextField.text];
+        self.goalObject.rate = [NSNumber numberWithDouble:[self rateFromForm]];
     }
     else {
         self.goalObject.rate = nil;

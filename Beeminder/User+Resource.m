@@ -53,6 +53,7 @@
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
         if ([key isEqualToString:@"datapoints"]) {
+            // since we send the "skinny" parameter now, we shouldn't get this key back.
             NSDictionary *datapointDict;
             for (datapointDict in obj) {
                 Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
@@ -66,6 +67,18 @@
                 datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
                 [defaultContext MR_save];
             }
+        }
+        else if ([key isEqualToString:@"last_datapoint"] && NULL_TO_NIL(obj)) {
+            Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[obj objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
+            if (!datapoint) {
+                datapoint = [Datapoint MR_createInContext:[NSManagedObjectContext MR_defaultContext]];
+            }
+            datapoint.goal = goal;
+            datapoint.comment = [obj objectForKey:@"comment"];
+            datapoint.value = [obj objectForKey:@"value"];
+            datapoint.serverId = [obj objectForKey:@"id"];
+            datapoint.timestamp = [obj objectForKey:@"timestamp"];
+            [defaultContext MR_save];
         }
         else {
             NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];

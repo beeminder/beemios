@@ -130,6 +130,29 @@
     return [self.goalSlugs containsObject:[BeeminderAppDelegate slugFromTitle:title]];
 }
 
+- (id)rateFromForm
+{
+    Goal *goal = [BeeminderAppDelegate sharedSessionGoal];
+    if ([goal.goal_type isEqualToString:kDrinkerPrivate]) {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        return [numberFormatter numberFromString:self.firstTextField.text];
+    }
+    return nil;
+}
+
+- (NSNumber *)initialValFromForm
+{
+    NSDictionary *goalTypeInfo = [[BeeminderAppDelegate goalTypesInfo] objectForKey:[BeeminderAppDelegate sharedSessionGoal].goal_type];
+    
+    if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
+        return [NSNumber numberWithInt:0];
+    }
+    else {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        return [numberFormatter numberFromString:self.firstTextField.text];
+    }
+}
+
 - (IBAction)saveGoalButtonPressed
 {
     Goal *goal = [BeeminderAppDelegate sharedSessionGoal];
@@ -137,6 +160,10 @@
     goal.title = self.titleTextField.text;
     goal.slug = [BeeminderAppDelegate slugFromTitle:goal.title];
     goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
+    if ([goal.goal_type isEqualToString:kDrinkerPrivate] && !goal.rate) {
+        goal.rate = [self rateFromForm];
+    }
+    goal.initval = [self initialValFromForm];
     
     [self parseInitialValue];
     [self parseWeeklyEstimate];

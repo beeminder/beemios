@@ -76,6 +76,10 @@
         pString = [pString stringByAppendingFormat:@"&goalval=%f", [self.goalval doubleValue]];
     }
     
+    if (self.initval) {
+        pString = [pString stringByAppendingFormat:@"&initval=%f", [self.initval doubleValue]];
+    }
+    
     return pString;
 }
 

@@ -583,7 +583,7 @@ Bee patient!</string>
                                     <action selector="submitButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="uJi-Wm-z0p"/>
                                 </connections>
                             </button>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000" id="YcL-8d-VDM">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1000000" maximumValue="1000000" id="YcL-8d-VDM">
                                 <rect key="frame" x="198" y="268" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <connections>
@@ -910,9 +910,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
-                <relationship kind="action" name="editingDidBegin:"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
