@@ -58,7 +58,7 @@
 
 - (NSString *)paramString
 {
-    NSString *pString = [NSString stringWithFormat:@"ephem=%d&goal_type=%@&slug=%@&title=%@", [self.ephem integerValue], self.goal_type, self.slug, self.title];
+    NSString *pString = [NSString stringWithFormat:@"ephem=%d&goal_type=%@&slug=%@&title=%@", [self.ephem integerValue], self.goal_type, self.slug, (__bridge NSString *)(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self.title, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8))];
     
     if (self.burner) {
         pString = [pString stringByAppendingFormat:@"&burner=%@", self.burner];
