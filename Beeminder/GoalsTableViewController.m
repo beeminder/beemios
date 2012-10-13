@@ -237,39 +237,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self resetAllLocalNotifications];
-    }); 
-}
-
-- (void)resetAllLocalNotifications
-{
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    for (Goal *goal in self.goalObjects) {
-        NSDate *emergencyTime;
-        NSDate *wrongLaneTime;
-        double losedate = [goal.losedate doubleValue]; 
-        emergencyTime = [NSDate dateWithTimeIntervalSince1970:losedate - 24*3600];
-        wrongLaneTime = [NSDate dateWithTimeIntervalSince1970:losedate - 48*3600];
-
-        UIApplication* app = [UIApplication sharedApplication];
-        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
-        if (notifyAlarm && losedate > [[NSDate date] timeIntervalSince1970])
-        {
-            notifyAlarm.fireDate = emergencyTime;
-            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-            notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"Emergency day today for %@!", goal.title];
-            [app scheduleLocalNotification:notifyAlarm];
-            
-            notifyAlarm = [[UILocalNotification alloc] init];
-            notifyAlarm.fireDate = wrongLaneTime;
-            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-            notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"In the wrong lane for %@!", goal.title];
-            [app scheduleLocalNotification:notifyAlarm];
-        }
-    }
-
+    });
 }
     
 - (void)failedFetch
