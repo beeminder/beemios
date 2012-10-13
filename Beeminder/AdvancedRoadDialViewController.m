@@ -94,7 +94,7 @@
     if (self.goalObject.goalval) {
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.goalValueSwitch]];
         [self.goalValueSwitch setOn:YES animated:NO ignoreControlEvents:YES];
-        self.goalValueTextField.text = [NSString stringWithFormat:@"%@", self.goalObject.goalval];
+        self.goalValueTextField.text = [NSString stringWithFormat:[self stringFormatForValue:[self.goalObject.goalval doubleValue]], [self.goalObject.goalval doubleValue]];
         [self.goalValueTextField becomeFirstResponder];
     }
     else {
@@ -103,7 +103,7 @@
     }
     
     if (self.goalObject.rate) {
-        self.rateTextField.text = [NSString stringWithFormat:@"%f", ABS([self.goalObject.rate doubleValue])];
+        self.rateTextField.text = [NSString stringWithFormat:[self stringFormatForValue:[self.goalObject.rate doubleValue]], [self.goalObject.rate doubleValue]];
         [self enableTextFieldAtIndex:[self.switchCollection indexOfObject:self.rateSwitch]];
         [self.rateSwitch setOn:YES animated:NO ignoreControlEvents:YES];
         [self.rateTextField becomeFirstResponder];
@@ -194,18 +194,19 @@
     }
 
     [self.valuePickerView reloadAllComponents];
+    [self setValuePickerValue];    
     [self updatePickerMagnitude];
-    [self setValuePickerValue];
+
     [self recalculateValues];
 }
 
 - (void)updatePickerMagnitude
 {
     if (self.valuePickerTextField == self.goalValueTextField) {
-        self.pickerViewMagnitude = floor(log10(ABS([self valFromForm])));
+        self.pickerViewMagnitude = MAX(0, floor(log10(ABS([self valFromForm]))));
     }
     else {
-        self.pickerViewMagnitude = floor(log10(ABS([self rateFromForm])));
+        self.pickerViewMagnitude = MAX(0, floor(log10(ABS([self rateFromForm]))));
     }
 }
 
@@ -213,7 +214,7 @@
 {
     int i = 0;
     double val = 0;
-    BOOL neg = [self.valuePickerView selectedRowInComponent:0] <= 10;
+    BOOL neg = [self.valuePickerView selectedRowInComponent:0] < 10;
     double componentVal;
     while (i < self.valuePickerView.numberOfComponents) {
         int offset = i == 0 ? 10 : 0;
@@ -394,14 +395,15 @@
         self.pickerViewMagnitude = 0;
     }
     else {
-        self.pickerViewMagnitude = floor(log10(ABS(value)));
+        self.pickerViewMagnitude = MAX(0, floor(log10(ABS(value))));
     }
     [self.valuePickerView reloadAllComponents];
     int i = 0;
 
     while (i < self.valuePickerView.numberOfComponents) {
         int row;
-        int mag = floor(log10(ABS(value))) - i;
+//        int mag = floor(log10(ABS(value))) - i;
+        int mag = self.pickerViewMagnitude - i;
         int componentVal;
 
         componentVal = (int)floor(fmod(ABS(value), pow(10, mag + 1))/pow(10, mag));
