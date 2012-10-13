@@ -210,9 +210,16 @@
 {
     double goalVal = [self valFromForm];
     double rate = [self rateFromForm];
-    double interval = (3600*24*7)*goalVal/rate;
-    
-    NSDate *gDate = [NSDate dateWithTimeIntervalSinceNow:interval];
+    double diff = goalVal - [self currentValue];
+    NSDate *gDate;
+
+    if (rate == 0 || (3600*24*7)*diff/rate > INT32_MAX) {
+        gDate = [NSDate dateWithTimeIntervalSince1970:INT32_MAX];
+    }
+    else {
+        double interval = (3600*24*7)*diff/rate;
+        gDate = [NSDate dateWithTimeIntervalSinceNow:interval];
+    }
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
@@ -248,12 +255,12 @@
     }
 }
 
-- (double)rateFromForm
+- (double)rateFromForm2
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+//    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     double rate = [[numberFormatter numberFromString:self.rateTextField.text] doubleValue];
-    if ([self showingNegativeRateGoal]) rate = rate * -1;
+    if ([self showingNegativeRateGoal]) rate = -1.0f*rate;
     return rate;
 }
 
