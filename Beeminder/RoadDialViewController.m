@@ -209,7 +209,6 @@
         CompletionBlock successBlock = ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-            [[NSManagedObjectContext MR_defaultContext] MR_save];            
         };
         [goal pushToRemoteWithSuccessBlock:successBlock];
         
