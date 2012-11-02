@@ -56,9 +56,7 @@
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
-    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", self.emailTextField.text, self.passwordTextField.text, kBeemiosSecret];
-    
-    postString = AFURLEncodedStringFromStringWithEncoding(postString, NSUTF8StringEncoding);
+    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding), kBeemiosSecret];
 
     [loginRequest setHTTPMethod:@"POST"];
     [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
