@@ -211,9 +211,7 @@
 - (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON progressCallback:(void(^)(float incrementBy))progressCallback
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.activityIndicator stopAnimating];
-        self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
-        self.navigationItem.rightBarButtonItem = self.refreshButton;
+        [self replaceRefreshButton];
     });
     
     NSArray *deletedGoals = [responseJSON objectForKey:@"deleted_goals"];
@@ -247,11 +245,18 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     });
 }
+
+- (void)replaceRefreshButton
+{
+    [self.activityIndicator stopAnimating];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
+}
     
 - (void)failedFetch
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self.activityIndicator stopAnimating];
+    [self replaceRefreshButton];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
