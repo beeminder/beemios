@@ -548,14 +548,14 @@ Bee patient!</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 day, 00:00:00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nmH-hs-lbB">
-                                <rect key="frame" x="20" y="222" width="141" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="20" y="20" width="190" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7bq-At-vl4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="151"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -570,10 +570,10 @@ Bee patient!</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RjJ-3S-8pz">
-                                <rect key="frame" x="190" y="316" width="110" height="44"/>
+                                <rect key="frame" x="218" y="330" width="82" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add data">
+                                <state key="normal" title="Enter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -585,15 +585,15 @@ Bee patient!</string>
                                 </connections>
                             </button>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1000000" maximumValue="1000000" id="YcL-8d-VDM">
-                                <rect key="frame" x="198" y="268" width="94" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="20" y="369" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="inputStepperValueChanged" destination="GSH-K4-VbA" eventType="valueChanged" id="kLN-RQ-LSr"/>
                                 </connections>
                             </stepper>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Giw-L8-CSA">
-                                <rect key="frame" x="198" y="222" width="94" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="20" y="330" width="94" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <connections>
@@ -601,8 +601,8 @@ Bee patient!</string>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xgj-3b-5Fn">
-                                <rect key="frame" x="20" y="316" width="110" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="218" y="20" width="82" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Dial Road">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -615,6 +615,22 @@ Bee patient!</string>
                                     <action selector="editGoalButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="5yO-HL-0ll"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Comment" minimumFontSize="17" id="dht-HJ-Tbn">
+                                <rect key="frame" x="122" y="330" width="88" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jUu-By-wgu">
+                                <rect key="frame" x="20" y="256" width="280" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">23 191 "Last datapoint comment"
+23 191 "Last datapoint comment"
+23 191 "Last datapoint comment"</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </scrollView>
@@ -623,10 +639,12 @@ Bee patient!</string>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="addDataButton" destination="RjJ-3S-8pz" id="xim-X2-BzY"/>
+                        <outlet property="commentTextField" destination="dht-HJ-Tbn" id="OBt-aK-iAm"/>
                         <outlet property="editGoalButton" destination="Xgj-3b-5Fn" id="s7t-l1-Cbj"/>
                         <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
                         <outlet property="inputStepper" destination="YcL-8d-VDM" id="8Wg-p7-jsM"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
+                        <outlet property="lastDatapointLabel" destination="jUu-By-wgu" id="8dy-bS-hBp"/>
                         <outlet property="scrollView" destination="10a-Hy-Xhw" id="NKI-tc-9lM"/>
                         <outlet property="submitButton" destination="RjJ-3S-8pz" id="x5p-pS-zKZ"/>
                         <outlet property="timerLabel" destination="nmH-hs-lbB" id="tQx-gx-NlZ"/>
@@ -946,11 +964,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="addDataButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="commentTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="inputStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lastDatapointLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>

@@ -40,10 +40,6 @@
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
     
-    if (self.goalObject.graph_url) {
-        [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
-    }
-    
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
@@ -52,6 +48,39 @@
     
     NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
     self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
+
+    NSUInteger datapointCount = [datapoints count];
+    NSArray *showDatapoints;
+    if (datapointCount < 4) {
+        showDatapoints = datapoints;
+    }
+    else {
+        showDatapoints = [datapoints objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
+    }
+    
+    NSString *lastDatapointsText = @"";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd"];
+
+    for (Datapoint *datapoint in showDatapoints) {
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
+
+
+        NSString *day = [formatter stringFromDate:date];
+        NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
+        
+        if (datapoint.comment) {
+            comment = [comment stringByAppendingFormat:@"%@\n", datapoint.comment];
+        }
+        else {
+            comment = [comment stringByAppendingString:@"\n"];
+        }
+        
+        lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
+    }
+    self.lastDatapointLabel.text = lastDatapointsText;
+    
+    // remove final newline
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
@@ -147,11 +176,12 @@
 - (IBAction)submitButtonPressed
 {
     [self.inputTextField resignFirstResponder];
-    
+    [self.commentTextField resignFirstResponder];
     Datapoint *datapoint = [Datapoint MR_createEntity];
 
     datapoint.value = [NSDecimalNumber decimalNumberWithString:self.inputTextField.text];
     datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    datapoint.comment = self.commentTextField.text;
     datapoint.goal = self.goalObject;
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
@@ -161,7 +191,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%i", [ABCurrentUser accessToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970]];
+    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%i&comment=%@", [ABCurrentUser accessToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970], AFURLEncodedStringFromStringWithEncoding(self.commentTextField.text, NSUTF8StringEncoding)];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -276,6 +306,8 @@
     [self setScrollView:nil];
     [self setEditGoalButton:nil];
     [self setAddDataButton:nil];
+    [self setCommentTextField:nil];
+    [self setLastDatapointLabel:nil];
     [super viewDidUnload];
 }
 

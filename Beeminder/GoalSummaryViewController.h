@@ -24,6 +24,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *editGoalButton;
 @property (strong, nonatomic) IBOutlet UIButton *addDataButton;
+@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+@property (strong, nonatomic) IBOutlet UILabel *lastDatapointLabel;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;
