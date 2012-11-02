@@ -40,10 +40,6 @@
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
     
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.delegate = self;
-    [self.view addGestureRecognizer:recognizer];
-    
     if (self.goalObject.graph_url) {
         [self.graphButton setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height/2.5)];
     }
@@ -59,11 +55,6 @@
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
-}
-
-- (void)handleTap:(UITapGestureRecognizer *)recognizer
-{
-    [self.view endEditing:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -250,6 +241,7 @@
 
 - (IBAction)editGoalButtonPressed
 {
+    NSLog(@"foo");
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     AdvancedRoalDialViewController *advCon = [storyboard instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
     advCon.goalObject = self.goalObject;
