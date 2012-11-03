@@ -44,43 +44,10 @@
         self.unitsLabel.text = self.goalObject.units;
     }
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-    
-    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
-    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
-
-    NSUInteger datapointCount = [datapoints count];
-    NSArray *showDatapoints;
-    if (datapointCount < 4) {
-        showDatapoints = datapoints;
-    }
-    else {
-        showDatapoints = [datapoints objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
-    }
-    
-    NSString *lastDatapointsText = @"";
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd"];
-
-    for (Datapoint *datapoint in showDatapoints) {
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
+    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
 
 
-        NSString *day = [formatter stringFromDate:date];
-        NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
-        
-        if (datapoint.comment) {
-            comment = [comment stringByAppendingFormat:@"%@\n", datapoint.comment];
-        }
-        else {
-            comment = [comment stringByAppendingString:@"\n"];
-        }
-        
-        lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
-    }
-    self.lastDatapointLabel.text = lastDatapointsText;
-    
-    // remove final newline
+    [self setDatapointsText];
 
     self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
@@ -89,6 +56,47 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadGraphImage];
+}
+
+//- (void)loadDatapoints
+//{
+//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+//    
+//    self.datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
+//}
+
+-(void)setDatapointsText
+{
+    NSUInteger datapointCount = [self.goalObject.datapoints count];
+    NSArray *showDatapoints;
+    if (datapointCount < 4) {
+        showDatapoints = [self.goalObject.datapoints allObjects];
+    }
+    else {
+        showDatapoints = [[self.goalObject.datapoints allObjects] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
+    }
+    
+    NSString *lastDatapointsText = @"";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd"];
+    
+    for (Datapoint *datapoint in showDatapoints) {
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
+        
+        
+        NSString *day = [formatter stringFromDate:date];
+        NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
+        
+        if (datapoint.comment) {
+            comment = [comment stringByAppendingFormat:@" %@\n", datapoint.comment];
+        }
+        else {
+            comment = [comment stringByAppendingString:@"\n"];
+        }
+        
+        lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
+    }
+    self.lastDatapointLabel.text = lastDatapointsText;
 }
 
 - (void)loadGraphImage
@@ -207,10 +215,12 @@
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self setDatapointsText];
             [self pollUntilGraphIsNotUpdating];
         });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [datapoint MR_deleteEntity];
     }];
     [operation start];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
