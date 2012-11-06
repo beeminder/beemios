@@ -36,7 +36,7 @@
 
     [self loadGraphImageIgnoreCache:YES];
     [self loadGraphImageThumbIgnoreCache:YES];
-    self.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
     
@@ -44,12 +44,12 @@
         self.unitsLabel.text = self.goalObject.units;
     }
     
-    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
+//    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
 
 
     [self setDatapointsText];
 
-    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
+//    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
 }
 
@@ -158,9 +158,9 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
 
     NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
-    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
-    
-    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
+//    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
+//    
+//    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 
     [self startTimer];
 }
@@ -170,26 +170,97 @@
     
 }
 
-- (IBAction)inputStepperValueChanged
+- (void)updateInputTextFieldText
 {
-    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
-}
-- (IBAction)inputTextFieldValueChanged
-{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd"];
+    NSString *day = [dateFormatter stringFromDate:self.datapointDate];
+    
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    self.inputStepper.value = [[numberFormatter numberFromString:self.inputTextField.text] doubleValue];
+    
+    NSString *inputText = [NSString stringWithFormat:@"%@ %@", day, [numberFormatter stringFromNumber:[NSNumber numberWithDouble:self.valueStepper.value]]];
+
+    if ([self.datapointComment length] > 0) {
+        inputText = [inputText stringByAppendingFormat:@" \"%@\"", self.datapointComment];
+    }
+    
+    self.inputTextField.text = inputText;
+}
+
+- (IBAction)dateStepperValueChanged
+{
+    self.datapointDate = [NSDate dateWithTimeIntervalSinceNow:self.dateStepper.value * 24 * 3600];
+    [self updateInputTextFieldText];
+}
+
+- (IBAction)valueStepperValueChanged
+{
+    [self updateInputTextFieldText];
+}
+
+- (NSDictionary *)parseInputTextField
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,2})\\s([\\d\\.]+)(\\s\"?([^\"]*)\"?)?$" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSString *string = self.inputTextField.text;
+    
+    NSTextCheckingResult *result = [regex firstMatchInString:string options:0 range:NSMakeRange(0, [string length])];
+
+    if (result) {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        NSNumber *day = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:1]]];
+        NSNumber *val = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:2]]];
+        NSString *comment = @"";
+        if ([result rangeAtIndex:3].length > 0) {
+            comment = [string substringWithRange:[result rangeAtIndex:3]];
+        }
+
+        return [NSDictionary dictionaryWithObjectsAndKeys:day, @"day", val, @"val", comment, @"comment", nil];
+    }
+    return [NSDictionary dictionaryWithObjectsAndKeys:nil, @"day", nil, @"val", nil, "@comment", nil];
+}
+
+- (IBAction)inputTextFieldEditingChanged
+{
+    [self saveDatapointLocally];
+}
+
+- (void)saveDatapointLocally
+{
+    NSDictionary *dict = [self parseInputTextField];
+    if (![dict objectForKey:@"day"]) {
+        return;
+    }
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *dateComponents = [gregorian components:unitFlags fromDate:[NSDate date]];
+
+    NSInteger monthOffset = ([[dict objectForKey:@"day"] integerValue] > [dateComponents day]) ? -1 : 0;
+
+    [dateComponents setMonth:[dateComponents month] + monthOffset];
+    [dateComponents setDay:[[dict objectForKey:@"day"] integerValue]];
+     
+    self.datapointDate = [gregorian dateFromComponents:dateComponents];
+    
+    
+    self.valueStepper.value = [[dict objectForKey:@"val"] doubleValue];
+    
+    self.datapointComment = [dict objectForKey:@"comment"];
+
 }
 
 - (IBAction)submitButtonPressed
 {
     [self.inputTextField resignFirstResponder];
-    [self.commentTextField resignFirstResponder];
     Datapoint *datapoint = [Datapoint MR_createEntity];
+    [self saveDatapointLocally];
+    
+    datapoint.value = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.valueStepper.value] decimalValue]];
+    datapoint.timestamp = [NSNumber numberWithDouble:[self.datapointDate timeIntervalSince1970]];
+    datapoint.comment = self.datapointComment;
 
-    datapoint.value = [NSDecimalNumber decimalNumberWithString:self.inputTextField.text];
-    datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
-    datapoint.comment = self.commentTextField.text;
     datapoint.goal = self.goalObject;
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
@@ -199,7 +270,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%i&comment=%@", [ABCurrentUser accessToken], self.inputTextField.text, (int)[[NSDate date]timeIntervalSince1970], AFURLEncodedStringFromStringWithEncoding(self.commentTextField.text, NSUTF8StringEncoding)];
+    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%@&comment=%@", [ABCurrentUser accessToken], datapoint.value, datapoint.timestamp, AFURLEncodedStringFromStringWithEncoding(self.datapointComment, NSUTF8StringEncoding)];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -310,14 +381,14 @@
     [self setUnitsLabel:nil];
     [self setInstructionLabel:nil];
     [self setInputTextField:nil];
-    [self setInputStepper:nil];
     [self setSubmitButton:nil];
     [self setTimerLabel:nil];
     [self setScrollView:nil];
     [self setEditGoalButton:nil];
     [self setAddDataButton:nil];
-    [self setCommentTextField:nil];
     [self setLastDatapointLabel:nil];
+    [self setDateStepper:nil];
+    [self setValueStepper:nil];
     [super viewDidUnload];
 }
 

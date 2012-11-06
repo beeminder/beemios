@@ -16,7 +16,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *unitsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
-@property (strong, nonatomic) IBOutlet UIStepper *inputStepper;
+@property (strong, nonatomic) IBOutlet UIStepper *dateStepper;
+@property (strong, nonatomic) IBOutlet UIStepper *valueStepper;
+
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property BOOL graphIsUpdating;
@@ -24,8 +26,11 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *editGoalButton;
 @property (strong, nonatomic) IBOutlet UIButton *addDataButton;
-@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
 @property (strong, nonatomic) IBOutlet UILabel *lastDatapointLabel;
+
+@property (strong, nonatomic) NSDate *datapointDate;
+
+@property (strong, nonatomic) NSString *datapointComment;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;
