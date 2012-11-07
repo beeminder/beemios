@@ -36,7 +36,7 @@
 
     [self loadGraphImageIgnoreCache:YES];
     [self loadGraphImageThumbIgnoreCache:YES];
-    self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
     
@@ -48,6 +48,8 @@
 
 
     [self setDatapointsText];
+
+    [self setInitialDatapoint];
 
 //    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
@@ -65,20 +67,41 @@
 //    self.datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
 //}
 
+- (void)setInitialDatapoint
+{
+    self.datapointDate = [NSDate date];
+    
+    Datapoint *datapoint = [[self sortedDatapoints] lastObject];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *dateComponents = [gregorian components:unitFlags fromDate:[NSDate date]];
+
+    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], datapoint.value];
+    
+    self.valueStepper.value = [datapoint.value doubleValue];
+
+}
+
+- (NSArray *)sortedDatapoints
+{
+    return [[self.goalObject.datapoints allObjects] sortedArrayUsingSelector:@selector(timestamp)];
+}
+
 -(void)setDatapointsText
 {
     NSUInteger datapointCount = [self.goalObject.datapoints count];
     NSArray *showDatapoints;
     if (datapointCount < 4) {
-        showDatapoints = [self.goalObject.datapoints allObjects];
+        showDatapoints = [self sortedDatapoints];
     }
     else {
-        showDatapoints = [[self.goalObject.datapoints allObjects] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
+        showDatapoints = [[self sortedDatapoints] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
     }
     
     NSString *lastDatapointsText = @"";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd"];
+    [formatter setDateFormat:@"d"];
     
     for (Datapoint *datapoint in showDatapoints) {
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
@@ -155,9 +178,9 @@
     
     [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[ABCurrentUser username]];
 
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-
-    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
+//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
+//
+//    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
 //    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
 //    
 //    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
@@ -173,7 +196,7 @@
 - (void)updateInputTextFieldText
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd"];
+    [dateFormatter setDateFormat:@"d"];
     NSString *day = [dateFormatter stringFromDate:self.datapointDate];
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -200,7 +223,7 @@
 
 - (NSDictionary *)parseInputTextField
 {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,2})\\s([\\d\\.]+)(\\s\"?([^\"]*)\"?)?$" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,2})\\s([\\d\\.\\-]+)(\\s)?(\"([^\"]*)\")?$" options:NSRegularExpressionCaseInsensitive error:nil];
     NSString *string = self.inputTextField.text;
     
     NSTextCheckingResult *result = [regex firstMatchInString:string options:0 range:NSMakeRange(0, [string length])];
@@ -210,11 +233,16 @@
         NSNumber *day = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:1]]];
         NSNumber *val = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:2]]];
         NSString *comment = @"";
-        if ([result rangeAtIndex:3].length > 0) {
-            comment = [string substringWithRange:[result rangeAtIndex:3]];
+        BOOL aboutToComment = NO;
+        if ([result rangeAtIndex:5].length > 0) {
+            comment = [string substringWithRange:[result rangeAtIndex:5]];
+        }
+        else if ([result rangeAtIndex:3].length > 0 && [result rangeAtIndex:4].length == 0) {
+            aboutToComment = YES;
         }
 
-        return [NSDictionary dictionaryWithObjectsAndKeys:day, @"day", val, @"val", comment, @"comment", nil];
+
+        return [NSDictionary dictionaryWithObjectsAndKeys:day, @"day", val, @"val", comment, @"comment", [NSNumber numberWithBool:aboutToComment], @"aboutToComment", nil];
     }
     return [NSDictionary dictionaryWithObjectsAndKeys:nil, @"day", nil, @"val", nil, "@comment", nil];
 }
@@ -241,13 +269,27 @@
 
     [dateComponents setMonth:[dateComponents month] + monthOffset];
     [dateComponents setDay:[[dict objectForKey:@"day"] integerValue]];
-     
-    self.datapointDate = [gregorian dateFromComponents:dateComponents];
     
+
+    NSDate *date = [gregorian dateFromComponents:dateComponents];
     
+    self.datapointDate = date;
+    self.dateStepper.value = (int)[date timeIntervalSinceNow]/(24*3600);
+
     self.valueStepper.value = [[dict objectForKey:@"val"] doubleValue];
     
     self.datapointComment = [dict objectForKey:@"comment"];
+    if ([[dict objectForKey:@"aboutToComment"] boolValue]) {
+
+        self.inputTextField.text = [self.inputTextField.text stringByAppendingString:@"\"\""];
+
+        UITextPosition *endOfDoc = self.inputTextField.endOfDocument;
+        UITextPosition *start = [self.inputTextField positionFromPosition:endOfDoc offset:-1];
+        UITextPosition *end = [self.inputTextField positionFromPosition:endOfDoc offset:-1];
+        
+        [self.inputTextField setSelectedTextRange:[self.inputTextField textRangeFromPosition: start toPosition:end]];
+        
+    }
 
 }
 
@@ -352,7 +394,6 @@
 
 - (IBAction)editGoalButtonPressed
 {
-    NSLog(@"foo");
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     AdvancedRoalDialViewController *advCon = [storyboard instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
     advCon.goalObject = self.goalObject;
