@@ -77,7 +77,12 @@
     return [[self.goalObject.datapoints allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         Datapoint *d1 = (Datapoint *)obj1;
         Datapoint *d2 = (Datapoint *)obj2;
-        return ([d1.timestamp doubleValue] < [d2.timestamp doubleValue]);
+        if ([d1.timestamp doubleValue] < [d2.timestamp doubleValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        else {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
     }];
 }
 
@@ -265,7 +270,13 @@
     [self saveDatapointLocally];
     
     datapoint.value = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.valueStepper.value] decimalValue]];
-    datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    if (ABS([self.datapointDate timeIntervalSinceNow]) < 24*3600) {
+        datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    }
+    else {
+        datapoint.timestamp = [NSNumber numberWithDouble:[self.datapointDate timeIntervalSince1970]];
+    }
+
     datapoint.comment = self.datapointComment;
 
     datapoint.goal = self.goalObject;
