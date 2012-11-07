@@ -229,6 +229,26 @@
         progressCallback(1.0f/[goals count]);
         NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
         [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
+        NSString *runits = [goalDict objectForKey:@"runits"];
+        NSNumber *weeklyRate;
+        if ([runits isEqualToString:@"y"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]/52];
+        }
+        else if ([runits isEqualToString:@"m"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]/4];
+        }
+        else if ([runits isEqualToString:@"d"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]*7];
+        }
+        else if ([runits isEqualToString:@"h"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]*7*24];
+        }
+        else {
+            weeklyRate = [goalDict objectForKey:@"rate"];
+        }
+        
+        [modGoalDict setObject:weeklyRate forKey:@"rate"];
+        
         Goal *goal = [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
         [self.goalObjects addObject:goal];
     }

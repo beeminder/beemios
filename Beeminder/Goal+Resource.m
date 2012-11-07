@@ -148,11 +148,11 @@
         int days = seconds/(3600*24);
         
         if (days > 0) {
-            if (brief) return [NSString stringWithFormat:@"%i days", days];
-            return [NSString stringWithFormat:@"%i days, %i:%02i:%02i", days, hours, minutes,leftoverSeconds];
+            if (brief) return [NSString stringWithFormat:@"%i %@", days, days == 1 ? @"day" : @"days"];
+            return [NSString stringWithFormat:@"%i %@, %i:%02i:%02i", days, days == 1 ? @"day" : @"days", hours, minutes,leftoverSeconds];
         }
         else {
-            if (brief) return [NSString stringWithFormat:@"%i days", days];
+            if (brief) return [NSString stringWithFormat:@"%i %@", days, days == 1 ? @"day" : @"days"];
             return [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
         }
         
