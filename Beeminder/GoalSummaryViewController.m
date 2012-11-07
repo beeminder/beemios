@@ -107,7 +107,7 @@
         NSString *day = [formatter stringFromDate:date];
         NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
         
-        if (datapoint.comment) {
+        if (datapoint.comment.length > 0) {
             comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
         }
         else {
