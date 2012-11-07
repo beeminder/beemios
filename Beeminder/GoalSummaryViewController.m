@@ -43,15 +43,11 @@
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
-    
-//    self.inputStepper.value = [[(Datapoint *)[[self.goalObject.datapoints allObjects] lastObject] value] doubleValue];
-
 
     [self setDatapointsText];
 
     [self setInitialDatapoint];
 
-//    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
     [self startTimer];
 }
 
@@ -59,13 +55,6 @@
 {
     [self loadGraphImage];
 }
-
-//- (void)loadDatapoints
-//{
-//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-//    
-//    self.datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
-//}
 
 - (void)setInitialDatapoint
 {
@@ -157,36 +146,12 @@
 }
 
 - (void)successfulGoalFetchJSON:(id)responseJSON
-{
-//    for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
-//
-//        NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-//        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
-//        
-//        if (!datapoint) {
-//            datapoint = [Datapoint MR_createEntity];
-//        }
-//        
-//        datapoint.value = [datapointDict objectForKey:@"value"];
-//        datapoint.comment = [datapointDict objectForKey:@"comment"];
-//        datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
-//        datapoint.serverId = [datapointDict objectForKey:@"id"];
-//        datapoint.goal = self.goalObject;
-//        [defaultContext MR_save];
-//    }
-//    
+{ 
     NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:responseJSON];
     
     [mutableResponse removeObjectForKey:@"datapoints"];
     
     [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[ABCurrentUser username]];
-
-//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"goal = %@", self.goalObject];
-//
-//    NSArray *datapoints = [Datapoint MR_findAllSortedBy:@"timestamp" ascending:YES withPredicate:pred inContext:[NSManagedObjectContext MR_defaultContext]];
-//    self.inputStepper.value = [[(Datapoint *)[datapoints lastObject] value] doubleValue];
-//    
-//    self.inputTextField.text = [NSString stringWithFormat:@"%i", (int)self.inputStepper.value];
 
     [self startTimer];
 }
@@ -283,7 +248,6 @@
     
     self.datapointComment = [dict objectForKey:@"comment"];
     if ([[dict objectForKey:@"aboutToComment"] boolValue]) {
-
         self.inputTextField.text = [self.inputTextField.text stringByAppendingString:@"\"\""];
 
         UITextPosition *endOfDoc = self.inputTextField.endOfDocument;
@@ -291,9 +255,7 @@
         UITextPosition *end = [self.inputTextField positionFromPosition:endOfDoc offset:-1];
         
         [self.inputTextField setSelectedTextRange:[self.inputTextField textRangeFromPosition: start toPosition:end]];
-        
     }
-
 }
 
 - (IBAction)submitButtonPressed
