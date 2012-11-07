@@ -158,23 +158,23 @@
 
 - (void)successfulGoalFetchJSON:(id)responseJSON
 {
-    for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
-
-        NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
-        
-        if (!datapoint) {
-            datapoint = [Datapoint MR_createEntity];
-        }
-        
-        datapoint.value = [datapointDict objectForKey:@"value"];
-        datapoint.comment = [datapointDict objectForKey:@"comment"];
-        datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
-        datapoint.serverId = [datapointDict objectForKey:@"id"];
-        datapoint.goal = self.goalObject;
-        [defaultContext MR_save];
-    }
-    
+//    for (NSDictionary *datapointDict in [responseJSON objectForKey:@"datapoints"]) {
+//
+//        NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+//        Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
+//        
+//        if (!datapoint) {
+//            datapoint = [Datapoint MR_createEntity];
+//        }
+//        
+//        datapoint.value = [datapointDict objectForKey:@"value"];
+//        datapoint.comment = [datapointDict objectForKey:@"comment"];
+//        datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
+//        datapoint.serverId = [datapointDict objectForKey:@"id"];
+//        datapoint.goal = self.goalObject;
+//        [defaultContext MR_save];
+//    }
+//    
     NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:responseJSON];
     
     [mutableResponse removeObjectForKey:@"datapoints"];
@@ -303,7 +303,7 @@
     [self saveDatapointLocally];
     
     datapoint.value = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.valueStepper.value] decimalValue]];
-    datapoint.timestamp = [NSNumber numberWithDouble:[self.datapointDate timeIntervalSince1970]];
+    datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
     datapoint.comment = self.datapointComment;
 
     datapoint.goal = self.goalObject;
