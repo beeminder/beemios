@@ -85,7 +85,11 @@
 
 - (NSArray *)sortedDatapoints
 {
-    return [[self.goalObject.datapoints allObjects] sortedArrayUsingSelector:@selector(timestamp)];
+    return [[self.goalObject.datapoints allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        Datapoint *d1 = (Datapoint *)obj1;
+        Datapoint *d2 = (Datapoint *)obj2;
+        return ([d1.timestamp doubleValue] < [d2.timestamp doubleValue]);
+    }];
 }
 
 -(void)setDatapointsText
@@ -106,12 +110,11 @@
     for (Datapoint *datapoint in showDatapoints) {
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
         
-        
         NSString *day = [formatter stringFromDate:date];
         NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
         
         if (datapoint.comment) {
-            comment = [comment stringByAppendingFormat:@" %@\n", datapoint.comment];
+            comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
         }
         else {
             comment = [comment stringByAppendingString:@"\n"];
@@ -321,8 +324,12 @@
             hud.labelText = @"Error";
         }
         else {
+            NSLog(@"%@", JSON);
             [self loadGraphImageIgnoreCache:YES];
             hud.labelText = @"Saved";
+            datapoint.serverId = [JSON objectForKey:@"id"];
+            NSLog(@"%@", datapoint.serverId);
+            [[NSManagedObjectContext MR_defaultContext] MR_save];
         }
         hud.mode = MBProgressHUDModeText;
 
