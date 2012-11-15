@@ -29,7 +29,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lastDatapointLabel;
 
 @property (strong, nonatomic) NSDate *datapointDate;
-
+@property (strong, nonatomic) NSNumber *datapointDecimalValue;
 @property (strong, nonatomic) NSString *datapointComment;
 
 - (void)pollUntilGraphIsNotUpdating;

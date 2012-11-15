@@ -173,8 +173,31 @@
     NSString *day = [dateFormatter stringFromDate:self.datapointDate];
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    NSString *inputText = [NSString stringWithFormat:@"%@ %@", day, [numberFormatter stringFromNumber:[NSNumber numberWithDouble:self.valueStepper.value]]];
+    
+    NSString *inputText = [NSString stringWithFormat:@"%@ ", day];
+    
+    if (self.datapointDecimalValue) {
+        NSString *decimalString = [numberFormatter stringFromNumber:self.datapointDecimalValue];
+        if ([self.datapointDecimalValue doubleValue] < 0) {
+            decimalString = [decimalString substringFromIndex:2];
+            if (self.valueStepper.value == 0) {
+                inputText = [inputText stringByAppendingFormat:@"-0%@", decimalString];
+            }
+            else {
+                inputText = [inputText stringByAppendingFormat:@"%d%@", (int)self.valueStepper.value, decimalString];
+            }
+        }
+        else {
+            decimalString = [decimalString substringFromIndex:1];
+            inputText = [inputText stringByAppendingFormat:@"%d%@", (int)self.valueStepper.value, decimalString];
+        }
+
+    }
+    else {
+        inputText = [inputText stringByAppendingString:[numberFormatter stringFromNumber:[NSNumber numberWithDouble:self.valueStepper.value]]];
+    }
 
     if ([self.datapointComment length] > 0) {
         inputText = [inputText stringByAppendingFormat:@" \"%@\"", self.datapointComment];
@@ -191,6 +214,15 @@
 
 - (IBAction)valueStepperValueChanged
 {
+    if (ABS(self.valueStepper.value) == 1) {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\-" options:0 error:nil];
+        NSUInteger matchCount = [regex numberOfMatchesInString:self.inputTextField.text options:0 range:NSMakeRange(0, self.inputTextField.text.length)];
+        if ((matchCount == 0 && self.valueStepper.value == -1) ||
+            (matchCount == 1 && self.valueStepper.value == 1)) {
+            self.valueStepper.value = 0;
+            self.datapointDecimalValue = [NSNumber numberWithDouble:-1*[self.datapointDecimalValue doubleValue]];
+        }
+    }
     [self updateInputTextFieldText];
 }
 
@@ -204,7 +236,14 @@
     if (result) {
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         NSNumber *day = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:1]]];
-        NSNumber *val = [formatter numberFromString:[string substringWithRange:[result rangeAtIndex:2]]];
+        NSString *fullVal = [string substringWithRange:[result rangeAtIndex:2]];
+        NSRegularExpression *decimalRegex = [NSRegularExpression regularExpressionWithPattern:@"\\d?(\\.\\d+)" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSTextCheckingResult *decimalResult = [decimalRegex firstMatchInString:fullVal options:0 range:NSMakeRange(0, [fullVal length])];
+        
+        NSNumber *intVal = [NSNumber numberWithInt:[[formatter numberFromString:fullVal] integerValue]];
+        NSNumber *decimalVal = [formatter numberFromString:[fullVal substringWithRange:[decimalResult rangeAtIndex:1]]];
+        
+        
         NSString *comment = @"";
         BOOL aboutToComment = NO;
         if ([result rangeAtIndex:5].length > 0) {
@@ -215,7 +254,7 @@
         }
 
 
-        return [NSDictionary dictionaryWithObjectsAndKeys:day, @"day", val, @"val", comment, @"comment", [NSNumber numberWithBool:aboutToComment], @"aboutToComment", nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:day, @"day", intVal, @"intVal", comment, @"comment", [NSNumber numberWithBool:aboutToComment], @"aboutToComment", decimalVal, @"decimalVal", nil];
     }
     return [NSDictionary dictionaryWithObjectsAndKeys:nil, @"day", nil, @"val", nil, "@comment", nil];
 }
@@ -243,14 +282,14 @@
     [dateComponents setMonth:[dateComponents month] + monthOffset];
     [dateComponents setDay:[[dict objectForKey:@"day"] integerValue]];
     [dateComponents setTimeZone:[NSTimeZone localTimeZone]];
-    
 
     NSDate *date = [gregorian dateFromComponents:dateComponents];
     
     self.datapointDate = date;
     self.dateStepper.value = (int)[date timeIntervalSinceNow]/(24*3600);
 
-    self.valueStepper.value = [[dict objectForKey:@"val"] doubleValue];
+    self.valueStepper.value = [[dict objectForKey:@"intVal"] doubleValue];
+    self.datapointDecimalValue = [dict objectForKey:@"decimalVal"];
     
     self.datapointComment = [dict objectForKey:@"comment"];
     if ([[dict objectForKey:@"aboutToComment"] boolValue]) {
