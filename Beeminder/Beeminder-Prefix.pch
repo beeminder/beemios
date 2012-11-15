@@ -25,4 +25,6 @@
     #import "MBProgressHUD.h"
     #import "BeeminderAppDelegate.h"
     #import "GoalPullRequest.h"
+    #import <Twitter/Twitter.h>
+    #import <Accounts/Accounts.h>
 #endif

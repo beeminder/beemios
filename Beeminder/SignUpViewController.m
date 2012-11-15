@@ -27,7 +27,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
+    
+    // Create an account store object.
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    // Create an account type that ensures Twitter accounts are retrieved.
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    // Request access from the user to use their Twitter accounts.
+    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        if(granted) {
+            NSLog(@"granted");
+        }
+        else {
+            NSLog(@"not");
+        }
+    }];
 }
 
 - (void)viewDidUnload

@@ -37,6 +37,8 @@
 		A14A1FB2161E312D00E2F3BB /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A14A1FB1161E312D00E2F3BB /* Goal.m */; };
 		A14A1FB5161E312E00E2F3BB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A14A1FB4161E312E00E2F3BB /* User.m */; };
 		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
+		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
+		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A1879B6B1629DD4B007FF592 /* dark-cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B691629DD4B007FF592 /* dark-cell-noise.png */; };
 		A1879B6C1629DD4B007FF592 /* dark-cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B6A1629DD4B007FF592 /* dark-cell-noise@2x.png */; };
@@ -194,6 +196,8 @@
 		A14A1FB4161E312E00E2F3BB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+autoRotate.h"; sourceTree = "<group>"; };
 		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
+		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		A17EBDCE16557603007949CA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A1879B691629DD4B007FF592 /* dark-cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-cell-noise.png"; sourceTree = "<group>"; };
@@ -339,6 +343,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */,
+				A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */,
+				A17EBDD016557613007949CA /* Accounts.framework in Frameworks */,
 				A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
 				A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */,
@@ -540,6 +546,8 @@
 		A1F03D4F158E9A850075D5DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A17EBDCE16557603007949CA /* Accounts.framework */,
+				A17EBDCB165573F6007949CA /* Twitter.framework */,
 				A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */,
 				A19D7BE11596DC3B0031ABED /* CoreData.framework */,
 				A1CA215915935AE200AE16FB /* QuartzCore.framework */,
