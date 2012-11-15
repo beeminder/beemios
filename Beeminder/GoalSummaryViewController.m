@@ -242,6 +242,7 @@
 
     [dateComponents setMonth:[dateComponents month] + monthOffset];
     [dateComponents setDay:[[dict objectForKey:@"day"] integerValue]];
+    [dateComponents setTimeZone:[NSTimeZone localTimeZone]];
     
 
     NSDate *date = [gregorian dateFromComponents:dateComponents];
@@ -266,8 +267,10 @@
 - (IBAction)submitButtonPressed
 {
     [self.inputTextField resignFirstResponder];
-    Datapoint *datapoint = [Datapoint MR_createEntity];
+
     [self saveDatapointLocally];
+    
+    Datapoint *datapoint = [Datapoint MR_createEntity];
     
     datapoint.value = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.valueStepper.value] decimalValue]];
     if (ABS([self.datapointDate timeIntervalSinceNow]) < 24*3600) {
