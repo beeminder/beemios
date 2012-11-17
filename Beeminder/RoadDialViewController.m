@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.fitbitDatasetTitles = [NSArray arrayWithObjects:@"Steps", @"Weight", @"Body Fat Percentage", @"Hours Slept", @"Active Score", nil];
     [self hideFormFields];
     self.goalSlugExistsWarningLabel.hidden = YES;
     self.roadDialButton.hidden = YES;
@@ -64,11 +65,13 @@
     self.saveGoalButton.hidden = YES;
 }
 
-- (void)showFitbitFields
+- (void)adjustForFitbit
 {
     [self showFormFields];
-    self.firstLabel.hidden = YES;
-    self.firstTextField.hidden = YES;
+    self.firstTextField.inputView = self.pickerView;
+    self.firstLabel.text = kChooseFitbitFieldText;
+    self.firstTextField.text = @"Steps";
+    [self.firstTextField becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -77,45 +80,57 @@
     self.goalTypeLabel.text = [goalTypeInfo objectForKey:kPublicNameKey];
     self.goalDetailsLabel.text = [goalTypeInfo objectForKey:kDetailsKey];
     
-    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFitbitPrivate] && ![ABCurrentUser user].has_authorized_fitbit) {
-        [self hideFormFields];
-        if (self.canceledAuthorizeBeeminderView) {
-            [self showFitbitFields];
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFitbitPrivate]) {
+        if ([ABCurrentUser user].has_authorized_fitbit) {
+            [self adjustForFitbit];
         }
         else {
-            self.canceledAuthorizeBeeminderView = NO;
-            [self presentAuthorizeBeeminderController];
+            if (self.comingFromAuthorizeBeeminderView) {
+                [self adjustForFitbit];
+            }
+            else {
+                self.comingFromAuthorizeBeeminderView = YES;
+                [self presentAuthorizeBeeminderController];
+            }
         }
-
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
+        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
+        self.firstLabel.text = kWeeklyEstimateText;
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
+        self.firstTextField.inputView = nil;
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
+        self.firstLabel.hidden = YES;
+        self.firstTextField.hidden = YES;
+        self.firstTextField.inputView = nil;
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
+        self.firstTextField.inputView = nil;
     }
     else {
-        [self showFormFields];
+        self.firstTextField.inputView = nil;        
+        self.firstLabel.text = @"Current value:";
     }
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
         [BeeminderAppDelegate sharedSessionGoal].initval = [NSNumber numberWithInt:0];
     }
+}
 
-    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
-        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
-        self.firstLabel.text = kWeeklyEstimateText;
-        self.startFlatLabel.hidden = YES;
-        self.startFlatSwitch.hidden = YES;
-    }
-    else {
-        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:17.0]];
-        self.firstLabel.text = @"Current value:";
-    }
-    
-    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
-        self.firstLabel.hidden = YES;
-        self.firstTextField.hidden = YES;
-    }
-    
-    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
-        self.startFlatLabel.hidden = YES;
-        self.startFlatSwitch.hidden = YES;
-    }
+- (void)showStartFlat
+{
+    self.startFlatLabel.hidden = NO;
+    self.startFlatSwitch.hidden = NO;
+}
+
+- (void)hideStartFlat
+{
+    self.startFlatLabel.hidden = YES;
+    self.startFlatSwitch.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,7 +148,6 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     AuthorizeBeeminderViewController *authCon = [storyboard instantiateViewControllerWithIdentifier:@"authorizeBeeminderViewController"];
-    authCon.rdvCon = self;
     
     [self presentViewController:authCon animated:YES completion:nil];
 }
@@ -157,6 +171,7 @@
     [self setEphemSwitch:nil];
     [self setStartFlatLabel:nil];
     [self setEphemLabel:nil];
+    [self setPickerView:nil];
     [super viewDidUnload];
 }
 
@@ -346,6 +361,26 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 5;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self.fitbitDatasetTitles objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self.firstTextField.text = [self.fitbitDatasetTitles objectAtIndex:row];
 }
 
 @end

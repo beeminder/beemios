@@ -13,7 +13,7 @@
 #import "ChooseGoalTypeViewController.h"
 #import "AuthorizeBeeminderViewController.h"
 
-@interface RoadDialViewController : UIViewController
+@interface RoadDialViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *goalTypeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *goalDetailsLabel;
@@ -29,7 +29,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *saveGoalButton;
 @property (strong, nonatomic) IBOutlet UILabel *goalSlugExistsWarningLabel;
 @property (strong, nonatomic) IBOutlet UILabel *startFlatLabel;
-@property BOOL canceledAuthorizeBeeminderView;
+@property BOOL comingFromAuthorizeBeeminderView;
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (strong, nonatomic) NSArray *fitbitDatasetTitles;
 
 - (NSUInteger)supportedInterfaceOrientations;
 

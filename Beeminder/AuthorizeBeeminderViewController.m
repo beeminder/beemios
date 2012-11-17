@@ -47,7 +47,6 @@
         [defaults setObject:[fragments objectAtIndex:[fragments indexOfObject:@"fitbit_access_token"] + 1] forKey:@"fitbit_access_token"];
         [defaults setObject:[fragments objectAtIndex:[fragments indexOfObject:@"fitbit_access_token_secret"] + 1] forKey:@"fitbit_access_token_secret"];
         [defaults setObject:[fragments objectAtIndex:[fragments indexOfObject:@"fitbit_user_id"] + 1] forKey:@"fitbit_user_id"];
-        self.rdvCon.canceledAuthorizeBeeminderView = YES;
         [[self presentingViewController] dismissModalViewControllerAnimated:YES];
     }
 }
@@ -60,9 +59,6 @@
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender
 {
-
-    self.rdvCon.canceledAuthorizeBeeminderView = YES;
-    
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
     [[self.rdvCon navigationController] popViewControllerAnimated:YES];
 }

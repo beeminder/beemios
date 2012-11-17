@@ -258,6 +258,14 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pickerView contentMode="scaleToFill" id="lby-1W-IL7">
+                                        <rect key="frame" x="0.0" y="198" width="320" height="216"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Xgv-aN-lSx" id="qbU-Pn-e5w"/>
+                                            <outlet property="delegate" destination="Xgv-aN-lSx" id="aOK-4U-NXG"/>
+                                        </connections>
+                                    </pickerView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -274,6 +282,7 @@
                         <outlet property="goalDetailsLabel" destination="OXb-zp-oFN" id="s5e-LN-gKs"/>
                         <outlet property="goalSlugExistsWarningLabel" destination="zAk-KC-z2d" id="m8k-CT-gUt"/>
                         <outlet property="goalTypeLabel" destination="ERu-9V-ZQI" id="zwM-oP-qrQ"/>
+                        <outlet property="pickerView" destination="lby-1W-IL7" id="Mz6-NE-zhS"/>
                         <outlet property="roadDialButton" destination="uPp-vR-WlF" id="QQT-oz-k3T"/>
                         <outlet property="saveGoalButton" destination="oqv-eG-50a" id="JcG-gS-ZYI"/>
                         <outlet property="startFlatLabel" destination="qZy-Qb-cUe" id="9iT-sv-CY0"/>
@@ -1058,6 +1067,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="goalDetailsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startFlatLabel" candidateClass="UILabel"/>
