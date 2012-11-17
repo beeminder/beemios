@@ -158,6 +158,10 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="firstTextFieldEditingDidBegin" destination="Xgv-aN-lSx" eventType="editingDidBegin" id="CDQ-Hb-D9w"/>
+                                            <action selector="firstTextFieldEditingDidEnd" destination="Xgv-aN-lSx" eventType="editingDidEnd" id="nla-JJ-LBA"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="A generous estimate for your current weekly rate:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N6U-el-0yv">
                                         <rect key="frame" x="20" y="155" width="143" height="40"/>
@@ -258,7 +262,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <pickerView contentMode="scaleToFill" id="lby-1W-IL7">
+                                    <pickerView hidden="YES" contentMode="scaleToFill" id="lby-1W-IL7">
                                         <rect key="frame" x="0.0" y="198" width="320" height="216"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <connections>

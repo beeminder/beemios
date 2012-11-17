@@ -19,7 +19,7 @@
     
     [userDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
-        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key capitalizedString] ];
+        NSString *selectorString = [NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]];
         if ([user respondsToSelector:NSSelectorFromString(selectorString)]) {
             [user performSelector:NSSelectorFromString(selectorString) withObject:obj];
             }

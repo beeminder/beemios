@@ -30,6 +30,7 @@
 {
     [super viewDidLoad];
     self.fitbitDatasetTitles = [NSArray arrayWithObjects:@"Steps", @"Weight", @"Body Fat Percentage", @"Hours Slept", @"Active Score", nil];
+    self.fitbitDatasetValues = [NSArray arrayWithObjects:@"steps", @"weight", @"body_fat", @"hours_slept", @"active_score", nil];
     [self hideFormFields];
     self.goalSlugExistsWarningLabel.hidden = YES;
     self.roadDialButton.hidden = YES;
@@ -71,7 +72,7 @@
     self.firstTextField.inputView = self.pickerView;
     self.firstLabel.text = kChooseFitbitFieldText;
     self.firstTextField.text = @"Steps";
-    [self.firstTextField becomeFirstResponder];
+//    [self.firstTextField becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -81,12 +82,12 @@
     self.goalDetailsLabel.text = [goalTypeInfo objectForKey:kDetailsKey];
     
     if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFitbitPrivate]) {
-        if ([ABCurrentUser user].has_authorized_fitbit) {
+        if ([ABCurrentUser user].hasAuthorizedFitbit || [[NSUserDefaults standardUserDefaults] objectForKey:kFitbitAccessTokenKey]) {
             [self adjustForFitbit];
         }
         else {
             if (self.comingFromAuthorizeBeeminderView) {
-                [self adjustForFitbit];
+                [[self navigationController] popViewControllerAnimated:YES];
             }
             else {
                 self.comingFromAuthorizeBeeminderView = YES;
@@ -114,6 +115,7 @@
     else {
         self.firstTextField.inputView = nil;        
         self.firstLabel.text = @"Current value:";
+        self.firstLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];        
     }
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
@@ -125,12 +127,14 @@
 {
     self.startFlatLabel.hidden = NO;
     self.startFlatSwitch.hidden = NO;
+    self.startFlatSwitch.on = YES;
 }
 
 - (void)hideStartFlat
 {
     self.startFlatLabel.hidden = YES;
     self.startFlatSwitch.hidden = YES;
+    self.startFlatSwitch.on = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -246,6 +250,17 @@
     goal.title = self.titleTextField.text;
     goal.slug = [BeeminderAppDelegate slugFromTitle:goal.title];
     goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
+    if ([goal.goal_type isEqualToString:kFitbitPrivate]) {
+        goal.fitbit = [NSNumber numberWithBool:YES];
+        goal.fitbit_field = [self.fitbitDatasetValues objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+        if ([goal.fitbit_field isEqualToString:@"weight"] ||
+            [goal.fitbit_field isEqualToString:@"body_fat"]) {
+            goal.goal_type = kFatloserPrivate;
+        }
+        else {
+            goal.goal_type = kHustlerPrivate;
+        }
+    }
     if ([goal.goal_type isEqualToString:kDrinkerPrivate] && !goal.rate) {
         goal.rate = [self rateFromForm];
     }
@@ -363,9 +378,21 @@
     return NO;
 }
 
+- (IBAction)firstTextFieldEditingDidBegin
+{
+    if (self.firstTextField.inputView == self.pickerView) {
+        self.pickerView.hidden = NO;
+    }
+}
+
+- (IBAction)firstTextFieldEditingDidEnd
+{
+    self.pickerView.hidden = YES;
+}
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 5;
+    return [self.fitbitDatasetTitles count];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -381,6 +408,12 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.firstTextField.text = [self.fitbitDatasetTitles objectAtIndex:row];
+    if ([self.firstTextField.text isEqualToString:@"Weight"] || [self.firstTextField.text isEqualToString:@"Body Fat Percentage"]) {
+        [self hideStartFlat];
+    }
+    else {
+        [self showStartFlat];
+    }
 }
 
 @end

@@ -80,6 +80,10 @@
         pString = [pString stringByAppendingFormat:@"&initval=%g", [self.initval doubleValue]];
     }
     
+    if (self.fitbit) {
+        pString = [pString stringByAppendingFormat:@"&fitbit=true&fitbit_field=%@", self.fitbit_field];
+    }
+    
     return pString;
 }
 

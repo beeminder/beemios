@@ -2,7 +2,7 @@
 //  User.h
 //  Beeminder
 //
-//  Created by Andy Brett on 11/15/12.
+//  Created by Andy Brett on 11/17/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -14,10 +14,10 @@
 @interface User : NSManagedObject
 
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSNumber * hasAuthorizedFitbit;
 @property (nonatomic, retain) NSString * serverId;
-@property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSString * timezone;
-@property (nonatomic, retain) NSNumber * has_authorized_fitbit;
+@property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSSet *goals;
 @end
 

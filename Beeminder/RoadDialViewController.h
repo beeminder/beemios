@@ -32,6 +32,7 @@
 @property BOOL comingFromAuthorizeBeeminderView;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong, nonatomic) NSArray *fitbitDatasetTitles;
+@property (strong, nonatomic) NSArray *fitbitDatasetValues;
 
 - (NSUInteger)supportedInterfaceOrientations;
 

@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 11/15/12.
+//  Created by Andy Brett on 11/17/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -30,6 +30,8 @@
 @property (nonatomic, retain) NSString * thumb_url;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
+@property (nonatomic, retain) NSString * fitbit_field;
+@property (nonatomic, retain) NSNumber * fitbit;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end
