@@ -300,8 +300,18 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Saving...";
         CompletionBlock successBlock = ^{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            if ([goal.fitbit boolValue]) {
+                hud.labelText = @"We're importing your Fitbit data...";
+                [hud setLabelFont:[UIFont fontWithName:@"Helvetica" size:13.0f]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                });
+            }
+            else {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            }
         };
         [goal pushToRemoteWithSuccessBlock:successBlock];
         

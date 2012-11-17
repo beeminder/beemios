@@ -339,11 +339,9 @@
             hud.labelText = @"Error";
         }
         else {
-            NSLog(@"%@", JSON);
             [self loadGraphImageIgnoreCache:YES];
             hud.labelText = @"Saved";
             datapoint.serverId = [JSON objectForKey:@"id"];
-            NSLog(@"%@", datapoint.serverId);
             [[NSManagedObjectContext MR_defaultContext] MR_save];
         }
         hud.mode = MBProgressHUDModeText;
