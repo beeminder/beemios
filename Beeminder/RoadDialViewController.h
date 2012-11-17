@@ -11,6 +11,7 @@
 #import "GoalsTableViewController.h"
 #import "AdvancedRoadDialViewController.h"
 #import "ChooseGoalTypeViewController.h"
+#import "AuthorizeBeeminderViewController.h"
 
 @interface RoadDialViewController : UIViewController
 
@@ -21,11 +22,15 @@
 @property (strong, nonatomic) IBOutlet UISwitch *startFlatSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *ephemSwitch;
 @property (strong, nonatomic) IBOutlet UIButton *roadDialButton;
+@property (strong, nonatomic) IBOutlet UILabel *ephemLabel;
 @property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) NSArray *goalSlugs;
 @property (strong, nonatomic) IBOutlet UIButton *saveGoalButton;
 @property (strong, nonatomic) IBOutlet UILabel *goalSlugExistsWarningLabel;
 @property (strong, nonatomic) IBOutlet UILabel *startFlatLabel;
+@property BOOL canceledAuthorizeBeeminderView;
+
 - (NSUInteger)supportedInterfaceOrientations;
+
 @end

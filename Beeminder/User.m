@@ -2,7 +2,7 @@
 //  User.m
 //  Beeminder
 //
-//  Created by Andy Brett on 10/4/12.
+//  Created by Andy Brett on 11/15/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -15,6 +15,8 @@
 @dynamic email;
 @dynamic serverId;
 @dynamic username;
+@dynamic timezone;
+@dynamic has_authorized_fitbit;
 @dynamic goals;
 
 @end

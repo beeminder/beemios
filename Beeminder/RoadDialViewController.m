@@ -29,13 +29,46 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self hideFormFields];
     self.goalSlugExistsWarningLabel.hidden = YES;
     self.roadDialButton.hidden = YES;
     self.roadDialButton = [BeeminderAppDelegate standardGrayButtonWith:self.roadDialButton];
     self.saveGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.saveGoalButton];
-    
     [self fetchGoalSlugs];
     [self setGoalToDefaults];
+}
+
+- (void)showFormFields
+{
+    self.firstLabel.hidden = NO;
+    self.firstTextField.hidden = NO;
+    self.ephemSwitch.hidden = NO;
+    self.ephemLabel.hidden = NO;
+    self.startFlatLabel.hidden = NO;
+    self.startFlatSwitch.hidden = NO;
+    self.titleLabel.hidden = NO;
+    self.titleTextField.hidden = NO;
+    self.saveGoalButton.hidden = NO;
+}
+
+- (void)hideFormFields
+{
+    self.firstLabel.hidden = YES;
+    self.firstTextField.hidden = YES;
+    self.ephemSwitch.hidden = YES;
+    self.ephemLabel.hidden = YES;
+    self.startFlatLabel.hidden = YES;
+    self.startFlatSwitch.hidden = YES;
+    self.titleLabel.hidden = YES;
+    self.titleTextField.hidden = YES;
+    self.saveGoalButton.hidden = YES;
+}
+
+- (void)showFitbitFields
+{
+    [self showFormFields];
+    self.firstLabel.hidden = YES;
+    self.firstTextField.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -43,6 +76,21 @@
     NSDictionary *goalTypeInfo = [[BeeminderAppDelegate goalTypesInfo] objectForKey:[BeeminderAppDelegate sharedSessionGoal].goal_type];
     self.goalTypeLabel.text = [goalTypeInfo objectForKey:kPublicNameKey];
     self.goalDetailsLabel.text = [goalTypeInfo objectForKey:kDetailsKey];
+    
+    if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFitbitPrivate] && ![ABCurrentUser user].has_authorized_fitbit) {
+        [self hideFormFields];
+        if (self.canceledAuthorizeBeeminderView) {
+            [self showFitbitFields];
+        }
+        else {
+            self.canceledAuthorizeBeeminderView = NO;
+            [self presentAuthorizeBeeminderController];
+        }
+
+    }
+    else {
+        [self showFormFields];
+    }
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
         [BeeminderAppDelegate sharedSessionGoal].initval = [NSNumber numberWithInt:0];
@@ -76,6 +124,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)authorizeBeeminderButtonPressed
+{
+    [self presentAuthorizeBeeminderController];
+}
+
+- (void)presentAuthorizeBeeminderController
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    AuthorizeBeeminderViewController *authCon = [storyboard instantiateViewControllerWithIdentifier:@"authorizeBeeminderViewController"];
+    authCon.rdvCon = self;
+    
+    [self presentViewController:authCon animated:YES completion:nil];
+}
+
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
@@ -94,6 +156,7 @@
     [self setGoalSlugExistsWarningLabel:nil];
     [self setEphemSwitch:nil];
     [self setStartFlatLabel:nil];
+    [self setEphemLabel:nil];
     [super viewDidUnload];
 }
 
