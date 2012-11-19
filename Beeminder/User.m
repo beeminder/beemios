@@ -2,7 +2,7 @@
 //  User.m
 //  Beeminder
 //
-//  Created by Andy Brett on 11/17/12.
+//  Created by Andy Brett on 11/19/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 

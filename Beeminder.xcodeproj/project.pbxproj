@@ -13,9 +13,6 @@
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
-		A110CECD165846F10035B0A4 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A110CECC165846F10035B0A4 /* Goal.m */; };
-		A110CED0165846F10035B0A4 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A110CECF165846F10035B0A4 /* User.m */; };
-		A110CED3165846F20035B0A4 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A110CED2165846F10035B0A4 /* Datapoint.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
@@ -92,6 +89,9 @@
 		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
 		A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F0C7BC15BB77530044E01B /* graph-processing.png */; };
 		A1F82ACA1601791B000E56DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F82AC91601791B000E56DA /* Default-568h@2x.png */; };
+		A1F9C73D165AAA890082E5EB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F9C73C165AAA890082E5EB /* User.m */; };
+		A1F9C740165AAA890082E5EB /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F9C73F165AAA890082E5EB /* Datapoint.m */; };
+		A1F9C743165AAA890082E5EB /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F9C742165AAA890082E5EB /* Goal.m */; };
 		A1FCBF1E15B7602700E5C955 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */; };
 		A1FCBF1F15B7602700E5C955 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE815B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.m */; };
 		A1FCBF2015B7602700E5C955 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEEA15B7602600E5C955 /* NSEntityDescription+MagicalDataImport.m */; };
@@ -150,12 +150,6 @@
 		A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeBeeminderViewController.m; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
-		A110CECB165846F10035B0A4 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A110CECC165846F10035B0A4 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A110CECE165846F10035B0A4 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A110CECF165846F10035B0A4 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A110CED1165846F10035B0A4 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A110CED2165846F10035B0A4 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -284,6 +278,12 @@
 		A1F03D77158EA2690075D5DA /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		A1F0C7BC15BB77530044E01B /* graph-processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph-processing.png"; sourceTree = "<group>"; };
 		A1F82AC91601791B000E56DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		A1F9C73B165AAA890082E5EB /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A1F9C73C165AAA890082E5EB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1F9C73E165AAA890082E5EB /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A1F9C73F165AAA890082E5EB /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A1F9C741165AAA890082E5EB /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1F9C742165AAA890082E5EB /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1FCBEE515B7602600E5C955 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		A1FCBEE715B7602600E5C955 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -446,14 +446,14 @@
 		A19D7C24159760860031ABED /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A110CED1165846F10035B0A4 /* Datapoint.h */,
-				A110CED2165846F10035B0A4 /* Datapoint.m */,
-				A110CECE165846F10035B0A4 /* User.h */,
-				A110CECF165846F10035B0A4 /* User.m */,
-				A110CECB165846F10035B0A4 /* Goal.h */,
-				A110CECC165846F10035B0A4 /* Goal.m */,
 				A1B2687215A121F300859EDD /* Sync */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
+				A1F9C73B165AAA890082E5EB /* User.h */,
+				A1F9C73C165AAA890082E5EB /* User.m */,
+				A1F9C73E165AAA890082E5EB /* Datapoint.h */,
+				A1F9C73F165AAA890082E5EB /* Datapoint.m */,
+				A1F9C741165AAA890082E5EB /* Goal.h */,
+				A1F9C742165AAA890082E5EB /* Goal.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -907,9 +907,9 @@
 				A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */,
 				A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */,
 				A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */,
-				A110CECD165846F10035B0A4 /* Goal.m in Sources */,
-				A110CED0165846F10035B0A4 /* User.m in Sources */,
-				A110CED3165846F20035B0A4 /* Datapoint.m in Sources */,
+				A1F9C73D165AAA890082E5EB /* User.m in Sources */,
+				A1F9C740165AAA890082E5EB /* Datapoint.m in Sources */,
+				A1F9C743165AAA890082E5EB /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

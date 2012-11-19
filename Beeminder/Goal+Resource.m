@@ -123,6 +123,19 @@
     }
 }
 
+- (NSString *)bareMinTodayString
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"today|within 0 days" options:0 error:nil];
+    if ([self.goal_type isEqualToString:kHustlerPrivate] && self.limsum &&
+        [self.limsum length] > 0 && [regex numberOfMatchesInString:self.limsum options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, self.limsum.length)] > 0) {
+        
+        return [self.limsum stringByReplacingOccurrencesOfString:@"within 0 days" withString:@"today"];
+    }
+    else {
+        return @"";
+    }
+}
+
 - (int)losedateSeconds
 {
     int seconds = (int)[[NSDate dateWithTimeIntervalSince1970:[self.losedate doubleValue]] timeIntervalSinceNow];
@@ -155,8 +168,13 @@
             if (brief) return [NSString stringWithFormat:@"%i %@", days, days == 1 ? @"day" : @"days"];
             return [NSString stringWithFormat:@"%i %@, %i:%02i:%02i", days, days == 1 ? @"day" : @"days", hours, minutes,leftoverSeconds];
         }
-        else {
-            if (brief) return [NSString stringWithFormat:@"%i %@", days, days == 1 ? @"day" : @"days"];
+        else { // days = 0
+            if (brief) {
+                if ([self bareMinTodayString].length > 0) {
+                    return [self bareMinTodayString];
+                }
+                return [NSString stringWithFormat:@"%i %@", days, days == 1 ? @"day" : @"days"];
+            }
             return [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes,leftoverSeconds];
         }
         
@@ -171,7 +189,7 @@
 
 - (UIColor *)losedateColor
 {
-    switch (self.losedateDays) {
+    switch ([self losedateDays]) {
         case -1:
             if ([[self losedateTextBrief:YES] isEqualToString:@"Derailed!"]) {
                 return [UIColor redColor];
@@ -228,9 +246,6 @@
         self.graph_image_thumb = image;
         if (block) block();
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"223");
-        NSLog(@"%@", self);
-        NSLog(@"%@", request.URL);
         NSLog(@"%@", error);
     }];
 
