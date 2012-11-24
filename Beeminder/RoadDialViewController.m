@@ -96,6 +96,7 @@
         }
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
+        [self showFormFields];
         [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
         self.firstLabel.text = kWeeklyEstimateText;
         self.startFlatLabel.hidden = YES;
@@ -103,16 +104,19 @@
         self.firstTextField.inputView = nil;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
+        [self showFormFields];
         self.firstLabel.hidden = YES;
         self.firstTextField.hidden = YES;
         self.firstTextField.inputView = nil;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
+        [self showFormFields];
         self.startFlatLabel.hidden = YES;
         self.startFlatSwitch.hidden = YES;
         self.firstTextField.inputView = nil;
     }
     else {
+        [self showFormFields];        
         self.firstTextField.inputView = nil;        
         self.firstLabel.text = @"Current value:";
         self.firstLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];        

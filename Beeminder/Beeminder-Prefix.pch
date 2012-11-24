@@ -9,6 +9,9 @@
 #endif
 
 #ifdef __OBJC__
+    #import <Security/Security.h>
+    #import <CommonCrypto/CommonDigest.h>
+    #import <CommonCrypto/CommonHMAC.h>
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "CoreData+MagicalRecord.h"
@@ -27,4 +30,5 @@
     #import "GoalPullRequest.h"
     #import <Twitter/Twitter.h>
     #import <Accounts/Accounts.h>
+
 #endif
