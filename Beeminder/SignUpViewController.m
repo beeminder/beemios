@@ -23,25 +23,9 @@
     return self;
 }
 
-- (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount
-{
-    AFHTTPRequestOperation *operation = [BeeminderAppDelegate reverseAuthTokenOperationForTwitterAccount:twitterAccount];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseString = [operation responseString];
-        [self fetchAccessTokenForAccount:twitterAccount authParams:responseString];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //foo
-        NSLog(@"%@", error);
-    }];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [operation start];
-}
-
 - (void)requestAccessToTwitter
 {
     [BeeminderAppDelegate requestAccessToTwitterFromView:self.view withDelegate:self];
-    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -50,7 +34,7 @@
         return;
     }
     self.selectedTwitterAccount = [self.twitterAccounts objectAtIndex:buttonIndex];
-    [self getReverseAuthTokensForTwitterAccount:self.selectedTwitterAccount];
+    [BeeminderAppDelegate getReverseAuthTokensForTwitterAccount:self.selectedTwitterAccount fromView:self.view withDelegate:self];
 }
 
 - (void)viewDidLoad
@@ -77,8 +61,6 @@
             [defaults setObject:[result username] forKey:kFacebookUsernameKey];
             [defaults setObject:[result id] forKey:kFacebookUserIdKey];
         }];
-        
-        NSLog(@"can close");
     }
 }
 
@@ -102,56 +84,20 @@
     [self usernameValueChanged];
 }
 
-- (void)fetchAccessTokenForAccount:(ACAccount *)account authParams:(NSString *)authParams
+- (void)didSuccessfullyAuthWithFacebook
 {
-    NSDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setValue:kTwitterConsumerKey forKey:@"x_reverse_auth_target"];
-    [params setValue:authParams forKey:@"x_reverse_auth_parameters"];
     
-    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-    TWRequest *request = [[TWRequest alloc] initWithURL:url parameters:params requestMethod:TWRequestMethodPOST];
-    [request setAccount:account];
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        // update form on the main thread
-        int64_t delayInSeconds = 0.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self updateFormAfterTwitterAuth];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        });
-        [self saveOAuthResponseToDefaults:responseString];
-     }];
 }
 
-- (void)saveOAuthResponseToDefaults:(NSString *)response
+- (void)didSuccessfullyAuthWithTwitter
 {
-    NSDictionary *oAuthDictionary = [self parseOAuthInfo:response];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[oAuthDictionary objectForKey:@"oauth_token"] forKey:kTwitterOAuthTokenKey];
-    [defaults setObject:[oAuthDictionary objectForKey:@"oauth_token_secret"] forKey:kTwitterOAuthTokenSecretKey];
-    [defaults setObject:[oAuthDictionary objectForKey:@"user_id"] forKey:kTwitterUserIdKey];
-    [defaults setObject:[oAuthDictionary objectForKey:@"screen_name"] forKey:kTwitterScreenNameKey];
-}
-
-- (void)updateFormAfterTwitterAuth
-{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self updateFormAfterAuthWithUsername:self.selectedTwitterAccount.username prompt:@"Success! Choose a Beeminder username or confirm to use the same username as Twitter."];
-}
-
-- (NSDictionary *)parseOAuthInfo:(NSString *)responseString
-{
-    NSArray *components = [responseString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=&"]];
-    NSString *oauthToken = [components objectAtIndex:[components indexOfObject:@"oauth_token"] + 1];
-    NSString *oauthTokenSecret = [components objectAtIndex:[components indexOfObject:@"oauth_token_secret"] + 1];
-    NSString *userId = [components objectAtIndex:[components indexOfObject:@"user_id"] + 1];
-    NSString *screenName = [components objectAtIndex:[components indexOfObject:@"screen_name"] + 1];
-    return [NSDictionary dictionaryWithObjectsAndKeys:oauthToken, @"oauth_token", oauthTokenSecret, @"oauth_token_secret", userId, @"user_id", screenName, @"screen_name", nil];
 }
 
 - (IBAction)signUpWithTwitterButtonPressed
 {
-    [self removeStoredOAuthDefaults];
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
     [self requestAccessToTwitter];
 }
 
@@ -160,20 +106,8 @@
     BeeminderAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     // The user has initiated a login, so call the openSession method
     // and show the login UX if necessary.
-    [self removeStoredOAuthDefaults];
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
     [appDelegate openSessionWithAllowLoginUI:YES];
-}
-
-- (void)removeStoredOAuthDefaults
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:kFacebookUserIdKey];
-    [defaults removeObjectForKey:kFacebookOAuthTokenKey];
-    [defaults removeObjectForKey:kFacebookUsernameKey];
-    [defaults removeObjectForKey:kTwitterOAuthTokenKey];
-    [defaults removeObjectForKey:kTwitterOAuthTokenSecretKey];
-    [defaults removeObjectForKey:kTwitterScreenNameKey];
-    [defaults removeObjectForKey:kTwitterUserIdKey];
 }
 
 - (void)viewDidUnload

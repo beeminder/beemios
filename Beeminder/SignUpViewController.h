@@ -31,5 +31,5 @@
 
 - (IBAction)usernameValueChanged;
 - (NSUInteger)supportedInterfaceOrientations;
-- (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount;
+
 @end

@@ -25,8 +25,15 @@ extern NSString *const FBSessionStateChangedNotification;
 + (Goal *)sharedSessionGoal;
 + (NSString *)slugFromTitle:(NSString *)title;
 + (void)clearSessionGoal;
+
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
+
 + (AFHTTPRequestOperation *)reverseAuthTokenOperationForTwitterAccount:(ACAccount *)twitterAccount;
 + (void)requestAccessToTwitterFromView:(UIView *)view withDelegate:(id<UIActionSheetDelegate, TwitterAuthDelegate>)delegate;
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
++ (void)fetchAccessTokenForTwitterAccount:twitterAccount authParams:authParams withDelegate:(id<TwitterAuthDelegate>)delegate;
++ (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount fromView:(UIView *)view withDelegate:(id<TwitterAuthDelegate>)delegate;
+
++ (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key;
++ (void)removeStoredOAuthDefaults;
 
 @end

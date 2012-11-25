@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "User+Resource.h"
 
-@interface SignInViewController : UIViewController
+@interface SignInViewController : UIViewController<TwitterAuthDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *signInButton;
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;
 - (NSUInteger)supportedInterfaceOrientations;
+@property (strong, nonatomic) NSArray *twitterAccounts;
+@property (strong, nonatomic) ACAccount *selectedTwitterAccount;
 @end

@@ -10,7 +10,7 @@
 
 @protocol TwitterAuthDelegate <NSObject>
 
-- (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount;
+- (void)didSuccessfullyAuthWithTwitter;
 @property (strong, nonatomic) NSArray *twitterAccounts;
 @property (strong, nonatomic) ACAccount *selectedTwitterAccount;
 

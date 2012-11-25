@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
+    
     [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
     self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
@@ -50,27 +52,8 @@
 
 - (void)formSubmitted
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
-    
-    NSURL *loginUrl = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
-    
-    NSString *postString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding), kBeemiosSecret];
-
-    [loginRequest setHTTPMethod:@"POST"];
-    [loginRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulLoginJSON:JSON];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [self invalidLogin];
-    }];
-    [self.view endEditing:YES];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Authenticating...";
-    
-    [operation start];
+    NSString *paramString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding), kBeemiosSecret];
+    [self signInWithEncodedParamString:paramString];
 }
 
 - (IBAction)signInButtonPressed:(UIButton *)sender
@@ -85,19 +68,81 @@
 
 - (IBAction)signInWithFacebookButtonPressed
 {
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
+    BeeminderAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    // The user has initiated a login, so call the openSession method
+    // and show the login UX if necessary.
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
+    [appDelegate openSessionWithAllowLoginUI:YES];
+}
+
+- (IBAction)signInWithTwitterButtonPressed
+{
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
+    [BeeminderAppDelegate requestAccessToTwitterFromView:self.view withDelegate:self];
+}
+
+- (void)fbSessionStateChanged:(NSNotification*)notification
+{
+    if (FBSession.activeSession.isOpen) {
+        [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessToken forKey:kFacebookOAuthTokenKey];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        FBRequest *request = [FBRequest requestForMe];
+        
+        [request setSession:FBSession.activeSession];
+        [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[result username] forKey:kFacebookUsernameKey];
+            [defaults setObject:[result id] forKey:kFacebookUserIdKey];
+            
+            NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
+            [self signInWithEncodedParamString:paramString];
+        }];
+    }
+}
+
+- (void)signInWithEncodedParamString:(NSString *)paramString
+{
+    NSLog(@"%@", paramString);
+    paramString = [paramString stringByAppendingFormat:@"&beemios_token=%@", [BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey]];
     NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
     
     NSURL *loginUrl = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
     
-    NSString *postString = [NSString stringWithFormat:@"oauth_verifier=%@&oauth_token=%@&provider=facebook", @"goo", @"foo"];
+    [loginRequest setHTTPMethod:@"POST"];
+    [loginRequest setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
     
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self successfulLoginJSON:JSON];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self invalidLogin];
+    }];
+    [self.view endEditing:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Authenticating...";
+    
+    [operation start];
 }
 
-- (IBAction)signInWithTwitterButtonPressed
+#pragma mark TwitterAuthDelegate methods
+
+- (void)didSuccessfullyAuthWithTwitter
 {
-    
+    NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=twitter", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUserIdKey], NSUTF8StringEncoding)];
+    [self signInWithEncodedParamString:paramString];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex >= [self.twitterAccounts count]) {
+        return;
+    }
+    self.selectedTwitterAccount = [self.twitterAccounts objectAtIndex:buttonIndex];
+    [BeeminderAppDelegate getReverseAuthTokensForTwitterAccount:self.selectedTwitterAccount fromView:self.view withDelegate:self];
 }
 
 - (void)successfulLoginJSON:(NSDictionary *)responseJSON
