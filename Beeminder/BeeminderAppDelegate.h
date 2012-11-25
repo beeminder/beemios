@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Accounts/Accounts.h>
+#import "TwitterAuthDelegate.h"
 
 @interface BeeminderAppDelegate : UIResponder <UIApplicationDelegate>
+
+extern NSString *const FBSessionStateChangedNotification;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) Goal* sessionGoal;
@@ -21,5 +25,8 @@
 + (Goal *)sharedSessionGoal;
 + (NSString *)slugFromTitle:(NSString *)title;
 + (void)clearSessionGoal;
++ (AFHTTPRequestOperation *)reverseAuthTokenOperationForTwitterAccount:(ACAccount *)twitterAccount;
++ (void)requestAccessToTwitterFromView:(UIView *)view withDelegate:(id<UIActionSheetDelegate, TwitterAuthDelegate>)delegate;
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 
 @end

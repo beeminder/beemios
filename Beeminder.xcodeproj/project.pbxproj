@@ -45,6 +45,7 @@
 		A14AA6B21661B43600D59A47 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14AA6B11661B43500D59A47 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A14AA6B81661B93F00D59A47 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14AA6B71661B93F00D59A47 /* FacebookSDK.framework */; };
 		A14AA6BA1661B94A00D59A47 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6B91661B94A00D59A47 /* FacebookSDKResources.bundle */; };
+		A14AA6BC1661C35500D59A47 /* f_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6BB1661C35500D59A47 /* f_logo.png */; };
 		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -214,6 +215,8 @@
 		A14AA6B11661B43500D59A47 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A14AA6B71661B93F00D59A47 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		A14AA6B91661B94A00D59A47 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		A14AA6BB1661C35500D59A47 /* f_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_logo.png; sourceTree = "<group>"; };
+		A14AA6BD166281B700D59A47 /* TwitterAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthDelegate.h; sourceTree = "<group>"; };
 		A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+autoRotate.h"; sourceTree = "<group>"; };
 		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -518,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				A14AA6801661202900D59A47 /* twitter_64.png */,
+				A14AA6BB1661C35500D59A47 /* f_logo.png */,
 				A14AA6821661223400D59A47 /* twitter-bird-light-bgs.png */,
 				A18ECAD21625E22900F603A3 /* settings_tab_icon.png */,
 				A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */,
@@ -639,6 +643,7 @@
 				A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */,
 				A14AA67D1660647E00D59A47 /* NSString+Base64.h */,
 				A14AA67E1660647E00D59A47 /* NSString+Base64.m */,
+				A14AA6BD166281B700D59A47 /* TwitterAuthDelegate.h */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -851,6 +856,7 @@
 				A14AA6811661202900D59A47 /* twitter_64.png in Resources */,
 				A14AA6831661223400D59A47 /* twitter-bird-light-bgs.png in Resources */,
 				A14AA6BA1661B94A00D59A47 /* FacebookSDKResources.bundle in Resources */,
+				A14AA6BC1661C35500D59A47 /* f_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

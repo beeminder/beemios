@@ -39,6 +39,11 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         pString = [pString stringByAppendingFormat:@"&twitter_oauth_token=%@&twitter_oauth_token_secret=%@&twitter_user_id=%@&twitter_screen_name=%@", [defaults objectForKey:kTwitterOAuthTokenKey], [defaults objectForKey:kTwitterOAuthTokenSecretKey], [defaults objectForKey:kTwitterUserIdKey], [defaults objectForKey:kTwitterScreenNameKey]];
     }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookOAuthTokenKey]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        pString = [pString stringByAppendingFormat:@"&facebook_access_token=%@&facebook_username=%@&facebook_user_id=%@", [defaults objectForKey:kFacebookOAuthTokenKey], [defaults objectForKey:kFacebookUsernameKey], [defaults objectForKey:kFacebookUserIdKey]];
+    }
     [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     
 

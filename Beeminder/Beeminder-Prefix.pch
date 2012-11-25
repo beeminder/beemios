@@ -31,5 +31,6 @@
     #import <Twitter/Twitter.h>
     #import <Accounts/Accounts.h>
     #import <FacebookSDK/FacebookSDK.h>
-
+    #import "TwitterAuthDelegate.h"
+    #import "BeeminderAppDelegate.h"
 #endif

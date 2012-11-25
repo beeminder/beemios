@@ -83,6 +83,23 @@
     [self dismiss];
 }
 
+- (IBAction)signInWithFacebookButtonPressed
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
+    
+    NSURL *loginUrl = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
+    
+    NSString *postString = [NSString stringWithFormat:@"oauth_verifier=%@&oauth_token=%@&provider=facebook", @"goo", @"foo"];
+    
+}
+
+- (IBAction)signInWithTwitterButtonPressed
+{
+    
+}
+
 - (void)successfulLoginJSON:(NSDictionary *)responseJSON
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
