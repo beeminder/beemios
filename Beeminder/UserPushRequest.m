@@ -35,6 +35,10 @@
          }];
     }
     pString = [pString stringByAppendingFormat:@"&%@=%@", @"beemios_secret", kBeemiosSecret];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthTokenKey]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        pString = [pString stringByAppendingFormat:@"&twitter_oauth_token=%@&twitter_oauth_token_secret=%@&twitter_user_id=%@&twitter_screen_name=%@", [defaults objectForKey:kTwitterOAuthTokenKey], [defaults objectForKey:kTwitterOAuthTokenSecretKey], [defaults objectForKey:kTwitterUserIdKey], [defaults objectForKey:kTwitterScreenNameKey]];
+    }
     [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     
 

@@ -2,7 +2,7 @@
 //  User.h
 //  Beeminder
 //
-//  Created by Andy Brett on 11/19/12.
+//  Created by Andy Brett on 11/24/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * serverId;
 @property (nonatomic, retain) NSString * timezone;
 @property (nonatomic, retain) NSString * username;
+@property (nonatomic, retain) NSString * twitterUsername;
+@property (nonatomic, retain) NSString * facebookUsername;
 @property (nonatomic, retain) NSSet *goals;
 @end
 

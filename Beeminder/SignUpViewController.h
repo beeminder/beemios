@@ -12,7 +12,7 @@
 #import "GoalsTableViewController.h"
 #import "UserPushRequest.h"
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : UIViewController <UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -22,6 +22,11 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) UITextField *activeField;
 @property (strong, nonatomic) IBOutlet UILabel *validationWarningLabel;
+@property (strong, nonatomic) NSArray *twitterAccounts;
+@property (strong, nonatomic) ACAccount *selectedTwitterAccount;
+@property (strong, nonatomic) IBOutlet UILabel *signUpWithServiceLabel;
+@property (strong, nonatomic) IBOutlet UIButton *signUpWithTwitterButton;
+@property (strong, nonatomic) IBOutlet UILabel *promptLabel;
 
 - (IBAction)usernameValueChanged;
 - (NSUInteger)supportedInterfaceOrientations;

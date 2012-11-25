@@ -33,15 +33,17 @@
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facebookUsername" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hasAuthorizedFitbit" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timezone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twitterUsername" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="user" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <elements>
         <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
         <element name="Goal" positionX="0" positionY="0" width="128" height="375"/>
-        <element name="User" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="User" positionX="0" positionY="0" width="128" height="165"/>
     </elements>
 </model>
