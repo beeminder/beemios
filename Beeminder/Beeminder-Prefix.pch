@@ -30,5 +30,6 @@
     #import "GoalPullRequest.h"
     #import <Twitter/Twitter.h>
     #import <Accounts/Accounts.h>
+    #import <FacebookSDK/FacebookSDK.h>
 
 #endif
