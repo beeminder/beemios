@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WrO-Th-DZC">
-                                <rect key="frame" x="57" y="219" width="206" height="75"/>
+                                <rect key="frame" x="73" y="219" width="175" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Start a New Goal">
@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vm4-AT-NEL">
-                                <rect key="frame" x="73" y="302" width="175" height="75"/>
+                                <rect key="frame" x="73" y="302" width="175" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign In to Beeminder">
@@ -474,7 +474,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CqD-QV-7h3">
-                                        <rect key="frame" x="82" y="185" width="156" height="55"/>
+                                        <rect key="frame" x="82" y="164" width="156" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Sign In">
@@ -511,7 +511,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f4b-U1-LIb">
-                                        <rect key="frame" x="90" y="297" width="64" height="64"/>
+                                        <rect key="frame" x="90" y="302" width="54" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="twitter-bird-light-bgs.png">
@@ -1059,7 +1059,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="ios_logo_bee_110.png" width="112" height="110"/>
         <image name="ios_logo_bmndr_238.png" width="239" height="29"/>
         <image name="settings_tab_icon" width="16" height="16"/>
-        <image name="twitter-bird-light-bgs.png" width="300" height="300"/>
+        <image name="twitter-bird-light-bgs.png" width="200" height="200"/>
         <image name="your-goals-tab" width="16" height="16"/>
     </resources>
     <classes>
