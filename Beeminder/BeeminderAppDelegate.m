@@ -176,8 +176,12 @@ NSString *const FBSessionStateChangedNotification =
                         sheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account" delegate:delegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[[twitterAccounts objectAtIndex:0] username], [[twitterAccounts objectAtIndex:1] username], [[twitterAccounts objectAtIndex:2] username], [[twitterAccounts objectAtIndex:3] username], nil];
                         break;
                         
-                    default:
+                    case 5:
                         sheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account" delegate:delegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[[twitterAccounts objectAtIndex:0] username], [[twitterAccounts objectAtIndex:1] username], [[twitterAccounts objectAtIndex:2] username], [[twitterAccounts objectAtIndex:3] username], [[twitterAccounts objectAtIndex:4] username], nil];
+                        break;
+                        
+                    default:
+                        sheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account" delegate:delegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[[twitterAccounts objectAtIndex:0] username], [[twitterAccounts objectAtIndex:1] username], [[twitterAccounts objectAtIndex:2] username], [[twitterAccounts objectAtIndex:3] username], [[twitterAccounts objectAtIndex:4] username], [[twitterAccounts objectAtIndex:5] username], nil];
                         break;
                 }
                 // show the sheet on the main thread

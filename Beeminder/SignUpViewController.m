@@ -30,7 +30,8 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex >= [self.twitterAccounts count]) {
+    
+    if (buttonIndex + 1 >= actionSheet.numberOfButtons) {
         return;
     }
     self.selectedTwitterAccount = [self.twitterAccounts objectAtIndex:buttonIndex];

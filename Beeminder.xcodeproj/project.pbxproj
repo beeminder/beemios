@@ -38,9 +38,6 @@
 		A14AA67F1660647E00D59A47 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A14AA67E1660647E00D59A47 /* NSString+Base64.m */; };
 		A14AA6811661202900D59A47 /* twitter_64.png in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6801661202900D59A47 /* twitter_64.png */; };
 		A14AA6831661223400D59A47 /* twitter-bird-light-bgs.png in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6821661223400D59A47 /* twitter-bird-light-bgs.png */; };
-		A14AA69816617EA500D59A47 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A14AA69716617EA500D59A47 /* Goal.m */; };
-		A14AA69B16617EA600D59A47 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A14AA69A16617EA600D59A47 /* User.m */; };
-		A14AA69E16617EA600D59A47 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A14AA69D16617EA600D59A47 /* Datapoint.m */; };
 		A14AA6A41661AB0C00D59A47 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14AA6A31661AB0B00D59A47 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A14AA6B21661B43600D59A47 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14AA6B11661B43500D59A47 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A14AA6B81661B93F00D59A47 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14AA6B71661B93F00D59A47 /* FacebookSDK.framework */; };
@@ -87,6 +84,9 @@
 		A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735F1622493C00E14238 /* MainTabBarViewController.m */; };
 		A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC7366162378DE00E14238 /* GoalGraphViewController.m */; };
 		A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2A2616265409005B3517 /* GoalPullRequest.m */; };
+		A1D9A1CA1662D07B00E54ACE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D9A1C91662D07B00E54ACE /* User.m */; };
+		A1D9A1CD1662D07C00E54ACE /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D9A1CC1662D07B00E54ACE /* Goal.m */; };
+		A1D9A1D01662D07C00E54ACE /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D9A1CF1662D07C00E54ACE /* Datapoint.m */; };
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
@@ -205,12 +205,6 @@
 		A14AA67E1660647E00D59A47 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		A14AA6801661202900D59A47 /* twitter_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_64.png; sourceTree = "<group>"; };
 		A14AA6821661223400D59A47 /* twitter-bird-light-bgs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-light-bgs.png"; sourceTree = "<group>"; };
-		A14AA69616617EA500D59A47 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A14AA69716617EA500D59A47 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A14AA69916617EA600D59A47 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A14AA69A16617EA600D59A47 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A14AA69C16617EA600D59A47 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A14AA69D16617EA600D59A47 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A14AA6A31661AB0B00D59A47 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A14AA6B11661B43500D59A47 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A14AA6B71661B93F00D59A47 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -283,6 +277,12 @@
 		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A1CE2A2516265409005B3517 /* GoalPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPullRequest.h; sourceTree = "<group>"; };
 		A1CE2A2616265409005B3517 /* GoalPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPullRequest.m; sourceTree = "<group>"; };
+		A1D9A1C81662D07B00E54ACE /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A1D9A1C91662D07B00E54ACE /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1D9A1CB1662D07B00E54ACE /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1D9A1CC1662D07B00E54ACE /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A1D9A1CE1662D07C00E54ACE /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A1D9A1CF1662D07C00E54ACE /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -470,14 +470,14 @@
 		A19D7C24159760860031ABED /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A14AA69C16617EA600D59A47 /* Datapoint.h */,
-				A14AA69D16617EA600D59A47 /* Datapoint.m */,
-				A14AA69916617EA600D59A47 /* User.h */,
-				A14AA69A16617EA600D59A47 /* User.m */,
-				A14AA69616617EA500D59A47 /* Goal.h */,
-				A14AA69716617EA500D59A47 /* Goal.m */,
 				A1B2687215A121F300859EDD /* Sync */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
+				A1D9A1C81662D07B00E54ACE /* User.h */,
+				A1D9A1C91662D07B00E54ACE /* User.m */,
+				A1D9A1CB1662D07B00E54ACE /* Goal.h */,
+				A1D9A1CC1662D07B00E54ACE /* Goal.m */,
+				A1D9A1CE1662D07C00E54ACE /* Datapoint.h */,
+				A1D9A1CF1662D07C00E54ACE /* Datapoint.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -947,9 +947,9 @@
 				A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */,
 				A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */,
 				A14AA67F1660647E00D59A47 /* NSString+Base64.m in Sources */,
-				A14AA69816617EA500D59A47 /* Goal.m in Sources */,
-				A14AA69B16617EA600D59A47 /* User.m in Sources */,
-				A14AA69E16617EA600D59A47 /* Datapoint.m in Sources */,
+				A1D9A1CA1662D07B00E54ACE /* User.m in Sources */,
+				A1D9A1CD1662D07C00E54ACE /* Goal.m in Sources */,
+				A1D9A1D01662D07C00E54ACE /* Datapoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

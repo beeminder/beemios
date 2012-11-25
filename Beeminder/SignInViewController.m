@@ -107,7 +107,6 @@
 
 - (void)signInWithEncodedParamString:(NSString *)paramString
 {
-    NSLog(@"%@", paramString);
     paramString = [paramString stringByAppendingFormat:@"&beemios_token=%@", [BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey]];
     NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
     
@@ -146,7 +145,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex >= [self.twitterAccounts count]) {
+    if (buttonIndex + 1 >= actionSheet.numberOfButtons) {
         return;
     }
     self.selectedTwitterAccount = [self.twitterAccounts objectAtIndex:buttonIndex];
