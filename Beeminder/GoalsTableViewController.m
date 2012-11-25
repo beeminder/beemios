@@ -57,6 +57,8 @@
     for (Goal *goal in self.goalObjects) {
         [goal updateGraphImageThumb];
     }
+    NSLog(@"load");
+    [self fetchEverything];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,8 +67,6 @@
         [self failedFetch];
         return;
     }
-    
-    [self fetchEverything];
 }
 
 - (IBAction)refreshPressed:(UIBarButtonItem *)sender
