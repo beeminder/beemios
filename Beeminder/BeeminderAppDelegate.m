@@ -268,7 +268,9 @@ NSString *const FBSessionStateChangedNotification =
             }
             break;
         case FBSessionStateClosed:
+            NSLog(@"closed");
         case FBSessionStateClosedLoginFailed:
+            NSLog(@"login failed");
             [FBSession.activeSession closeAndClearTokenInformation];
             break;
         default:
@@ -276,11 +278,12 @@ NSString *const FBSessionStateChangedNotification =
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:FBSessionStateChangedNotification object:session];
-    
+
     if (error) {
+        NSLog(@"%@", error.localizedDescription);
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Error"
-                                  message:error.localizedDescription
+                                  message:@"Error signing in to Facebook"
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

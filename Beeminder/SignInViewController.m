@@ -93,12 +93,14 @@
         [request setSession:FBSession.activeSession];
         [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[result username] forKey:kFacebookUsernameKey];
-            [defaults setObject:[result id] forKey:kFacebookUserIdKey];
-            
-            NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
-            [self signInWithEncodedParamString:paramString];
+            if (!error) {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[result username] forKey:kFacebookUsernameKey];
+                [defaults setObject:[result id] forKey:kFacebookUserIdKey];
+                
+                NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
+                [self signInWithEncodedParamString:paramString];
+            }
         }];
     }
 }
@@ -119,7 +121,13 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self successfulLoginJSON:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [self invalidLogin];
+        if ([JSON objectForKey:@"error"]) {
+            [self invalidLoginMessage:[JSON objectForKey:@"error"]];
+        }
+        else {
+            [self invalidLoginMessage:nil];
+        }
+
     }];
     [self.view endEditing:YES];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -171,10 +179,10 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];    
 }
 
-- (void)invalidLogin
+- (void)invalidLoginMessage:(NSString *)message
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Login" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Login" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
