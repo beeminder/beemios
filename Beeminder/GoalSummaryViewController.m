@@ -303,10 +303,31 @@
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        // canceled
+    }
+    else {
+        [self submitDatapoint];
+    }
+}
+
 - (IBAction)submitButtonPressed
 {
     [self.inputTextField resignFirstResponder];
+    
+    if ([self.goalObject isDerailed]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Frozen graph!" message:@"This goal is currently derailed. Adding data won't update the graph. \n\nEmail support@beeminder.com to unfreeze!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add data anyway", nil];
+        [alert show];
+    }
+    else {
+        [self submitDatapoint];
+    }
+}
 
+- (void)submitDatapoint
+{
     [self saveDatapointLocally];
     
     Datapoint *datapoint = [Datapoint MR_createEntity];
@@ -350,6 +371,7 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self setDatapointsText];
             [self pollUntilGraphIsNotUpdating];
+            [self loadGraphImageThumbIgnoreCache:YES];
         });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

@@ -35,5 +35,6 @@
 - (void)updateGraphImagesWithCompletionBlock:(void (^) ())block;
 - (void)updateGraphImageWithCompletionBlock:(void (^) ())block;
 - (void)updateGraphImageThumbWithCompletionBlock:(void (^) ())block;
+- (BOOL)isDerailed;
 
 @end

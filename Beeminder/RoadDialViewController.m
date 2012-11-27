@@ -40,9 +40,10 @@
     [self setGoalToDefaults];
 }
 
-- (void)showFormFields
+- (void)showDefaultFormFields
 {
-    self.firstLabel.hidden = NO;
+    self.firstLabel.hidden = YES;
+    self.firstTextField.placeholder = @"Current value";
     self.firstTextField.hidden = NO;
     self.ephemSwitch.hidden = NO;
     self.ephemLabel.hidden = NO;
@@ -68,10 +69,12 @@
 
 - (void)adjustForFitbit
 {
-    [self showFormFields];
+    [self showDefaultFormFields];
     self.firstTextField.inputView = self.pickerView;
     self.firstLabel.text = kChooseFitbitFieldText;
+    self.firstLabel.hidden = NO;
     self.firstTextField.text = @"Steps";
+    self.firstLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
 //    [self.firstTextField becomeFirstResponder];
 }
 
@@ -96,30 +99,30 @@
         }
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
-        [self showFormFields];
-        [self.firstLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
-        self.firstLabel.text = kWeeklyEstimateText;
+        [self showDefaultFormFields];
+        self.firstLabel.hidden = NO;
+        self.firstTextField.placeholder = nil;
         self.startFlatLabel.hidden = YES;
         self.startFlatSwitch.hidden = YES;
         self.firstTextField.inputView = nil;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
-        [self showFormFields];
+        [self showDefaultFormFields];
         self.firstLabel.hidden = YES;
         self.firstTextField.hidden = YES;
         self.firstTextField.inputView = nil;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
-        [self showFormFields];
+        [self showDefaultFormFields];
         self.startFlatLabel.hidden = YES;
         self.startFlatSwitch.hidden = YES;
         self.firstTextField.inputView = nil;
     }
     else {
-        [self showFormFields];        
-        self.firstTextField.inputView = nil;        
-        self.firstLabel.text = @"Current value:";
-        self.firstLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];        
+        [self showDefaultFormFields];
+        self.firstTextField.inputView = nil;
+        self.firstTextField.placeholder = @"Current value";
+        self.firstLabel.hidden = YES;
     }
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
@@ -286,6 +289,7 @@
     }
     
     if ([self.titleTextField.text isEqualToString:@""]) {
+        self.titleTextField.borderStyle = UITex
         self.titleLabel.textColor = [UIColor redColor];
         self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
         errors = YES;

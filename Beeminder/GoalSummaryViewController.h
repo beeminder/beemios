@@ -10,7 +10,7 @@
 
 @class AdvancedRoalDialViewController;
 
-@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *graphButton;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UILabel *unitsLabel;

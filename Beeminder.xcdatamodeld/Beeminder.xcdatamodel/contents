@@ -9,6 +9,7 @@
     </entity>
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="burner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contract" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="ephem" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fitbit" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fitbit_field" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,7 +42,7 @@
     </entity>
     <elements>
         <element name="Datapoint" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Goal" positionX="0" positionY="0" width="128" height="375"/>
+        <element name="Goal" positionX="0" positionY="0" width="128" height="390"/>
         <element name="User" positionX="0" positionY="0" width="128" height="135"/>
     </elements>
 </model>

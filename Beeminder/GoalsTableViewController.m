@@ -9,6 +9,7 @@
 #import "GoalsTableViewController.h"
 #import "AFJSONRequestOperation.h"
 
+
 @interface GoalsTableViewController ()
 
 @end
@@ -33,6 +34,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [self.pull setDelegate:self];
+    [self.tableView addSubview:self.pull];
+    
     self.tableView.rowHeight = 92.0f;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
@@ -54,11 +60,13 @@
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
-    for (Goal *goal in self.goalObjects) {
-        [goal updateGraphImageThumb];
-    }
-    NSLog(@"load");
+
     [self fetchEverything];
+}
+
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self performSelectorInBackground:@selector(fetchEverything) withObject:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,8 +121,10 @@
                     [self.tableView reloadData];
                 });
             }];
+            for (Goal *goal in self.goalObjects) {
+                [goal updateGraphImageThumb];
+            }
         });
-
 
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
@@ -210,6 +220,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self replaceRefreshButton];
+        [self.pull finishedLoading];
     });
     
     NSArray *deletedGoals = [responseJSON objectForKey:@"deleted_goals"];
@@ -277,7 +288,7 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self replaceRefreshButton];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 

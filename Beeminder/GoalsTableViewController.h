@@ -10,12 +10,14 @@
 #import "GoalSummaryViewController.h"
 #import "Goal+Resource.h"
 #import "User+Resource.h"
+#import "PullToRefreshView.h"
 
-@interface GoalsTableViewController : UITableViewController
+@interface GoalsTableViewController : UITableViewController<PullToRefreshViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *goalObjects;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSComparator goalComparator;
 - (NSUInteger)supportedInterfaceOrientations;
+@property (strong, nonatomic) PullToRefreshView *pull;
 @end

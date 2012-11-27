@@ -187,6 +187,11 @@
     }
 }
 
+- (BOOL)isDerailed
+{
+    return [[self losedateTextBrief:YES] isEqualToString:@"Derailed!"];
+}
+
 - (UIColor *)losedateColor
 {
     switch ([self losedateDays]) {

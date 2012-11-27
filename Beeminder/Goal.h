@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 11/25/12.
+//  Created by Andy Brett on 11/26/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -33,6 +33,7 @@
 @property (nonatomic, retain) NSString * thumb_url;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
+@property (nonatomic, retain) id contract;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end

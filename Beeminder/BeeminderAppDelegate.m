@@ -285,9 +285,10 @@ NSString *const FBSessionStateChangedNotification =
 
     if (error) {
         NSLog(@"%@", error.localizedDescription);
+
         UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:@"Error signing in to Facebook"
+                                  initWithTitle:@"Error signing in to Facebook"
+                                  message:@"To sign in with Facebook, go to Settings -> Facebook and enable Beeminder."
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
