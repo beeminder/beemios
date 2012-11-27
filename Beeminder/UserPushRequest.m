@@ -26,24 +26,43 @@
         request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"POST"];
     }
-
-    __block NSString *pString = [user paramString];
-
+    
+    NSDictionary *allParams = [user paramsDict];
+    
     if (additionalParams) {
-        [additionalParams enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-             pString = [pString stringByAppendingFormat:@"&%@=%@", key, obj];
-         }];
+        allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
     }
-    pString = [pString stringByAppendingFormat:@"&%@=%@", @"beemios_secret", kBeemiosSecret];
+
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthTokenKey]) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        pString = [pString stringByAppendingFormat:@"&twitter_oauth_token=%@&twitter_oauth_token_secret=%@&twitter_user_id=%@&twitter_screen_name=%@", [defaults objectForKey:kTwitterOAuthTokenKey], [defaults objectForKey:kTwitterOAuthTokenSecretKey], [defaults objectForKey:kTwitterUserIdKey], [defaults objectForKey:kTwitterScreenNameKey]];
+        NSDictionary *twitterParams = [NSDictionary dictionaryWithObjectsAndKeys:[defaults objectForKey:kTwitterOAuthTokenKey], @"twitter_oauth_token", [defaults objectForKey:kTwitterOAuthTokenSecretKey], @"twitter_oauth_token_secret", [defaults objectForKey:kTwitterUserIdKey], @"oauth_user_id", [defaults objectForKey:kTwitterScreenNameKey], @"twitter_screen_name", nil];
+        allParams = [NSDictionary dictionaryByMerging:allParams with:twitterParams];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookOAuthTokenKey]) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-        pString = [pString stringByAppendingFormat:@"&facebook_access_token=%@&facebook_username=%@&facebook_user_id=%@", [defaults objectForKey:kFacebookOAuthTokenKey], [defaults objectForKey:kFacebookUsernameKey], [defaults objectForKey:kFacebookUserIdKey]];
+        NSDictionary *facebookParams = [NSDictionary dictionaryWithObjectsAndKeys:[defaults objectForKey:kFacebookOAuthTokenKey], @"facebook_access_token", [defaults objectForKey:kFacebookUsernameKey], @"facebook_username", [defaults objectForKey:kFacebookUserIdKey], @"oauth_user_id", nil];
+        allParams = [NSDictionary dictionaryByMerging:allParams with:facebookParams];
     }
+    
+    NSArray *keys = [allParams allKeys];
+    
+    NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2];
+    }];
+    
+    __block NSString *pString = @"";
+    
+    [sortedKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
+        pString = [pString stringByAppendingFormat:@"&%@=%@", key, [allParams objectForKey:key]];
+    }];
+    
+    // remove first & character
+    pString = [pString substringFromIndex:1];
+    
+    pString = [pString stringByAppendingFormat:@"&beemios_token=%@",  AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:pString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
+    
     [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     
 

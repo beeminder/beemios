@@ -277,8 +277,8 @@
                         <outlet property="firstLabel" destination="N6U-el-0yv" id="xb2-8N-975"/>
                         <outlet property="firstTextField" destination="Lxk-qX-GgE" id="nay-tO-gp7"/>
                         <outlet property="goalDetailsLabel" destination="OXb-zp-oFN" id="s5e-LN-gKs"/>
-                        <outlet property="goalSlugExistsWarningLabel" destination="zAk-KC-z2d" id="m8k-CT-gUt"/>
                         <outlet property="goalTypeLabel" destination="ERu-9V-ZQI" id="zwM-oP-qrQ"/>
+                        <outlet property="goalWarningLabel" destination="zAk-KC-z2d" id="co0-O7-0hl"/>
                         <outlet property="pickerView" destination="lby-1W-IL7" id="Mz6-NE-zhS"/>
                         <outlet property="roadDialButton" destination="uPp-vR-WlF" id="QQT-oz-k3T"/>
                         <outlet property="saveGoalButton" destination="oqv-eG-50a" id="JcG-gS-ZYI"/>
@@ -1130,8 +1130,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="firstLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="firstTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="goalDetailsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalSlugExistsWarningLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalWarningLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>

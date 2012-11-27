@@ -154,6 +154,7 @@
     }
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthTokenKey] &&
+        ![[NSUserDefaults standardUserDefaults] objectForKey:kFacebookOAuthTokenKey] &&
         ![self validateEmailWithString:self.emailTextField.text]) {
         self.validationWarningLabel.text = @"Invalid email address";
         self.validationWarningLabel.hidden = NO;
@@ -168,7 +169,11 @@
     
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", nil];
     
-    NSDictionary *paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
+    NSDictionary *paramsDict;
+    if ([self.passwordTextField.text length] > 0) {
+        paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
+    }
+
     
     user = [User writeToUserWithDictionary:userDict];
     user.goals = [NSSet setWithObject:[BeeminderAppDelegate sharedSessionGoal]];

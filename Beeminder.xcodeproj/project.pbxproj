@@ -30,6 +30,7 @@
 		A133F9FA158FB27F002F151A /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EC158FB27F002F151A /* SBJsonTokeniser.m */; };
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
+		A140F3E31665070B0082275A /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F3E21665070B0082275A /* NSDictionary+Merge.m */; };
 		A14A1FA7161E0B0000E2F3BB /* cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA5161E0B0000E2F3BB /* cell-noise.png */; };
 		A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */; };
 		A14A1FAB161E0F4200E2F3BB /* bg-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA9161E0F4200E2F3BB /* bg-noise.png */; };
@@ -197,6 +198,8 @@
 		A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A133F9EF158FB27F002F151A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		A133F9F0158FB27F002F151A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		A140F3E11665070B0082275A /* NSDictionary+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Merge.h"; sourceTree = "<group>"; };
+		A140F3E21665070B0082275A /* NSDictionary+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Merge.m"; sourceTree = "<group>"; };
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		A14A1FA5161E0B0000E2F3BB /* cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise.png"; sourceTree = "<group>"; };
 		A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise@2x.png"; sourceTree = "<group>"; };
@@ -660,6 +663,8 @@
 				A14AA67D1660647E00D59A47 /* NSString+Base64.h */,
 				A14AA67E1660647E00D59A47 /* NSString+Base64.m */,
 				A14AA6BD166281B700D59A47 /* TwitterAuthDelegate.h */,
+				A140F3E11665070B0082275A /* NSDictionary+Merge.h */,
+				A140F3E21665070B0082275A /* NSDictionary+Merge.m */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
@@ -968,6 +973,7 @@
 				A19A20AC16644481007736C1 /* Goal.m in Sources */,
 				A19A20AF16644481007736C1 /* User.m in Sources */,
 				A19A20B216644481007736C1 /* Datapoint.m in Sources */,
+				A140F3E31665070B0082275A /* NSDictionary+Merge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "User+Resource.h"
 #import "GoalPushRequest.h"
+#import "NSDictionary+Merge.h"
 
 @interface UserPushRequest : NSObject
 

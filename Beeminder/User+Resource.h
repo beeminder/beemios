@@ -20,5 +20,6 @@
 - (NSString *)updateURL;
 - (NSString *)deleteURL;
 - (NSString *)paramString;
+- (NSDictionary *)paramsDict;
 
 @end

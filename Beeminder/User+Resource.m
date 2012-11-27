@@ -124,4 +124,9 @@
     return [NSString stringWithFormat:@"username=%@&email=%@", self.username, self.email];
 }
 
+- (NSDictionary *)paramsDict
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:self.username, @"username", self.email, @"email", self.timezone, @"timezone", nil];
+}
+
 @end

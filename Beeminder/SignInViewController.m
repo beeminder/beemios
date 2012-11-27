@@ -52,7 +52,7 @@
 
 - (void)formSubmitted
 {
-    NSString *paramString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@&beemios_secret=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding), kBeemiosSecret];
+    NSString *paramString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding)];
     [self signInWithEncodedParamString:paramString];
 }
 
@@ -107,7 +107,7 @@
 
 - (void)signInWithEncodedParamString:(NSString *)paramString
 {
-    paramString = [paramString stringByAppendingFormat:@"&beemios_token=%@", [BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey]];
+    paramString = [paramString stringByAppendingFormat:@"&beemios_token=%@", AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
     NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
     
     NSURL *loginUrl = [NSURL URLWithString:urlString];
@@ -120,11 +120,11 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self successfulLoginJSON:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        if ([JSON objectForKey:@"error"]) {
-            [self invalidLoginMessage:[JSON objectForKey:@"error"]];
+        if ([JSON objectForKey:@"errors"]) {
+            [self invalidLoginMessage:[[JSON objectForKey:@"errors"] objectForKey:@"message"]];
         }
         else {
-            [self invalidLoginMessage:nil];
+            [self invalidLoginMessage:@"Could not reach Beeminder"];
         }
 
     }];
@@ -181,7 +181,7 @@
 - (void)invalidLoginMessage:(NSString *)message
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Login" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not log in" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 

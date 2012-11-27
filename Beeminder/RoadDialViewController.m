@@ -32,7 +32,7 @@
     self.fitbitDatasetTitles = [NSArray arrayWithObjects:@"Steps", @"Weight", @"Body Fat Percentage", @"Hours Slept", @"Active Score", nil];
     self.fitbitDatasetValues = [NSArray arrayWithObjects:@"steps", @"weight", @"body_fat", @"hours_slept", @"active_score", nil];
     [self hideFormFields];
-    self.goalSlugExistsWarningLabel.hidden = YES;
+
     self.roadDialButton.hidden = YES;
     self.roadDialButton = [BeeminderAppDelegate standardGrayButtonWith:self.roadDialButton];
     self.saveGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.saveGoalButton];
@@ -49,7 +49,6 @@
     self.ephemLabel.hidden = NO;
     self.startFlatLabel.hidden = NO;
     self.startFlatSwitch.hidden = NO;
-    self.titleLabel.hidden = NO;
     self.titleTextField.hidden = NO;
     self.saveGoalButton.hidden = NO;
 }
@@ -62,9 +61,9 @@
     self.ephemLabel.hidden = YES;
     self.startFlatLabel.hidden = YES;
     self.startFlatSwitch.hidden = YES;
-    self.titleLabel.hidden = YES;
     self.titleTextField.hidden = YES;
     self.saveGoalButton.hidden = YES;
+    self.goalWarningLabel.hidden = YES;
 }
 
 - (void)adjustForFitbit
@@ -176,13 +175,12 @@
     [self setStartFlatSwitch:nil];
     [self setRoadDialButton:nil];
     [self setTitleTextField:nil];
-    [self setTitleLabel:nil];
     [self setSaveGoalButton:nil];
-    [self setGoalSlugExistsWarningLabel:nil];
     [self setEphemSwitch:nil];
     [self setStartFlatLabel:nil];
     [self setEphemLabel:nil];
     [self setPickerView:nil];
+    [self setGoalWarningLabel:nil];
     [super viewDidUnload];
 }
 
@@ -218,7 +216,8 @@
 - (void)checkForExistingSlug
 {
     BOOL exists = [self slugExistsForTitle:self.titleTextField.text];
-    self.goalSlugExistsWarningLabel.hidden = !exists;
+    self.goalWarningLabel.text = @"You already have a goal with that slug";
+    self.goalWarningLabel.hidden = !exists;
     self.saveGoalButton.enabled = !exists;
 }
 
@@ -289,14 +288,9 @@
     }
     
     if ([self.titleTextField.text isEqualToString:@""]) {
-        self.titleTextField.borderStyle = UITex
-        self.titleLabel.textColor = [UIColor redColor];
-        self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+        self.goalWarningLabel.text = @"You must choose a name for your goal";
+        self.goalWarningLabel.hidden = NO;
         errors = YES;
-    }
-    else {
-        self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
     }
     
     if (errors) {

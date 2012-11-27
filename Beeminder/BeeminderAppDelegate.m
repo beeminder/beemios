@@ -84,6 +84,12 @@ NSString *const FBSessionStateChangedNotification =
     return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, fitbit, kFitbitPrivate, custom, kCustomPrivate, nil];
 }
 
++ (void)requestPushNotificationAccess
+{
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+}
+
 // Begin Twitter Auth code
 + (AFHTTPRequestOperation *)reverseAuthTokenOperationForTwitterAccount:(ACAccount *)twitterAccount
 {
@@ -119,15 +125,18 @@ NSString *const FBSessionStateChangedNotification =
 
 + (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key
 {
+    NSLog(@"%@", baseString);
+    NSLog(@"%@", key);
     const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cData = [baseString cStringUsingEncoding:NSASCIIStringEncoding];
-    
+    NSLog(@"%s", cKey);
+    NSLog(@"%s", cData);
     unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
     
     CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
     
     NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
-
+    NSLog(@"%@", [NSString base64StringFromData:HMAC length:HMAC.length]);
     return [NSString base64StringFromData:HMAC length:HMAC.length];
 }
 
@@ -197,6 +206,19 @@ NSString *const FBSessionStateChangedNotification =
             }
         }
         else {
+            // show the alert on the main thread
+            int64_t delayInSeconds = 0.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                UIAlertView *alertView = [[UIAlertView alloc]
+                                          initWithTitle:@"Error signing in to Twitter"
+                                          message:@"To sign in with Twitter, go to Settings -> Twitter and enable Beeminder."
+                                          delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                [alertView show];
+            });
+
             NSLog(@"not granted");
         }
     }];
@@ -320,9 +342,23 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     [MagicalRecord setupCoreDataStack];
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+}
+
+- (void)saveDeviceTokenToServer:(NSData *)deviceToken
+{
+    
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
