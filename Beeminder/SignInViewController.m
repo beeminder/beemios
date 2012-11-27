@@ -98,7 +98,7 @@
                 [defaults setObject:[result username] forKey:kFacebookUsernameKey];
                 [defaults setObject:[result id] forKey:kFacebookUserIdKey];
                 
-                NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
+                NSString *paramString = [NSString stringWithFormat:@"email=%@&facebook_access_token=%@&facebook_username=%@&oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([result email], NSUTF8StringEncoding), FBSession.activeSession.accessToken, [result username], AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
                 [self signInWithEncodedParamString:paramString];
             }
         }];

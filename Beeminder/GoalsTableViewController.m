@@ -94,16 +94,20 @@
     }
     
     NSString *username = [ABCurrentUser username];
-    int lastUpdatedAt = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedAt"];
+    int lastUpdatedAt = [ABCurrentUser lastUpdatedAt];
 
     NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=%d&skinny=true&access_token=%@", kBaseURL, kAPIPrefix, username, lastUpdatedAt, [ABCurrentUser accessToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
     
-    [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:@"lastUpdatedAt"];
+    [ABCurrentUser setLastUpdatedAtToNow];
     MBProgressHUD *hud;
     BOOL initialImport = (!lastUpdatedAt || lastUpdatedAt == 0);
     if (initialImport) {
+        User *user = [ABCurrentUser user];
+        for (Goal *goal in user.goals) {
+            [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+        }
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Fetching Beeswax...";
     }

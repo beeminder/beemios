@@ -16,5 +16,7 @@
 + (void)logout;
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken;
 + (void)setUsername:(NSString *)username;
++ (int)lastUpdatedAt;
++ (void)setLastUpdatedAtToNow;
 
 @end

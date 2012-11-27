@@ -30,7 +30,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"accessToken"];
     [defaults setObject:nil forKey:@"username"];
-    [defaults setInteger:0 forKey:@"lastUpdatedAt"];
 }
 
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken
@@ -46,6 +45,16 @@
 + (void)setUsername:(NSString *)username
 {
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+}
+
++ (int)lastUpdatedAt
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:@"lastUpdatedAt-%@", [ABCurrentUser username]]];
+}
+
++ (void)setLastUpdatedAtToNow
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:[NSString stringWithFormat:@"lastUpdatedAt-%@", [ABCurrentUser username]]];
 }
 
 @end

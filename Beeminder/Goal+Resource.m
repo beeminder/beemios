@@ -33,12 +33,12 @@
 
 - (NSString *)createURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%@/goals.json", kBaseURL, kAPIPrefix, self.user.username];
+    return [NSString stringWithFormat:@"%@/%@/users/me/goals.json", kBaseURL, kAPIPrefix];
 }
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json", kBaseURL, kAPIPrefix, self.user.username, self.slug];
+    return [NSString stringWithFormat:@"%@/%@/users/me/goals/%@.json", kBaseURL, kAPIPrefix, self.slug];
 }
 
 - (NSString *)updateURL
@@ -53,7 +53,7 @@
 
 - (NSString *)roadDialURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/dial_road.json", kBaseURL, kAPIPrefix, self.user.username, self.slug];
+    return [NSString stringWithFormat:@"%@/%@/users/me/goals/%@/dial_road.json", kBaseURL, kAPIPrefix, self.slug];
 }
 
 - (NSString *)paramString

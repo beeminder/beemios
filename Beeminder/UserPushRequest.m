@@ -55,7 +55,7 @@
     __block NSString *pString = @"";
     
     [sortedKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
-        pString = [pString stringByAppendingFormat:@"&%@=%@", key, [allParams objectForKey:key]];
+        pString = [pString stringByAppendingFormat:@"&%@=%@", key, AFURLEncodedStringFromStringWithEncoding([allParams objectForKey:key], NSUTF8StringEncoding)];
     }];
     
     // remove first & character
@@ -92,23 +92,5 @@
     
     return userPushRequest;
 }
-
-//- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-//{
-//    NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-//    
-//    NSDictionary *responseJSON = [responseString JSONValue];
-//    NSString *accessToken = [responseJSON objectForKey:@"access_token"];
-//    NSString *username = [responseJSON objectForKey:@"username"];
-//    [ABCurrentUser loginWithUsername:username accessToken:accessToken];
-//    
-//    if (self.pushAssociations) {
-//        Goal *g;
-//        for (g in [(User *)self.resource goals]) {
-//            [GoalPushRequest requestForGoal:g withCompletionBlock:nil];
-//        }
-//    }
-//    [super connectionDidFinishLoading:connection];
-//}
 
 @end
