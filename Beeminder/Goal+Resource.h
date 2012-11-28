@@ -10,10 +10,12 @@
 #import "User+Resource.h"
 #import "GoalPushRequest.h"
 
+
+
 @interface Goal (Resource)
 
-+ (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
-                forUserWithUsername:(NSString *)username;
++ (NSDictionary *)processGoalDictFromServer:(NSDictionary *)goalDict;
++ (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict forUserWithUsername:(NSString *)username;
 
 - (void)pushToRemoteWithSuccessBlock:(CompletionBlock)completionBlock;
 - (NSString *)createURL;

@@ -10,6 +10,36 @@
 
 @implementation Goal (Resource)
 
++ (NSDictionary *)processGoalDictFromServer:(NSDictionary *)goalDict
+{
+    NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:goalDict];
+    [modGoalDict setObject:[goalDict objectForKey:@"id"] forKey:@"serverId"];
+    
+    NSString *runits = [goalDict objectForKey:@"runits"];
+    NSNumber *weeklyRate;
+    if ([goalDict objectForKey:@"rate"] != (id)[NSNull null]) {
+        
+        if ([runits isEqualToString:@"y"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]/52];
+        }
+        else if ([runits isEqualToString:@"m"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]/4];
+        }
+        else if ([runits isEqualToString:@"d"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]*7];
+        }
+        else if ([runits isEqualToString:@"h"]) {
+            weeklyRate = [NSNumber numberWithDouble:[[goalDict objectForKey:@"rate"] doubleValue]*7*24];
+        }
+        else {
+            weeklyRate = [goalDict objectForKey:@"rate"];
+        }
+        [modGoalDict setObject:weeklyRate forKey:@"rate"];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:modGoalDict];
+}
+
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict
     forUserWithUsername:(NSString *)username
 {
@@ -126,8 +156,10 @@
 - (NSString *)bareMinTodayString
 {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"today|within 0 days" options:0 error:nil];
-    if ([self.goal_type isEqualToString:kHustlerPrivate] && self.limsum &&
-        [self.limsum length] > 0 && [regex numberOfMatchesInString:self.limsum options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, self.limsum.length)] > 0) {
+    if (([self.goal_type isEqualToString:kHustlerPrivate] ||
+         [self.goal_type isEqualToString:kBikerPrivate]) &&
+          self.limsum && [self.limsum length] > 0 &&
+         [regex numberOfMatchesInString:self.limsum options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, self.limsum.length)] > 0) {
         
         return [self.limsum stringByReplacingOccurrencesOfString:@"within 0 days" withString:@"today"];
     }

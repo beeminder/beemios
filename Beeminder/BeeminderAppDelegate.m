@@ -84,6 +84,19 @@ NSString *const FBSessionStateChangedNotification =
     return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, fitbit, kFitbitPrivate, custom, kCustomPrivate, nil];
 }
 
++ (NSDate *)defaultEnterDataReminderDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:2012];
+    [components setHour:21];
+    [components setMinute:0];
+    [components setSecond:0];
+    
+    NSDate *date = [calendar dateFromComponents:components];
+    return date;
+}
+
 + (void)requestPushNotificationAccess
 {
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:

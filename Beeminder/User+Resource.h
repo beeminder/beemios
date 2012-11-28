@@ -12,6 +12,7 @@
 
 @interface User (Resource)
 
+- (void)reloadAllGoalsWithSuccessBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock;
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict;
 - (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict;
 - (void)pushToRemote;

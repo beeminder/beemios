@@ -33,4 +33,5 @@
     #import <FacebookSDK/FacebookSDK.h>
     #import "TwitterAuthDelegate.h"
     #import "BeeminderAppDelegate.h"
+    #import "ReminderCellUIView.h"
 #endif

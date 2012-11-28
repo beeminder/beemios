@@ -36,4 +36,6 @@ extern NSString *const FBSessionStateChangedNotification;
 + (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key;
 + (void)removeStoredOAuthDefaults;
 
++ (NSDate *)defaultEnterDataReminderDate;
+
 @end

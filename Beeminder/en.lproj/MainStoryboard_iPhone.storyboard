@@ -555,7 +555,7 @@
         <scene sceneID="H13-sb-cqs">
             <objects>
                 <viewController id="5GU-h5-Z9o" customClass="SettingsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wLW-WJ-n5M">
+                    <view key="view" contentMode="scaleToFill" id="wLW-WJ-n5M" customClass="TPKeyboardAvoidingScrollView">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -564,10 +564,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pKD-gz-O4a">
-                                <rect key="frame" x="67" y="208" width="187" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="170" y="347" width="130" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Sign Out of Beeminder">
+                                <state key="normal" title="Sign Out">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -578,19 +578,35 @@
                                     <action selector="signOutButtonPressed" destination="5GU-h5-Z9o" eventType="touchUpInside" id="Dd8-38-aVW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Logged in as:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vsw-7h-nsG">
-                                <rect key="frame" x="20" y="20" width="280" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Logged in as: apb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="vsw-7h-nsG">
+                                <rect key="frame" x="20" y="0.0" width="280" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oKW-qB-Pwp">
+                                <rect key="frame" x="20" y="347" width="130" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Reload all goals">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reloadAllGoalsButtonPressed" destination="5GU-h5-Z9o" eventType="touchUpInside" id="lFf-7D-Sh7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings_tab_icon" id="Bkk-Jd-6Yr"/>
                     <connections>
                         <outlet property="loggedInAsLabel" destination="vsw-7h-nsG" id="PGW-lY-fj2"/>
+                        <outlet property="reloadAllGoalsButton" destination="oKW-qB-Pwp" id="T8c-TE-lB2"/>
                         <outlet property="signOutButton" destination="pKD-gz-O4a" id="k8Q-Fm-F9S"/>
                     </connections>
                 </viewController>
@@ -1137,7 +1153,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startFlatLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="startFlatSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -1146,6 +1161,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="signOutButtonPressed"/>
                 <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reloadAllGoalsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="remindAtTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="reminderTimePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="signOutButton" candidateClass="UIButton"/>
             </relationships>
         </class>

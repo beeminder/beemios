@@ -20,4 +20,5 @@
 @property (strong, nonatomic) NSComparator goalComparator;
 - (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) PullToRefreshView *pull;
+- (void)fetchEverything;
 @end

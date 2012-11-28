@@ -18,5 +18,6 @@
 + (void)setUsername:(NSString *)username;
 + (int)lastUpdatedAt;
 + (void)setLastUpdatedAtToNow;
++ (void)resetLastUpdatedAt;
 
 @end

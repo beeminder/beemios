@@ -11,6 +11,36 @@
 
 @implementation User (Resource)
 
+- (void)reloadAllGoalsWithSuccessBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock
+{
+    for (Goal *goal in self.goals) {
+        [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+    }
+    
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=0&skinny=true&access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], [ABCurrentUser accessToken]]];
+    
+    NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
+    
+    AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSArray *goals = [JSON objectForKey:@"goals"];
+            
+            for (NSDictionary *goalDict in goals) {
+                
+                NSDictionary *modGoalDict = [Goal processGoalDictFromServer:goalDict];
+                
+                [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
+            }
+            if (successBlock) successBlock();
+        });
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (errorBlock) errorBlock();
+    }];
+    [fetchOperation start];
+}
+
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict
 {
     User *user = [User MR_findFirstByAttribute:@"username" withValue:[userDict objectForKey:@"username"] inContext:[NSManagedObjectContext MR_defaultContext]];

@@ -7,10 +7,9 @@
 //
 
 #import "Goal+Resource.h"
+typedef void(^CompletionBlock)();
 
 @interface GoalPushRequest : NSObject
-
-typedef void(^CompletionBlock)();
 
 + (GoalPushRequest *)requestForGoal:(Goal *)goal;
 

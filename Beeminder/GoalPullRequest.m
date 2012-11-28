@@ -19,8 +19,7 @@
 
     AFJSONRequestOperation *afRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSMutableDictionary *modGoalDict = [NSMutableDictionary dictionaryWithDictionary:JSON];
-        [modGoalDict setObject:[JSON objectForKey:@"id"] forKey:@"serverId"];
+        NSDictionary *modGoalDict = [Goal processGoalDictFromServer:JSON];
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];        
         if (successBlock) successBlock();
         
