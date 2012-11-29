@@ -39,4 +39,6 @@ extern NSString *const FBSessionStateChangedNotification;
 
 + (NSDate *)defaultEnterDataReminderDate;
 + (void)scheduleEnterDataReminders;
+
++ (void)requestPushNotificationAccess;
 @end

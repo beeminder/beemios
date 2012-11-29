@@ -29,7 +29,7 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *deviceToken = @"124";//[defaults objectForKey:kLatestDeviceTokenKey];
+    NSString *deviceToken = [defaults objectForKey:kLatestDeviceTokenKey];
     
     NSString *paramString = [NSString stringWithFormat:@"access_token=%@", [ABCurrentUser accessToken]];
     
@@ -51,9 +51,9 @@
 //    [defaults setObject:operation forKey:kPendingLogoutRequestKey];
     
     [operation start];
-    
-    [defaults setObject:nil forKey:@"accessToken"];
-    [defaults setObject:nil forKey:@"username"];
+    [defaults removeObjectForKey:kLatestDeviceTokenKey];
+    [defaults removeObjectForKey:@"accessToken"];
+    [defaults removeObjectForKey:@"username"];
 }
 
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken
@@ -63,6 +63,10 @@
     [defaults setObject:accessToken forKey:@"accessToken"];
     
     [defaults setObject:username forKey:@"username"];
+    
+    if (YES){//[[NSUserDefaults standardUserDefaults] boolForKey:kDidAllowRemoteNotificationsKey]) {
+        [BeeminderAppDelegate requestPushNotificationAccess];
+    }
     
 }
 
