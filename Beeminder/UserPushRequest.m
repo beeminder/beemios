@@ -61,7 +61,7 @@
     // remove first & character
     pString = [pString substringFromIndex:1];
     
-    pString = [pString stringByAppendingFormat:@"&beemios_token=%@",  AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:pString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
+    pString = [BeeminderAppDelegate addDeviceTokenToParamString:pString];
     
     [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
     

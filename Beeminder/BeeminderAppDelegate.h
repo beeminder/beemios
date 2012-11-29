@@ -34,8 +34,9 @@ extern NSString *const FBSessionStateChangedNotification;
 + (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount fromView:(UIView *)view withDelegate:(id<TwitterAuthDelegate>)delegate;
 
 + (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key;
++ (NSString *)addDeviceTokenToParamString:(NSString *)paramString;
 + (void)removeStoredOAuthDefaults;
 
 + (NSDate *)defaultEnterDataReminderDate;
-
++ (void)scheduleEnterDataReminders;
 @end

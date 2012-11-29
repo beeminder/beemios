@@ -28,40 +28,63 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithY:53.0f];
+
+    self.defaultFontString = @"Helvetica";
+    self.defaultFontSize = 15.0f;
+    
+    // Begin ReminderSwitchCell
+    self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithYPosition:52.0f showBottomBorder:NO];
 
     self.remindSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
+    self.remindSwitch.on = [[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataKey] boolValue];    
+    [self.remindSwitch addTarget:self action:@selector(remindSwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.reminderSwitchCell addSubview:self.remindSwitch];
     
     UILabel *reminderSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(9.0f, 9.0f, 195.0f, 30.0f)];
     reminderSwitchLabel.backgroundColor = [UIColor clearColor];
     reminderSwitchLabel.text = @"Remind me to enter data";
-    reminderSwitchLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    reminderSwitchLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
     [self.reminderSwitchCell addSubview:reminderSwitchLabel];
     
     [self.view addSubview:self.reminderSwitchCell];
     
-    self.reminderTimeCell = [[ReminderCellUIView alloc] initWithY:103.0f andBottomBorder:YES];
+    // Begin ReminderTimeCell
+    self.reminderTimePicker = [[UIDatePicker alloc] init];
+    self.reminderTimePicker.datePickerMode = UIDatePickerModeTime;
+    self.reminderTimePicker.minuteInterval = 5.0f;
+    [self.reminderTimePicker addTarget:self action:@selector(timePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.remindAtTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 195.0f, 30.0f)];
-
-
-    [self.reminderTimeCell addSubview:self.remindAtTextField];
+    self.reminderTimeCell = [[ReminderCellUIView alloc] initWithYPosition:103.0f showBottomBorder:YES];
+    self.remindAtPRLabel = [[PRLabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 195.0f, 30.0f)];
+    self.remindAtPRLabel.inputView = self.reminderTimePicker;
+    self.remindAtPRLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
+    self.remindAtPRLabel.backgroundColor = [UIColor clearColor];
+    [self.reminderTimeCell addSubview:self.remindAtPRLabel];
     
     [self.view addSubview:self.reminderTimeCell];
     
-    self.reminderTimePicker = [[UIDatePicker alloc] init];
-    self.reminderTimePicker.datePickerMode = UIDatePickerModeTime;
-    [self.reminderTimePicker addTarget:self action:@selector(timePickerValueChanged) forControlEvents:UIControlEventValueChanged];
-    self.remindAtTextField.inputView = self.reminderTimePicker;
+    // Begin Emergency Cell
+    self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
+    self.emergencySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
+    UILabel *emergencySwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(9.0f, 9.0f, 195.0f, 30.0f)];
+    emergencySwitchLabel.backgroundColor = [UIColor clearColor];
+    emergencySwitchLabel.text = @"Notify on Emergency Days";
+    emergencySwitchLabel.font = [UIFont fontWithName:self.defaultFontString size:14.0f];
+    [self.emergencySwitchCell addSubview:emergencySwitchLabel];
+    [self.emergencySwitchCell addSubview:self.emergencySwitch];
     
-    self.remindSwitch.on = [[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataKey] boolValue];
+    [self.view addSubview:self.emergencySwitchCell];
+    
+    if (!self.remindSwitch.on) {
+        [self hideRemindMeToEnterDataAt];
+    }
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey]) {
         [[NSUserDefaults standardUserDefaults] setObject:[BeeminderAppDelegate defaultEnterDataReminderDate] forKey:kRemindMeToEnterDataAtKey];
     }
+    
     [self.reminderTimePicker setDate:[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey] animated:YES];
-    [self updateReminderTimeTextField];
+    [self updateReminderTimePRLabel];
     
     self.signOutButton = [BeeminderAppDelegate standardGrayButtonWith:self.signOutButton];
     
@@ -73,22 +96,27 @@
 - (void)timePickerValueChanged
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.reminderTimePicker.date forKey:kRemindMeToEnterDataAtKey];
-    [self updateReminderTimeTextField];
+    [self updateReminderTimePRLabel];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [BeeminderAppDelegate scheduleEnterDataReminders];
 }
 
-- (void)updateReminderTimeTextField
+- (void)updateReminderTimePRLabel
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
-    self.remindAtTextField.text = [NSString stringWithFormat:@"Every day at %@", [formatter stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey]]];
+    self.remindAtPRLabel.text = [NSString stringWithFormat:@"Every day at %@", [formatter stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey]]];
     
 }
 
-- (IBAction)remindMeToEnterDataValueChanged
+- (void)remindSwitchValueChanged
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:self.remindSwitch.on] forKey:kRemindMeToEnterDataKey];
+    [self.remindAtPRLabel resignFirstResponder];
     if (self.remindSwitch.on) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.reminderTimePicker.date forKey:kRemindMeToEnterDataAtKey];
         [self showRemindMeToEnterDataAt];
+        [BeeminderAppDelegate scheduleEnterDataReminders];        
     }
     else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRemindMeToEnterDataAtKey];
@@ -97,26 +125,17 @@
     }
 }
 
-//- (IBAction)remindMeToEnterDataAtTextFieldEditingDidBegin
-//{
-//    self.remindMeToEnterDataAtDatePicker.hidden = NO;
-//    self.remindMeToEnterDataAtTextField.inputView = self.remindMeToEnterDataAtDatePicker;
-//}
-//
-//- (IBAction)remindMeToEnterDataAtDatePickerValueChanged
-//{
-//    [[NSUserDefaults standardUserDefaults] setObject:[self.remindMeToEnterDataAtDatePicker date] forKey:kRemindMeToEnterDataAtKey];
-//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//}
-
 - (void)showRemindMeToEnterDataAt
 {
-    
+    self.reminderTimeCell.hidden = NO;
+    self.reminderSwitchCell.bottomBorder.hidden = YES;
 }
 
 - (void)hideRemindMeToEnterDataAt
 {
-    
+    self.reminderTimeCell.hidden = YES;    
+    self.reminderSwitchCell.bottomBorder.hidden = NO;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,7 +151,6 @@
 
 - (IBAction)reloadAllGoalsButtonPressed
 {
-
     UINavigationController *navCon = [[[self tabBarController] viewControllers] objectAtIndex:0];
     GoalsTableViewController *gtvCon = [[navCon viewControllers] objectAtIndex:0];
     [ABCurrentUser resetLastUpdatedAt];
@@ -150,7 +168,7 @@
     [self setSignOutButton:nil];
     [self setReloadAllGoalsButton:nil];
     [self setRemindSwitch:nil];
-    [self setRemindAtTextField:nil];
+    [self setRemindAtPRLabel:nil];
     [super viewDidUnload];
 }
 @end

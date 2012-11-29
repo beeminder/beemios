@@ -580,7 +580,7 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Logged in as: apb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="vsw-7h-nsG">
                                 <rect key="frame" x="20" y="0.0" width="280" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1162,8 +1162,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="signOutButtonPressed"/>
                 <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="reloadAllGoalsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="remindAtTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="reminderTimePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="signOutButton" candidateClass="UIButton"/>
             </relationships>
         </class>

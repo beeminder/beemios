@@ -15,43 +15,45 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.borderColor = [UIColor lightGrayColor].CGColor;
-        CALayer *topBorder = [CALayer layer];
-        topBorder.borderColor = self.borderColor;
-        topBorder.borderWidth = 1;
-        topBorder.frame = CGRectMake(-1, -1, self.frame.size.width + 2, 1);
-        [self.layer addSublayer:topBorder];
+        self.borderWidth = 1.0f;
         
-        CALayer *leftBorder = [CALayer layer];
-        leftBorder.borderColor = self.borderColor;
-        leftBorder.borderWidth = 1;
-        leftBorder.frame = CGRectMake(-1, 0, 1, self.frame.size.height);
-        [self.layer addSublayer:leftBorder];
+        self.topBorder = [CALayer layer];
+        self.topBorder.borderColor = self.borderColor;
+        self.topBorder.borderWidth = self.borderWidth;
+        self.topBorder.frame = CGRectMake(-1*self.borderWidth, -1*self.borderWidth, self.frame.size.width + 2*self.borderWidth, self.borderWidth);
+        [self.layer addSublayer:self.topBorder];
         
-        CALayer *rightBorder = [CALayer layer];
-        rightBorder.borderColor = self.borderColor;
-        rightBorder.borderWidth = 1;
-        rightBorder.frame = CGRectMake(self.frame.size.width, 0, 1, self.frame.size.height);
-        [self.layer addSublayer:rightBorder];
-        // Initialization code
+        self.leftBorder = [CALayer layer];
+        self.leftBorder.borderColor = self.borderColor;
+        self.leftBorder.borderWidth = 1;
+        self.leftBorder.frame = CGRectMake(-1*self.borderWidth, 0, self.borderWidth, self.frame.size.height);
+        [self.layer addSublayer:self.leftBorder];
+        
+        self.rightBorder = [CALayer layer];
+        self.rightBorder.borderColor = self.borderColor;
+        self.rightBorder.borderWidth = self.borderWidth;
+        self.rightBorder.frame = CGRectMake(self.frame.size.width, 0, self.borderWidth, self.frame.size.height);
+        [self.layer addSublayer:self.rightBorder];
+        
+        self.bottomBorder = [CALayer layer];
+        self.bottomBorder.borderColor = self.borderColor;
+        self.bottomBorder.borderWidth = self.borderWidth;
+        self.bottomBorder.frame = CGRectMake(-1*self.borderWidth, self.frame.size.height, self.frame.size.width + 2, self.borderWidth);
+        [self.layer addSublayer:self.bottomBorder];
     }
     return self;
 }
 
-- (id)initWithY:(float)y
+- (id)initWithYPosition:(float)y
 {
     return [[ReminderCellUIView alloc] initWithFrame:CGRectMake(20.0f, y, 280.0f, 50.0f)];
 }
 
-- (id)initWithY:(float)y andBottomBorder:(BOOL)bottomBorder
+- (id)initWithYPosition:(float)y showBottomBorder:(BOOL)bottomBorder
 {
-    ReminderCellUIView *view = [[ReminderCellUIView alloc] initWithY:y];
-    if (bottomBorder) {
-        CALayer *bottomBorder = [CALayer layer];
-        bottomBorder.borderColor = view.borderColor;
-        bottomBorder.borderWidth = 1;
-        bottomBorder.frame = CGRectMake(-1, view.frame.size.height, view.frame.size.width + 2, 1);
-        [view.layer addSublayer:bottomBorder];
-    }
+    ReminderCellUIView *view = [[ReminderCellUIView alloc] initWithYPosition:y];
+    view.bottomBorder.hidden = !bottomBorder;
+
     return view;
 }
 

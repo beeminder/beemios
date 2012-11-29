@@ -11,9 +11,15 @@
 @interface ReminderCellUIView : UIView
 
 @property CGColorRef borderColor;
+@property float borderWidth;
+@property CALayer *topBorder;
 
-- (id)initWithY:(float)y;
-- (id)initWithY:(float)y andBottomBorder:(BOOL)bottomBorder;
+@property CALayer *rightBorder;
+@property CALayer *leftBorder;
+@property CALayer *bottomBorder;
+
+- (id)initWithYPosition:(float)y;
+- (id)initWithYPosition:(float)y showBottomBorder:(BOOL)bottomBorder;
 
 
 @end

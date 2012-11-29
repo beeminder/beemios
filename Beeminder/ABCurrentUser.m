@@ -28,6 +28,30 @@
 + (void)logout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *deviceToken = @"124";//[defaults objectForKey:kLatestDeviceTokenKey];
+    
+    NSString *paramString = [NSString stringWithFormat:@"access_token=%@", [ABCurrentUser accessToken]];
+    
+    NSString *beemiosToken = [BeeminderAppDelegate addDeviceTokenToParamString:@""];
+    
+    paramString = [paramString stringByAppendingString:beemiosToken];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/device_tokens/%@.json?%@", kBaseURL, kPrivateAPIPrefix, deviceToken, paramString]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"DELETE"];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        [defaults removeObjectForKey:kPendingLogoutRequestKey];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        //bar
+    }];
+//    [defaults setObject:operation forKey:kPendingLogoutRequestKey];
+    
+    [operation start];
+    
     [defaults setObject:nil forKey:@"accessToken"];
     [defaults setObject:nil forKey:@"username"];
 }

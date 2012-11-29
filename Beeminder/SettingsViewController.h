@@ -18,8 +18,12 @@
 - (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) IBOutlet UIButton *reloadAllGoalsButton;
 @property (strong, nonatomic) UISwitch *remindSwitch;
-@property (strong, nonatomic) IBOutlet UITextField *remindAtTextField;
-@property (strong, nonatomic) IBOutlet UIDatePicker *reminderTimePicker;
+@property (strong, nonatomic) UISwitch *emergencySwitch;
+@property (strong, nonatomic) PRLabel *remindAtPRLabel;
+@property (strong, nonatomic) UIDatePicker *reminderTimePicker;
 @property (strong, nonatomic) ReminderCellUIView *reminderSwitchCell;
 @property (strong, nonatomic) ReminderCellUIView *reminderTimeCell;
+@property (strong, nonatomic) ReminderCellUIView *emergencySwitchCell;
+@property float defaultFontSize;
+@property (strong, nonatomic) NSString *defaultFontString;
 @end

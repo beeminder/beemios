@@ -97,6 +97,42 @@ NSString *const FBSessionStateChangedNotification =
     return date;
 }
 
++ (void)scheduleEnterDataReminders
+{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    unsigned timeUnitFlags = NSMinuteCalendarUnit | NSHourCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *timeComponents = [calendar components:timeUnitFlags fromDate:date];
+    
+    for (int i = 0; i < 7; i++) {
+        NSDate *today = [NSDate date];
+
+        unsigned dayUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+        
+        NSDateComponents *todayComponents = [calendar components:dayUnitFlags fromDate:today];
+        
+        [todayComponents setMinute:[timeComponents minute]];
+        [todayComponents setHour:[timeComponents hour]];
+        [todayComponents setSecond:[timeComponents second]];
+        
+        NSDate *todayAtReminderTime = [calendar dateFromComponents:todayComponents];
+        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+        [offsetComponents setDay:i];
+        
+        NSDate *reminderDate = [calendar dateByAddingComponents:offsetComponents toDate:todayAtReminderTime options:0];
+        
+        if ([reminderDate timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970]) {
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            
+            [notification setFireDate:reminderDate];
+            [notification setAlertBody:@"Don't forget to enter your Beeminder data for today!"];
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
+    
+}
+
 + (void)requestPushNotificationAccess
 {
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
@@ -355,23 +391,81 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (YES){//[[NSUserDefaults standardUserDefaults] boolForKey:kDidAllowRemoteNotificationsKey]) {
+        [BeeminderAppDelegate requestPushNotificationAccess];
+    }
+    [BeeminderAppDelegate resendPendingDeviceTokenRequests];
     [MagicalRecord setupCoreDataStack];
     return YES;
 }
 
++ (void)resendPendingDeviceTokenRequests
+{
+    // Perhaps store the operation as NSData? Right now it complains "Attempt to insert non-property value "
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if ([defaults objectForKey:kPendingLogoutRequestKey]) {
+//        AFJSONRequestOperation *operation = [defaults objectForKey:kPendingLogoutRequestKey];
+//        [operation start];
+//    }
+//    if ([defaults objectForKey:kPendingDeviceTokenSyncKey]) {
+//        AFJSONRequestOperation *syncOperation = [defaults objectForKey:kPendingDeviceTokenSyncKey];
+//        [syncOperation start];
+//    }
+}
+
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDidAllowRemoteNotificationsKey];
+    [BeeminderAppDelegate saveDeviceTokenToServer:deviceToken];
 	NSLog(@"My token is: %@", deviceToken);
 }
 
-- (void)saveDeviceTokenToServer:(NSData *)deviceToken
++ (NSString *)addDeviceTokenToParamString:(NSString *)paramString
 {
+    return [paramString stringByAppendingFormat:@"&beemios_token=%@", AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
+}
+
++ (void)saveDeviceTokenToServer:(NSData *)deviceToken
+{
+    NSString *deviceTokenString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString:@" " withString:@""];
+ 
+    NSString *latestDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:kLatestDeviceTokenKey];
+
+    if (latestDeviceToken && [deviceTokenString isEqualToString:latestDeviceToken]) {
+        return;
+    }
     
+    [[NSUserDefaults standardUserDefaults] setObject:deviceTokenString forKey:kLatestDeviceTokenKey];
+    
+    NSString *accessToken = [ABCurrentUser accessToken];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/device_tokens.json", kBaseURL, kPrivateAPIPrefix]];
+    
+    NSString *paramString = [NSString stringWithFormat:@"access_token=%@&device_token=%@", accessToken, deviceTokenString];
+    paramString = [BeeminderAppDelegate addDeviceTokenToParamString:paramString];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPendingDeviceTokenSyncKey];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@", response);
+        NSLog(@"%@", error);
+    }];
+//    [[NSUserDefaults standardUserDefaults] setObject:operation forKey:kPendingDeviceTokenSyncKey];
+    [operation start];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

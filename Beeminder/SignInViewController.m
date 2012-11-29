@@ -107,7 +107,7 @@
 
 - (void)signInWithEncodedParamString:(NSString *)paramString
 {
-    paramString = [paramString stringByAppendingFormat:@"&beemios_token=%@", AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
+    paramString = [BeeminderAppDelegate addDeviceTokenToParamString:paramString];
     NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
     
     NSURL *loginUrl = [NSURL URLWithString:urlString];
