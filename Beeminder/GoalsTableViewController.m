@@ -254,6 +254,8 @@
     
     self.title = @"Your Goals";
     
+    [BeeminderAppDelegate updateApplicationIconBadgeCount];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

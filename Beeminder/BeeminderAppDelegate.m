@@ -391,11 +391,11 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MagicalRecord setupCoreDataStack];
     if (YES){//[[NSUserDefaults standardUserDefaults] boolForKey:kDidAllowRemoteNotificationsKey]) {
         [BeeminderAppDelegate requestPushNotificationAccess];
     }
     [BeeminderAppDelegate resendPendingDeviceTokenRequests];
-    [MagicalRecord setupCoreDataStack];
     return YES;
 }
 
@@ -458,9 +458,52 @@ NSString *const FBSessionStateChangedNotification =
     [operation start];
 }
 
++ (void)removeDeviceTokenFromServer
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *deviceToken = [defaults objectForKey:kLatestDeviceTokenKey];
+    
+    NSString *paramString = [NSString stringWithFormat:@"access_token=%@", [ABCurrentUser accessToken]];
+    
+    NSString *beemiosToken = [BeeminderAppDelegate addDeviceTokenToParamString:@""];
+    
+    paramString = [paramString stringByAppendingString:beemiosToken];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/device_tokens/%@.json?%@", kBaseURL, kPrivateAPIPrefix, deviceToken, paramString]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"DELETE"];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        //        [defaults removeObjectForKey:kPendingLogoutRequestKey];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        //bar
+    }];
+    //    [defaults setObject:operation forKey:kPendingLogoutRequestKey];
+    
+    [operation start];
+    [defaults removeObjectForKey:kLatestDeviceTokenKey];
+}
+
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+}
+
++ (void)updateApplicationIconBadgeCount
+{
+    __block int count = 0;
+    [[ABCurrentUser user].goals enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        Goal *goal = (Goal *)obj;
+        if (!goal.won && [goal.panicTime doubleValue] < [[NSDate date] timeIntervalSince1970]) {
+            count++;
+        }
+    }];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    [notification setFireDate:[NSDate date]];
+    [notification setApplicationIconBadgeNumber:count];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -482,6 +525,20 @@ NSString *const FBSessionStateChangedNotification =
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self refreshGoalsAndShowDashboard];
+}
+
+- (void)refreshGoalsAndShowDashboard
+{
+    UIViewController *rootCon = self.window.rootViewController;
+    if ([rootCon.presentedViewController isMemberOfClass:[MainTabBarViewController class]]) {
+        MainTabBarViewController *mtbvCon = (MainTabBarViewController *)rootCon.presentedViewController;
+        [mtbvCon setSelectedIndex:0];
+        UINavigationController *navCon = [[mtbvCon viewControllers] objectAtIndex:0];
+        GoalsTableViewController *gtvCon = [[navCon viewControllers] objectAtIndex:0];
+        [gtvCon fetchEverything];
+        [mtbvCon setSelectedIndex:0];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -489,7 +546,7 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to SSO
     // (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
-    
+    [self refreshGoalsAndShowDashboard];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Accounts/Accounts.h>
 #import "TwitterAuthDelegate.h"
+#import "MainTabBarViewController.h"
+#import "GoalsTableViewController.h"
 
 @interface BeeminderAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -41,4 +43,8 @@ extern NSString *const FBSessionStateChangedNotification;
 + (void)scheduleEnterDataReminders;
 
 + (void)requestPushNotificationAccess;
++ (void)updateApplicationIconBadgeCount;
+- (void)refreshGoalsAndShowDashboard;
+
++ (void)removeDeviceTokenFromServer;
 @end

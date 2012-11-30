@@ -66,9 +66,16 @@
     // Begin Emergency Cell
     self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
     self.emergencySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kLatestDeviceTokenKey]) {
+        self.emergencySwitch.on = YES;
+    }
+    else {
+        self.emergencySwitch.on = NO;
+    }
+    [self.emergencySwitch addTarget:self action:@selector(emergencySwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     UILabel *emergencySwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(9.0f, 9.0f, 195.0f, 30.0f)];
     emergencySwitchLabel.backgroundColor = [UIColor clearColor];
-    emergencySwitchLabel.text = @"Notify on Emergency Days";
+    emergencySwitchLabel.text = @"Emergency Day notifications";
     emergencySwitchLabel.font = [UIFont fontWithName:self.defaultFontString size:14.0f];
     [self.emergencySwitchCell addSubview:emergencySwitchLabel];
     [self.emergencySwitchCell addSubview:self.emergencySwitch];
@@ -91,6 +98,16 @@
     self.reloadAllGoalsButton = [BeeminderAppDelegate standardGrayButtonWith:self.reloadAllGoalsButton];
 
     self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
+}
+
+- (void)emergencySwitchValueChanged
+{
+    if (self.emergencySwitch.on) {
+        [BeeminderAppDelegate requestPushNotificationAccess];
+    }
+    else {
+        [BeeminderAppDelegate removeDeviceTokenFromServer];
+    }
 }
 
 - (void)timePickerValueChanged

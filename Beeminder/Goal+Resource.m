@@ -211,12 +211,17 @@
         }
         
     }
-    else if (self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue]) {
+    else if (self.won) {
         return @"Success!";
     }
     else {
         return [NSString stringWithFormat:@"Derailed!"];
     }
+}
+
+- (BOOL)won
+{
+    return self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue];
 }
 
 - (BOOL)isDerailed
