@@ -52,7 +52,7 @@
 
 - (void)formSubmitted
 {
-    NSString *paramString = [NSString stringWithFormat:@"user[login]=%@&user[password]=%@", AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding)];
+    NSString *paramString = [NSString stringWithFormat:@"beemios_secret=%@&user[login]=%@&user[password]=%@", kBeemiosSecret, AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding)];
     [self signInWithEncodedParamString:paramString];
 }
 
