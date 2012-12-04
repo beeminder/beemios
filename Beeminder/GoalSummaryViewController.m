@@ -54,6 +54,27 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadGraphImage];
+    [self adjustForFrozen];
+}
+
+- (void)adjustForFrozen
+{
+    if ([self.goalObject.frozen boolValue]) {
+        self.editGoalButton.hidden = YES;
+        self.inputTextField.hidden = YES;
+        self.valueStepper.hidden = YES;
+        self.dateStepper.hidden = YES;
+        self.addDataButton.hidden = YES;
+        self.lastDatapointLabel.hidden = YES;
+    }
+    else {
+        self.editGoalButton.hidden = NO;
+        self.inputTextField.hidden = NO;
+        self.valueStepper.hidden = NO;
+        self.dateStepper.hidden = NO;
+        self.addDataButton.hidden = NO;
+        self.lastDatapointLabel.hidden = NO;
+    }
 }
 
 - (void)setInitialDatapoint

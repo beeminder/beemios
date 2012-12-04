@@ -496,7 +496,7 @@ NSString *const FBSessionStateChangedNotification =
     __block int count = 0;
     [[ABCurrentUser user].goals enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         Goal *goal = (Goal *)obj;
-        if (!goal.won && [goal.panicTime doubleValue] < [[NSDate date] timeIntervalSince1970]) {
+        if (![goal.won boolValue] && [goal.panicTime doubleValue] < [[NSDate date] timeIntervalSince1970]) {
             count++;
         }
     }];

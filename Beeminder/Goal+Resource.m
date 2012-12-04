@@ -211,7 +211,7 @@
         }
         
     }
-    else if (self.won) {
+    else if ([self.won boolValue]) {
         return @"Success!";
     }
     else {
@@ -219,10 +219,10 @@
     }
 }
 
-- (BOOL)won
-{
-    return self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue];
-}
+//- (BOOL)won
+//{
+//    return self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue];
+//}
 
 - (BOOL)isDerailed
 {

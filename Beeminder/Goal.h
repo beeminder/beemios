@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 11/26/12.
+//  Created by Andy Brett on 12/3/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -14,9 +14,11 @@
 @interface Goal : NSManagedObject
 
 @property (nonatomic, retain) NSString * burner;
+@property (nonatomic, retain) id contract;
 @property (nonatomic, retain) NSNumber * ephem;
 @property (nonatomic, retain) NSNumber * fitbit;
 @property (nonatomic, retain) NSString * fitbit_field;
+@property (nonatomic, retain) NSNumber * frozen;
 @property (nonatomic, retain) NSString * goal_type;
 @property (nonatomic, retain) NSNumber * goaldate;
 @property (nonatomic, retain) NSNumber * goalval;
@@ -26,6 +28,7 @@
 @property (nonatomic, retain) NSNumber * initval;
 @property (nonatomic, retain) NSString * limsum;
 @property (nonatomic, retain) NSNumber * losedate;
+@property (nonatomic, retain) NSNumber * lost;
 @property (nonatomic, retain) NSNumber * panic;
 @property (nonatomic, retain) NSNumber * rate;
 @property (nonatomic, retain) NSString * serverId;
@@ -33,7 +36,7 @@
 @property (nonatomic, retain) NSString * thumb_url;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
-@property (nonatomic, retain) id contract;
+@property (nonatomic, retain) NSNumber * won;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end

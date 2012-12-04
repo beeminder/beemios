@@ -14,6 +14,9 @@
 		A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
 		A1192A8716658455004BED65 /* chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = A1192A8616658455004BED65 /* chevron.png */; };
+		A11AA6AB166D748100FA8C76 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6AA166D748100FA8C76 /* Goal.m */; };
+		A11AA6AE166D748100FA8C76 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6AD166D748100FA8C76 /* User.m */; };
+		A11AA6B1166D748100FA8C76 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6B0166D748100FA8C76 /* Datapoint.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
@@ -71,9 +74,6 @@
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
 		A19A20A816642FCA007736C1 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A19A20A616642FCA007736C1 /* arrow.png */; };
 		A19A20A916642FCA007736C1 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A19A20A716642FCA007736C1 /* arrow@2x.png */; };
-		A19A20AC16644481007736C1 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A19A20AB16644481007736C1 /* Goal.m */; };
-		A19A20AF16644481007736C1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A19A20AE16644481007736C1 /* User.m */; };
-		A19A20B216644481007736C1 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A19A20B116644481007736C1 /* Datapoint.m */; };
 		A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D7BE11596DC3B0031ABED /* CoreData.framework */; };
 		A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */; };
 		A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */; };
@@ -166,6 +166,12 @@
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
 		A1192A8616658455004BED65 /* chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron.png; sourceTree = "<group>"; };
+		A11AA6A9166D748100FA8C76 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A11AA6AA166D748100FA8C76 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		A11AA6AC166D748100FA8C76 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A11AA6AD166D748100FA8C76 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A11AA6AF166D748100FA8C76 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A11AA6B0166D748100FA8C76 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -262,12 +268,6 @@
 		A1993CC1159007B700011568 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		A19A20A616642FCA007736C1 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A19A20A716642FCA007736C1 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
-		A19A20AA16644481007736C1 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A19A20AB16644481007736C1 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A19A20AD16644481007736C1 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A19A20AE16644481007736C1 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A19A20B016644481007736C1 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A19A20B116644481007736C1 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A19D7BE11596DC3B0031ABED /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder.xcdatamodel; sourceTree = "<group>"; };
 		A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalSummaryViewController.h; sourceTree = "<group>"; };
@@ -510,12 +510,12 @@
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A19A20B016644481007736C1 /* Datapoint.h */,
-				A19A20B116644481007736C1 /* Datapoint.m */,
-				A19A20AD16644481007736C1 /* User.h */,
-				A19A20AE16644481007736C1 /* User.m */,
-				A19A20AA16644481007736C1 /* Goal.h */,
-				A19A20AB16644481007736C1 /* Goal.m */,
+				A11AA6AF166D748100FA8C76 /* Datapoint.h */,
+				A11AA6B0166D748100FA8C76 /* Datapoint.m */,
+				A11AA6AC166D748100FA8C76 /* User.h */,
+				A11AA6AD166D748100FA8C76 /* User.m */,
+				A11AA6A9166D748100FA8C76 /* Goal.h */,
+				A11AA6AA166D748100FA8C76 /* Goal.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -1000,12 +1000,12 @@
 				A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */,
 				A14AA67F1660647E00D59A47 /* NSString+Base64.m in Sources */,
 				A1D9A1D31662E74900E54ACE /* PullToRefreshView.m in Sources */,
-				A19A20AC16644481007736C1 /* Goal.m in Sources */,
-				A19A20AF16644481007736C1 /* User.m in Sources */,
-				A19A20B216644481007736C1 /* Datapoint.m in Sources */,
 				A140F3E31665070B0082275A /* NSDictionary+Merge.m in Sources */,
 				A1B64A471665B2CB0023CC40 /* ReminderCellUIView.m in Sources */,
 				A162C8C7166685DD0085D94A /* PRLabel.m in Sources */,
+				A11AA6AB166D748100FA8C76 /* Goal.m in Sources */,
+				A11AA6AE166D748100FA8C76 /* User.m in Sources */,
+				A11AA6B1166D748100FA8C76 /* Datapoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

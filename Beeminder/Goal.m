@@ -2,7 +2,7 @@
 //  Goal.m
 //  Beeminder
 //
-//  Created by Andy Brett on 11/26/12.
+//  Created by Andy Brett on 12/3/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 
@@ -14,9 +14,11 @@
 @implementation Goal
 
 @dynamic burner;
+@dynamic contract;
 @dynamic ephem;
 @dynamic fitbit;
 @dynamic fitbit_field;
+@dynamic frozen;
 @dynamic goal_type;
 @dynamic goaldate;
 @dynamic goalval;
@@ -26,6 +28,7 @@
 @dynamic initval;
 @dynamic limsum;
 @dynamic losedate;
+@dynamic lost;
 @dynamic panic;
 @dynamic rate;
 @dynamic serverId;
@@ -33,7 +36,7 @@
 @dynamic thumb_url;
 @dynamic title;
 @dynamic units;
-@dynamic contract;
+@dynamic won;
 @dynamic datapoints;
 @dynamic user;
 
