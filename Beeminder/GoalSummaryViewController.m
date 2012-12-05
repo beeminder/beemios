@@ -50,6 +50,9 @@
     [self setInitialDatapoint];
     [self adjustForFrozen];
     [self startTimer];
+    
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -94,7 +97,48 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     ContractViewController *contractViewController = [storyboard instantiateViewControllerWithIdentifier:@"contractViewController"];
     contractViewController.goalObject = self.goalObject;
+    contractViewController.gsvCon = self;
     [self presentViewController:contractViewController animated:YES completion:nil];
+}
+
+- (void)replaceRefreshButton
+{
+    [self.activityIndicator stopAnimating];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
+}
+
+- (void)refreshGoalData
+{
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.activityIndicator startAnimating];
+    self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [self replaceRefreshButton];
+        
+        NSDictionary *modGoalDict = [Goal processGoalDictFromServer:JSON];
+        
+        [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
+        
+        [self loadGraphImageIgnoreCache:YES];
+        [self loadGraphImageThumbIgnoreCache:YES];
+        
+        [self setDatapointsText];
+        
+        [self setInitialDatapoint];
+        [self adjustForFrozen];
+        [self startTimer];
+        [BeeminderAppDelegate updateApplicationIconBadgeCount];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [self replaceRefreshButton];
+    }];
+    
+    [operation start];
 }
 
 - (void)setInitialDatapoint
@@ -418,14 +462,16 @@
             hud.labelText = @"Saved";
             datapoint.serverId = [JSON objectForKey:@"id"];
             [[NSManagedObjectContext MR_defaultContext] MR_save];
+            [self setDatapointsText];
+            [self pollUntilGraphIsNotUpdating];
+            [self loadGraphImageThumbIgnoreCache:YES];
+            [self refreshGoalData];
+
         }
         hud.mode = MBProgressHUDModeText;
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self setDatapointsText];
-            [self pollUntilGraphIsNotUpdating];
-            [self loadGraphImageThumbIgnoreCache:YES];
         });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -475,8 +521,9 @@
 }
 
 - (void)startTimer {
+    [self.countdownTimer invalidate];
     [self updateTimer];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+    self.countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

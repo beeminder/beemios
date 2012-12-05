@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoalSummaryViewController.h"
 
 @interface ContractViewController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) Goal *goalObject;
+@property (strong, nonatomic) GoalSummaryViewController *gsvCon;
 @end

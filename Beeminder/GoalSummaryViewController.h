@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property BOOL graphIsUpdating;
 @property (strong, nonatomic) NSTimer *graphPoller;
+@property (strong, nonatomic) NSTimer *countdownTimer;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *editGoalButton;
 @property (strong, nonatomic) IBOutlet UIButton *addDataButton;
@@ -34,8 +35,11 @@
 @property (strong, nonatomic) NSNumber *datapointDecimalValue;
 @property (strong, nonatomic) NSString *datapointComment;
 @property (strong, nonatomic) IBOutlet UIButton *rerailButton;
+@property (strong, nonatomic) UIBarButtonItem *refreshButton;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;
+- (void)refreshGoalData;
 
 @end

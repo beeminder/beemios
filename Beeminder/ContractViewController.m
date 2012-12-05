@@ -62,8 +62,12 @@
     [MBProgressHUD hideAllHUDsForView:self.webView animated:YES];
     NSString *path = webView.request.URL.path;
     if ([path isEqualToString:[NSString stringWithFormat:@"/%@/goals/%@", [ABCurrentUser username], self.goalObject.slug]]) {
-        [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-        // refresh graph
+        
+        [[self presentingViewController] dismissViewControllerAnimated:YES completion:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+                [self.gsvCon refreshGoalData];
+            });
+        }];
     }
 }
 
