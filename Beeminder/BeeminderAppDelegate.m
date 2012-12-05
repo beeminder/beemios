@@ -500,10 +500,8 @@ NSString *const FBSessionStateChangedNotification =
             count++;
         }
     }];
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    [notification setFireDate:[NSDate date]];
-    [notification setApplicationIconBadgeNumber:count];
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
