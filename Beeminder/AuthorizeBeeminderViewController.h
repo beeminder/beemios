@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RoadDialViewController.h"
 
-@interface AuthorizeBeeminderViewController : UIViewController
+@interface AuthorizeBeeminderViewController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) RoadDialViewController *rdvCon;
 

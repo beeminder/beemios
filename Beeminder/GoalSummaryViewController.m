@@ -9,6 +9,7 @@
 #import "GoalSummaryViewController.h"
 #import "GoalGraphViewController.h"
 #import "AdvancedRoadDialViewController.h"
+#import "ContractViewController.h"
 
 @interface GoalSummaryViewController ()
 
@@ -39,7 +40,7 @@
 
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
-    
+    self.rerailButton = [BeeminderAppDelegate standardGrayButtonWith:self.rerailButton];
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
@@ -47,7 +48,7 @@
     [self setDatapointsText];
 
     [self setInitialDatapoint];
-
+    [self adjustForFrozen];
     [self startTimer];
 }
 
@@ -55,6 +56,7 @@
 {
     [self loadGraphImage];
     [self adjustForFrozen];
+    [self setDatapointsText];
 }
 
 - (void)adjustForFrozen
@@ -65,7 +67,15 @@
         self.valueStepper.hidden = YES;
         self.dateStepper.hidden = YES;
         self.addDataButton.hidden = YES;
-        self.lastDatapointLabel.hidden = YES;
+        self.dateStepperLabel.hidden = YES;
+        self.valueStepperLabel.hidden = YES;
+        self.rerailButton.hidden = NO;
+        if ([self.goalObject.won boolValue]) {
+            self.rerailButton.titleLabel.text = @"Restart";
+        }
+        else if ([self.goalObject.lost boolValue]) {
+            self.rerailButton.titleLabel.text = @"Unfreeze and try again";
+        }
     }
     else {
         self.editGoalButton.hidden = NO;
@@ -73,8 +83,18 @@
         self.valueStepper.hidden = NO;
         self.dateStepper.hidden = NO;
         self.addDataButton.hidden = NO;
-        self.lastDatapointLabel.hidden = NO;
+        self.dateStepperLabel.hidden = NO;
+        self.valueStepperLabel.hidden = NO;
+        self.rerailButton.hidden = YES;
     }
+}
+
+- (IBAction)rerailButtonPressed
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    ContractViewController *contractViewController = [storyboard instantiateViewControllerWithIdentifier:@"contractViewController"];
+    contractViewController.goalObject = self.goalObject;
+    [self presentViewController:contractViewController animated:YES completion:nil];
 }
 
 - (void)setInitialDatapoint
@@ -109,35 +129,48 @@
 
 -(void)setDatapointsText
 {
-    NSUInteger datapointCount = [self.goalObject.datapoints count];
-    NSArray *showDatapoints;
-    if (datapointCount < 4) {
-        showDatapoints = [self sortedDatapoints];
+    if ([self.goalObject.frozen boolValue]) {
+        if ([self.goalObject.won boolValue]) {
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+            self.lastDatapointLabel.text = kWinnerText;
+        }
+        else if ([self.goalObject.lost boolValue]) {
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
+            self.lastDatapointLabel.text = kDerailedText;
+        }
     }
     else {
-        showDatapoints = [[self sortedDatapoints] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
-    }
-    
-    NSString *lastDatapointsText = @"";
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"d"];
-    
-    for (Datapoint *datapoint in showDatapoints) {
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
-        
-        NSString *day = [formatter stringFromDate:date];
-        NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
-        
-        if (datapoint.comment.length > 0) {
-            comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
+        self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        NSUInteger datapointCount = [self.goalObject.datapoints count];
+        NSArray *showDatapoints;
+        if (datapointCount < 4) {
+            showDatapoints = [self sortedDatapoints];
         }
         else {
-            comment = [comment stringByAppendingString:@"\n"];
+            showDatapoints = [[self sortedDatapoints] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
         }
         
-        lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
+        NSString *lastDatapointsText = @"";
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"d"];
+        
+        for (Datapoint *datapoint in showDatapoints) {
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
+            
+            NSString *day = [formatter stringFromDate:date];
+            NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
+            
+            if (datapoint.comment.length > 0) {
+                comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
+            }
+            else {
+                comment = [comment stringByAppendingString:@"\n"];
+            }
+            
+            lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
+        }
+        self.lastDatapointLabel.text = lastDatapointsText;
     }
-    self.lastDatapointLabel.text = lastDatapointsText;
 }
 
 - (void)loadGraphImage
@@ -493,6 +526,9 @@
     [self setLastDatapointLabel:nil];
     [self setDateStepper:nil];
     [self setValueStepper:nil];
+    [self setValueStepperLabel:nil];
+    [self setDateStepperLabel:nil];
+    [self setRerailButton:nil];
     [super viewDidUnload];
 }
 

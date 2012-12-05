@@ -17,7 +17,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIStepper *dateStepper;
+@property (strong, nonatomic) IBOutlet UILabel *dateStepperLabel;
 @property (strong, nonatomic) IBOutlet UIStepper *valueStepper;
+@property (strong, nonatomic) IBOutlet UILabel *valueStepperLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
@@ -31,6 +33,7 @@
 @property (strong, nonatomic) NSDate *datapointDate;
 @property (strong, nonatomic) NSNumber *datapointDecimalValue;
 @property (strong, nonatomic) NSString *datapointComment;
+@property (strong, nonatomic) IBOutlet UIButton *rerailButton;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;

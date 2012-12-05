@@ -2,7 +2,7 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 12/3/12.
+//  Created by Andy Brett on 12/4/12.
 //  Copyright (c) 2012 Andy Brett. All rights reserved.
 //
 

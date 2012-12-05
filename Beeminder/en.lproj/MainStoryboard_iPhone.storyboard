@@ -664,6 +664,54 @@
             </objects>
             <point key="canvasLocation" x="2215" y="-104"/>
         </scene>
+        <!--Contract View Controller-->
+        <scene sceneID="xUa-Br-1gV">
+            <objects>
+                <viewController storyboardIdentifier="contractViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="r5v-qm-wKM" customClass="ContractViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OPT-ai-YC6" customClass="TPKeyboardAvoidingScrollView">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="New Contract for Pushups!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0re-gb-uzw">
+                                <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <webView contentMode="scaleToFill" id="6h0-pw-AIb">
+                                <rect key="frame" x="0.0" y="49" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="r5v-qm-wKM" id="d71-fl-MI3"/>
+                                </connections>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="t4u-Za-GiY">
+                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Gce-wZ-ei6"/>
+                                    <barButtonItem title="Cancel" id="rUw-Ky-gNJ">
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="r5v-qm-wKM" id="KwT-IY-Znc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Snw-so-gGW"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="0re-gb-uzw" id="CMW-8r-iGC"/>
+                        <outlet property="webView" destination="6h0-pw-AIb" id="2pn-N9-Jhp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XN6-Kj-iY8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2653" y="-707"/>
+        </scene>
         <!--Goal Summary View Controller-->
         <scene sceneID="Lf1-it-4YQ">
             <objects>
@@ -775,6 +823,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ghG-w3-sRL">
+                                <rect key="frame" x="20" y="334" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Unfreeze and try again">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rerailButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="Wp3-9L-5C0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </scrollView>
@@ -784,14 +847,17 @@
                     <connections>
                         <outlet property="addDataButton" destination="RjJ-3S-8pz" id="xim-X2-BzY"/>
                         <outlet property="dateStepper" destination="YcL-8d-VDM" id="Qoj-no-GY2"/>
+                        <outlet property="dateStepperLabel" destination="fC4-rI-57m" id="PqF-Bn-KyF"/>
                         <outlet property="editGoalButton" destination="Xgj-3b-5Fn" id="s7t-l1-Cbj"/>
                         <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
                         <outlet property="lastDatapointLabel" destination="jUu-By-wgu" id="8dy-bS-hBp"/>
+                        <outlet property="rerailButton" destination="ghG-w3-sRL" id="iU7-kV-yus"/>
                         <outlet property="scrollView" destination="10a-Hy-Xhw" id="NKI-tc-9lM"/>
                         <outlet property="submitButton" destination="RjJ-3S-8pz" id="x5p-pS-zKZ"/>
                         <outlet property="timerLabel" destination="nmH-hs-lbB" id="tQx-gx-NlZ"/>
                         <outlet property="valueStepper" destination="R4d-Wz-dQA" id="9B6-tU-6NZ"/>
+                        <outlet property="valueStepperLabel" destination="LsI-8o-Ros" id="tMk-J7-5M4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XqH-GM-EaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1099,6 +1165,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="ChooseGoalTypeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalTypeViewController.h"/>
         </class>
+        <class className="ContractViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContractViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
         <class className="DCRoundSwitch" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
         </class>
@@ -1117,16 +1191,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="outlet" name="addDataButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dateStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="dateStepperLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lastDatapointLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rerailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="valueStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="valueStepperLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="GoalsTableViewController" superclassName="UITableViewController">
