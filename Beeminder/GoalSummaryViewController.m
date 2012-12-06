@@ -144,8 +144,10 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     NSDateComponents *dateComponents = [gregorian components:unitFlags fromDate:[NSDate date]];
+    
+    NSDecimalNumber *datapointValue = datapoint ? datapoint.value : 0;
 
-    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], datapoint.value];
+    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], datapointValue];
     
     self.valueStepper.value = [datapoint.value doubleValue];
 
