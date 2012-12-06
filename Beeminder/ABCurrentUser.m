@@ -39,12 +39,7 @@
     
     [defaults setObject:accessToken forKey:@"accessToken"];
     
-    [defaults setObject:username forKey:@"username"];
-    
-    if (YES){//[[NSUserDefaults standardUserDefaults] boolForKey:kDidAllowRemoteNotificationsKey]) {
-        [BeeminderAppDelegate requestPushNotificationAccess];
-    }
-    
+    [defaults setObject:username forKey:@"username"];    
 }
 
 + (void)setUsername:(NSString *)username
@@ -55,6 +50,32 @@
 + (int)lastUpdatedAt
 {
     return [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:@"lastUpdatedAt-%@", [ABCurrentUser username]]];
+}
+
++ (BOOL)emergencyDayNotifications
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", kEmergencyKey, [ABCurrentUser username]]] boolValue];
+}
+
++ (void)setEmergencyDayNotifications:(BOOL)on
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:on] forKey:[NSString stringWithFormat:@"%@-%@", kEmergencyKey, [ABCurrentUser username]]];
+}
+
++ (NSDate *)emergencyNotificationDate
+{
+    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", kEmergencyTimeKey, [ABCurrentUser username]]];
+    if (date) {
+        return date;
+    }
+    date = [BeeminderAppDelegate defaultEmergencyDayReminderDate];
+    [ABCurrentUser setEmergencyNotificationDate:date];
+    return date;
+}
+
++ (void)setEmergencyNotificationDate:(NSDate *)date
+{
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:[NSString stringWithFormat:@"%@-%@", kEmergencyTimeKey, [ABCurrentUser username]]];
 }
 
 + (void)setLastUpdatedAtToNow

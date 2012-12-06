@@ -23,7 +23,10 @@
 @property (strong, nonatomic) UIDatePicker *reminderTimePicker;
 @property (strong, nonatomic) ReminderCellUIView *reminderSwitchCell;
 @property (strong, nonatomic) ReminderCellUIView *reminderTimeCell;
+@property (strong, nonatomic) ReminderCellUIView *emergencyTimeCell;
 @property (strong, nonatomic) ReminderCellUIView *emergencySwitchCell;
+@property (strong, nonatomic) PRLabel *emergencyTimePRLabel ;
+@property (strong, nonatomic) UIDatePicker *emergencyTimePicker;
 @property float defaultFontSize;
 @property (strong, nonatomic) NSString *defaultFontString;
 @end

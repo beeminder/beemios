@@ -97,8 +97,24 @@ NSString *const FBSessionStateChangedNotification =
     return date;
 }
 
++ (NSDate *)defaultEmergencyDayReminderDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:2012];
+    [components setHour:9];
+    [components setMinute:0];
+    [components setSecond:0];
+    
+    NSDate *date = [calendar dateFromComponents:components];
+    return date;
+}
+
 + (void)scheduleEnterDataReminders
 {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataKey]) {
+        return;
+    }
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -392,10 +408,13 @@ NSString *const FBSessionStateChangedNotification =
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecord setupCoreDataStack];
-    if (YES){//[[NSUserDefaults standardUserDefaults] boolForKey:kDidAllowRemoteNotificationsKey]) {
-        [BeeminderAppDelegate requestPushNotificationAccess];
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[payload objectForKey:@"slug"] forKey:kGoToGoalWithSlugKey];
     }
-    [BeeminderAppDelegate resendPendingDeviceTokenRequests];
+    [BeeminderAppDelegate scheduleEnterDataReminders];
+//    [BeeminderAppDelegate resendPendingDeviceTokenRequests];
     return YES;
 }
 
@@ -415,9 +434,7 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDidAllowRemoteNotificationsKey];
     [BeeminderAppDelegate saveDeviceTokenToServer:deviceToken];
-	NSLog(@"My token is: %@", deviceToken);
 }
 
 + (NSString *)addDeviceTokenToParamString:(NSString *)paramString

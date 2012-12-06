@@ -34,6 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [BeeminderAppDelegate requestPushNotificationAccess];
 
     self.pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [self.pull setDelegate:self];
@@ -62,6 +64,26 @@
     self.navigationItem.rightBarButtonItem = self.refreshButton;
 
     [self fetchEverything];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
+        [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kGoToGoalWithSlugKey];
+    }
+}
+
+- (void)goToGoalWithSlug:(NSString *)slug
+{
+    NSIndexSet *set = [self.goalObjects indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        Goal *goal = (Goal *)obj;
+        return [goal.slug isEqualToString:slug];
+    }];
+    
+    [set lastIndex];
+    
+    NSIndexPath *path = [NSIndexPath indexPathForItem:[set lastIndex] inSection:0];
+    
+    [self.tableView selectRowAtIndexPath:path animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
+    [self performSegueWithIdentifier:@"segueToGoalSummaryView" sender:self];
 }
 
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;

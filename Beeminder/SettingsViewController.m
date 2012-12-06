@@ -66,12 +66,7 @@
     // Begin Emergency Cell
     self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
     self.emergencySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kLatestDeviceTokenKey]) {
-        self.emergencySwitch.on = YES;
-    }
-    else {
-        self.emergencySwitch.on = NO;
-    }
+    self.emergencySwitch.on = [ABCurrentUser emergencyDayNotifications];
     [self.emergencySwitch addTarget:self action:@selector(emergencySwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     UILabel *emergencySwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(9.0f, 9.0f, 195.0f, 30.0f)];
     emergencySwitchLabel.backgroundColor = [UIColor clearColor];
@@ -82,8 +77,27 @@
     
     [self.view addSubview:self.emergencySwitchCell];
     
+    // Begin EmergencyTimeCell
+    self.emergencyTimePicker = [[UIDatePicker alloc] init];
+    self.emergencyTimePicker.datePickerMode = UIDatePickerModeTime;
+    self.emergencyTimePicker.minuteInterval = 5.0f;
+    [self.emergencyTimePicker addTarget:self action:@selector(emergencyTimePickerValueChanged) forControlEvents:UIControlEventValueChanged];
+    
+    self.emergencyTimeCell = [[ReminderCellUIView alloc] initWithYPosition:205.0 showBottomBorder:YES];
+    self.emergencyTimePRLabel = [[PRLabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 235.0f, 30.0f)];
+    self.emergencyTimePRLabel.inputView = self.emergencyTimePicker;
+    self.emergencyTimePRLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
+    self.emergencyTimePRLabel.backgroundColor = [UIColor clearColor];
+    [self.emergencyTimeCell addSubview:self.emergencyTimePRLabel];
+    
+    [self.view addSubview:self.emergencyTimeCell];
+    
     if (!self.remindSwitch.on) {
         [self hideRemindMeToEnterDataAt];
+    }
+    
+    if (!self.emergencySwitch.on) {
+        [self hideEmergencyTime];
     }
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey]) {
@@ -92,6 +106,9 @@
     
     [self.reminderTimePicker setDate:[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey] animated:YES];
     [self updateReminderTimePRLabel];
+    
+    [self.emergencyTimePicker setDate:[ABCurrentUser emergencyNotificationDate] animated:YES];
+    [self updateEmergencyTimePRLabel];
     
     self.signOutButton = [BeeminderAppDelegate standardGrayButtonWith:self.signOutButton];
     
@@ -102,11 +119,16 @@
 
 - (void)emergencySwitchValueChanged
 {
+    [ABCurrentUser setEmergencyDayNotifications:self.emergencySwitch.on];
     if (self.emergencySwitch.on) {
         [BeeminderAppDelegate requestPushNotificationAccess];
+        [ABCurrentUser setEmergencyNotificationDate:self.emergencyTimePicker.date];
+        [self syncEmergencyTimeToServer];
+        [self showEmergencyTime];
     }
     else {
         [BeeminderAppDelegate removeDeviceTokenFromServer];
+        [self hideEmergencyTime];
     }
 }
 
@@ -118,12 +140,55 @@
     [BeeminderAppDelegate scheduleEnterDataReminders];
 }
 
+- (void)emergencyTimePickerValueChanged
+{
+    [ABCurrentUser setEmergencyNotificationDate:self.emergencyTimePicker.date];
+    [self updateEmergencyTimePRLabel];
+    [self syncEmergencyTimeToServer];
+}
+
+- (void)syncEmergencyTimeToServer
+{
+    if (![ABCurrentUser emergencyDayNotifications]) {
+        return;
+    }
+
+    NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    unsigned timeUnitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSDateComponents *components = [calendar components:timeUnitFlags fromDate:[ABCurrentUser emergencyNotificationDate]];
+    
+    NSInteger panic = 86400 - (60*(60*[components hour] + [components minute]));
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/me.json?access_token=%@&panic=%d", kBaseURL, kAPIPrefix,[ABCurrentUser accessToken], panic]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"PUT"];
+
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        //foo
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        //bar
+    }];
+    
+    [operation start];
+}
+
 - (void)updateReminderTimePRLabel
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     self.remindAtPRLabel.text = [NSString stringWithFormat:@"Every day at %@", [formatter stringFromDate:[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataAtKey]]];
-    
+}
+
+- (void)updateEmergencyTimePRLabel
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    self.emergencyTimePRLabel.text = [NSString stringWithFormat:@"On emergency days at %@", [formatter stringFromDate:[ABCurrentUser emergencyNotificationDate]]];
 }
 
 - (void)remindSwitchValueChanged
@@ -152,7 +217,18 @@
 {
     self.reminderTimeCell.hidden = YES;    
     self.reminderSwitchCell.bottomBorder.hidden = NO;
+}
 
+- (void)showEmergencyTime
+{
+    self.emergencyTimeCell.hidden = NO;
+    self.emergencySwitchCell.bottomBorder.hidden = YES;
+}
+
+- (void)hideEmergencyTime
+{
+    self.emergencyTimeCell.hidden = YES;
+    self.emergencySwitchCell.bottomBorder.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning

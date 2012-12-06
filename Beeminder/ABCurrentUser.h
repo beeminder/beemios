@@ -20,4 +20,8 @@
 + (void)setLastUpdatedAtToNow;
 + (void)resetLastUpdatedAt;
 
++ (BOOL)emergencyDayNotifications;
++ (void)setEmergencyDayNotifications:(BOOL)on;
++ (NSDate *)emergencyNotificationDate;
++ (void)setEmergencyNotificationDate:(NSDate *)date;
 @end

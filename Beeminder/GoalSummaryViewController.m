@@ -73,12 +73,6 @@
         self.dateStepperLabel.hidden = YES;
         self.valueStepperLabel.hidden = YES;
         self.rerailButton.hidden = NO;
-        if ([self.goalObject.won boolValue]) {
-            self.rerailButton.titleLabel.text = @"Restart";
-        }
-        else if ([self.goalObject.lost boolValue]) {
-            self.rerailButton.titleLabel.text = @"Unfreeze and try again";
-        }
     }
     else {
         self.editGoalButton.hidden = NO;
@@ -119,14 +113,14 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self replaceRefreshButton];
-        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSDictionary *modGoalDict = [Goal processGoalDictFromServer:JSON];
         
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
         
         [self loadGraphImageIgnoreCache:YES];
         [self loadGraphImageThumbIgnoreCache:YES];
-        
+        [self pollUntilGraphIsNotUpdating];
         [self setDatapointsText];
         
         [self setInitialDatapoint];

@@ -40,6 +40,7 @@ extern NSString *const FBSessionStateChangedNotification;
 + (void)removeStoredOAuthDefaults;
 
 + (NSDate *)defaultEnterDataReminderDate;
++ (NSDate *)defaultEmergencyDayReminderDate;
 + (void)scheduleEnterDataReminders;
 
 + (void)requestPushNotificationAccess;

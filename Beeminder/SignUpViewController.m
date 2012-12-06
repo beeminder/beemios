@@ -167,7 +167,7 @@
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", nil];
+    NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", [NSTimeZone systemTimeZone].name, @"timezone", nil];
     
     NSDictionary *paramsDict;
     if ([self.passwordTextField.text length] > 0) {
