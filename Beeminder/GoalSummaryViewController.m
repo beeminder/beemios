@@ -145,7 +145,13 @@
     
     NSDateComponents *dateComponents = [gregorian components:unitFlags fromDate:[NSDate date]];
     
-    NSDecimalNumber *datapointValue = datapoint ? datapoint.value : 0;
+    NSDecimalNumber *datapointValue;
+    if (datapoint) {
+        datapointValue = datapoint.value;
+    }
+    else {
+        datapointValue = [NSDecimalNumber decimalNumberWithString:@"0"];
+    }
 
     self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], datapointValue];
     
