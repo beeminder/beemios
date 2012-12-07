@@ -31,6 +31,7 @@
     [BeeminderAppDelegate removeDeviceTokenFromServer];
     [defaults removeObjectForKey:@"accessToken"];
     [defaults removeObjectForKey:@"username"];
+    [BeeminderAppDelegate removeStoredOAuthDefaults];
 }
 
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken

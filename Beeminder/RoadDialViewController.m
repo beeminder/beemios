@@ -312,7 +312,16 @@
             }
             else {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                UIViewController *presenting = self.navigationController.presentingViewController;
+                [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
+                    
+                    if ([presenting isKindOfClass:[UITabBarController class]]) {
+                        UITabBarController *tab = (UITabBarController *)presenting;
+                        UINavigationController *dashNav = [[tab viewControllers] objectAtIndex:0];
+                        [[[dashNav viewControllers] objectAtIndex:0] performSelector:@selector(fetchEverything)];
+                    }
+                }];
+
             }
         };
         [goal pushToRemoteWithSuccessBlock:successBlock];
