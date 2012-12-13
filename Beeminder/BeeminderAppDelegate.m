@@ -75,13 +75,11 @@ NSString *const FBSessionStateChangedNotification =
     
     NSDictionary *inboxer = [NSDictionary dictionaryWithObjectsAndKeys:kInboxerPrivate, kPrivateNameKey, kInboxerPublic, kPublicNameKey, kInboxerDetails, kDetailsKey, kBikerInstructions, kInstructionsKey, [NSNumber numberWithInt:4], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
     
-    NSDictionary *custom = [NSDictionary dictionaryWithObjectsAndKeys:kCustomPrivate, kPrivateNameKey, kCustomPublic, kPublicNameKey, kCustomDetails, kDetailsKey, kCustomInstructions, kInstructionsKey, [NSNumber numberWithInt:6], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
-    
     NSDictionary *drinker = [NSDictionary dictionaryWithObjectsAndKeys:kDrinkerPrivate, kPrivateNameKey, kDrinkerPublic, kPublicNameKey, kDrinkerDetails, kDetailsKey, kDrinkerInstructions, kInstructionsKey, [NSNumber numberWithInt:5], kSortPriorityKey, [NSNumber numberWithBool:YES], kKyoomKey, nil];
     
     NSDictionary *fitbit = [NSDictionary dictionaryWithObjectsAndKeys:kFitbitPrivate, kPrivateNameKey, kFitbitPublic, kPublicNameKey, kFitbitDetails, kDetailsKey, kFitbitInstructions, kInstructionsKey, [NSNumber numberWithInt:6], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, fitbit, kFitbitPrivate, custom, kCustomPrivate, nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, fitbit, kFitbitPrivate, nil];
 }
 
 + (NSDate *)defaultEnterDataReminderDate

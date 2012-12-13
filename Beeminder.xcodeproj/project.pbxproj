@@ -300,6 +300,7 @@
 		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A1CE2A2516265409005B3517 /* GoalPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPullRequest.h; sourceTree = "<group>"; };
 		A1CE2A2616265409005B3517 /* GoalPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPullRequest.m; sourceTree = "<group>"; };
+		A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = Beeminder1.5.1.xcdatamodel; sourceTree = "<group>"; };
 		A1D9A1D11662E74900E54ACE /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
 		A1D9A1D21662E74900E54ACE /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
 		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -1185,6 +1186,7 @@
 		A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */,
 				A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */,
 			);
 			currentVersion = A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */;
