@@ -10,9 +10,11 @@
 
 @class AdvancedRoalDialViewController;
 
-@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate>
-@property (strong, nonatomic) IBOutlet UIButton *graphButton;
+@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate, UIScrollViewDelegate>
+
 @property (strong, nonatomic) Goal *goalObject;
+@property (strong, nonatomic) IBOutlet UIScrollView *graphScrollView;
+@property (strong, nonatomic) IBOutlet UIImageView *graphImageView;
 @property (strong, nonatomic) IBOutlet UILabel *unitsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
@@ -41,5 +43,6 @@
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;
 - (void)refreshGoalData;
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView;
 
 @end

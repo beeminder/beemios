@@ -731,21 +731,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7bq-At-vl4">
-                                <rect key="frame" x="0.0" y="60" width="320" height="176"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="E0E-N1-huo" kind="push" identifier="segueToGraphView" id="MqR-UT-U13"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RjJ-3S-8pz">
                                 <rect key="frame" x="218" y="318" width="82" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -838,6 +823,19 @@
                                     <action selector="rerailButtonPressed" destination="GSH-K4-VbA" eventType="touchUpInside" id="Wp3-9L-5C0"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" id="u7X-6O-ORg">
+                                <rect key="frame" x="0.0" y="60" width="320" height="176"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" id="e16-Ni-dYG">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="176"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="GSH-K4-VbA" id="DWp-Ox-vEi"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </scrollView>
@@ -849,7 +847,8 @@
                         <outlet property="dateStepper" destination="YcL-8d-VDM" id="Qoj-no-GY2"/>
                         <outlet property="dateStepperLabel" destination="fC4-rI-57m" id="PqF-Bn-KyF"/>
                         <outlet property="editGoalButton" destination="Xgj-3b-5Fn" id="s7t-l1-Cbj"/>
-                        <outlet property="graphButton" destination="7bq-At-vl4" id="p3J-08-Cvw"/>
+                        <outlet property="graphImageView" destination="e16-Ni-dYG" id="LBH-5y-XRy"/>
+                        <outlet property="graphScrollView" destination="u7X-6O-ORg" id="Mkh-9u-5Gc"/>
                         <outlet property="inputTextField" destination="Giw-L8-CSA" id="6Dc-pp-I6L"/>
                         <outlet property="lastDatapointLabel" destination="jUu-By-wgu" id="8dy-bS-hBp"/>
                         <outlet property="rerailButton" destination="ghG-w3-sRL" id="iU7-kV-yus"/>
@@ -1020,49 +1019,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2321" y="481"/>
         </scene>
-        <!--Goal Graph View Controller-->
-        <scene sceneID="Rtk-RA-fOm">
-            <objects>
-                <viewController id="E0E-N1-huo" customClass="GoalGraphViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="faZ-oE-sdo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1dV-di-Z9W">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView contentMode="scaleAspectFit" image="graph-processing.png" id="Rtt-fP-NIj">
-                                        <rect key="frame" x="13" y="175" width="295" height="66"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="onH-GG-N0P" appends="YES" id="H3v-r4-QQJ"/>
-                                        </connections>
-                                    </imageView>
-                                </subviews>
-                                <connections>
-                                    <outlet property="delegate" destination="faZ-oE-sdo" id="GSj-ZR-6tN"/>
-                                </connections>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="84w-kf-fst"/>
-                    <connections>
-                        <outlet property="graphImageView" destination="Rtt-fP-NIj" id="EWA-a3-XaQ"/>
-                        <outlet property="scrollView" destination="1dV-di-Z9W" id="xia-UE-ZT6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GoA-hp-mVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="onH-GG-N0P">
-                    <connections>
-                        <outlet property="delegate" destination="E0E-N1-huo" id="IWD-fj-yhV"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2756" y="-104"/>
-        </scene>
         <!--Dashboard Navigation Controller - Your Goals-->
         <scene sceneID="g7X-kD-e6b">
             <objects>
@@ -1206,7 +1162,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     <resources>
         <image name="bg-noise" width="16" height="16"/>
         <image name="f_logo.png" width="140" height="140"/>
-        <image name="graph-processing.png" width="371" height="121"/>
         <image name="ios_logo_bee_110.png" width="112" height="110"/>
         <image name="ios_logo_bmndr_238.png" width="239" height="29"/>
         <image name="sample_graph" width="16" height="16"/>
@@ -1256,13 +1211,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="DashboardNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
         </class>
-        <class className="GoalGraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalGraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
         <class className="GoalSummaryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
             <relationships>
@@ -1270,7 +1218,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="dateStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="dateStepperLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="graphButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="graphScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lastDatapointLabel" candidateClass="UILabel"/>

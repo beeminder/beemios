@@ -93,7 +93,6 @@
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
 		A1CC735D162247AE00E14238 /* NewGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735C162247AE00E14238 /* NewGoalViewController.m */; };
 		A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC735F1622493C00E14238 /* MainTabBarViewController.m */; };
-		A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC7366162378DE00E14238 /* GoalGraphViewController.m */; };
 		A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CE2A2616265409005B3517 /* GoalPullRequest.m */; };
 		A1D9A1D31662E74900E54ACE /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D9A1D21662E74900E54ACE /* PullToRefreshView.m */; };
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
@@ -301,8 +300,6 @@
 		A1CC735C162247AE00E14238 /* NewGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGoalViewController.m; sourceTree = "<group>"; };
 		A1CC735E1622493C00E14238 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		A1CC735F1622493C00E14238 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
-		A1CC7365162378DD00E14238 /* GoalGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalGraphViewController.h; sourceTree = "<group>"; };
-		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A1CE2A2516265409005B3517 /* GoalPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPullRequest.h; sourceTree = "<group>"; };
 		A1CE2A2616265409005B3517 /* GoalPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPullRequest.m; sourceTree = "<group>"; };
 		A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder1.5.1.xcdatamodel; sourceTree = "<group>"; };
@@ -679,8 +676,6 @@
 				A126C9301592EE1700FE8CF8 /* constants.h */,
 				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
 				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
-				A1CC7365162378DD00E14238 /* GoalGraphViewController.h */,
-				A1CC7366162378DE00E14238 /* GoalGraphViewController.m */,
 				A133F97D158FA32D002F151A /* GoalsTableViewController.h */,
 				A133F97E158FA32D002F151A /* GoalsTableViewController.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
@@ -1009,7 +1004,6 @@
 				A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				A1CC735D162247AE00E14238 /* NewGoalViewController.m in Sources */,
 				A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */,
-				A1CC7367162378DE00E14238 /* GoalGraphViewController.m in Sources */,
 				A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */,
 				A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */,
 				A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */,

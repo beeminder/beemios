@@ -188,18 +188,13 @@ NSString *const FBSessionStateChangedNotification =
 
 + (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key
 {
-    NSLog(@"%@", baseString);
-    NSLog(@"%@", key);
     const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cData = [baseString cStringUsingEncoding:NSASCIIStringEncoding];
-    NSLog(@"%s", cKey);
-    NSLog(@"%s", cData);
     unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
     
     CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
     
     NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
-    NSLog(@"%@", [NSString base64StringFromData:HMAC length:HMAC.length]);
     return [NSString base64StringFromData:HMAC length:HMAC.length];
 }
 

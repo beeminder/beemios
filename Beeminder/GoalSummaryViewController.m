@@ -7,7 +7,6 @@
 //
 
 #import "GoalSummaryViewController.h"
-#import "GoalGraphViewController.h"
 #import "AdvancedRoadDialViewController.h"
 #import "ContractViewController.h"
 
@@ -16,6 +15,9 @@
 @end
 
 @implementation GoalSummaryViewController
+
+#define ZOOM_STEP 2.0
+#define ZOOM_VIEW_TAG 100
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +36,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.scrollView.clipsToBounds = YES;
+    self.scrollView.contentSize = self.graphImageView.image.size;
+    self.scrollView.delegate = self;
+    
+    // set the tag for the image view
+    [self.graphImageView setTag:ZOOM_VIEW_TAG];
+    
+    // add gesture recognizers to the image view
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [twoFingerTap setNumberOfTouchesRequired:2];
+    
+    [self.graphImageView addGestureRecognizer:singleTap];
+    [self.graphImageView addGestureRecognizer:doubleTap];
+    [self.graphImageView addGestureRecognizer:twoFingerTap];
 
     [self loadGraphImageIgnoreCache:YES];
     [self loadGraphImageThumbIgnoreCache:YES];
@@ -227,16 +247,16 @@
 - (void)loadGraphImageIgnoreCache:(BOOL)ignoreCache
 {
     if (ignoreCache || !self.goalObject.graph_image) {
-        [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
+        [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
         [self.goalObject updateGraphImageWithCompletionBlock:^(void){
-            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
             [self loadGraphImageIgnoreCache:NO];
         }];
     }
     else {
-        [self.graphButton setBackgroundImage:self.goalObject.graph_image forState:UIControlStateNormal];
+        self.graphImageView.image = self.goalObject.graph_image;
         if (!self.graphPoller || ![self.graphPoller isValid]) {
-            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
         }
     }
 }
@@ -484,7 +504,7 @@
 
 - (void)checkIfGraphIsUpdating
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphButton animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
     hud.labelText = @"Updating Graph...";
     
     NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
@@ -497,7 +517,7 @@
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
             [self loadGraphImageIgnoreCache:YES];
-            [MBProgressHUD hideAllHUDsForView:self.graphButton animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         // nothing...
@@ -537,13 +557,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"segueToGraphView"]) {
-        GoalGraphViewController *ggvCon = (GoalGraphViewController *)segue.destinationViewController;
-        ggvCon.graphImage = self.goalObject.graph_image;
-    }
-    else {
-        [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
-    }
+    [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
 }
 
 - (void)didReceiveMemoryWarning
@@ -552,8 +566,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.graphImageView;
+}
+
+#pragma mark tap gesture recognizer methods
+
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
+    // single tap does nothing for now
+}
+
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
+    // double tap zooms in
+    float newScale = [self.scrollView zoomScale] * ZOOM_STEP;
+    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+    [self.graphScrollView zoomToRect:zoomRect animated:YES];
+}
+
+- (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
+    // two-finger tap zooms out
+    float newScale = [self.scrollView zoomScale] / ZOOM_STEP;
+    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+    [self.graphScrollView zoomToRect:zoomRect animated:YES];
+}
+
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
+    
+    CGRect zoomRect;
+    
+    // the zoom rect is in the content view's coordinates.
+    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
+    zoomRect.size.height = [self.graphScrollView frame].size.height / scale;
+    zoomRect.size.width  = [self.graphScrollView frame].size.width  / scale;
+    
+    // choose an origin so as to get the right center.
+    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
+    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
+    
+    return zoomRect;
+}
+
 - (void)viewDidUnload {
-    [self setGraphButton:nil];
     [self setUnitsLabel:nil];
     [self setInstructionLabel:nil];
     [self setInputTextField:nil];
@@ -568,6 +623,8 @@
     [self setValueStepperLabel:nil];
     [self setDateStepperLabel:nil];
     [self setRerailButton:nil];
+    [self setGraphScrollView:nil];
+    [self setGraphImageView:nil];
     [super viewDidUnload];
 }
 
