@@ -430,20 +430,6 @@
 {
     [self saveDatapointLocally];
     
-    Datapoint *datapoint = [Datapoint MR_createEntity];
-    
-    datapoint.value = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.valueStepper.value] decimalValue]];
-    if (ABS([self.datapointDate timeIntervalSinceNow]) < 24*3600) {
-        datapoint.timestamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
-    }
-    else {
-        datapoint.timestamp = [NSNumber numberWithDouble:[self.datapointDate timeIntervalSince1970]];
-    }
-
-    datapoint.comment = self.datapointComment;
-
-    datapoint.goal = self.goalObject;
-    
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug]];
@@ -451,7 +437,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postString = [NSString stringWithFormat:@"access_token=%@&value=%@&timestamp=%@&comment=%@", [ABCurrentUser accessToken], datapoint.value, datapoint.timestamp, AFURLEncodedStringFromStringWithEncoding(self.datapointComment, NSUTF8StringEncoding)];
+    NSString *postString = [NSString stringWithFormat:@"access_token=%@&urtext=%@", [ABCurrentUser accessToken], self.inputTextField.text];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -462,7 +448,12 @@
         else {
             [self loadGraphImageIgnoreCache:YES];
             hud.labelText = @"Saved";
+            Datapoint *datapoint = [Datapoint MR_createEntity];
+            datapoint.goal = self.goalObject;
             datapoint.serverId = [JSON objectForKey:@"id"];
+            datapoint.value = [JSON objectForKey:@"value"];
+            datapoint.timestamp = [JSON objectForKey:@"timestamp"];
+            datapoint.comment = [JSON objectForKey:@"comment"];
             [[NSManagedObjectContext MR_defaultContext] MR_save];
             [self setDatapointsText];
             [self pollUntilGraphIsNotUpdating];
@@ -477,7 +468,6 @@
         });
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [datapoint MR_deleteEntity];
     }];
     [operation start];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

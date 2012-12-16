@@ -36,6 +36,7 @@
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A140F3E31665070B0082275A /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F3E21665070B0082275A /* NSDictionary+Merge.m */; };
+		A149DB1A167D3B1B00458226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A149DB19167D3B1B00458226 /* IntroViewController.m */; };
 		A14A1FA7161E0B0000E2F3BB /* cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA5161E0B0000E2F3BB /* cell-noise.png */; };
 		A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */; };
 		A14A1FAB161E0F4200E2F3BB /* bg-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA9161E0F4200E2F3BB /* bg-noise.png */; };
@@ -52,6 +53,7 @@
 		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A1869F5C167D4D9F005EF866 /* sample_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = A1869F5B167D4D9F005EF866 /* sample_graph.png */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A1879B6B1629DD4B007FF592 /* dark-cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B691629DD4B007FF592 /* dark-cell-noise.png */; };
 		A1879B6C1629DD4B007FF592 /* dark-cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B6A1629DD4B007FF592 /* dark-cell-noise@2x.png */; };
@@ -214,6 +216,8 @@
 		A140F3E11665070B0082275A /* NSDictionary+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Merge.h"; sourceTree = "<group>"; };
 		A140F3E21665070B0082275A /* NSDictionary+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Merge.m"; sourceTree = "<group>"; };
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		A149DB18167D3B1B00458226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		A149DB19167D3B1B00458226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		A14A1FA5161E0B0000E2F3BB /* cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise.png"; sourceTree = "<group>"; };
 		A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise@2x.png"; sourceTree = "<group>"; };
 		A14A1FA9161E0F4200E2F3BB /* bg-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-noise.png"; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A17EBDCE16557603007949CA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		A1869F5B167D4D9F005EF866 /* sample_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_graph.png; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A1879B691629DD4B007FF592 /* dark-cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-cell-noise.png"; sourceTree = "<group>"; };
@@ -300,7 +305,7 @@
 		A1CC7366162378DE00E14238 /* GoalGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalGraphViewController.m; sourceTree = "<group>"; };
 		A1CE2A2516265409005B3517 /* GoalPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPullRequest.h; sourceTree = "<group>"; };
 		A1CE2A2616265409005B3517 /* GoalPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalPullRequest.m; sourceTree = "<group>"; };
-		A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = Beeminder1.5.1.xcdatamodel; sourceTree = "<group>"; };
+		A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder1.5.1.xcdatamodel; sourceTree = "<group>"; };
 		A1D9A1D11662E74900E54ACE /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
 		A1D9A1D21662E74900E54ACE /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
 		A1DD32DB15CF4E9B0077B774 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -562,6 +567,7 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1869F5B167D4D9F005EF866 /* sample_graph.png */,
 				A1192A8616658455004BED65 /* chevron.png */,
 				A19A20A616642FCA007736C1 /* arrow.png */,
 				A19A20A716642FCA007736C1 /* arrow@2x.png */,
@@ -681,7 +687,13 @@
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 				A18A487715CE20F600E314B7 /* GradientViews.h */,
 				A18A487815CE20F600E314B7 /* GradientViews.m */,
+				A149DB18167D3B1B00458226 /* IntroViewController.h */,
+				A149DB19167D3B1B00458226 /* IntroViewController.m */,
 				A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */,
+				A1CC735E1622493C00E14238 /* MainTabBarViewController.h */,
+				A1CC735F1622493C00E14238 /* MainTabBarViewController.m */,
+				A1CC735B162247AE00E14238 /* NewGoalViewController.h */,
+				A1CC735C162247AE00E14238 /* NewGoalViewController.m */,
 				A1B5F8AF159280F6004D9FF0 /* RoadDialViewController.h */,
 				A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */,
 				A1993CC0159007B700011568 /* SettingsViewController.h */,
@@ -693,10 +705,6 @@
 				A1F03D70158E9BE60075D5DA /* SplashViewController.h */,
 				A1F03D71158E9BE60075D5DA /* SplashViewController.m */,
 				A1F03D57158E9A850075D5DA /* Supporting Files */,
-				A1CC735B162247AE00E14238 /* NewGoalViewController.h */,
-				A1CC735C162247AE00E14238 /* NewGoalViewController.m */,
-				A1CC735E1622493C00E14238 /* MainTabBarViewController.h */,
-				A1CC735F1622493C00E14238 /* MainTabBarViewController.m */,
 				A14AA6BD166281B700D59A47 /* TwitterAuthDelegate.h */,
 				A1B64A451665B2CB0023CC40 /* ReminderCellUIView.h */,
 				A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */,
@@ -915,6 +923,7 @@
 				A19A20A816642FCA007736C1 /* arrow.png in Resources */,
 				A19A20A916642FCA007736C1 /* arrow@2x.png in Resources */,
 				A1192A8716658455004BED65 /* chevron.png in Resources */,
+				A1869F5C167D4D9F005EF866 /* sample_graph.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,6 +1022,7 @@
 				A11AA6C4166EA03B00FA8C76 /* Goal.m in Sources */,
 				A11AA6C7166EA03C00FA8C76 /* User.m in Sources */,
 				A11AA6CA166EA03C00FA8C76 /* Datapoint.m in Sources */,
+				A149DB1A167D3B1B00458226 /* IntroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

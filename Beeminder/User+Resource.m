@@ -17,7 +17,7 @@
         [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
     }
     
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&diff_since=0&skinny=true&access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], [ABCurrentUser accessToken]]];
+    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&datapoints_count=3&diff_since=0&access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], [ABCurrentUser accessToken]]];
     
     NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
     
@@ -83,7 +83,6 @@
     [goalDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
     {
         if ([key isEqualToString:@"datapoints"]) {
-            // since we send the "skinny" parameter now, we shouldn't get this key back.
             NSDictionary *datapointDict;
             for (datapointDict in obj) {
                 Datapoint *datapoint = [Datapoint MR_findFirstByAttribute:@"serverId" withValue:[datapointDict objectForKey:@"id"] inContext:[NSManagedObjectContext MR_defaultContext]];
