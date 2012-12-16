@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VeQ-bS-jbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="-404"/>
+            <point key="canvasLocation" x="-229" y="-394"/>
         </scene>
         <!--Choose Goal Type View Controller - Choose Goal Type-->
         <scene sceneID="HZg-gX-vu7">
@@ -95,7 +95,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1J-EX-1QT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="-816"/>
+            <point key="canvasLocation" x="1067" y="-816"/>
         </scene>
         <!--Authorize Beeminder View Controller-->
         <scene sceneID="Jmv-j5-hpq">
@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOP-zu-j4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="-1448"/>
+            <point key="canvasLocation" x="1461" y="-1440"/>
         </scene>
         <!--Road Dial View Controller - Set up Goal-->
         <scene sceneID="Kzg-i9-IJH">
@@ -290,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INY-lf-v1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1379" y="-816"/>
+            <point key="canvasLocation" x="1461" y="-816"/>
         </scene>
         <!--Sign Up View Controller - Sign Up-->
         <scene sceneID="sTU-xC-bd8">
@@ -549,7 +549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ms8-Fr-DAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="-104"/>
+            <point key="canvasLocation" x="314" y="-104"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="H13-sb-cqs">
@@ -612,7 +612,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sp3-SB-SKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1744" y="481"/>
+            <point key="canvasLocation" x="1461" y="497"/>
         </scene>
         <!--Goals Table View Controller - Your Goals-->
         <scene sceneID="pWv-c6-Wuv">
@@ -662,7 +662,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDh-1z-A9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2215" y="-104"/>
+            <point key="canvasLocation" x="1848" y="-104"/>
         </scene>
         <!--Contract View Controller-->
         <scene sceneID="xUa-Br-1gV">
@@ -710,7 +710,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XN6-Kj-iY8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653" y="-707"/>
+            <point key="canvasLocation" x="2756" y="-816"/>
         </scene>
         <!--Goal Summary View Controller-->
         <scene sceneID="Lf1-it-4YQ">
@@ -862,7 +862,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XqH-GM-EaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653" y="-104"/>
+            <point key="canvasLocation" x="2321" y="-104"/>
         </scene>
         <!--Advanced Roal Dial View Controller-->
         <scene sceneID="hau-yP-90W">
@@ -1018,7 +1018,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ac0-FJ-Mpq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653" y="481"/>
+            <point key="canvasLocation" x="2321" y="481"/>
         </scene>
         <!--Goal Graph View Controller-->
         <scene sceneID="Rtk-RA-fOm">
@@ -1061,7 +1061,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3088" y="-104"/>
+            <point key="canvasLocation" x="2756" y="-104"/>
         </scene>
         <!--Dashboard Navigation Controller - Your Goals-->
         <scene sceneID="g7X-kD-e6b">
@@ -1080,7 +1080,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjy-ti-wQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="-158"/>
+            <point key="canvasLocation" x="1461" y="-104"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="QnM-kJ-SDN">
@@ -1101,7 +1101,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyT-ng-sFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1131" y="-104"/>
+            <point key="canvasLocation" x="1067" y="-104"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="cRR-Hc-CsD">
@@ -1111,8 +1111,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-noise" id="Pim-fy-p6H">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S9P-im-jcC">
-                                <rect key="frame" x="106" y="397" width="109" height="44"/>
+                                <rect key="frame" x="106" y="345" width="109" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Start a Goal">
@@ -1151,7 +1155,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You can then pledge money to stay on track. If you go off the road, we'll take your money!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wmr-6p-NvU">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You can then pledge money to stay on track. If you go off the road, we take your money!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wmr-6p-NvU">
                                 <rect key="frame" x="20" y="268" width="280" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1174,7 +1178,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdG-Uz-AkY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="210" y="-887"/>
+            <point key="canvasLocation" x="314" y="-816"/>
         </scene>
         <!--New Goal View Controller-->
         <scene sceneID="AOO-Xe-No5">
@@ -1196,7 +1200,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DD4-eu-xL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="-816"/>
+            <point key="canvasLocation" x="689" y="-816"/>
         </scene>
     </scenes>
     <resources>
