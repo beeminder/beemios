@@ -64,7 +64,7 @@
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
-
+    [self setInitialDatapoint];
     [self setDatapointsText];
     [self adjustForFrozen];
     [self startTimer];
@@ -339,8 +339,9 @@
     if (ABS(self.valueStepper.value) == 1) {
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\-" options:0 error:nil];
         NSUInteger matchCount = [regex numberOfMatchesInString:self.inputTextField.text options:0 range:NSMakeRange(0, self.inputTextField.text.length)];
-        if ((matchCount == 0 && self.valueStepper.value == -1) ||
-            (matchCount == 1 && self.valueStepper.value == 1)) {
+        if (self.datapointDecimalValue &&
+            ((matchCount == 0 && self.valueStepper.value == -1) ||
+            (matchCount == 1 && self.valueStepper.value == 1))) {
             self.valueStepper.value = 0;
             self.datapointDecimalValue = [NSNumber numberWithDouble:-1*[self.datapointDecimalValue doubleValue]];
         }
