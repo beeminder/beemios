@@ -13,6 +13,8 @@
 		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
+		A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = A115119E167EAE2F009C7B91 /* sample_graph.png */; };
+		A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A115119F167EAE2F009C7B91 /* sample_graph@2x.png */; };
 		A1192A8716658455004BED65 /* chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = A1192A8616658455004BED65 /* chevron.png */; };
 		A11AA6BD166E83EA00FA8C76 /* ContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6BC166E83EA00FA8C76 /* ContractViewController.m */; };
 		A11AA6C4166EA03B00FA8C76 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6C3166EA03B00FA8C76 /* Goal.m */; };
@@ -53,7 +55,6 @@
 		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A1869F5C167D4D9F005EF866 /* sample_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = A1869F5B167D4D9F005EF866 /* sample_graph.png */; };
 		A186B1E51599F58C00A6F60C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A186B1E41599F58C00A6F60C /* SignUpViewController.m */; };
 		A1879B6B1629DD4B007FF592 /* dark-cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B691629DD4B007FF592 /* dark-cell-noise.png */; };
 		A1879B6C1629DD4B007FF592 /* dark-cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B6A1629DD4B007FF592 /* dark-cell-noise@2x.png */; };
@@ -167,6 +168,8 @@
 		A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeBeeminderViewController.m; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
 		A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoalTypeViewController.m; sourceTree = "<group>"; };
+		A115119E167EAE2F009C7B91 /* sample_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_graph.png; sourceTree = "<group>"; };
+		A115119F167EAE2F009C7B91 /* sample_graph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample_graph@2x.png"; sourceTree = "<group>"; };
 		A1192A8616658455004BED65 /* chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron.png; sourceTree = "<group>"; };
 		A11AA6BB166E83EA00FA8C76 /* ContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractViewController.h; sourceTree = "<group>"; };
 		A11AA6BC166E83EA00FA8C76 /* ContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractViewController.m; sourceTree = "<group>"; };
@@ -237,7 +240,6 @@
 		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A17EBDCE16557603007949CA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		A1869F5B167D4D9F005EF866 /* sample_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_graph.png; sourceTree = "<group>"; };
 		A186B1E31599F58C00A6F60C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A186B1E41599F58C00A6F60C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		A1879B691629DD4B007FF592 /* dark-cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-cell-noise.png"; sourceTree = "<group>"; };
@@ -564,7 +566,8 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A1869F5B167D4D9F005EF866 /* sample_graph.png */,
+				A115119E167EAE2F009C7B91 /* sample_graph.png */,
+				A115119F167EAE2F009C7B91 /* sample_graph@2x.png */,
 				A1192A8616658455004BED65 /* chevron.png */,
 				A19A20A616642FCA007736C1 /* arrow.png */,
 				A19A20A716642FCA007736C1 /* arrow@2x.png */,
@@ -918,7 +921,8 @@
 				A19A20A816642FCA007736C1 /* arrow.png in Resources */,
 				A19A20A916642FCA007736C1 /* arrow@2x.png in Resources */,
 				A1192A8716658455004BED65 /* chevron.png in Resources */,
-				A1869F5C167D4D9F005EF866 /* sample_graph.png in Resources */,
+				A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */,
+				A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

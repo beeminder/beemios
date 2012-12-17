@@ -39,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *rerailButton;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property BOOL needsFreshData;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;

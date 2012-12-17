@@ -35,6 +35,8 @@
 {
     [super viewDidLoad];
     
+    self.hasCompletedDataFetch = NO;
+    
     [BeeminderAppDelegate requestPushNotificationAccess];
 
     self.pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
@@ -239,6 +241,7 @@
         Goal *goalObject = [self.goalObjects objectAtIndex:path.row];
         [segue.destinationViewController setTitle:goalObject.title];
         [segue.destinationViewController setGoalObject:goalObject];
+        [segue.destinationViewController setNeedsFreshData:!self.hasCompletedDataFetch];
     }
 }
 
@@ -277,7 +280,7 @@
     self.title = @"Your Goals";
     
     [BeeminderAppDelegate updateApplicationIconBadgeCount];
-    
+    self.hasCompletedDataFetch = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

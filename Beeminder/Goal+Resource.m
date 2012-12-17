@@ -219,10 +219,11 @@
     }
 }
 
-//- (BOOL)won
-//{
-//    return self.goaldate && [self.goaldate doubleValue] < [[NSDate date] timeIntervalSince1970] && [self.losedate doubleValue] > [self.goaldate doubleValue];
-//}
+- (BOOL)canAcceptData
+{
+    double grace = 3*3600;
+    return ![self.frozen boolValue] || ([self.losedate doubleValue] + grace > [[NSDate date] timeIntervalSince1970]);
+}
 
 - (BOOL)isDerailed
 {

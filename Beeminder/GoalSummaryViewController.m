@@ -66,35 +66,25 @@
     }
 
     [self setDatapointsText];
-
-    [self setInitialDatapoint];
     [self adjustForFrozen];
     [self startTimer];
     
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
+    
+    if (self.needsFreshData) {
+        [self refreshGoalData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self loadGraphImage];
-    [self adjustForFrozen];
-    [self setDatapointsText];
+
 }
 
 - (void)adjustForFrozen
 {
-    if ([self.goalObject.frozen boolValue]) {
-        self.editGoalButton.hidden = YES;
-        self.inputTextField.hidden = YES;
-        self.valueStepper.hidden = YES;
-        self.dateStepper.hidden = YES;
-        self.addDataButton.hidden = YES;
-        self.dateStepperLabel.hidden = YES;
-        self.valueStepperLabel.hidden = YES;
-        self.rerailButton.hidden = NO;
-    }
-    else {
+    if ([self.goalObject canAcceptData]) {
         self.editGoalButton.hidden = NO;
         self.inputTextField.hidden = NO;
         self.valueStepper.hidden = NO;
@@ -103,6 +93,16 @@
         self.dateStepperLabel.hidden = NO;
         self.valueStepperLabel.hidden = NO;
         self.rerailButton.hidden = YES;
+    }
+    else {
+        self.editGoalButton.hidden = YES;
+        self.inputTextField.hidden = YES;
+        self.valueStepper.hidden = YES;
+        self.dateStepper.hidden = YES;
+        self.addDataButton.hidden = YES;
+        self.dateStepperLabel.hidden = YES;
+        self.valueStepperLabel.hidden = YES;
+        self.rerailButton.hidden = NO;
     }
 }
 
@@ -127,7 +127,8 @@
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self.activityIndicator startAnimating];
     self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@&datapoints_count=3", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -140,9 +141,10 @@
         
         [self loadGraphImageIgnoreCache:YES];
         [self loadGraphImageThumbIgnoreCache:YES];
-        [self pollUntilGraphIsNotUpdating];
+        if ([[JSON objectForKey:@"queued"] boolValue]) {
+            [self pollUntilGraphIsNotUpdating];
+        }
         [self setDatapointsText];
-        
         [self setInitialDatapoint];
         [self adjustForFrozen];
         [self startTimer];

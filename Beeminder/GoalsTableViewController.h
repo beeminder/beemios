@@ -21,4 +21,5 @@
 - (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) PullToRefreshView *pull;
 - (void)fetchEverything;
+@property BOOL hasCompletedDataFetch;
 @end
