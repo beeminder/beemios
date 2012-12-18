@@ -320,7 +320,7 @@
 		A1F03D71158E9BE60075D5DA /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		A1F03D76158EA2690075D5DA /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		A1F03D77158EA2690075D5DA /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
-		A1F07DBC1680CE2C00E12B8F /* Beeminder1.5.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = Beeminder1.5.2.xcdatamodel; sourceTree = "<group>"; };
+		A1F07DBC1680CE2C00E12B8F /* Beeminder1.5.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beeminder1.5.2.xcdatamodel; sourceTree = "<group>"; };
 		A1F07DBD1680CE6B00E12B8F /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
 		A1F07DBE1680CE6B00E12B8F /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1F07DC01680CE6B00E12B8F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
