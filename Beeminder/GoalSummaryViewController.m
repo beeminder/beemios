@@ -470,7 +470,6 @@
             hud.labelText = @"Error";
         }
         else {
-            [self loadGraphImageIgnoreCache:YES];
             hud.labelText = @"Saved";
             Datapoint *datapoint = [Datapoint MR_createEntity];
             datapoint.goal = self.goalObject;
@@ -480,10 +479,10 @@
             datapoint.comment = [JSON objectForKey:@"comment"];
             [[NSManagedObjectContext MR_defaultContext] MR_save];
             [self setDatapointsText];
+            [self setInitialDatapoint];
             [self pollUntilGraphIsNotUpdating];
             [self loadGraphImageThumbIgnoreCache:YES];
             [self refreshGoalData];
-
         }
         hud.mode = MBProgressHUDModeText;
 
