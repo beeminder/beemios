@@ -400,7 +400,7 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MagicalRecord setupCoreDataStack];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
         NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         

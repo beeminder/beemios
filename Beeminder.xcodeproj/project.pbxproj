@@ -17,9 +17,6 @@
 		A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A115119F167EAE2F009C7B91 /* sample_graph@2x.png */; };
 		A1192A8716658455004BED65 /* chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = A1192A8616658455004BED65 /* chevron.png */; };
 		A11AA6BD166E83EA00FA8C76 /* ContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6BC166E83EA00FA8C76 /* ContractViewController.m */; };
-		A11AA6C4166EA03B00FA8C76 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6C3166EA03B00FA8C76 /* Goal.m */; };
-		A11AA6C7166EA03C00FA8C76 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6C6166EA03B00FA8C76 /* User.m */; };
-		A11AA6CA166EA03C00FA8C76 /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AA6C9166EA03C00FA8C76 /* Datapoint.m */; };
 		A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A82159FCDCF0058B495 /* User+Resource.m */; };
 		A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A85159FDB350058B495 /* Goal+Resource.m */; };
 		A1253A9E15A022460058B495 /* UserPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1253A9D15A022460058B495 /* UserPushRequest.m */; };
@@ -108,6 +105,9 @@
 		A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F03D62158E9A850075D5DA /* MainStoryboard_iPhone.storyboard */; };
 		A1F03D72158E9BE60075D5DA /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D71158E9BE60075D5DA /* SplashViewController.m */; };
 		A1F03D78158EA2690075D5DA /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F03D77158EA2690075D5DA /* SignInViewController.m */; };
+		A1F07DBF1680CE6B00E12B8F /* Datapoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F07DBE1680CE6B00E12B8F /* Datapoint.m */; };
+		A1F07DC21680CE6B00E12B8F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F07DC11680CE6B00E12B8F /* User.m */; };
+		A1F07DC51680CE6C00E12B8F /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F07DC41680CE6C00E12B8F /* Goal.m */; };
 		A1F0C7BD15BB77530044E01B /* graph-processing.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F0C7BC15BB77530044E01B /* graph-processing.png */; };
 		A1F82ACA1601791B000E56DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F82AC91601791B000E56DA /* Default-568h@2x.png */; };
 		A1FCBF1E15B7602700E5C955 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FCBEE615B7602600E5C955 /* MagicalImportFunctions.m */; };
@@ -173,12 +173,6 @@
 		A1192A8616658455004BED65 /* chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron.png; sourceTree = "<group>"; };
 		A11AA6BB166E83EA00FA8C76 /* ContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractViewController.h; sourceTree = "<group>"; };
 		A11AA6BC166E83EA00FA8C76 /* ContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractViewController.m; sourceTree = "<group>"; };
-		A11AA6C2166EA03B00FA8C76 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		A11AA6C3166EA03B00FA8C76 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
-		A11AA6C5166EA03B00FA8C76 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		A11AA6C6166EA03B00FA8C76 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		A11AA6C8166EA03C00FA8C76 /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
-		A11AA6C9166EA03C00FA8C76 /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
 		A1253A81159FCDCF0058B495 /* User+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Resource.h"; sourceTree = "<group>"; };
 		A1253A82159FCDCF0058B495 /* User+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Resource.m"; sourceTree = "<group>"; };
 		A1253A84159FDB350058B495 /* Goal+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Goal+Resource.h"; sourceTree = "<group>"; };
@@ -326,6 +320,13 @@
 		A1F03D71158E9BE60075D5DA /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		A1F03D76158EA2690075D5DA /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		A1F03D77158EA2690075D5DA /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		A1F07DBC1680CE2C00E12B8F /* Beeminder1.5.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = Beeminder1.5.2.xcdatamodel; sourceTree = "<group>"; };
+		A1F07DBD1680CE6B00E12B8F /* Datapoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datapoint.h; sourceTree = "<group>"; };
+		A1F07DBE1680CE6B00E12B8F /* Datapoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datapoint.m; sourceTree = "<group>"; };
+		A1F07DC01680CE6B00E12B8F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		A1F07DC11680CE6B00E12B8F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		A1F07DC31680CE6C00E12B8F /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		A1F07DC41680CE6C00E12B8F /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F0C7BC15BB77530044E01B /* graph-processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph-processing.png"; sourceTree = "<group>"; };
 		A1F82AC91601791B000E56DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		A1FCBEE515B7602600E5C955 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
@@ -517,13 +518,13 @@
 			isa = PBXGroup;
 			children = (
 				A1B2687215A121F300859EDD /* Sync */,
+				A1F07DBD1680CE6B00E12B8F /* Datapoint.h */,
+				A1F07DC31680CE6C00E12B8F /* Goal.h */,
+				A1F07DC41680CE6C00E12B8F /* Goal.m */,
+				A1F07DC01680CE6B00E12B8F /* User.h */,
+				A1F07DC11680CE6B00E12B8F /* User.m */,
+				A1F07DBE1680CE6B00E12B8F /* Datapoint.m */,
 				A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */,
-				A11AA6C8166EA03C00FA8C76 /* Datapoint.h */,
-				A11AA6C9166EA03C00FA8C76 /* Datapoint.m */,
-				A11AA6C5166EA03B00FA8C76 /* User.h */,
-				A11AA6C6166EA03B00FA8C76 /* User.m */,
-				A11AA6C2166EA03B00FA8C76 /* Goal.h */,
-				A11AA6C3166EA03B00FA8C76 /* Goal.m */,
 				A1253A81159FCDCF0058B495 /* User+Resource.h */,
 				A1253A82159FCDCF0058B495 /* User+Resource.m */,
 				A1253A84159FDB350058B495 /* Goal+Resource.h */,
@@ -1017,10 +1018,10 @@
 				A1B64A471665B2CB0023CC40 /* ReminderCellUIView.m in Sources */,
 				A162C8C7166685DD0085D94A /* PRLabel.m in Sources */,
 				A11AA6BD166E83EA00FA8C76 /* ContractViewController.m in Sources */,
-				A11AA6C4166EA03B00FA8C76 /* Goal.m in Sources */,
-				A11AA6C7166EA03C00FA8C76 /* User.m in Sources */,
-				A11AA6CA166EA03C00FA8C76 /* Datapoint.m in Sources */,
 				A149DB1A167D3B1B00458226 /* IntroViewController.m in Sources */,
+				A1F07DBF1680CE6B00E12B8F /* Datapoint.m in Sources */,
+				A1F07DC21680CE6B00E12B8F /* User.m in Sources */,
+				A1F07DC51680CE6C00E12B8F /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1194,10 +1195,11 @@
 		A19D7BE31596DC840031ABED /* Beeminder.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A1F07DBC1680CE2C00E12B8F /* Beeminder1.5.2.xcdatamodel */,
 				A1D918F71679571A004B3759 /* Beeminder1.5.1.xcdatamodel */,
 				A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */,
 			);
-			currentVersion = A19D7BE41596DC840031ABED /* Beeminder.xcdatamodel */;
+			currentVersion = A1F07DBC1680CE2C00E12B8F /* Beeminder1.5.2.xcdatamodel */;
 			path = Beeminder.xcdatamodeld;
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;
