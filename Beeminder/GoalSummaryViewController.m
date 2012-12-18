@@ -187,7 +187,7 @@
     return [[self.goalObject.datapoints allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         Datapoint *d1 = (Datapoint *)obj1;
         Datapoint *d2 = (Datapoint *)obj2;
-        if ([d1.timestamp doubleValue] < [d2.timestamp doubleValue]) {
+        if ([d1.updatedAt doubleValue] < [d2.updatedAt doubleValue]) {
             return (NSComparisonResult)NSOrderedAscending;
         }
         else {
@@ -229,7 +229,10 @@
             NSString *day = [formatter stringFromDate:date];
             NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
             
-            if (datapoint.comment.length > 0) {
+            if (datapoint.comment.length > 30) {
+                comment = [comment stringByAppendingFormat:@" \"%@...\"\n", [datapoint.comment substringToIndex:30]];
+            }
+            else if (datapoint.comment.length > 0) {
                 comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
             }
             else {
@@ -477,6 +480,7 @@
             datapoint.value = [JSON objectForKey:@"value"];
             datapoint.timestamp = [JSON objectForKey:@"timestamp"];
             datapoint.comment = [JSON objectForKey:@"comment"];
+            datapoint.updatedAt = [JSON objectForKey:@"updated_at"];
             [[NSManagedObjectContext MR_defaultContext] MR_save];
             [self setDatapointsText];
             [self setInitialDatapoint];

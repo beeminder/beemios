@@ -94,7 +94,7 @@
                 datapoint.value = [datapointDict objectForKey:@"value"];
                 datapoint.serverId = [datapointDict objectForKey:@"id"];
                 datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
-                datapoint.updatedAt = [datapointDict objectForKey:@"api_updated_at"];
+                datapoint.updatedAt = [datapointDict objectForKey:@"updated_at"];
                 [defaultContext MR_save];
             }
         }
