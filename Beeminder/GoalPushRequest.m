@@ -12,25 +12,44 @@
 
 + (GoalPushRequest *)requestForGoal:(Goal *)goal
 {
-    return [GoalPushRequest requestForGoal:goal withSuccessBlock:nil];
+    return [GoalPushRequest requestForGoal:goal additionalParams:nil withSuccessBlock:nil];
 }
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock
++ (GoalPushRequest *)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock
 {
-    return [GoalPushRequest requestForGoal:goal roadDial:NO withSuccessBlock:successBlock withErrorBlock:nil];
+    return [GoalPushRequest requestForGoal:goal roadDial:NO additionalParams:additionalParams withSuccessBlock:successBlock withErrorBlock:nil];
 }
 
 + (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock
 {
-    return [GoalPushRequest requestForGoal:goal roadDial:YES withSuccessBlock:successBlock withErrorBlock:nil];
+    return [GoalPushRequest requestForGoal:goal roadDial:YES additionalParams:nil withSuccessBlock:successBlock withErrorBlock:nil];
 }
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock
 {
     GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
-
-    NSString *pString = [goal paramString];
-    pString = [pString stringByAppendingFormat:@"&access_token=%@", [ABCurrentUser accessToken]];
+    
+    NSDictionary *allParams = [goal paramsDict];
+    
+    if (additionalParams) {
+        allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
+    }
+    
+    __block NSString *pString = @"";
+    
+    pString = [pString stringByAppendingFormat:@"access_token=%@", [ABCurrentUser accessToken]];
+    
+    [allParams enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:@"goaldate"]) {
+            pString = [pString stringByAppendingFormat:@"&%@=%f", key, [obj doubleValue]];
+        }
+        else if ([[allParams objectForKey:key] isMemberOfClass:[NSNumber class]]) {
+            pString = [pString stringByAppendingFormat:@"&%@=%g", key, [obj doubleValue]];
+        }
+        else {
+            pString = [pString stringByAppendingFormat:@"&%@=%@", key, obj];
+        }
+    }];
     
     NSURL *url;
     NSMutableURLRequest *request;

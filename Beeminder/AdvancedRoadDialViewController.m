@@ -402,7 +402,7 @@
     self.datePicker.hidden = YES;
     self.dismissToolbar.hidden = YES;
     if (![self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
-        [GoalPushRequest requestForGoal:self.goalObject roadDial:YES withSuccessBlock:^{
+        [GoalPushRequest requestForGoal:self.goalObject roadDial:YES additionalParams:nil withSuccessBlock:^{
             MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
             hud.labelText = @"Saved";
             hud.mode = MBProgressHUDModeText;

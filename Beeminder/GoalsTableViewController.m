@@ -64,12 +64,10 @@
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
-
-    [self fetchEverything];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
         [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kGoToGoalWithSlugKey];
     }
+    [self fetchEverything];
 }
 
 - (void)goToGoalWithSlug:(NSString *)slug
@@ -241,7 +239,8 @@
         Goal *goalObject = [self.goalObjects objectAtIndex:path.row];
         [segue.destinationViewController setTitle:goalObject.title];
         [segue.destinationViewController setGoalObject:goalObject];
-        [segue.destinationViewController setNeedsFreshData:!self.hasCompletedDataFetch];
+        [segue.destinationViewController setNeedsFreshData:!self.hasCompletedDataFetch || [[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kGoToGoalWithSlugKey];
     }
 }
 
@@ -282,6 +281,9 @@
     [BeeminderAppDelegate updateApplicationIconBadgeCount];
     self.hasCompletedDataFetch = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
+            [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
+        }
         [self.tableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     });

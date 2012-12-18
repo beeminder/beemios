@@ -263,6 +263,23 @@
                                             <outlet property="delegate" destination="Xgv-aN-lSx" id="aOK-4U-NXG"/>
                                         </connections>
                                     </pickerView>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="qo9-iG-FyO">
+                                        <rect key="frame" x="20" y="274" width="79" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </switch>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Start with a week of safety buffer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vx-pS-hDh">
+                                        <rect key="frame" x="105" y="270" width="195" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Today's value" textAlignment="center" minimumFontSize="17" id="ASH-zQ-EKe">
+                                        <rect key="frame" x="105" y="131" width="111" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -279,8 +296,11 @@
                         <outlet property="goalDetailsLabel" destination="OXb-zp-oFN" id="s5e-LN-gKs"/>
                         <outlet property="goalTypeLabel" destination="ERu-9V-ZQI" id="zwM-oP-qrQ"/>
                         <outlet property="goalWarningLabel" destination="zAk-KC-z2d" id="co0-O7-0hl"/>
+                        <outlet property="initvalTextField" destination="ASH-zQ-EKe" id="vso-Kg-lN4"/>
                         <outlet property="pickerView" destination="lby-1W-IL7" id="Mz6-NE-zhS"/>
                         <outlet property="roadDialButton" destination="uPp-vR-WlF" id="QQT-oz-k3T"/>
+                        <outlet property="safetyBufferLabel" destination="4vx-pS-hDh" id="FCm-I8-HI6"/>
+                        <outlet property="safetyBufferSwitch" destination="qo9-iG-FyO" id="er9-h5-V1p"/>
                         <outlet property="saveGoalButton" destination="oqv-eG-50a" id="JcG-gS-ZYI"/>
                         <outlet property="startFlatLabel" destination="qZy-Qb-cUe" id="9iT-sv-CY0"/>
                         <outlet property="startFlatSwitch" destination="sZz-do-bWY" id="IZo-jk-J0n"/>
@@ -1272,8 +1292,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="goalDetailsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalWarningLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="initvalTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="safetyBufferLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="safetyBufferSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startFlatLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="startFlatSwitch" candidateClass="UISwitch"/>

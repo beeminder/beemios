@@ -13,10 +13,10 @@ typedef void(^CompletionBlock)();
 
 + (GoalPushRequest *)requestForGoal:(Goal *)goal;
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock;
++ (GoalPushRequest *)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock;
 
 + (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock;
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
++ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
 
 @end

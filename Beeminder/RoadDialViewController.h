@@ -32,6 +32,9 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong, nonatomic) NSArray *fitbitDatasetTitles;
 @property (strong, nonatomic) NSArray *fitbitDatasetValues;
+@property (strong, nonatomic) IBOutlet UISwitch *safetyBufferSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *safetyBufferLabel;
+@property (strong, nonatomic) IBOutlet UITextField *initvalTextField;
 
 - (NSUInteger)supportedInterfaceOrientations;
 

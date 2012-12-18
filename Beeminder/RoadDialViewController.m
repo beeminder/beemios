@@ -42,15 +42,19 @@
 
 - (void)showDefaultFormFields
 {
+    self.firstTextField.placeholder = nil;
     self.firstLabel.hidden = YES;
     self.firstTextField.placeholder = @"Current value";
     self.firstTextField.hidden = NO;
+    self.initvalTextField.hidden = YES;
     self.ephemSwitch.hidden = NO;
     self.ephemLabel.hidden = NO;
     self.startFlatLabel.hidden = NO;
     self.startFlatSwitch.hidden = NO;
     self.titleTextField.hidden = NO;
     self.saveGoalButton.hidden = NO;
+    self.safetyBufferSwitch.hidden = YES;
+    self.safetyBufferLabel.hidden = YES;
 }
 
 - (void)hideFormFields
@@ -74,7 +78,6 @@
     self.firstLabel.hidden = NO;
     self.firstTextField.text = @"Steps";
     self.firstLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
-//    [self.firstTextField becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -100,28 +103,39 @@
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kDrinkerPrivate]) {
         [self showDefaultFormFields];
         self.firstLabel.hidden = NO;
-        self.firstTextField.placeholder = nil;
         self.startFlatLabel.hidden = YES;
         self.startFlatSwitch.hidden = YES;
-        self.firstTextField.inputView = nil;
+        self.firstTextField.placeholder = nil;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kHustlerPrivate]) {
         [self showDefaultFormFields];
-        self.firstLabel.hidden = YES;
-        self.firstTextField.hidden = YES;
-        self.firstTextField.inputView = nil;
+        self.firstTextField.placeholder = @"Weekly rate";
+        self.safetyBufferSwitch.hidden = NO;
+        self.safetyBufferLabel.hidden = NO;
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
     }
     else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kFatloserPrivate]) {
         [self showDefaultFormFields];
         self.startFlatLabel.hidden = YES;
         self.startFlatSwitch.hidden = YES;
-        self.firstTextField.inputView = nil;
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kBikerPrivate]){
+        [self showDefaultFormFields];
+        self.firstTextField.placeholder = @"Weekly rate";
+        self.safetyBufferLabel.hidden = NO;
+        self.safetyBufferSwitch.hidden = NO;
+        self.startFlatSwitch.hidden = YES;
+        self.startFlatLabel.hidden = YES;
+        self.initvalTextField.hidden = NO;
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kInboxerPrivate]) {
+        [self showDefaultFormFields];
+        self.startFlatLabel.hidden = YES;
+        self.startFlatSwitch.hidden = YES;
     }
     else {
         [self showDefaultFormFields];
-        self.firstTextField.inputView = nil;
-        self.firstTextField.placeholder = @"Current value";
-        self.firstLabel.hidden = YES;
     }
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
@@ -181,6 +195,9 @@
     [self setEphemLabel:nil];
     [self setPickerView:nil];
     [self setGoalWarningLabel:nil];
+    [self setSafetyBufferSwitch:nil];
+    [self setSafetyBufferLabel:nil];
+    [self setInitvalTextField:nil];
     [super viewDidUnload];
 }
 
@@ -229,7 +246,9 @@
 - (id)rateFromForm
 {
     Goal *goal = [BeeminderAppDelegate sharedSessionGoal];
-    if ([goal.goal_type isEqualToString:kDrinkerPrivate]) {
+    if ([goal.goal_type isEqualToString:kDrinkerPrivate] ||
+        [goal.goal_type isEqualToString:kHustlerPrivate] ||
+        [goal.goal_type isEqualToString:kBikerPrivate]) {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         return [numberFormatter numberFromString:self.firstTextField.text];
     }
@@ -242,6 +261,10 @@
     
     if ([[goalTypeInfo objectForKey:kKyoomKey] boolValue]) {
         return [NSNumber numberWithInt:0];
+    }
+    else if ([[goalTypeInfo objectForKey:kPrivateNameKey] isEqualToString:kBikerPrivate]) {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        return [numberFormatter numberFromString:self.initvalTextField.text];
     }
     else {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -267,7 +290,9 @@
             goal.goal_type = kHustlerPrivate;
         }
     }
-    if ([goal.goal_type isEqualToString:kDrinkerPrivate] && !goal.rate) {
+    if ([goal.goal_type isEqualToString:kHustlerPrivate] ||
+        [goal.goal_type isEqualToString:kBikerPrivate] ||
+        ([goal.goal_type isEqualToString:kDrinkerPrivate] && !goal.rate)) {
         goal.rate = [self rateFromForm];
     }
     goal.initval = [self initialValFromForm];
@@ -313,19 +338,27 @@
             else {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 UIViewController *presenting = self.navigationController.presentingViewController;
+                [[NSUserDefaults standardUserDefaults] setObject:goal.slug forKey:kGoToGoalWithSlugKey];                
                 [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-                    
                     if ([presenting isKindOfClass:[UITabBarController class]]) {
                         UITabBarController *tab = (UITabBarController *)presenting;
                         UINavigationController *dashNav = [[tab viewControllers] objectAtIndex:0];
+                        GoalsTableViewController *gtvCon = (GoalsTableViewController *)[dashNav.viewControllers objectAtIndex:0];
+                        [MBProgressHUD showHUDAddedTo:gtvCon.view animated:YES];
                         [[[dashNav viewControllers] objectAtIndex:0] performSelector:@selector(fetchEverything)];
                     }
                 }];
 
             }
         };
-        [goal pushToRemoteWithSuccessBlock:successBlock];
-        
+
+        if (!self.safetyBufferSwitch.hidden && self.safetyBufferSwitch.on) {
+            NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"safety_buffer", nil];
+            [goal pushToRemoteWithAdditionalParams:params successBlock:successBlock];
+        }
+        else {
+            [goal pushToRemoteWithAdditionalParams:nil successBlock:successBlock];
+        }
     }
     else {
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];

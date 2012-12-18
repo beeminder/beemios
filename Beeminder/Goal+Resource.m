@@ -51,9 +51,9 @@
     return goal;
 }
 
-- (void)pushToRemoteWithSuccessBlock:(CompletionBlock)successBlock
+- (void)pushToRemoteWithAdditionalParams:(NSDictionary *)additionalParams successBlock:(CompletionBlock)successBlock
 {
-    [GoalPushRequest requestForGoal:self withSuccessBlock:successBlock];
+    [GoalPushRequest requestForGoal:self additionalParams:additionalParams withSuccessBlock:successBlock];
 }
 
 - (void)pushRoadDialToRemoteWithSuccessBlock:(CompletionBlock)successBlock
@@ -115,6 +115,38 @@
     }
     
     return pString;
+}
+
+- (NSDictionary *)paramsDict
+{
+    NSMutableDictionary *paramsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ephem, @"ephem", self.goal_type, @"goal_type", self.slug, @"slug", AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding), @"title", nil];
+    
+    if (self.burner) {
+        [paramsDict setObject:self.burner forKey:@"burner"];
+    }
+    
+    if (self.goaldate) {
+        [paramsDict setObject:self.goaldate forKey:@"goaldate"];
+    }
+    
+    if (self.rate) {
+        [paramsDict setObject:self.rate forKey:@"rate"];
+    }
+    
+    if (self.goalval) {
+        [paramsDict setObject:self.goalval forKey:@"goalval"];
+    }
+    
+    if (self.initval) {
+        [paramsDict setObject:self.initval forKey:@"initval"];
+    }
+    
+    if (self.fitbit) {
+        [paramsDict setObject:@"true" forKey:@"fitbit"];
+        [paramsDict setObject:self.fitbit_field forKey:@"fitbit_field"];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:paramsDict];
 }
 
 - (int)losedateDays
