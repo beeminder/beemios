@@ -128,7 +128,10 @@
     [self.activityIndicator startAnimating];
     self.refreshButton = [[self.navigationItem rightBarButtonItem] initWithCustomView:self.activityIndicator];
     [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:NO];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (![MBProgressHUD HUDForView:self.view]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@&datapoints_count=3", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -145,8 +148,6 @@
         if ([[JSON objectForKey:@"queued"] boolValue]) {
             [self pollUntilGraphIsNotUpdating];
         }
-        [self setDatapointsText];
-        [self setInitialDatapoint];
         [self adjustForFrozen];
         [self startTimer];
         [BeeminderAppDelegate updateApplicationIconBadgeCount];
@@ -253,17 +254,12 @@
 - (void)loadGraphImageIgnoreCache:(BOOL)ignoreCache
 {
     if (ignoreCache || !self.goalObject.graph_image) {
-        [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
         [self.goalObject updateGraphImageWithCompletionBlock:^(void){
-            [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
             [self loadGraphImageIgnoreCache:NO];
         }];
     }
     else {
         self.graphImageView.image = self.goalObject.graph_image;
-        if (!self.graphPoller || ![self.graphPoller isValid]) {
-            [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
-        }
     }
 }
 
@@ -474,6 +470,8 @@
         }
         else {
             hud.labelText = @"Saved";
+            [self pollUntilGraphIsNotUpdating];
+            [self refreshGoalData];
             Datapoint *datapoint = [Datapoint MR_createEntity];
             datapoint.goal = self.goalObject;
             datapoint.serverId = [JSON objectForKey:@"id"];
@@ -484,9 +482,6 @@
             [[NSManagedObjectContext MR_defaultContext] MR_save];
             [self setDatapointsText];
             [self setInitialDatapoint];
-            [self pollUntilGraphIsNotUpdating];
-            [self loadGraphImageThumbIgnoreCache:YES];
-            [self refreshGoalData];
         }
         hud.mode = MBProgressHUDModeText;
 
@@ -506,14 +501,20 @@
     [self.graphPoller invalidate];
     self.graphIsUpdating = YES;
     [self checkIfGraphIsUpdating];
+    if (![MBProgressHUD HUDForView:self.graphImageView]) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
+        hud.labelText = @"Updating Graph...";
+    }
     self.graphPoller = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkIfGraphIsUpdating) userInfo:nil repeats:YES];
 }
 
 - (void)checkIfGraphIsUpdating
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
-    hud.labelText = @"Updating Graph...";
-    
+    if (![MBProgressHUD HUDForView:self.graphImageView]) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.graphImageView animated:YES];
+        hud.labelText = @"Updating Graph...";
+    }
+
     NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
     
     NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
