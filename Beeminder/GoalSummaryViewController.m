@@ -154,6 +154,7 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self replaceRefreshButton];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
     [operation start];
