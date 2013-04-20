@@ -45,7 +45,6 @@
     
     self.tableView.rowHeight = 92.0f;
     self.tableView.backgroundColor = [BeeminderAppDelegate cloudsColor];
-    //    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
     self.goalComparator = ^(id a, id b) {
         double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
         double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
@@ -180,14 +179,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.goalObjects.count;
-//        return self.frontburnerGoalObjects.count;
+        return self.frontburnerGoalObjects.count;
     }
     return self.backburnerGoalObjects.count;
 }
@@ -224,7 +222,6 @@
         if (self.goalObjects.count > 0) {
             Goal *goal;
             if (indexPath.section == 0) {
-//                goal = [self.goalObjects objectAtIndex:indexPath.row];
                 goal = [self.goalObjects objectAtIndex:indexPath.row];
             }
             else {
@@ -249,15 +246,7 @@
             }
 
             [cell addSubview:imageView];
-
-            if ([goal.burner isEqualToString:@"frontburner"]) {
-//                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
-                cell.backgroundColor = [BeeminderAppDelegate cloudsColor];
-            }
-            else {
-//                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dark-cell-noise"]];
-                cell.backgroundColor = [BeeminderAppDelegate silverColor];
-            }
+            cell.backgroundColor = [BeeminderAppDelegate silverColor];
         }
     }
     return cell;
@@ -316,6 +305,8 @@
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     [self.goalObjects removeAllObjects];
+    [self.frontburnerGoalObjects removeAllObjects];
+    [self.backburnerGoalObjects removeAllObjects];
     
     for (NSDictionary *goalDict in goals) {
         progressCallback(1.0f/[goals count]);
@@ -327,9 +318,21 @@
     }
     User *user = [ABCurrentUser user];
     [self.goalObjects removeAllObjects];
+    [self.frontburnerGoalObjects removeAllObjects];
+    [self.backburnerGoalObjects removeAllObjects];
     
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
+    
+    self.frontburnerGoalObjects = [NSMutableArray arrayWithArray:[[user.goals allObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        Goal *g = (Goal *)evaluatedObject;
+        return [g.burner isEqualToString:@"frontburner"];
+    }]]];
+    
+    self.backburnerGoalObjects = [NSMutableArray arrayWithArray:[[user.goals allObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        Goal *g = (Goal *)evaluatedObject;
+        return [g.burner isEqualToString:@"backburner"];
+    }]]];
     
     self.title = @"Your Goals";
     
