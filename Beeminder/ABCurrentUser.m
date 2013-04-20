@@ -32,6 +32,7 @@
     [defaults removeObjectForKey:@"accessToken"];
     [defaults removeObjectForKey:@"username"];
     [BeeminderAppDelegate removeStoredOAuthDefaults];
+    [defaults synchronize];
 }
 
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken
@@ -40,12 +41,15 @@
     
     [defaults setObject:accessToken forKey:@"accessToken"];
     
-    [defaults setObject:username forKey:@"username"];    
+    [defaults setObject:username forKey:@"username"];
+    
+    [defaults synchronize];
 }
 
 + (void)setUsername:(NSString *)username
 {
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (int)lastUpdatedAt
@@ -61,6 +65,7 @@
 + (void)setEmergencyDayNotifications:(BOOL)on
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:on] forKey:[NSString stringWithFormat:@"%@-%@", kEmergencyKey, [ABCurrentUser username]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSDate *)emergencyNotificationDate
@@ -77,16 +82,19 @@
 + (void)setEmergencyNotificationDate:(NSDate *)date
 {
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:[NSString stringWithFormat:@"%@-%@", kEmergencyTimeKey, [ABCurrentUser username]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)setLastUpdatedAtToNow
 {
     [[NSUserDefaults standardUserDefaults] setInteger:(int)[[NSDate date] timeIntervalSince1970] forKey:[NSString stringWithFormat:@"lastUpdatedAt-%@", [ABCurrentUser username]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)resetLastUpdatedAt
 {
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:[NSString stringWithFormat:@"lastUpdatedAt-%@", [ABCurrentUser username]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
