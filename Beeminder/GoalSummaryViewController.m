@@ -41,6 +41,15 @@
     self.scrollView.contentSize = self.graphImageView.image.size;
     self.scrollView.delegate = self;
     
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.inputTextField.leftView = paddingView;
+    self.inputTextField.leftViewMode = UITextFieldViewModeAlways;
+    
+    self.inputTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.inputTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.timerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    
     // set the tag for the image view
     [self.graphImageView setTag:ZOOM_VIEW_TAG];
     
@@ -59,8 +68,9 @@
     [self loadGraphImageThumbIgnoreCache:YES];
 
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
+    self.editGoalButton.titleLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
-    self.rerailButton = [BeeminderAppDelegate standardGrayButtonWith:self.rerailButton];
+//    self.rerailButton = [BeeminderAppDelegate standardGrayButtonWith:self.rerailButton];
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
@@ -102,17 +112,7 @@
         self.addDataButton.hidden = YES;
         self.dateStepperLabel.hidden = YES;
         self.valueStepperLabel.hidden = YES;
-        self.rerailButton.hidden = NO;
     }
-}
-
-- (IBAction)rerailButtonPressed
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    ContractViewController *contractViewController = [storyboard instantiateViewControllerWithIdentifier:@"contractViewController"];
-    contractViewController.goalObject = self.goalObject;
-    contractViewController.gsvCon = self;
-    [self presentViewController:contractViewController animated:YES completion:nil];
 }
 
 - (void)replaceRefreshButton
@@ -202,16 +202,16 @@
 {
     if ([self.goalObject.frozen boolValue]) {
         if ([self.goalObject.won boolValue]) {
-            self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
             self.lastDatapointLabel.text = kWinnerText;
         }
         else if ([self.goalObject.lost boolValue]) {
-            self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
             self.lastDatapointLabel.text = kDerailedText;
         }
     }
     else {
-        self.lastDatapointLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
         NSUInteger datapointCount = [self.goalObject.datapoints count];
         NSArray *showDatapoints;
         if (datapointCount < 4) {

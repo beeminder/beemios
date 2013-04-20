@@ -44,8 +44,8 @@
     [self.tableView addSubview:self.pull];
     
     self.tableView.rowHeight = 92.0f;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
+    self.tableView.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    //    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
     self.goalComparator = ^(id a, id b) {
         double aBackburnerPenalty = [[a burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
         double bBackburnerPenalty = [[b burner] isEqualToString:@"backburner"] ? 1000000000000 : 0;
@@ -62,6 +62,17 @@
 
     NSArray *arrayOfGoalObjects = [[user.goals allObjects] sortedArrayUsingComparator:self.goalComparator];
     self.goalObjects = [NSMutableArray arrayWithArray:arrayOfGoalObjects];
+    
+    self.frontburnerGoalObjects = [NSMutableArray arrayWithArray:[[user.goals allObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        Goal *g = (Goal *)evaluatedObject;
+        return [g.burner isEqualToString:@"frontburner"];
+    }]]];
+    
+    self.backburnerGoalObjects = [NSMutableArray arrayWithArray:[[user.goals allObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        Goal *g = (Goal *)evaluatedObject;
+        return [g.burner isEqualToString:@"backburner"];
+    }]]];
+    
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
@@ -132,13 +143,15 @@
         }
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Fetching Beeswax...";
+        hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
     }
 
-    AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    [[AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         if (initialImport) {
             hud.mode = MBProgressHUDModeDeterminate;
             hud.progress = 0.0f;
             hud.labelText = @"Importing Beeswax...";
+            hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
         }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [self successfulFetchEverythingJSON:JSON progressCallback:^(float incrementBy){
@@ -154,8 +167,7 @@
 
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [self failedFetch];
-    }];
-    [fetchOperation start];
+    }] start];
 }
 
 - (void)viewDidUnload
@@ -173,12 +185,36 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.goalObjects count] + 1;
+    if (section == 0) {
+        return self.goalObjects.count;
+//        return self.frontburnerGoalObjects.count;
+    }
+    return self.backburnerGoalObjects.count;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
+        view.backgroundColor = [BeeminderAppDelegate silverColor];
+        return view;
+    }
+    return [[UIView alloc] init];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 10;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.row >= self.goalObjects.count) {
         cell.textLabel.text = @"Add New Goal";
@@ -186,11 +222,21 @@
     }
     else {
         if (self.goalObjects.count > 0) {
-            Goal *goal = [self.goalObjects objectAtIndex:indexPath.row];
+            Goal *goal;
+            if (indexPath.section == 0) {
+//                goal = [self.goalObjects objectAtIndex:indexPath.row];
+                goal = [self.goalObjects objectAtIndex:indexPath.row];
+            }
+            else {
+                goal = [self.goalObjects objectAtIndex:indexPath.row + self.frontburnerGoalObjects.count];
+            }
             cell.textLabel.text = goal.title;
+            cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
+            cell.textLabel.adjustsFontSizeToFitWidth = YES;
+            cell.textLabel.minimumFontSize = 14.0f;
             cell.detailTextLabel.text = [goal losedateTextBrief:YES];
             cell.detailTextLabel.textColor = goal.losedateColor;
-            cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+            cell.detailTextLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
             cell.indentationLevel = 3.0;
             cell.indentationWidth = 40.0;
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 10, 106, 70)];
@@ -205,10 +251,12 @@
             [cell addSubview:imageView];
 
             if ([goal.burner isEqualToString:@"frontburner"]) {
-                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
+//                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell-noise"]];
+                cell.backgroundColor = [BeeminderAppDelegate cloudsColor];
             }
             else {
-                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dark-cell-noise"]];
+//                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dark-cell-noise"]];
+                cell.backgroundColor = [BeeminderAppDelegate silverColor];
             }
         }
     }
@@ -236,7 +284,14 @@
     }
     else {
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        Goal *goalObject = [self.goalObjects objectAtIndex:path.row];
+        Goal *goalObject;
+        if (path.section == 0) {
+            goalObject = [self.goalObjects objectAtIndex:path.row];
+        }
+        else {
+            goalObject = [self.goalObjects objectAtIndex:path.row + self.frontburnerGoalObjects.count];
+        }
+
         [segue.destinationViewController setTitle:goalObject.title];
         [segue.destinationViewController setGoalObject:goalObject];
         [segue.destinationViewController setNeedsFreshData:!self.hasCompletedDataFetch || [[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];

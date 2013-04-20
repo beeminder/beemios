@@ -29,11 +29,21 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
+    self.connectContainer.backgroundColor = [BeeminderAppDelegate grayButtonColor];
     
-    [GradientViews addGradient:self.view withColor:[UIColor colorWithRed:1.0 green:203.0/255.0f blue:8.0f/255.0 alpha:1.0] startAtTop:YES cornerRadius:0.0f borderColor:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
+
+    self.view.backgroundColor = [BeeminderAppDelegate sunflowerColor];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
     self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
+    self.alternativesLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.emailTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.emailTextField.textColor = [UIColor darkGrayColor];
+    self.emailTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.passwordTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.emailTextField.layer.borderColor = [UIColor clearColor].CGColor;
+    self.passwordTextField.layer.borderColor = [UIColor clearColor].CGColor;
 }
 
 - (void)viewDidUnload
@@ -42,6 +52,10 @@
     [self setPasswordTextField:nil];
     [self setSignInButton:nil];
     [self setSignUpButton:nil];
+    [self setAlternativesLabel:nil];
+    [self setTwitterButton:nil];
+    [self setFacebookButton:nil];
+    [self setConnectContainer:nil];
     [super viewDidUnload];
 }
 
@@ -131,6 +145,7 @@
     [self.view endEditing:YES];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Authenticating...";
+    hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
     
     [operation start];
 }

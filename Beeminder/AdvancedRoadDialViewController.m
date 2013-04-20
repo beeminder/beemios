@@ -35,6 +35,23 @@
 {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.delayLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.goalValLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.goalRateLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.goalDateLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.headerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:17.0f];
+    
+    UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.goalDateTextField.leftView = paddingView1;
+    self.goalDateTextField.leftViewMode = UITextFieldViewModeAlways;
+    UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.rateTextField.leftView = paddingView2;
+    self.rateTextField.leftViewMode = UITextFieldViewModeAlways;
+    UIView *paddingView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.goalValueTextField.leftView = paddingView3;
+    self.goalValueTextField.leftViewMode = UITextFieldViewModeAlways;
+    
     if ([self showingNegativeRateGoal]) {
         self.negativeSignLabel.hidden = NO;
     }
@@ -180,6 +197,9 @@
     [self setDelayLabel:nil];
     [self setGoalValLabel:nil];
     [self setNegativeSignLabel:nil];
+    [self setGoalDateLabel:nil];
+    [self setGoalRateLabel:nil];
+    [self setHeaderLabel:nil];
     [super viewDidUnload];
 }
 

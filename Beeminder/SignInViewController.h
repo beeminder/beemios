@@ -16,5 +16,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;
 - (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) NSArray *twitterAccounts;
+@property (strong, nonatomic) IBOutlet UILabel *alternativesLabel;
 @property (strong, nonatomic) ACAccount *selectedTwitterAccount;
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
+@property (strong, nonatomic) IBOutlet UIButton *facebookButton;
+@property (strong, nonatomic) IBOutlet UIView *connectContainer;
 @end

@@ -23,9 +23,10 @@ NSString *const FBSessionStateChangedNotification =
 + (UIButton *)standardGrayButtonWith:(UIButton *)button
 {
     button.backgroundColor = [BeeminderAppDelegate grayButtonColor];
-    [button.layer setBorderWidth:1.0f];
-    [button.layer setBorderColor:[UIColor darkGrayColor].CGColor];
-    button.layer.cornerRadius = 5.0f;
+//    [button.layer setBorderWidth:1.0f];
+//    [button.layer setBorderColor:[UIColor darkGrayColor].CGColor];
+//    button.layer.cornerRadius = 5.0f;
+    button.titleLabel.font = [UIFont fontWithName:@"Lato" size:18.0f];
 
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     return button;
@@ -33,7 +34,7 @@ NSString *const FBSessionStateChangedNotification =
 
 + (UIColor *)grayButtonColor
 {
-    return [UIColor colorWithRed:184.0f/255.0 green:184.0f/255.0 blue:184.0f/255.0 alpha:1.0];
+    return [BeeminderAppDelegate concreteColor];
 }
 
 - (Goal *)sessionGoal
@@ -663,6 +664,26 @@ NSString *const FBSessionStateChangedNotification =
     }
     
     return _persistentStoreCoordinator;
+}
+
++ (UIColor *)silverColor
+{
+    return [UIColor colorWithRed:189.0f/255.0f green:195.0f/255.0f blue:199.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)cloudsColor
+{
+    return [UIColor colorWithRed:236.0f/255.0f green:240.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)sunflowerColor
+{
+    return [UIColor colorWithRed:241.0f/255.0f green:196.0f/255.0f blue:15.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)concreteColor
+{
+    return [UIColor colorWithRed:149.0f/255.0 green:165.0f/255.0 blue:166.0f/255.0 alpha:1.0];
 }
 
 #pragma mark - Application's Documents directory

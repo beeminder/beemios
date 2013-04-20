@@ -49,6 +49,9 @@
 		A14AA6BA1661B94A00D59A47 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6B91661B94A00D59A47 /* FacebookSDKResources.bundle */; };
 		A14AA6BC1661C35500D59A47 /* f_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A14AA6BB1661C35500D59A47 /* f_logo.png */; };
 		A162C8C7166685DD0085D94A /* PRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A162C8C6166685DD0085D94A /* PRLabel.m */; };
+		A16548ED1722F2C900FA995B /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A16548EB1722EF8600FA995B /* Lato-Bol.ttf */; };
+		A16548EE1722F2C900FA995B /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A16548EC1722EF8600FA995B /* Lato-Reg.ttf */; };
+		A16548F21723418C00FA995B /* twitter-bird-dark-bgs.png in Resources */ = {isa = PBXBuildFile; fileRef = A16548F11723418C00FA995B /* twitter-bird-dark-bgs.png */; };
 		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -230,6 +233,9 @@
 		A14AA6BD166281B700D59A47 /* TwitterAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthDelegate.h; sourceTree = "<group>"; };
 		A162C8C5166685DD0085D94A /* PRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRLabel.h; sourceTree = "<group>"; };
 		A162C8C6166685DD0085D94A /* PRLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRLabel.m; sourceTree = "<group>"; };
+		A16548EB1722EF8600FA995B /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
+		A16548EC1722EF8600FA995B /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		A16548F11723418C00FA995B /* twitter-bird-dark-bgs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-dark-bgs.png"; sourceTree = "<group>"; };
 		A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+autoRotate.h"; sourceTree = "<group>"; };
 		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -567,6 +573,8 @@
 		A1CA215B15935B0800AE16FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A16548EB1722EF8600FA995B /* Lato-Bol.ttf */,
+				A16548EC1722EF8600FA995B /* Lato-Reg.ttf */,
 				A115119E167EAE2F009C7B91 /* sample_graph.png */,
 				A115119F167EAE2F009C7B91 /* sample_graph@2x.png */,
 				A1192A8616658455004BED65 /* chevron.png */,
@@ -574,6 +582,7 @@
 				A19A20A716642FCA007736C1 /* arrow@2x.png */,
 				A14AA6BB1661C35500D59A47 /* f_logo.png */,
 				A14AA6821661223400D59A47 /* twitter-bird-light-bgs.png */,
+				A16548F11723418C00FA995B /* twitter-bird-dark-bgs.png */,
 				A18ECAD21625E22900F603A3 /* settings_tab_icon.png */,
 				A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */,
 				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
@@ -894,6 +903,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16548ED1722F2C900FA995B /* Lato-Bol.ttf in Resources */,
+				A16548EE1722F2C900FA995B /* Lato-Reg.ttf in Resources */,
 				A1F03D5B158E9A850075D5DA /* InfoPlist.strings in Resources */,
 				A1F03D64158E9A850075D5DA /* MainStoryboard_iPhone.storyboard in Resources */,
 				A1993CBD158FFE0A00011568 /* Icon.png in Resources */,
@@ -924,6 +935,7 @@
 				A1192A8716658455004BED65 /* chevron.png in Resources */,
 				A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */,
 				A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */,
+				A16548F21723418C00FA995B /* twitter-bird-dark-bgs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

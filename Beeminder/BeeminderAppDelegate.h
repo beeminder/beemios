@@ -52,4 +52,9 @@ extern NSString *const FBSessionStateChangedNotification;
 - (void)refreshGoalsAndShowDashboard;
 
 + (void)removeDeviceTokenFromServer;
+
++ (UIColor *)silverColor;
++ (UIColor *)cloudsColor;
++ (UIColor *)sunflowerColor;
++ (UIColor *)concreteColor;
 @end

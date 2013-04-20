@@ -29,8 +29,10 @@
 {
     [super viewDidLoad];
 
-    self.defaultFontString = @"Helvetica";
+    self.defaultFontString = @"Lato";
     self.defaultFontSize = 15.0f;
+    
+    self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     
     // Begin ReminderSwitchCell
     self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithYPosition:52.0f showBottomBorder:NO];
@@ -45,6 +47,8 @@
     reminderSwitchLabel.text = @"Remind me to enter data";
     reminderSwitchLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
     [self.reminderSwitchCell addSubview:reminderSwitchLabel];
+    
+    self.loggedInAsLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
     
     [self.view addSubview:self.reminderSwitchCell];
     

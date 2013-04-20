@@ -28,6 +28,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *goalValLabel;
 @property (strong, nonatomic) IBOutlet UILabel *negativeSignLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goalDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goalRateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *headerLabel;
 
 - (IBAction)cancel;
 - (NSUInteger)supportedInterfaceOrientations;

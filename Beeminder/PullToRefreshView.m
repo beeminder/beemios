@@ -68,7 +68,7 @@
         [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:NULL];
         
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		self.backgroundColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
+		self.backgroundColor = [BeeminderAppDelegate silverColor];
         
 		lastUpdatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
 		lastUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -82,11 +82,11 @@
         
 		statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
 		statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		statusLabel.font = [UIFont boldSystemFontOfSize:13.0f];
+		statusLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0f];
 		statusLabel.textColor = TEXT_COLOR;
 //		statusLabel.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
 //		statusLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		statusLabel.backgroundColor = [UIColor clearColor];
+		statusLabel.backgroundColor = [BeeminderAppDelegate silverColor];
 		statusLabel.textAlignment = UITextAlignmentCenter;
 		[self addSubview:statusLabel];
         

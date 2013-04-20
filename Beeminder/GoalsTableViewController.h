@@ -15,6 +15,8 @@
 @interface GoalsTableViewController : UITableViewController<PullToRefreshViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *goalObjects;
+@property (strong, nonatomic) NSMutableArray *frontburnerGoalObjects;
+@property (strong, nonatomic) NSMutableArray *backburnerGoalObjects;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSComparator goalComparator;
