@@ -40,6 +40,7 @@
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property BOOL needsFreshData;
+@property (strong, nonatomic) UILabel *titleLabel;
 
 - (void)pollUntilGraphIsNotUpdating;
 - (NSUInteger)supportedInterfaceOrientations;

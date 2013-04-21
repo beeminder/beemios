@@ -24,4 +24,6 @@
 @property (strong, nonatomic) PullToRefreshView *pull;
 - (void)fetchEverything;
 @property BOOL hasCompletedDataFetch;
+@property (strong, nonatomic) UILabel *titleLabel;
+
 @end

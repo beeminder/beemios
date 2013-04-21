@@ -23,10 +23,7 @@ NSString *const FBSessionStateChangedNotification =
 + (UIButton *)standardGrayButtonWith:(UIButton *)button
 {
     button.backgroundColor = [BeeminderAppDelegate grayButtonColor];
-//    [button.layer setBorderWidth:1.0f];
-//    [button.layer setBorderColor:[UIColor darkGrayColor].CGColor];
-//    button.layer.cornerRadius = 5.0f;
-    button.titleLabel.font = [UIFont fontWithName:@"Lato" size:18.0f];
+    button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
 
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     return button;

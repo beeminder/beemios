@@ -786,7 +786,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xgj-3b-5Fn">
-                                <rect key="frame" x="204" y="13" width="96" height="33"/>
+                                <rect key="frame" x="204" y="15" width="96" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Dial Road">
@@ -801,7 +801,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jUu-By-wgu">
-                                <rect key="frame" x="25" y="244" width="275" height="66"/>
+                                <rect key="frame" x="24" y="244" width="275" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <string key="text">23 191 "Last datapoint comment"
 23 191 "Last datapoint comment"
@@ -930,8 +930,8 @@
                                     <action selector="recalculateValues" destination="YqE-9n-0QD" eventType="editingChanged" id="d5m-7f-yNn"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Road Dial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EW2-Ca-mdS">
-                                <rect key="frame" x="109" y="20" width="102" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Road Dial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EW2-Ca-mdS">
+                                <rect key="frame" x="20" y="20" width="280" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -988,7 +988,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Updates take effect in one week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="afE-aq-rfi">
-                                <rect key="frame" x="58" y="48" width="204" height="21"/>
+                                <rect key="frame" x="20" y="48" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1196,6 +1196,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>

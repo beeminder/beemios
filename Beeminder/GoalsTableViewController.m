@@ -77,6 +77,20 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
         [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
     }
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 40)];
+    self.titleLabel.text = @"Your Goals";
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.titleLabel.textAlignment = UITextAlignmentLeft;
+    self.navigationItem.titleView = self.titleLabel;
+    
+    UIBarButtonItem *backbutton =  [[UIBarButtonItem alloc] initWithTitle:@"Goals" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    
+    [backbutton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem = backbutton;
+    
     [self fetchEverything];
 }
 
@@ -333,8 +347,6 @@
         Goal *g = (Goal *)evaluatedObject;
         return [g.burner isEqualToString:@"backburner"];
     }]]];
-    
-    self.title = @"Your Goals";
     
     [BeeminderAppDelegate updateApplicationIconBadgeCount];
     self.hasCompletedDataFetch = YES;

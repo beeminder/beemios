@@ -74,6 +74,7 @@
     self.goalDateSwitch = [[DCRoundSwitch alloc] init];
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
+
     CGRect defaultFrame = self.goalDateSwitch.frame;
     self.goalDateSwitch.frame = CGRectMake(15, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalDateSwitch.tag = 0;

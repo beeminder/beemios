@@ -49,6 +49,8 @@
     self.inputTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.timerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.dateStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.valueStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
     
     // set the tag for the image view
     [self.graphImageView setTag:ZOOM_VIEW_TAG];
@@ -68,7 +70,6 @@
     [self loadGraphImageThumbIgnoreCache:YES];
 
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
-    self.editGoalButton.titleLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
 //    self.rerailButton = [BeeminderAppDelegate standardGrayButtonWith:self.rerailButton];
     if (self.goalObject.units) {
@@ -81,6 +82,15 @@
     
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
+    
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 32)];
+    self.titleLabel.text = self.title;
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.titleLabel.textAlignment = UITextAlignmentLeft;
+    self.navigationItem.titleView = self.titleLabel;
     
     if (self.needsFreshData) {
         [self refreshGoalData];
@@ -202,16 +212,16 @@
 {
     if ([self.goalObject.frozen boolValue]) {
         if ([self.goalObject.won boolValue]) {
-            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
             self.lastDatapointLabel.text = kWinnerText;
         }
         else if ([self.goalObject.lost boolValue]) {
-            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+            self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
             self.lastDatapointLabel.text = kDerailedText;
         }
     }
     else {
-        self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+        self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
         NSUInteger datapointCount = [self.goalObject.datapoints count];
         NSArray *showDatapoints;
         if (datapointCount < 4) {
