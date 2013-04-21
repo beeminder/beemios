@@ -36,9 +36,9 @@
     
     // Begin ReminderSwitchCell
     self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithYPosition:52.0f showBottomBorder:NO];
-
-    self.remindSwitch = [[DCRoundSwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
+    self.remindSwitch = [[DCRoundSwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 80.0f, 30.0f)];
     self.remindSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.remindSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
     self.remindSwitch.on = [[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataKey] boolValue];    
     [self.remindSwitch addTarget:self action:@selector(remindSwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.reminderSwitchCell addSubview:self.remindSwitch];
@@ -71,7 +71,8 @@
     // Begin Emergency Cell
     self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
     self.emergencySwitch = [[DCRoundSwitch alloc] init];
-    self.emergencySwitch.frame = CGRectMake(195.0f, 11.0f, 0.0f, 0.0f);
+    self.emergencySwitch.frame = CGRectMake(195.0f, 11.0f, 80.0f, 30.0f);
+    self.emergencySwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
     self.emergencySwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.emergencySwitch.on = [ABCurrentUser emergencyDayNotifications];
     [self.emergencySwitch addTarget:self action:@selector(emergencySwitchValueChanged) forControlEvents:UIControlEventValueChanged];
