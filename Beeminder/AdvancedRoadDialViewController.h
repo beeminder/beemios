@@ -31,6 +31,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *goalDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *goalRateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *headerLabel;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 - (IBAction)cancel;
 - (NSUInteger)supportedInterfaceOrientations;

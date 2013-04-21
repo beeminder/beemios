@@ -71,7 +71,6 @@
 
     self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
     self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
-//    self.rerailButton = [BeeminderAppDelegate standardGrayButtonWith:self.rerailButton];
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }

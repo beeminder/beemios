@@ -34,6 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.saveButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    [self.cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
 
     self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.delayLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
@@ -74,6 +76,8 @@
     self.goalDateSwitch = [[DCRoundSwitch alloc] init];
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
+    self.goalDateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
+    self.goalDateSwitch.onTintColor = [UIColor blackColor];
 
     CGRect defaultFrame = self.goalDateSwitch.frame;
     self.goalDateSwitch.frame = CGRectMake(15, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
@@ -84,6 +88,8 @@
     self.goalValueSwitch = [[DCRoundSwitch alloc] init];
     self.goalValueSwitch.onText = @"EDIT";
     self.goalValueSwitch.offText = @"INFER";
+    self.goalValueSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
+    self.goalValueSwitch.onTintColor = [UIColor blackColor];
     self.goalValueSwitch.frame = CGRectMake(115, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalValueSwitch.tag = 1;
     [self.view addSubview:self.goalValueSwitch];
@@ -92,6 +98,8 @@
     self.rateSwitch = [[DCRoundSwitch alloc] init];
     self.rateSwitch.onText = @"EDIT";
     self.rateSwitch.offText = @"INFER";
+    self.rateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
+    self.rateSwitch.onTintColor = [UIColor blackColor];
     self.rateSwitch.frame = CGRectMake(215, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.rateSwitch.tag = 2;
     [self.view addSubview:self.rateSwitch];
@@ -201,6 +209,8 @@
     [self setGoalDateLabel:nil];
     [self setGoalRateLabel:nil];
     [self setHeaderLabel:nil];
+    [self setSaveButton:nil];
+    [self setCancelButton:nil];
     [super viewDidUnload];
 }
 

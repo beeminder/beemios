@@ -786,7 +786,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xgj-3b-5Fn">
-                                <rect key="frame" x="204" y="15" width="96" height="33"/>
+                                <rect key="frame" x="204" y="14" width="96" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Dial Road">
@@ -878,14 +878,14 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Goal date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8tV-Ht-q7P">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Goal date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8tV-Ht-q7P">
                                 <rect key="frame" x="23" y="128" width="74" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Per week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SgN-fC-pAk">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Per week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SgN-fC-pAk">
                                 <rect key="frame" x="225" y="128" width="71" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1005,6 +1005,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="SoB-04-UrZ" id="zs2-Ai-lKg"/>
                         <outlet property="datePicker" destination="Fnl-aH-b4C" id="Hmc-ox-yD3"/>
                         <outlet property="delayLabel" destination="afE-aq-rfi" id="UNN-WI-eU1"/>
                         <outlet property="dismissToolbar" destination="MQc-z4-lDo" id="csH-xd-u5h"/>
@@ -1016,6 +1017,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="headerLabel" destination="EW2-Ca-mdS" id="BEy-6e-HCX"/>
                         <outlet property="negativeSignLabel" destination="RVc-On-rBT" id="Cyf-Ns-P1n"/>
                         <outlet property="rateTextField" destination="VYb-oD-b4s" id="tAS-4P-8Ft"/>
+                        <outlet property="saveButton" destination="LrR-NY-bwS" id="bhJ-n5-g6c"/>
                         <outletCollection property="textFieldCollection" destination="edC-Br-0Se" id="fvf-cJ-WFe"/>
                         <outletCollection property="textFieldCollection" destination="VYb-oD-b4s" id="LZg-SI-x1J"/>
                         <outletCollection property="textFieldCollection" destination="0Eb-ps-Dq7" id="hZb-27-KCf"/>
@@ -1199,6 +1201,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="editingDidBegin:"/>
                 <relationship kind="action" name="save:"/>
                 <relationship kind="action" name="switchValueChanged:" candidateClass="DCRoundSwitch"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
@@ -1213,6 +1216,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
                 <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
                 <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>
             </relationships>
