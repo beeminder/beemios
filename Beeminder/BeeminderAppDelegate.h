@@ -57,4 +57,6 @@ extern NSString *const FBSessionStateChangedNotification;
 + (UIColor *)cloudsColor;
 + (UIColor *)sunflowerColor;
 + (UIColor *)concreteColor;
++ (UIColor *)nephritisColor;
+
 @end

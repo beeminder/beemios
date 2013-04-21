@@ -77,7 +77,7 @@
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
     self.goalDateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
-    self.goalDateSwitch.onTintColor = [UIColor blackColor];
+    self.goalDateSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
 
     CGRect defaultFrame = self.goalDateSwitch.frame;
     self.goalDateSwitch.frame = CGRectMake(15, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
@@ -89,7 +89,7 @@
     self.goalValueSwitch.onText = @"EDIT";
     self.goalValueSwitch.offText = @"INFER";
     self.goalValueSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
-    self.goalValueSwitch.onTintColor = [UIColor blackColor];
+    self.goalValueSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.goalValueSwitch.frame = CGRectMake(115, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalValueSwitch.tag = 1;
     [self.view addSubview:self.goalValueSwitch];
@@ -99,7 +99,7 @@
     self.rateSwitch.onText = @"EDIT";
     self.rateSwitch.offText = @"INFER";
     self.rateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
-    self.rateSwitch.onTintColor = [UIColor blackColor];
+    self.rateSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.rateSwitch.frame = CGRectMake(215, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.rateSwitch.tag = 2;
     [self.view addSubview:self.rateSwitch];

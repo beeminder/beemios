@@ -683,6 +683,11 @@ NSString *const FBSessionStateChangedNotification =
     return [UIColor colorWithRed:149.0f/255.0 green:165.0f/255.0 blue:166.0f/255.0 alpha:1.0];
 }
 
++ (UIColor *)nephritisColor
+{
+    return [UIColor colorWithRed:39.0f/255.0f green:174.0f/255.0f blue:96.0f/255.0f alpha:1.0f];
+}
+
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
