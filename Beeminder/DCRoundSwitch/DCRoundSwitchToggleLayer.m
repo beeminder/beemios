@@ -66,16 +66,16 @@
 		CGContextFillRect(context, CGRectMake(0, 0, knobCenter, self.bounds.size.height));
 	}
     
-	// off tint color (white)
-	CGContextSetFillColorWithColor(context, [UIColor colorWithWhite:0.963 alpha:1.0].CGColor);
+	// off tint color (gray)
+	CGContextSetFillColorWithColor(context, [BeeminderAppDelegate silverColor].CGColor);
 	CGContextFillRect(context, CGRectMake(knobCenter, 0, self.bounds.size.width - knobCenter, self.bounds.size.height));
     
 	// knob shadow
-	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 1.5, [UIColor colorWithWhite:0.2 alpha:1.0].CGColor);
-	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.42 alpha:1.0].CGColor);
-	CGContextSetLineWidth(context, 1.0);
-	CGContextStrokeEllipseInRect(context, knobRect);
-	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, NULL);
+//	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 1.5, [UIColor colorWithWhite:0.2 alpha:1.0].CGColor);
+//	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.42 alpha:1.0].CGColor);
+//	CGContextSetLineWidth(context, 1.0);
+//	CGContextStrokeEllipseInRect(context, knobRect);
+//	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, NULL);
 	
     
 	// strings
@@ -85,12 +85,12 @@
     
 	// 'ON' state label (self.onString)
 	CGSize onTextSize = [self.onString sizeWithFont:self.labelFont];
-	CGPoint onTextPoint = CGPointMake((textSpaceWidth - onTextSize.width) / 2.0 + knobRadius * .15, floorf((self.bounds.size.height - onTextSize.height) / 2.0) + 1.0);
-	if (labelShadowColor)
-		[labelShadowColor set];
-	else
-		[[UIColor colorWithWhite:0.45 alpha:1.0] set]; // .2 & .4
-	[self.onString drawAtPoint:CGPointMake(onTextPoint.x, onTextPoint.y - 1.0) withFont:self.labelFont];
+	CGPoint onTextPoint = CGPointMake((textSpaceWidth - onTextSize.width) / 2.0 + knobRadius * .15, floorf((self.bounds.size.height - onTextSize.height) / 2.0)/* + 1.0*/);
+//	if (labelShadowColor)
+//		[labelShadowColor set];
+//	else
+//		[[UIColor colorWithWhite:0.45 alpha:1.0] set]; // .2 & .4
+//	[self.onString drawAtPoint:CGPointMake(onTextPoint.x, onTextPoint.y/* - 1.0*/) withFont:self.labelFont];
 	if (labelColor)
 		[labelColor set];
 	else
@@ -99,16 +99,16 @@
     
 	// 'OFF' state label (self.offString)
 	CGSize offTextSize = [self.offString sizeWithFont:self.labelFont];
-	CGPoint offTextPoint = CGPointMake(textSpaceWidth + (textSpaceWidth - offTextSize.width) / 2.0 + knobRadius * .86, floorf((self.bounds.size.height - offTextSize.height) / 2.0) + 1.0);
-	if (labelShadowColor)
-		[labelShadowColor set];
-	else
-		[[UIColor whiteColor] set];
-	[self.offString drawAtPoint:CGPointMake(offTextPoint.x, offTextPoint.y + 1.0) withFont:self.labelFont];
+	CGPoint offTextPoint = CGPointMake(textSpaceWidth + (textSpaceWidth - offTextSize.width) / 2.0 + knobRadius * .86, floorf((self.bounds.size.height - offTextSize.height) / 2.0)/* + 1.0*/);
+//	if (labelShadowColor)
+//		[labelShadowColor set];
+//	else
+//		[[UIColor whiteColor] set];
+//	[self.offString drawAtPoint:CGPointMake(offTextPoint.x, offTextPoint.y/* + 1.0*/) withFont:self.labelFont];
 	if (labelColor)
 		[labelColor set];
 	else
-		[[UIColor colorWithWhite:0.52 alpha:1.0] set];
+		[[UIColor colorWithWhite:0.96 alpha:1.0] set];
 	[self.offString drawAtPoint:offTextPoint withFont:self.labelFont];
     
 	UIGraphicsPopContext();

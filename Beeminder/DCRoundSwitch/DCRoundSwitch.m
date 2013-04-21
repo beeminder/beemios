@@ -195,7 +195,7 @@
 
 - (void)useLayerMasking
 {
-	// turn of the manual clipping (done in toggleLayer's drawInContext:)
+	// turn off the manual clipping (done in toggleLayer's drawInContext:)
 	self.toggleLayer.clip = NO;
 	self.toggleLayer.drawOnTint = YES;
 	[self.toggleLayer setNeedsDisplay];
@@ -393,7 +393,7 @@
 		self.knobLayer.gripped = NO;
         
 		[CATransaction setCompletionBlock:^{
-			[self removeLayerMask];
+//			[self removeLayerMask];
 			self.ignoreTap = NO;
             
 			// send the action here so it get's sent at the end of the animations

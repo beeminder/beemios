@@ -19,8 +19,8 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 - (void)drawInContext:(CGContextRef)context
 {
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-	CGRect knobRect = CGRectInset(self.bounds, 2, 2);
-	CGFloat knobRadius = self.bounds.size.height - 2;
+	CGRect knobRect = CGRectInset(self.bounds, 4, 4);
+	CGFloat knobRadius = self.bounds.size.height - 4;
 
 	// knob outline (shadow is drawn in the toggle layer)
 	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.62 alpha:1.0].CGColor);
@@ -32,7 +32,8 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 	CGContextAddEllipseInRect(context, knobRect);
 	CGContextClip(context);
 	CGColorRef knobStartColor = [UIColor colorWithWhite:0.82 alpha:1.0].CGColor;
-	CGColorRef knobEndColor = (self.gripped) ? [UIColor colorWithWhite:0.894 alpha:1.0].CGColor : [UIColor colorWithWhite:0.996 alpha:1.0].CGColor;
+//	CGColorRef knobEndColor = (self.gripped) ? [UIColor colorWithWhite:0.894 alpha:1.0].CGColor : [UIColor colorWithWhite:0.996 alpha:1.0].CGColor;
+    CGColorRef knobEndColor = knobStartColor;
 	CGPoint topPoint = CGPointMake(0, 0);
 	CGPoint bottomPoint = CGPointMake(0, knobRadius + 2);
 	CGGradientRef knobGradient = CreateGradientRefWithColors(colorSpace, knobStartColor, knobEndColor);
@@ -43,7 +44,7 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, CGColorRef
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 0.5, 0.5));
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 1.5, 1.5));
 	CGContextEOClip(context);
-	CGGradientRef knobHighlightGradient = CreateGradientRefWithColors(colorSpace, [UIColor whiteColor].CGColor, [UIColor colorWithWhite:1.0 alpha:0.5].CGColor);
+	CGGradientRef knobHighlightGradient = CreateGradientRefWithColors(colorSpace, [UIColor whiteColor].CGColor, [UIColor colorWithWhite:1.0 alpha:1.0].CGColor);
 	CGContextDrawLinearGradient(context, knobHighlightGradient, topPoint, bottomPoint, 0);
 	CGGradientRelease(knobHighlightGradient);
 

@@ -70,8 +70,9 @@
     
     // Begin Emergency Cell
     self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
-    self.emergencySwitch = [[DCRoundSwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 0.0f, 0.0f)];
-//    self.emergencySwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.emergencySwitch = [[DCRoundSwitch alloc] init];
+    self.emergencySwitch.frame = CGRectMake(195.0f, 11.0f, 0.0f, 0.0f);
+    self.emergencySwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.emergencySwitch.on = [ABCurrentUser emergencyDayNotifications];
     [self.emergencySwitch addTarget:self action:@selector(emergencySwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     UILabel *emergencySwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(9.0f, 9.0f, 195.0f, 30.0f)];
