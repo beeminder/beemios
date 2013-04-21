@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */; };
+		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; };
+		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; };
+		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; };
 		A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
 		A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = A115119E167EAE2F009C7B91 /* sample_graph.png */; };
