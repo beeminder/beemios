@@ -99,14 +99,6 @@
     self.titleLabel.textAlignment = UITextAlignmentLeft;
     self.navigationItem.titleView = self.titleLabel;
     
-//    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back-caret"]]];
-//    
-//    UIBarButtonItem *backbutton =  [[UIBarButtonItem alloc] initWithTitle:@"Goals" style:UIBarButtonItemStyleBordered target:nil action:nil];
-//    
-//    [backbutton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
-//    self.navigationItem.backBarButtonItem = nil;
-//    self.navigationItem.leftBarButtonItem = back;
-    
     [self fetchEverything];
 }
 

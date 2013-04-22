@@ -630,7 +630,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings_tab_icon" id="Bkk-Jd-6Yr"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Bkk-Jd-6Yr"/>
                     <connections>
                         <outlet property="loggedInAsLabel" destination="vsw-7h-nsG" id="PGW-lY-fj2"/>
                         <outlet property="reloadAllGoalsButton" destination="oKW-qB-Pwp" id="T8c-TE-lB2"/>
@@ -1188,12 +1188,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="ios_logo_bee_110.png" width="112" height="110"/>
         <image name="ios_logo_bmndr_238.png" width="239" height="29"/>
         <image name="sample_graph" width="16" height="16"/>
-        <image name="settings_tab_icon" width="16" height="16"/>
+        <image name="settings" width="16" height="16"/>
         <image name="twitter-bird-dark-bgs.png" width="200" height="200"/>
         <image name="twitter-bird-light-bgs.png" width="200" height="200"/>
         <image name="your-goals-tab" width="16" height="16"/>
     </resources>
     <classes>
+        <class className="ABFlatSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ABFlatSwitch.h"/>
+        </class>
         <class className="AdvancedRoalDialViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
@@ -1203,15 +1206,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="goalDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalDateSwitch" candidateClass="DCRoundSwitch"/>
+                <relationship kind="outlet" name="goalDateSwitch" candidateClass="ABFlatSwitch"/>
                 <relationship kind="outlet" name="goalDateTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="goalRateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="goalValLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="goalValueSwitch" candidateClass="DCRoundSwitch"/>
+                <relationship kind="outlet" name="goalValueSwitch" candidateClass="ABFlatSwitch"/>
                 <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="headerLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateSwitch" candidateClass="DCRoundSwitch"/>
+                <relationship kind="outlet" name="rateSwitch" candidateClass="ABFlatSwitch"/>
                 <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
@@ -1233,9 +1236,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
         </class>
         <class className="DashboardNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
@@ -1263,6 +1263,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="GoalsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="IntroViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>

@@ -70,8 +70,6 @@
 		A18A487915CE20F600E314B7 /* GradientViews.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A487815CE20F600E314B7 /* GradientViews.m */; };
 		A18ECAD01625DF0B00F603A3 /* your-goals-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECACE1625DF0B00F603A3 /* your-goals-tab.png */; };
 		A18ECAD11625DF0B00F603A3 /* your-goals-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECACF1625DF0B00F603A3 /* your-goals-tab@2x.png */; };
-		A18ECAD41625E22900F603A3 /* settings_tab_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECAD21625E22900F603A3 /* settings_tab_icon.png */; };
-		A18ECAD51625E22900F603A3 /* settings_tab_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */; };
 		A1993CBD158FFE0A00011568 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBC158FFE0A00011568 /* Icon.png */; };
 		A1993CBF158FFEDC00011568 /* Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A1993CBE158FFEDC00011568 /* Icon-Retina.png */; };
 		A1993CC2159007B700011568 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1993CC1159007B700011568 /* SettingsViewController.m */; };
@@ -101,6 +99,8 @@
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
 		A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62DE17258FE800E69F70 /* back-caret@2x.png */; };
+		A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E21725934E00E69F70 /* settings@2x.png */; };
+		A1EA62E5172594CF00E69F70 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E4172594CE00E69F70 /* settings.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -269,8 +269,6 @@
 		A18A487815CE20F600E314B7 /* GradientViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientViews.m; sourceTree = "<group>"; };
 		A18ECACE1625DF0B00F603A3 /* your-goals-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "your-goals-tab.png"; sourceTree = "<group>"; };
 		A18ECACF1625DF0B00F603A3 /* your-goals-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "your-goals-tab@2x.png"; sourceTree = "<group>"; };
-		A18ECAD21625E22900F603A3 /* settings_tab_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_tab_icon.png; sourceTree = "<group>"; };
-		A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_tab_icon@2x.png"; sourceTree = "<group>"; };
 		A1993CBC158FFE0A00011568 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1993CBE158FFEDC00011568 /* Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Retina.png"; path = "../Icon-Retina.png"; sourceTree = "<group>"; };
 		A1993CC0159007B700011568 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -314,6 +312,8 @@
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A1DD32E115D074C30077B774 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A1EA62DE17258FE800E69F70 /* back-caret@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-caret@2x.png"; sourceTree = "<group>"; };
+		A1EA62E21725934E00E69F70 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		A1EA62E4172594CE00E69F70 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -585,8 +585,8 @@
 				A14AA6BB1661C35500D59A47 /* f_logo.png */,
 				A14AA6821661223400D59A47 /* twitter-bird-light-bgs.png */,
 				A16548F11723418C00FA995B /* twitter-bird-dark-bgs.png */,
-				A18ECAD21625E22900F603A3 /* settings_tab_icon.png */,
-				A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */,
+				A1EA62E4172594CE00E69F70 /* settings.png */,
+				A1EA62E21725934E00E69F70 /* settings@2x.png */,
 				A1EA62DE17258FE800E69F70 /* back-caret@2x.png */,
 				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
 				A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */,
@@ -928,8 +928,6 @@
 				A14A1FAC161E0F4200E2F3BB /* bg-noise@2x.png in Resources */,
 				A18ECAD01625DF0B00F603A3 /* your-goals-tab.png in Resources */,
 				A18ECAD11625DF0B00F603A3 /* your-goals-tab@2x.png in Resources */,
-				A18ECAD41625E22900F603A3 /* settings_tab_icon.png in Resources */,
-				A18ECAD51625E22900F603A3 /* settings_tab_icon@2x.png in Resources */,
 				A1879B6B1629DD4B007FF592 /* dark-cell-noise.png in Resources */,
 				A1879B6C1629DD4B007FF592 /* dark-cell-noise@2x.png in Resources */,
 				A14AA6831661223400D59A47 /* twitter-bird-light-bgs.png in Resources */,
@@ -944,6 +942,8 @@
 				A1C244E6172581C600844297 /* flat-refresh.png in Resources */,
 				A1C244EA1725860800844297 /* flat-refresh@2x.png in Resources */,
 				A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */,
+				A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */,
+				A1EA62E5172594CF00E69F70 /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
