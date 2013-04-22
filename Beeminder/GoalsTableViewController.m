@@ -90,19 +90,15 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
         [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
     }
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 40)];
-        self.titleLabel.text = @"Your Goals";
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.backgroundColor = [UIColor clearColor];
-        self.titleLabel.adjustsFontSizeToFitWidth = YES;
-        self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-        self.titleLabel.textAlignment = UITextAlignmentLeft;
-        self.navigationItem.titleView = self.titleLabel;
-    }
-    else {
-        self.title = @"Your Goals";
-    }
+
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,0, 227, 32)];
+    self.titleLabel.text = @"Your Goals";
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.titleLabel.textAlignment = UITextAlignmentCenter;
+    self.navigationItem.titleView = self.titleLabel;
     
     [self fetchEverything];
 }

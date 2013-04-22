@@ -34,6 +34,7 @@
 		A133F9FB158FB27F002F151A /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9EE158FB27F002F151A /* SBJsonUTF8Stream.m */; };
 		A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A133F9F0158FB27F002F151A /* SBJsonWriter.m */; };
 		A140F3E31665070B0082275A /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F3E21665070B0082275A /* NSDictionary+Merge.m */; };
+		A14696561725FBDF005BC5BF /* flat-refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14696551725FBDF005BC5BF /* flat-refresh@2x.png */; };
 		A149DB1A167D3B1B00458226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A149DB19167D3B1B00458226 /* IntroViewController.m */; };
 		A14A1FA7161E0B0000E2F3BB /* cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA5161E0B0000E2F3BB /* cell-noise.png */; };
 		A14A1FA8161E0B0000E2F3BB /* cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14A1FA6161E0B0000E2F3BB /* cell-noise@2x.png */; };
@@ -88,7 +89,6 @@
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1B64A471665B2CB0023CC40 /* ReminderCellUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */; };
 		A1C244E6172581C600844297 /* flat-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C244E5172581C600844297 /* flat-refresh.png */; };
-		A1C244EA1725860800844297 /* flat-refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C244E91725860800844297 /* flat-refresh@2x.png */; };
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
@@ -217,6 +217,7 @@
 		A140F3E11665070B0082275A /* NSDictionary+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Merge.h"; sourceTree = "<group>"; };
 		A140F3E21665070B0082275A /* NSDictionary+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Merge.m"; sourceTree = "<group>"; };
 		A144556F159A62FB00134BAF /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../andybrett-xcode-45-fixes/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		A14696551725FBDF005BC5BF /* flat-refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh@2x.png"; sourceTree = "<group>"; };
 		A149DB18167D3B1B00458226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		A149DB19167D3B1B00458226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		A14A1FA5161E0B0000E2F3BB /* cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell-noise.png"; sourceTree = "<group>"; };
@@ -296,7 +297,6 @@
 		A1B64A451665B2CB0023CC40 /* ReminderCellUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderCellUIView.h; sourceTree = "<group>"; };
 		A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderCellUIView.m; sourceTree = "<group>"; };
 		A1C244E5172581C600844297 /* flat-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh.png"; sourceTree = "<group>"; };
-		A1C244E91725860800844297 /* flat-refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh@2x.png"; sourceTree = "<group>"; };
 		A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedRoadDialViewController.h; sourceTree = "<group>"; };
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA034E16210374000A4E95 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -604,7 +604,7 @@
 				A1F82AC91601791B000E56DA /* Default-568h@2x.png */,
 				A1DD32DB15CF4E9B0077B774 /* Default@2x.png */,
 				A1C244E5172581C600844297 /* flat-refresh.png */,
-				A1C244E91725860800844297 /* flat-refresh@2x.png */,
+				A14696551725FBDF005BC5BF /* flat-refresh@2x.png */,
 				A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */,
 				A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */,
 				A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */,
@@ -946,13 +946,13 @@
 				A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */,
 				A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */,
 				A1C244E6172581C600844297 /* flat-refresh.png in Resources */,
-				A1C244EA1725860800844297 /* flat-refresh@2x.png in Resources */,
 				A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */,
 				A1EA62E5172594CF00E69F70 /* settings.png in Resources */,
 				A1EA62E717259E9600E69F70 /* cancel-button-background@2x.png in Resources */,
 				A1EA62E91725A1EE00E69F70 /* save-button-background@2x.png in Resources */,
 				A16A5CBA1725DE90007EE004 /* twitter-icon@2x.png in Resources */,
 				A15519931725E471004B3141 /* back-caret@2x.png in Resources */,
+				A14696561725FBDF005BC5BF /* flat-refresh@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
