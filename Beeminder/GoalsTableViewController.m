@@ -35,6 +35,13 @@
 {
     [super viewDidLoad];
     
+    self.tabBarController.tabBar.backgroundImage = [[UIImage alloc] init];
+    self.tabBarController.tabBar.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
+    self.tabBarController.tabBar.selectionIndicatorImage = [[UIImage alloc] init];
+    self.tabBarController.tabBar.selectedImageTintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
+    
     self.hasCompletedDataFetch = NO;
     
     [BeeminderAppDelegate requestPushNotificationAccess];
@@ -72,7 +79,13 @@
         return [g.burner isEqualToString:@"backburner"];
     }]]];
     
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+    UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flat-refresh"]];
+    view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fetchEverything)];
+    [view addGestureRecognizer:recognizer];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
+    self.refreshButton.target = self;
+    self.refreshButton.action = @selector(fetchEverything);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
         [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
@@ -86,10 +99,13 @@
     self.titleLabel.textAlignment = UITextAlignmentLeft;
     self.navigationItem.titleView = self.titleLabel;
     
-    UIBarButtonItem *backbutton =  [[UIBarButtonItem alloc] initWithTitle:@"Goals" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    
-    [backbutton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
-    self.navigationItem.backBarButtonItem = backbutton;
+//    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back-caret"]]];
+//    
+//    UIBarButtonItem *backbutton =  [[UIBarButtonItem alloc] initWithTitle:@"Goals" style:UIBarButtonItemStyleBordered target:nil action:nil];
+//    
+//    [backbutton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
+//    self.navigationItem.backBarButtonItem = nil;
+//    self.navigationItem.leftBarButtonItem = back;
     
     [self fetchEverything];
 }
@@ -362,7 +378,13 @@
 - (void)replaceRefreshButton
 {
     [self.activityIndicator stopAnimating];
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(fetchEverything)];
+    UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flat-refresh"]];
+    view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fetchEverything)];
+    [view addGestureRecognizer:recognizer];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
+    self.refreshButton.target = self;
+    self.refreshButton.action = @selector(fetchEverything);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
     

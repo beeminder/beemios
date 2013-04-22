@@ -37,6 +37,20 @@
 {
     [super viewDidLoad];
     
+    UIImage *buttonImage = [UIImage imageNamed:@"back-caret"];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
+    
     self.scrollView.clipsToBounds = YES;
     self.scrollView.contentSize = self.graphImageView.image.size;
     self.scrollView.delegate = self;
@@ -79,7 +93,13 @@
     [self adjustForFrozen];
     [self startTimer];
     
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
+    UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flat-refresh"]];
+    view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshGoalData)];
+    [view addGestureRecognizer:recognizer];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
+    self.refreshButton.target = self;
+    self.refreshButton.action = @selector(fetchEverything);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 32)];
@@ -127,7 +147,13 @@
 - (void)replaceRefreshButton
 {
     [self.activityIndicator stopAnimating];
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshGoalData)];
+    UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flat-refresh"]];
+    view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshGoalData)];
+    [view addGestureRecognizer:recognizer];
+    self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
+    self.refreshButton.target = self;
+    self.refreshButton.action = @selector(fetchEverything);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
@@ -167,6 +193,11 @@
     }];
     
     [operation start];
+}
+
+- (void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setInitialDatapoint

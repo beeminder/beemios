@@ -88,6 +88,8 @@
 		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B5F8B1159280F6004D9FF0 /* RoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */; };
 		A1B64A471665B2CB0023CC40 /* ReminderCellUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */; };
+		A1C244E6172581C600844297 /* flat-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C244E5172581C600844297 /* flat-refresh.png */; };
+		A1C244EA1725860800844297 /* flat-refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C244E91725860800844297 /* flat-refresh@2x.png */; };
 		A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */; };
 		A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */; };
 		A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CA215915935AE200AE16FB /* QuartzCore.framework */; };
@@ -98,6 +100,7 @@
 		A1DD32DC15CF4E9B0077B774 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DB15CF4E9B0077B774 /* Default@2x.png */; };
 		A1DD32DE15CF4E9F0077B774 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1DD32DD15CF4E9F0077B774 /* Default.png */; };
 		A1DD32E215D076FD0077B774 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DD32E115D074C30077B774 /* MBProgressHUD.m */; };
+		A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62DE17258FE800E69F70 /* back-caret@2x.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -290,6 +293,8 @@
 		A1B5F8B0159280F6004D9FF0 /* RoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoadDialViewController.m; sourceTree = "<group>"; };
 		A1B64A451665B2CB0023CC40 /* ReminderCellUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderCellUIView.h; sourceTree = "<group>"; };
 		A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderCellUIView.m; sourceTree = "<group>"; };
+		A1C244E5172581C600844297 /* flat-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh.png"; sourceTree = "<group>"; };
+		A1C244E91725860800844297 /* flat-refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh@2x.png"; sourceTree = "<group>"; };
 		A1C5DEE515C0C83D0088FDE5 /* AdvancedRoadDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedRoadDialViewController.h; sourceTree = "<group>"; };
 		A1C5DEE615C0C83D0088FDE5 /* AdvancedRoadDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedRoadDialViewController.m; sourceTree = "<group>"; };
 		A1CA034E16210374000A4E95 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -308,6 +313,7 @@
 		A1DD32DD15CF4E9F0077B774 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		A1DD32E015D074C30077B774 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A1DD32E115D074C30077B774 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A1EA62DE17258FE800E69F70 /* back-caret@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-caret@2x.png"; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -581,6 +587,7 @@
 				A16548F11723418C00FA995B /* twitter-bird-dark-bgs.png */,
 				A18ECAD21625E22900F603A3 /* settings_tab_icon.png */,
 				A18ECAD31625E22900F603A3 /* settings_tab_icon@2x.png */,
+				A1EA62DE17258FE800E69F70 /* back-caret@2x.png */,
 				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
 				A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */,
 				A14A1FA5161E0B0000E2F3BB /* cell-noise.png */,
@@ -590,6 +597,8 @@
 				A1DD32DD15CF4E9F0077B774 /* Default.png */,
 				A1F82AC91601791B000E56DA /* Default-568h@2x.png */,
 				A1DD32DB15CF4E9B0077B774 /* Default@2x.png */,
+				A1C244E5172581C600844297 /* flat-refresh.png */,
+				A1C244E91725860800844297 /* flat-refresh@2x.png */,
 				A1A7E44A15CE461000711D3A /* ios_logo_bee_110.png */,
 				A1A7E44B15CE461000711D3A /* ios_logo_bee_220.png */,
 				A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */,
@@ -932,6 +941,9 @@
 				A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */,
 				A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */,
 				A16548F21723418C00FA995B /* twitter-bird-dark-bgs.png in Resources */,
+				A1C244E6172581C600844297 /* flat-refresh.png in Resources */,
+				A1C244EA1725860800844297 /* flat-refresh@2x.png in Resources */,
+				A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

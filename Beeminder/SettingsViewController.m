@@ -39,6 +39,7 @@
     self.remindSwitch = [[ABFlatSwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 80.0f, 30.0f)];
     self.remindSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.remindSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
+    self.remindSwitch.knobInset = YES;
     self.remindSwitch.on = [[[NSUserDefaults standardUserDefaults] objectForKey:kRemindMeToEnterDataKey] boolValue];    
     [self.remindSwitch addTarget:self action:@selector(remindSwitchValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.reminderSwitchCell addSubview:self.remindSwitch];
