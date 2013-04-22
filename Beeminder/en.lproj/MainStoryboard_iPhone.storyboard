@@ -979,7 +979,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="cancel" destination="YqE-9n-0QD" id="TEN-xy-t0Z"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="126" style="plain" systemItem="fixedSpace" id="KnB-z5-mQN"/>
+                                    <barButtonItem width="95" style="plain" systemItem="fixedSpace" id="KnB-z5-mQN"/>
                                     <barButtonItem title="DIAL-IT-IN" style="done" id="LrR-NY-bwS">
                                         <connections>
                                             <action selector="save:" destination="YqE-9n-0QD" id="mdm-OC-Tj7"/>
@@ -1201,6 +1201,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
+                <relationship kind="action" name="editingDidBegin:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="switchValueChanged:" candidateClass="ABFlatSwitch"/>
                 <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
@@ -1263,9 +1266,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="GoalsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
-            </relationships>
         </class>
         <class className="IntroViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>

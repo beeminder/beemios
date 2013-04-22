@@ -209,7 +209,7 @@
     if (section == 0) {
         return self.frontburnerGoalObjects.count;
     }
-    return self.backburnerGoalObjects.count;
+    return self.backburnerGoalObjects.count + 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -236,7 +236,9 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.row >= self.goalObjects.count) {
+    if (indexPath.section == 1 &&
+        indexPath.row >= self.backburnerGoalObjects.count) {
+        cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
         cell.textLabel.text = @"Add New Goal";
         cell.detailTextLabel.text = @"";
     }

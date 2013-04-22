@@ -101,6 +101,8 @@
 		A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62DE17258FE800E69F70 /* back-caret@2x.png */; };
 		A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E21725934E00E69F70 /* settings@2x.png */; };
 		A1EA62E5172594CF00E69F70 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E4172594CE00E69F70 /* settings.png */; };
+		A1EA62E717259E9600E69F70 /* cancel-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E617259E9600E69F70 /* cancel-button-background@2x.png */; };
+		A1EA62E91725A1EE00E69F70 /* save-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EA62E81725A1EE00E69F70 /* save-button-background@2x.png */; };
 		A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D50158E9A850075D5DA /* UIKit.framework */; };
 		A1F03D53158E9A850075D5DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D52158E9A850075D5DA /* Foundation.framework */; };
 		A1F03D55158E9A850075D5DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F03D54158E9A850075D5DA /* CoreGraphics.framework */; };
@@ -314,6 +316,8 @@
 		A1EA62DE17258FE800E69F70 /* back-caret@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-caret@2x.png"; sourceTree = "<group>"; };
 		A1EA62E21725934E00E69F70 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		A1EA62E4172594CE00E69F70 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		A1EA62E617259E9600E69F70 /* cancel-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button-background@2x.png"; sourceTree = "<group>"; };
+		A1EA62E81725A1EE00E69F70 /* save-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-button-background@2x.png"; sourceTree = "<group>"; };
 		A1F03D4C158E9A850075D5DA /* Beeminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beeminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F03D50158E9A850075D5DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1F03D52158E9A850075D5DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -577,6 +581,8 @@
 			children = (
 				A16548EB1722EF8600FA995B /* Lato-Bol.ttf */,
 				A16548EC1722EF8600FA995B /* Lato-Reg.ttf */,
+				A1EA62E617259E9600E69F70 /* cancel-button-background@2x.png */,
+				A1EA62E81725A1EE00E69F70 /* save-button-background@2x.png */,
 				A115119E167EAE2F009C7B91 /* sample_graph.png */,
 				A115119F167EAE2F009C7B91 /* sample_graph@2x.png */,
 				A1192A8616658455004BED65 /* chevron.png */,
@@ -944,6 +950,8 @@
 				A1EA62DF17258FE800E69F70 /* back-caret@2x.png in Resources */,
 				A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */,
 				A1EA62E5172594CF00E69F70 /* settings.png in Resources */,
+				A1EA62E717259E9600E69F70 /* cancel-button-background@2x.png in Resources */,
+				A1EA62E91725A1EE00E69F70 /* save-button-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

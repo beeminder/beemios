@@ -34,8 +34,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.saveButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
-    [self.cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    [self.dismissToolbar setBackgroundImage:[[UIImage alloc] init] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    self.dismissToolbar.backgroundColor = [UIColor clearColor];
+    [self.saveButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato-Bold" size:14.0f], UITextAttributeFont, [UIColor clearColor], UITextAttributeTextShadowColor, [NSNumber numberWithInt:0], UITextAttributeTextShadowOffset, nil] forState:UIControlStateNormal];
+    [self.cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato" size:14.0f], UITextAttributeFont, [UIColor clearColor], UITextAttributeTextShadowColor, [NSNumber numberWithInt:0], UITextAttributeTextShadowOffset, nil] forState:UIControlStateNormal];
+
+    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button-background"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [self.saveButton setBackgroundImage:[UIImage imageNamed:@"save-button-background"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
     self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.delayLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
@@ -78,6 +84,7 @@
     self.goalDateSwitch.offText = @"INFER";
     self.goalDateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
     self.goalDateSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.goalDateSwitch.knobInset = YES;
 
     CGRect defaultFrame = self.goalDateSwitch.frame;
     self.goalDateSwitch.frame = CGRectMake(15, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
@@ -90,6 +97,7 @@
     self.goalValueSwitch.offText = @"INFER";
     self.goalValueSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
     self.goalValueSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.goalValueSwitch.knobInset = YES;
     self.goalValueSwitch.frame = CGRectMake(115, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.goalValueSwitch.tag = 1;
     [self.view addSubview:self.goalValueSwitch];
@@ -100,6 +108,7 @@
     self.rateSwitch.offText = @"INFER";
     self.rateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
     self.rateSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.rateSwitch.knobInset = YES;
     self.rateSwitch.frame = CGRectMake(215, 160, defaultFrame.size.width + 12, defaultFrame.size.height);
     self.rateSwitch.tag = 2;
     [self.view addSubview:self.rateSwitch];
