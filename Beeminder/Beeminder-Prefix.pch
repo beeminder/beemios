@@ -35,4 +35,5 @@
     #import "BeeminderAppDelegate.h"
     #import "ReminderCellUIView.h"
     #import "PRLabel.h"
+    #import "WhitePlaceholderTextField.h"
 #endif

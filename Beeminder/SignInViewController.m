@@ -29,19 +29,20 @@
 {
     [super viewDidLoad];
     
-    self.connectContainer.backgroundColor = [BeeminderAppDelegate grayButtonColor];
+    self.connectContainer.backgroundColor = [UIColor clearColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
 
-    self.view.backgroundColor = [BeeminderAppDelegate sunflowerColor];
+    self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
     self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
     self.alternativesLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
     self.emailTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
     self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    self.emailTextField.textColor = [UIColor darkGrayColor];
-    self.emailTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
-    self.passwordTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.emailTextField.textColor = [UIColor blackColor];
+
+    self.emailTextField.backgroundColor = [BeeminderAppDelegate silverColor];
+    self.passwordTextField.backgroundColor = [BeeminderAppDelegate silverColor];
     self.emailTextField.layer.borderColor = [UIColor clearColor].CGColor;
     self.passwordTextField.layer.borderColor = [UIColor clearColor].CGColor;
 }
