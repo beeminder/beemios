@@ -40,8 +40,9 @@
     self.goalWarningLabel.font = [UIFont fontWithName:@"Lato" size:12.0f];
     self.safetyBufferLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
     
-    self.safetyBufferSwitch = [[ABFlatSwitch alloc] initWithFrame:CGRectMake(20, 272, 79, 31)];
+    self.safetyBufferSwitch = [[ABFlatSwitch alloc] initWithFrame:CGRectMake(20, 272, 80, 30)];
     self.safetyBufferSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.safetyBufferSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
     self.safetyBufferSwitch.knobInset = YES;
     self.safetyBufferSwitch.on = YES;
     [self.scrollView addSubview:self.safetyBufferSwitch];

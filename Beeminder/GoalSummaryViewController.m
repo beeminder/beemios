@@ -102,14 +102,17 @@
     self.refreshButton.action = @selector(fetchEverything);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 32)];
-    self.titleLabel.text = self.title;
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.backgroundColor = [UIColor clearColor];
-    self.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-    self.titleLabel.textAlignment = UITextAlignmentLeft;
-    self.navigationItem.titleView = self.titleLabel;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 32)];
+        self.titleLabel.text = self.title;
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.backgroundColor = [UIColor clearColor];
+        self.titleLabel.adjustsFontSizeToFitWidth = YES;
+        self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+        self.titleLabel.textAlignment = UITextAlignmentLeft;
+        self.navigationItem.titleView = self.titleLabel;
+
+    }
     
     if (self.needsFreshData) {
         [self refreshGoalData];
