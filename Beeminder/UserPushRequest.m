@@ -74,7 +74,13 @@
             
             if (pushAssociations) {
                 for (Goal *g in user.goals) {
-                    [GoalPushRequest requestForGoal:g];
+                    if ([[additionalParams objectForKey:@"safety_buffer"] isEqualToString:@"true"]) {
+                        [GoalPushRequest requestForGoal:g additionalParams: [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"safety_buffer", nil] withSuccessBlock: nil];
+                    }
+                    else {
+                        [GoalPushRequest requestForGoal:g];
+                    }
+
                 }
             }
             if (successBlock) successBlock();

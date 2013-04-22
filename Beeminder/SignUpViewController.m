@@ -199,11 +199,14 @@
     
     NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:self.usernameTextField.text, @"username", self.emailTextField.text, @"email", [NSTimeZone systemTimeZone].name, @"timezone", nil];
     
-    NSDictionary *paramsDict;
+    NSMutableDictionary *paramsDict;
     if ([self.passwordTextField.text length] > 0) {
-        paramsDict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
+        paramsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.passwordTextField.text, @"password", nil];
     }
-
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"newUserSafetyBufferKey"] boolValue]) {
+        [paramsDict setObject:@"true" forKey:@"safety_buffer"];
+    }
     
     user = [User writeToUserWithDictionary:userDict];
     user.goals = [NSSet setWithObject:[BeeminderAppDelegate sharedSessionGoal]];

@@ -393,6 +393,11 @@
         }
     }
     else {
+        if (!self.safetyBufferSwitch.hidden && self.safetyBufferSwitch.on) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"newUserSafetyBufferKey"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+
         [self performSegueWithIdentifier:@"segueToSignup" sender:self];
     }
 }

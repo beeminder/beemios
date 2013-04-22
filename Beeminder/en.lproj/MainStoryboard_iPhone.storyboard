@@ -1066,7 +1066,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sample_graph" id="yda-rM-O1c">
-                                <rect key="frame" x="49" y="170" width="222" height="150"/>
+                                <rect key="frame" x="49" y="164" width="222" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stick to your goals" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HI7-PL-77S">
@@ -1077,11 +1077,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="sX8-YJ-x4q">
-                                <rect key="frame" x="20" y="41" width="280" height="95"/>
+                                <rect key="frame" x="20" y="44" width="280" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Mind anything you can graph: weight, pushups, to-do tasks completed. Reply with data when Beeminder prompts you or connect with a service (like Fitbit, Withings, etc.) to report automatically.</string>
+                                    <fragment content="Beeminder helps you stick to you goals, which can be anything you can graph: weight, pushups, number of to-do tasks completed.">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <font key="NSFont" size="15" name="Helvetica"/>
@@ -1092,10 +1091,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bja-rx-s4h">
-                                <rect key="frame" x="20" y="137" width="280" height="25"/>
+                                <rect key="frame" x="20" y="131" width="280" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="We plot your progress on a Yellow Brick Road:">
+                                    <fragment content="We track progress on a Yellow Brick Road:">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <font key="NSFont" size="13" name="Helvetica"/>
@@ -1105,18 +1104,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wmr-6p-NvU">
-                                <rect key="frame" x="20" y="328" width="280" height="69"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you go off track, you pledge money to stay on the road the next time. If you go off track again, we charge you." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wmr-6p-NvU">
+                                <rect key="frame" x="20" y="322" width="280" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Keep all your data points on the road and Beeminder will always be free. Go off the road and you (literally) pay the price.">
-                                        <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <font key="NSFont" size="15" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1167,6 +1159,163 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter-bird-light-bgs.png" width="200" height="200"/>
         <image name="your-goals-tab" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="ABFlatSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ABFlatSwitch.h"/>
+        </class>
+        <class className="AdvancedRoalDialViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedRoalDialViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="delayLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dismissToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="goalDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalDateSwitch" candidateClass="ABFlatSwitch"/>
+                <relationship kind="outlet" name="goalDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalRateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalValLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalValueSwitch" candidateClass="ABFlatSwitch"/>
+                <relationship kind="outlet" name="goalValueTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="headerLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="negativeSignLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rateSwitch" candidateClass="ABFlatSwitch"/>
+                <relationship kind="outlet" name="rateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outletCollection" name="switchCollection" candidateClass="UISwitch"/>
+                <relationship kind="outletCollection" name="textFieldCollection" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AuthorizeBeeminderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AuthorizeBeeminderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="ChooseGoalTypeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseGoalTypeViewController.h"/>
+        </class>
+        <class className="ContractViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContractViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="DashboardNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardNavigationController.h"/>
+        </class>
+        <class className="GoalSummaryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalSummaryViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addDataButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dateStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="dateStepperLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="editGoalButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="graphImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="graphScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="inputTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lastDatapointLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rerailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timerLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unitsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="valueStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="valueStepperLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GoalsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalsTableViewController.h"/>
+        </class>
+        <class className="IntroViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dismissButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="header" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="para1" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="para2" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="para3" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MainTabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarViewController.h"/>
+        </class>
+        <class className="NewGoalViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewGoalViewController.h"/>
+        </class>
+        <class className="RoadDialViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoadDialViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="firstTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="goalDetailsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="goalWarningLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="initvalTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="roadDialButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="safetyBufferLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="safetyBufferSwitch" candidateClass="ABFlatSwitch"/>
+                <relationship kind="outlet" name="saveGoalButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="startFlatLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="startFlatSwitch" candidateClass="ABFlatSwitch"/>
+                <relationship kind="outlet" name="titleTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="signOutButtonPressed"/>
+                <relationship kind="outlet" name="loggedInAsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reloadAllGoalsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="signOutButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="SignInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignInViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="alternativesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="connectContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="facebookButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="signUpButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="twitterButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="SignUpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="usernameValueChanged"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordConfirmationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="promptLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="signUpWithFacebookButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="signUpWithServiceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="signUpWithTwitterButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="validationWarningLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startTrackingButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

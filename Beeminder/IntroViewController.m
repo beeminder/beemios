@@ -30,8 +30,8 @@
     UIFont *f = [UIFont fontWithName:@"Lato" size:15.0f];
     self.para1.font = f;
     self.para3.font = f;
-    self.para2.font = [UIFont fontWithName:@"Lato" size:13.0f];
-    self.header.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.para2.font = f;
+    self.header.font = [UIFont fontWithName:@"Lato-Bold" size:21.0f];
     self.dismissButton = [BeeminderAppDelegate standardGrayButtonWith:self.dismissButton];
 	// Do any additional setup after loading the view.
 }
