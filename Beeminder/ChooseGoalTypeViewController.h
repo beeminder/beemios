@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSArray *goalTypes;
 @property (nonatomic, strong) NSIndexPath *selectedAccessoryIndexPath;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 - (NSUInteger)supportedInterfaceOrientations;
 

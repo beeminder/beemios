@@ -13,4 +13,9 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *dismissButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *para1;
+@property (strong, nonatomic) IBOutlet UILabel *header;
+@property (strong, nonatomic) IBOutlet UILabel *para2;
+@property (strong, nonatomic) IBOutlet UILabel *para3;
+
 @end

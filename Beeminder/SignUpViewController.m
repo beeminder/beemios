@@ -41,9 +41,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    UIFont *f = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.usernameTextField.font = f;
+    self.emailTextField.font = f;
+    self.passwordConfirmationTextField.font = f;
+    self.passwordTextField.font = f;
+    self.signUpWithServiceLabel.font = f;
+    self.promptLabel.font = f;
+    self.validationWarningLabel.font = f;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
     self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"back-caret"];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backButton setImage:buttonImage forState:UIControlStateNormal];
+    
+    backButton.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
 }
+
+- (void)back
+{    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)fbSessionStateChanged:(NSNotification*)notification
 {

@@ -88,7 +88,7 @@
 
 - (NSString *)paramString
 {
-    NSString *pString = [NSString stringWithFormat:@"ephem=%d&goal_type=%@&slug=%@&title=%@", [self.ephem integerValue], self.goal_type, self.slug, AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding)];    
+    NSString *pString = [NSString stringWithFormat:@"goal_type=%@&slug=%@&title=%@", self.goal_type, self.slug, AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding)];    
     
     if (self.burner) {
         pString = [pString stringByAppendingFormat:@"&burner=%@", self.burner];
@@ -119,34 +119,34 @@
 
 - (NSDictionary *)paramsDict
 {
-    NSMutableDictionary *paramsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ephem, @"ephem", self.goal_type, @"goal_type", self.slug, @"slug", AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding), @"title", nil];
-    
+    NSMutableDictionary *pDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.goal_type, @"goal_type", self.slug, @"slug", AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding), @"title", nil];
+
     if (self.burner) {
-        [paramsDict setObject:self.burner forKey:@"burner"];
+        [pDict setObject:self.burner forKey:@"burner"];
     }
     
     if (self.goaldate) {
-        [paramsDict setObject:self.goaldate forKey:@"goaldate"];
+        [pDict setObject:self.goaldate forKey:@"goaldate"];
     }
     
     if (self.rate) {
-        [paramsDict setObject:self.rate forKey:@"rate"];
+        [pDict setObject:self.rate forKey:@"rate"];
     }
     
     if (self.goalval) {
-        [paramsDict setObject:self.goalval forKey:@"goalval"];
+        [pDict setObject:self.goalval forKey:@"goalval"];
     }
     
     if (self.initval) {
-        [paramsDict setObject:self.initval forKey:@"initval"];
+        [pDict setObject:self.initval forKey:@"initval"];
     }
     
     if (self.fitbit) {
-        [paramsDict setObject:@"true" forKey:@"fitbit"];
-        [paramsDict setObject:self.fitbit_field forKey:@"fitbit_field"];
+        [pDict setObject:@"true" forKey:@"fitbit"];
+        [pDict setObject:self.fitbit_field forKey:@"fitbit_field"];
     }
     
-    return [NSDictionary dictionaryWithDictionary:paramsDict];
+    return [NSDictionary dictionaryWithDictionary:pDict];
 }
 
 - (int)losedateDays

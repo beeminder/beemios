@@ -12,6 +12,7 @@
 #import "AdvancedRoadDialViewController.h"
 #import "ChooseGoalTypeViewController.h"
 #import "AuthorizeBeeminderViewController.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface RoadDialViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -19,10 +20,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *goalDetailsLabel;
 @property (strong, nonatomic) IBOutlet UITextField *firstTextField;
 @property (strong, nonatomic) IBOutlet UILabel *firstLabel;
-@property (strong, nonatomic) IBOutlet UISwitch *startFlatSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *ephemSwitch;
+@property (strong, nonatomic) IBOutlet ABFlatSwitch *startFlatSwitch;
 @property (strong, nonatomic) IBOutlet UIButton *roadDialButton;
-@property (strong, nonatomic) IBOutlet UILabel *ephemLabel;
 @property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) NSArray *goalSlugs;
 @property (strong, nonatomic) IBOutlet UIButton *saveGoalButton;
@@ -32,9 +31,10 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong, nonatomic) NSArray *fitbitDatasetTitles;
 @property (strong, nonatomic) NSArray *fitbitDatasetValues;
-@property (strong, nonatomic) IBOutlet UISwitch *safetyBufferSwitch;
+@property (strong, nonatomic) IBOutlet ABFlatSwitch *safetyBufferSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *safetyBufferLabel;
 @property (strong, nonatomic) IBOutlet UITextField *initvalTextField;
+@property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 
 - (NSUInteger)supportedInterfaceOrientations;
 

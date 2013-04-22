@@ -32,9 +32,21 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
+    
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 60, 40)];
+    self.titleLabel.text = @"Choose Goal Type";
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.titleLabel.textAlignment = UITextAlignmentLeft;
+    self.navigationItem.titleView = self.titleLabel;
+    
     [BeeminderAppDelegate clearSessionGoal];
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
+    self.tableView.backgroundColor = [BeeminderAppDelegate cloudsColor];
+//    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-noise"]];
     self.goalTypes = [[NSArray alloc] init];
     NSDictionary *goalTypesInfo = [BeeminderAppDelegate goalTypesInfo];
 
@@ -53,7 +65,7 @@
     button.userInteractionEnabled = YES;
     footerView.userInteractionEnabled = YES;
     [button setTitle:@"Cancel" forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0];
+    button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:17.0];
     
     [button addTarget:self action:@selector(cancelButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -91,6 +103,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Goal Type Cell"];
     NSDictionary *goalTypeInfo = [self.goalTypes objectAtIndex:indexPath.row];
     cell.textLabel.text = [goalTypeInfo objectForKey:@"publicName"];
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
     
     return cell;
 }

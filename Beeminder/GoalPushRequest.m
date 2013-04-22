@@ -72,7 +72,7 @@
         [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
     }
     
-    AFJSONRequestOperation *afRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    [[AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         if (response.statusCode == 200) {
             [[NSManagedObjectContext MR_defaultContext] MR_save];
@@ -89,9 +89,7 @@
             [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
             [[NSManagedObjectContext MR_defaultContext] MR_save];
         }
-    }];
-    
-    [afRequest start];
+    }] start];
     
     return goalPushRequest;
 }

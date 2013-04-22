@@ -280,7 +280,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row >= self.goalObjects.count) {
+    if (indexPath.section == 1 &&
+        indexPath.row >= self.backburnerGoalObjects.count) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
         UINavigationController *newGoalNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"newGoalNavigationController"];
         [self presentViewController:newGoalNavigationController animated:YES completion:nil];

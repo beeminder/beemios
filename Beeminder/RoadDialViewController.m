@@ -29,6 +29,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
+    self.goalDetailsLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.goalTypeLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    self.firstTextField.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.firstLabel.font = [UIFont fontWithName:@"Lato" size:12.0f];
+    self.titleTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.initvalTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.startFlatLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    self.goalWarningLabel.font = [UIFont fontWithName:@"Lato" size:12.0f];
+    self.safetyBufferLabel.font = [UIFont fontWithName:@"Lato" size:14.0f];
+    
+    self.safetyBufferSwitch = [[ABFlatSwitch alloc] initWithFrame:CGRectMake(20, 272, 79, 31)];
+    self.safetyBufferSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
+    self.safetyBufferSwitch.knobInset = YES;
+    self.safetyBufferSwitch.on = YES;
+    [self.scrollView addSubview:self.safetyBufferSwitch];
+    
+    
     self.fitbitDatasetTitles = [NSArray arrayWithObjects:@"Steps", @"Weight", @"Body Fat Percentage", @"Hours Slept", @"Active Score", nil];
     self.fitbitDatasetValues = [NSArray arrayWithObjects:@"steps", @"weight", @"body_fat", @"hours_slept", @"active_score", nil];
     [self hideFormFields];
@@ -38,6 +56,26 @@
     self.saveGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.saveGoalButton];
     [self fetchGoalSlugs];
     [self setGoalToDefaults];
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"back-caret"];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backButton setImage:buttonImage forState:UIControlStateNormal];
+    
+    backButton.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
+}
+
+
+- (void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showDefaultFormFields
@@ -47,8 +85,6 @@
     self.firstTextField.placeholder = @"Current value";
     self.firstTextField.hidden = NO;
     self.initvalTextField.hidden = YES;
-    self.ephemSwitch.hidden = NO;
-    self.ephemLabel.hidden = NO;
     self.startFlatLabel.hidden = NO;
     self.startFlatSwitch.hidden = NO;
     self.titleTextField.hidden = NO;
@@ -61,8 +97,6 @@
 {
     self.firstLabel.hidden = YES;
     self.firstTextField.hidden = YES;
-    self.ephemSwitch.hidden = YES;
-    self.ephemLabel.hidden = YES;
     self.startFlatLabel.hidden = YES;
     self.startFlatSwitch.hidden = YES;
     self.titleTextField.hidden = YES;
@@ -77,7 +111,7 @@
     self.firstLabel.text = kChooseFitbitFieldText;
     self.firstLabel.hidden = NO;
     self.firstTextField.text = @"Steps";
-    self.firstLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+    self.firstLabel.font = [UIFont fontWithName:@"Lato" size:17.0f];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -190,14 +224,13 @@
     [self setRoadDialButton:nil];
     [self setTitleTextField:nil];
     [self setSaveGoalButton:nil];
-    [self setEphemSwitch:nil];
     [self setStartFlatLabel:nil];
-    [self setEphemLabel:nil];
     [self setPickerView:nil];
     [self setGoalWarningLabel:nil];
     [self setSafetyBufferSwitch:nil];
     [self setSafetyBufferLabel:nil];
     [self setInitvalTextField:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 
@@ -278,7 +311,6 @@
     goal.user = [ABCurrentUser user];
     goal.title = self.titleTextField.text;
     goal.slug = [BeeminderAppDelegate slugFromTitle:goal.title];
-    goal.ephem = [NSNumber numberWithBool:self.ephemSwitch.on];
     if ([goal.goal_type isEqualToString:kFitbitPrivate]) {
         goal.fitbit = [NSNumber numberWithBool:YES];
         goal.fitbit_field = [self.fitbitDatasetValues objectAtIndex:[self.pickerView selectedRowInComponent:0]];
@@ -304,12 +336,12 @@
     
     if (!self.firstTextField.hidden && [self.firstTextField.text isEqualToString:@""]) {
         self.firstLabel.textColor = [UIColor redColor];
-        self.firstLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+        self.firstLabel.font = [UIFont fontWithName:@"Lato" size:17.0f];
         errors = YES;
     }
     else {
         self.firstLabel.textColor = [UIColor blackColor];
-        self.firstLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        self.firstLabel.font = [UIFont fontWithName:@"Lato" size:17.0f];
     }
     
     if ([self.titleTextField.text isEqualToString:@""]) {
