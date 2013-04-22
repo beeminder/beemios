@@ -1,24 +1,19 @@
 //
-//  DCRoundSwitch.m
+//  ABRoundSwitch.m
 //
-//  Created by Patrick Richards on 28/06/11.
+//  Created by Patrick Richards on 29/06/11.
+//  Modified by Andy Brett on 21/04/13
 //  MIT License.
 //
-//  http://twitter.com/patr
-//  http://domesticcat.com.au/projects
-//  http://github.com/domesticcatsoftware/DCRoundSwitch
-//
 
-#import "DCRoundSwitch.h"
-#import "DCRoundSwitchToggleLayer.h"
-#import "DCRoundSwitchOutlineLayer.h"
-#import "DCRoundSwitchKnobLayer.h"
+#import "ABFlatSwitch.h"
+#import "ABFlatSwitchToggleLayer.h"
+#import "ABFlatSwitchKnobLayer.h"
 
-@interface DCRoundSwitch () <UIGestureRecognizerDelegate>
+@interface ABFlatSwitch () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) DCRoundSwitchOutlineLayer *outlineLayer;
-@property (nonatomic, strong) DCRoundSwitchToggleLayer *toggleLayer;
-@property (nonatomic, strong) DCRoundSwitchKnobLayer *knobLayer;
+@property (nonatomic, strong) ABFlatSwitchToggleLayer *toggleLayer;
+@property (nonatomic, strong) ABFlatSwitchKnobLayer *knobLayer;
 @property (nonatomic, strong) CAShapeLayer *clipLayer;
 @property (nonatomic, assign) BOOL ignoreTap;
 
@@ -29,11 +24,12 @@
 
 @end
 
-@implementation DCRoundSwitch
-@synthesize outlineLayer, toggleLayer, knobLayer, clipLayer, ignoreTap;
+@implementation ABFlatSwitch
+@synthesize toggleLayer, knobLayer, clipLayer, ignoreTap;
 @synthesize on, onText, offText;
-@synthesize onTintColor;
-@synthesize labelFont, labelColor, labelShadowColor;
+@synthesize knobInset;
+@synthesize onTintColor, offTintColor;
+@synthesize labelFont, labelColor;
 
 #pragma mark -
 #pragma mark Init & Memory Managment
@@ -70,15 +66,11 @@
 }
 
 + (Class)knobLayerClass {
-    return [DCRoundSwitchKnobLayer class];
-}
-
-+ (Class)outlineLayerClass {
-    return [DCRoundSwitchOutlineLayer class];
+    return [ABFlatSwitchKnobLayer class];
 }
 
 + (Class)toggleLayerClass {
-    return [DCRoundSwitchToggleLayer class];
+    return [ABFlatSwitchToggleLayer class];
 }
 
 - (void)setup
@@ -116,21 +108,19 @@
 	// this is the knob, and sits on top of the layer stack. note that the knob shadow is NOT drawn here, it is drawn on the
 	// toggleLayer so it doesn't bleed out over the outlineLayer.
     
-	self.toggleLayer = [[[[self class] toggleLayerClass] alloc] initWithOnString:self.onText offString:self.offText onTintColor:[UIColor colorWithRed:0.000 green:0.478 blue:0.882 alpha:1.0]];
-	self.toggleLayer.drawOnTint = NO;
+	self.toggleLayer = [[[[self class] toggleLayerClass] alloc] initWithOnString:self.onText offString:self.offText onTintColor:[UIColor colorWithRed:0.000 green:0.478 blue:0.882 alpha:1.0] offTintColor:[UIColor colorWithRed:189.0f/255.0f green:195.0f/255.0f blue:199.0f/255.0f alpha:1.0f]];
+	self.toggleLayer.drawOnTint = YES;
+    self.toggleLayer.drawOffTint = YES;
 	self.toggleLayer.clip = YES;
 	[self.layer addSublayer:self.toggleLayer];
 	[self.toggleLayer setNeedsDisplay];
     
-	self.outlineLayer = [[[self class] outlineLayerClass] layer];
-	[self.toggleLayer addSublayer:self.outlineLayer];
-	[self.outlineLayer setNeedsDisplay];
-    
 	self.knobLayer = [[[self class] knobLayerClass] layer];
+    if (self.knobInset) self.knobLayer.inset = YES;
 	[self.layer addSublayer:self.knobLayer];
 	[self.knobLayer setNeedsDisplay];
     
-	self.toggleLayer.contentsScale = self.outlineLayer.contentsScale = self.knobLayer.contentsScale = [[UIScreen mainScreen] scale];
+	self.toggleLayer.contentsScale = self.knobLayer.contentsScale = [[UIScreen mainScreen] scale];
     
 	// tap gesture for toggling the switch
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
@@ -182,6 +172,7 @@
 	// turn off the manual clipping (done in toggleLayer's drawInContext:)
 	self.toggleLayer.clip = NO;
 	self.toggleLayer.drawOnTint = YES;
+    self.toggleLayer.drawOffTint = YES;
 	[self.toggleLayer setNeedsDisplay];
     
 	// create the layer mask and add that to the toggleLayer
@@ -202,7 +193,6 @@
     
 	// renable manual clipping (done in toggleLayer's drawInContext:)
 	self.toggleLayer.clip = YES;
-	self.toggleLayer.drawOnTint = self.on;
 	[self.toggleLayer setNeedsDisplay];
 }
 
@@ -210,7 +200,6 @@
 {
 	// repositions the underlying toggle and the layer mask, plus the knob
 	self.toggleLayer.mask.position = CGPointMake(-self.toggleLayer.frame.origin.x, 0.0);
-	self.outlineLayer.frame = CGRectMake(-self.toggleLayer.frame.origin.x, 0, self.bounds.size.width, self.bounds.size.height);
 	self.knobLayer.frame = CGRectMake(self.toggleLayer.frame.origin.x + self.toggleLayer.frame.size.width / 2.0 - self.knobLayer.frame.size.width / 2.0,
                                       -1,
                                       self.knobLayer.frame.size.width,
@@ -374,7 +363,8 @@
 		self.knobLayer.gripped = NO;
         
 		[CATransaction setCompletionBlock:^{
-//			[self removeLayerMask];
+            // don't remove the mask; if self.knobInset is YES, shows a semicircle of the other color.
+			// [self removeLayerMask];
 			self.ignoreTap = NO;
             
 			// send the action here so it get's sent at the end of the animations
@@ -395,6 +385,16 @@
 		[self.toggleLayer setNeedsDisplay];
 	}
 }
+
+- (void)setOffTintColor:(UIColor *)anOffTintColor
+{
+    if (anOffTintColor != offTintColor)
+        {
+            offTintColor = [anOffTintColor copy];
+            toggleLayer.offTintColor = anOffTintColor;
+            [toggleLayer setNeedsDisplay];
+        }
+    }
 
 - (void)layoutSubviews;
 {
@@ -462,14 +462,12 @@
 	}	
 }
 
-- (void)setLabelShadowColor:(UIColor *)newLabelShadowColor
+- (void)setKnobInset:(BOOL)newKnobInset
 {
-	if (newLabelShadowColor != labelShadowColor)
-	{
-		labelShadowColor = [newLabelShadowColor copy];
-		self.toggleLayer.labelShadowColor = labelShadowColor;
-		[self.toggleLayer setNeedsDisplay];
-	}	
+    if (newKnobInset != knobInset) {
+        self.knobLayer.inset = newKnobInset;
+        [self.toggleLayer setNeedsDisplay];
+    }
 }
 
 @end

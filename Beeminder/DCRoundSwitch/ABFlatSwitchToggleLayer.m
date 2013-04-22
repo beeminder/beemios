@@ -1,29 +1,27 @@
 //
-//  DCRoundSwitchToggleLayer.m
+//  ABRoundSwitchToggleLayer.m
 //
 //  Created by Patrick Richards on 29/06/11.
+//  Modified by Andy Brett on 21/04/13
 //  MIT License.
 //
-//  http://twitter.com/patr
-//  http://domesticcat.com.au/projects
-//  http://github.com/domesticcatsoftware/DCRoundSwitch
-//
 
-#import "DCRoundSwitchToggleLayer.h"
+#import "ABFlatSwitchToggleLayer.h"
 
-@implementation DCRoundSwitchToggleLayer
-@synthesize onString, offString, onTintColor;
-@synthesize drawOnTint;
+@implementation ABFlatSwitchToggleLayer
+@synthesize onString, offString, onTintColor, offTintColor;
+@synthesize drawOnTint, drawOffTint;
 @synthesize clip;
-@synthesize labelFont, labelColor, labelShadowColor;
+@synthesize labelFont, labelColor;
 
-- (id)initWithOnString:(NSString *)anOnString offString:(NSString *)anOffString onTintColor:(UIColor *)anOnTintColor
+- (id)initWithOnString:(NSString *)anOnString offString:(NSString *)anOffString onTintColor:(UIColor *)anOnTintColor offTintColor:(UIColor *)anOffTintColor
 {
 	if ((self = [super init]))
 	{
 		self.onString = anOnString;
 		self.offString = anOffString;
 		self.onTintColor = anOnTintColor;
+        self.offTintColor = anOffTintColor;
 	}
     
 	return self;
@@ -41,7 +39,6 @@
 {
 	CGFloat knobRadius = self.bounds.size.height - 2.0;
 	CGFloat knobCenter = self.bounds.size.width / 2.0;
-	CGRect knobRect = CGRectMake(knobCenter - knobRadius / 2.0, 1.0, knobRadius, knobRadius);
     
 	if (self.clip)
 	{
@@ -57,17 +54,11 @@
 		CGContextFillRect(context, CGRectMake(0, 0, knobCenter, self.bounds.size.height));
 	}
     
-	// off tint color (gray)
-	CGContextSetFillColorWithColor(context, [BeeminderAppDelegate silverColor].CGColor);
-	CGContextFillRect(context, CGRectMake(knobCenter, 0, self.bounds.size.width - knobCenter, self.bounds.size.height));
-    
-	// knob shadow
-//	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 1.5, [UIColor colorWithWhite:0.2 alpha:1.0].CGColor);
-//	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.42 alpha:1.0].CGColor);
-//	CGContextSetLineWidth(context, 1.0);
-//	CGContextStrokeEllipseInRect(context, knobRect);
-//	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, NULL);
-	
+	// off tint color
+    if (self.drawOffTint) {
+        CGContextSetFillColorWithColor(context, offTintColor.CGColor);
+        CGContextFillRect(context, CGRectMake(knobCenter, 0, self.bounds.size.width - knobCenter, self.bounds.size.height));
+    }
     
 	// strings
 	CGFloat textSpaceWidth = (self.bounds.size.width / 2) - (knobRadius / 2);
@@ -77,11 +68,7 @@
 	// 'ON' state label (self.onString)
 	CGSize onTextSize = [self.onString sizeWithFont:self.labelFont];
 	CGPoint onTextPoint = CGPointMake((textSpaceWidth - onTextSize.width) / 2.0 + knobRadius * .15, floorf((self.bounds.size.height - onTextSize.height) / 2.0)/* + 1.0*/);
-//	if (labelShadowColor)
-//		[labelShadowColor set];
-//	else
-//		[[UIColor colorWithWhite:0.45 alpha:1.0] set]; // .2 & .4
-//	[self.onString drawAtPoint:CGPointMake(onTextPoint.x, onTextPoint.y/* - 1.0*/) withFont:self.labelFont];
+
 	if (labelColor)
 		[labelColor set];
 	else
@@ -91,11 +78,7 @@
 	// 'OFF' state label (self.offString)
 	CGSize offTextSize = [self.offString sizeWithFont:self.labelFont];
 	CGPoint offTextPoint = CGPointMake(textSpaceWidth + (textSpaceWidth - offTextSize.width) / 2.0 + knobRadius * .86, floorf((self.bounds.size.height - offTextSize.height) / 2.0)/* + 1.0*/);
-//	if (labelShadowColor)
-//		[labelShadowColor set];
-//	else
-//		[[UIColor whiteColor] set];
-//	[self.offString drawAtPoint:CGPointMake(offTextPoint.x, offTextPoint.y/* + 1.0*/) withFont:self.labelFont];
+
 	if (labelColor)
 		[labelColor set];
 	else

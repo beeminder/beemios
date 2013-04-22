@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */; };
-		A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */; };
-		A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */; };
-		A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */; };
+		A106F6EE15C45BEB00D8C4E1 /* ABFlatSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E715C45BEB00D8C4E1 /* ABFlatSwitch.m */; };
+		A106F6EF15C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6E915C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.m */; };
+		A106F6F115C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A106F6ED15C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.m */; };
 		A1077BE21656912B00AB434F /* AuthorizeBeeminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */; };
 		A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B890515C761C1009E75F9 /* ChooseGoalTypeViewController.m */; };
 		A11511A0167EAE2F009C7B91 /* sample_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = A115119E167EAE2F009C7B91 /* sample_graph.png */; };
@@ -159,14 +158,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A106F6E615C45BEB00D8C4E1 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
-		A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
-		A106F6E815C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
-		A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
-		A106F6EA15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
-		A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
-		A106F6EC15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
-		A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
+		A106F6E615C45BEB00D8C4E1 /* ABFlatSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABFlatSwitch.h; sourceTree = "<group>"; };
+		A106F6E715C45BEB00D8C4E1 /* ABFlatSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABFlatSwitch.m; sourceTree = "<group>"; };
+		A106F6E815C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABFlatSwitchKnobLayer.h; sourceTree = "<group>"; };
+		A106F6E915C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABFlatSwitchKnobLayer.m; sourceTree = "<group>"; };
+		A106F6EC15C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABFlatSwitchToggleLayer.h; sourceTree = "<group>"; };
+		A106F6ED15C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABFlatSwitchToggleLayer.m; sourceTree = "<group>"; };
 		A1077BE01656912B00AB434F /* AuthorizeBeeminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeBeeminderViewController.h; sourceTree = "<group>"; };
 		A1077BE11656912B00AB434F /* AuthorizeBeeminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeBeeminderViewController.m; sourceTree = "<group>"; };
 		A10B890415C761C1009E75F9 /* ChooseGoalTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoalTypeViewController.h; sourceTree = "<group>"; };
@@ -413,18 +410,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */ = {
+		A106F6E515C45BEB00D8C4E1 /* ABFlatSwitch */ = {
 			isa = PBXGroup;
 			children = (
-				A106F6E615C45BEB00D8C4E1 /* DCRoundSwitch.h */,
-				A106F6E715C45BEB00D8C4E1 /* DCRoundSwitch.m */,
-				A106F6E815C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.h */,
-				A106F6E915C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m */,
-				A106F6EA15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.h */,
-				A106F6EB15C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m */,
-				A106F6EC15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.h */,
-				A106F6ED15C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m */,
+				A106F6E615C45BEB00D8C4E1 /* ABFlatSwitch.h */,
+				A106F6E715C45BEB00D8C4E1 /* ABFlatSwitch.m */,
+				A106F6E815C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.h */,
+				A106F6E915C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.m */,
+				A106F6EC15C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.h */,
+				A106F6ED15C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.m */,
 			);
+			name = ABFlatSwitch;
 			path = DCRoundSwitch;
 			sourceTree = "<group>";
 		};
@@ -672,7 +668,7 @@
 				A1CA034D16210354000A4E95 /* TPKeyboardAvoidingView */,
 				A1DD32DF15D074A90077B774 /* MBProgressHUD */,
 				A1AC0D7815CDA1AC00EFB21E /* ABCurrentUser */,
-				A106F6E515C45BEB00D8C4E1 /* DCRoundSwitch */,
+				A106F6E515C45BEB00D8C4E1 /* ABFlatSwitch */,
 				A188DFF215B8BB71009CBA60 /* AFNetworking */,
 				A1FCBEE215B7602600E5C955 /* MagicalRecord */,
 				A19D7C24159760860031ABED /* CoreData */,
@@ -1011,10 +1007,9 @@
 				A188E01015B8BB71009CBA60 /* AFXMLRequestOperation.m in Sources */,
 				A188E01115B8BB71009CBA60 /* UIImageView+AFNetworking.m in Sources */,
 				A1C5DEE715C0C83E0088FDE5 /* AdvancedRoadDialViewController.m in Sources */,
-				A106F6EE15C45BEB00D8C4E1 /* DCRoundSwitch.m in Sources */,
-				A106F6EF15C45BEB00D8C4E1 /* DCRoundSwitchKnobLayer.m in Sources */,
-				A106F6F015C45BEB00D8C4E1 /* DCRoundSwitchOutlineLayer.m in Sources */,
-				A106F6F115C45BEB00D8C4E1 /* DCRoundSwitchToggleLayer.m in Sources */,
+				A106F6EE15C45BEB00D8C4E1 /* ABFlatSwitch.m in Sources */,
+				A106F6EF15C45BEB00D8C4E1 /* ABFlatSwitchKnobLayer.m in Sources */,
+				A106F6F115C45BEB00D8C4E1 /* ABFlatSwitchToggleLayer.m in Sources */,
 				A10B890615C761C1009E75F9 /* ChooseGoalTypeViewController.m in Sources */,
 				A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */,
 				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,

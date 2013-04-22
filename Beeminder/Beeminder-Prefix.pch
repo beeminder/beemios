@@ -22,7 +22,7 @@
     #import "Goal+Resource.h"
     #import "User+Resource.h"
     #import "Datapoint.h"
-    #import "DCRoundSwitch.h"
+    #import "ABFlatSwitch.h"
     #import "ABCurrentUser.h"
     #import "GradientViews.h"
     #import "MBProgressHUD.h"

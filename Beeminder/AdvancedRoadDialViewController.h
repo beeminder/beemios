@@ -13,9 +13,9 @@
 
 @interface AdvancedRoalDialViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet DCRoundSwitch *goalDateSwitch;
-@property (strong, nonatomic) IBOutlet DCRoundSwitch *rateSwitch;
-@property (strong, nonatomic) IBOutlet DCRoundSwitch *goalValueSwitch;
+@property (strong, nonatomic) IBOutlet ABFlatSwitch *goalDateSwitch;
+@property (strong, nonatomic) IBOutlet ABFlatSwitch *rateSwitch;
+@property (strong, nonatomic) IBOutlet ABFlatSwitch *goalValueSwitch;
 @property (strong, nonatomic) IBOutlet UITextField *goalDateTextField;
 @property (strong, nonatomic) IBOutlet UITextField *rateTextField;
 @property (strong, nonatomic) IBOutlet UITextField *goalValueTextField;

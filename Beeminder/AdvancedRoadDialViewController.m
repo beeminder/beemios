@@ -73,7 +73,7 @@
     if ([self.presentingViewController isMemberOfClass:[NewGoalViewController class]]) {
         self.delayLabel.hidden = YES;
     }
-    self.goalDateSwitch = [[DCRoundSwitch alloc] init];
+    self.goalDateSwitch = [[ABFlatSwitch alloc] init];
     self.goalDateSwitch.onText = @"EDIT";
     self.goalDateSwitch.offText = @"INFER";
     self.goalDateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
@@ -85,7 +85,7 @@
     [self.view addSubview:self.goalDateSwitch];
     [self.switchCollection addObject:self.goalDateSwitch];
     
-    self.goalValueSwitch = [[DCRoundSwitch alloc] init];
+    self.goalValueSwitch = [[ABFlatSwitch alloc] init];
     self.goalValueSwitch.onText = @"EDIT";
     self.goalValueSwitch.offText = @"INFER";
     self.goalValueSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
@@ -95,7 +95,7 @@
     [self.view addSubview:self.goalValueSwitch];
     [self.switchCollection addObject:self.goalValueSwitch];
     
-    self.rateSwitch = [[DCRoundSwitch alloc] init];
+    self.rateSwitch = [[ABFlatSwitch alloc] init];
     self.rateSwitch.onText = @"EDIT";
     self.rateSwitch.offText = @"INFER";
     self.rateSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
@@ -330,13 +330,13 @@
     }
     int senderIndex = [self.textFieldCollection indexOfObject:sender];
     
-    DCRoundSwitch *senderSwitch = [self.switchCollection objectAtIndex:senderIndex];
+    ABFlatSwitch *senderSwitch = [self.switchCollection objectAtIndex:senderIndex];
     
     if (!senderSwitch.on) {
         [self enableTextFieldAtIndex:senderIndex];
         int turnOffIndex = (self.switchCollection.count == senderIndex + 1) ? 0 : senderIndex + 1;
         [self disableTextFieldAtIndex:turnOffIndex];
-        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
+        [(ABFlatSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
         [senderSwitch setOn:YES animated:YES ignoreControlEvents:YES];
     }
 }
@@ -355,7 +355,7 @@
     textField.textColor = [UIColor whiteColor];
 }
 
-- (IBAction)switchValueChanged:(DCRoundSwitch *)sender
+- (IBAction)switchValueChanged:(ABFlatSwitch *)sender
 {
     int senderIndex = [self.switchCollection indexOfObject:sender];
     if (sender.on) {
@@ -363,7 +363,7 @@
 
         [self enableTextFieldAtIndex:senderIndex];
         [self disableTextFieldAtIndex:turnOffIndex];
-        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
+        [(ABFlatSwitch *)[self.switchCollection objectAtIndex:turnOffIndex] setOn:NO animated:YES ignoreControlEvents:YES];
         [[self.textFieldCollection objectAtIndex:senderIndex] becomeFirstResponder];
     }
     else {
@@ -372,7 +372,7 @@
         int offSwitchIndex = [self offSwitchIndexExcludingIndex:senderIndex];
         
         [self enableTextFieldAtIndex:offSwitchIndex];
-        [(DCRoundSwitch *)[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES ignoreControlEvents:YES];
+        [(ABFlatSwitch *)[self.switchCollection objectAtIndex:offSwitchIndex] setOn:YES animated:YES ignoreControlEvents:YES];
         [[self.textFieldCollection objectAtIndex:senderIndex] resignFirstResponder];
         [[self.textFieldCollection objectAtIndex:offSwitchIndex] becomeFirstResponder];
     }
@@ -382,7 +382,7 @@
 {
     return [[self.switchCollection indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
-        DCRoundSwitch *theSwitch = (DCRoundSwitch *)obj;
+        ABFlatSwitch *theSwitch = (ABFlatSwitch *)obj;
         
         return (idx != excludedIndex && !theSwitch.on);
     }] lastIndex];

@@ -1,34 +1,33 @@
 //
-//  DCRoundSwitchKnobLayer.m
+//  ABRoundSwitchKnobLayer.m
 //
 //  Created by Patrick Richards on 29/06/11.
+//  Modified by Andy Brett on 21/04/13
 //  MIT License.
 //
-//  http://twitter.com/patr
-//  http://domesticcat.com.au/projects
-//  http://github.com/domesticcatsoftware/DCRoundSwitch
-//
 
-#import "DCRoundSwitchKnobLayer.h"
+#import "ABFlatSwitchKnobLayer.h"
 
 CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, UIColor* startColor, UIColor* endColor);
 
-@implementation DCRoundSwitchKnobLayer
+@implementation ABFlatSwitchKnobLayer
 @synthesize gripped;
 
 - (void)drawInContext:(CGContextRef)context
 {
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-	CGRect knobRect = CGRectInset(self.bounds, 4, 4);
-	CGFloat knobRadius = self.bounds.size.height - 4;
+    int insetRadius = 2;
+    if (self.inset) insetRadius = 5;
+	CGRect knobRect = CGRectInset(self.bounds, insetRadius, insetRadius);
+	CGFloat knobRadius = self.bounds.size.height - insetRadius;
 
-	// knob outline (shadow is drawn in the toggle layer)
+	// knob outline
 	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.62 alpha:1.0].CGColor);
 	CGContextSetLineWidth(context, 1.5);
 	CGContextStrokeEllipseInRect(context, knobRect);
 	CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, NULL);
 
-	// no gradient
+	// no gradient, just fill
 	CGContextAddEllipseInRect(context, knobRect);
 	CGContextClip(context);
 	UIColor* knobStartColor = [UIColor colorWithWhite:0.82 alpha:1.0];
@@ -39,7 +38,7 @@ CGGradientRef CreateGradientRefWithColors(CGColorSpaceRef colorSpace, UIColor* s
 	CGContextDrawLinearGradient(context, knobGradient, topPoint, bottomPoint, 0);
 	CGGradientRelease(knobGradient);
 
-	// knob inner highlight
+	// knob inner circle
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 0.5, 0.5));
 	CGContextAddEllipseInRect(context, CGRectInset(knobRect, 1.5, 1.5));
 	CGContextEOClip(context);

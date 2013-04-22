@@ -17,8 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *signOutButton;
 - (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) IBOutlet UIButton *reloadAllGoalsButton;
-@property (strong, nonatomic) DCRoundSwitch *remindSwitch;
-@property (strong, nonatomic) DCRoundSwitch *emergencySwitch;
+@property (strong, nonatomic) ABFlatSwitch *remindSwitch;
+@property (strong, nonatomic) ABFlatSwitch *emergencySwitch;
 @property (strong, nonatomic) PRLabel *remindAtPRLabel;
 @property (strong, nonatomic) UIDatePicker *reminderTimePicker;
 @property (strong, nonatomic) ReminderCellUIView *reminderSwitchCell;
