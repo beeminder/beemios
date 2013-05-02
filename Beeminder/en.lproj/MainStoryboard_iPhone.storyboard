@@ -1079,7 +1079,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="20" y="44" width="280" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Beeminder helps you stick to you goals, which can be anything you can graph: weight, pushups, number of to-do tasks completed.">
+                                    <fragment content="Beeminder helps you stick to your goals, which can be anything you can graph: weight, pushups, number of to-do tasks completed.">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <font key="NSFont" size="15" name="Helvetica"/>
