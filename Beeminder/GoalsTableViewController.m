@@ -35,6 +35,8 @@
 {
     [super viewDidLoad];
     
+    self.tableView.separatorColor = [UIColor clearColor];
+    
     self.tabBarController.tabBar.backgroundImage = [[UIImage alloc] init];
     self.tabBarController.tabBar.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
     self.tabBarController.tabBar.selectionIndicatorImage = [[UIImage alloc] init];
