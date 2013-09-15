@@ -37,8 +37,8 @@
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
     self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
     self.alternativesLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    self.emailTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.emailTextField.font = [UIFont fontWithName:@"Lato" size:22.0f];
+    self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:22.0f];
     self.emailTextField.textColor = [UIColor blackColor];
 
     self.emailTextField.backgroundColor = [BeeminderAppDelegate silverColor];

@@ -886,6 +886,11 @@
 				CLASSPREFIX = Beeminder;
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Andy Brett";
+				TargetAttributes = {
+					A1F03D4B158E9A850075D5DA = {
+						DevelopmentTeam = 8TW9V9HVES;
+					};
+				};
 			};
 			buildConfigurationList = A1F03D46158E9A850075D5DA /* Build configuration list for PBXProject "Beeminder" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1147,8 +1152,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Brett (96MUQF6TMK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Brett (96MUQF6TMK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1170,8 +1175,8 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E95BF734-0777-4329-A7DA-DAE82D1474A7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E95BF734-0777-4329-A7DA-DAE82D1474A7";
+				PROVISIONING_PROFILE = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1181,8 +1186,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1204,8 +1209,8 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
