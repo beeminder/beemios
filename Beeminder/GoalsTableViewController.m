@@ -210,7 +210,7 @@
     if (section == 0) {
         return self.frontburnerGoalObjects.count;
     }
-    return self.backburnerGoalObjects.count + 1;
+    return self.backburnerGoalObjects.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -239,9 +239,9 @@
     
     if (indexPath.section == 1 &&
         indexPath.row >= self.backburnerGoalObjects.count) {
-        cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
-        cell.textLabel.text = @"Add New Goal";
-        cell.detailTextLabel.text = @"";
+//        cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
+//        cell.textLabel.text = @"Add New Goal";
+//        cell.detailTextLabel.text = @"";
     }
     else {
         if (self.goalObjects.count > 0) {
@@ -272,6 +272,7 @@
 
             [cell addSubview:imageView];
             cell.backgroundColor = [BeeminderAppDelegate silverColor];
+            cell.backgroundColor = [UIColor whiteColor];
         }
     }
     return cell;
@@ -283,9 +284,9 @@
 {
     if (indexPath.section == 1 &&
         indexPath.row >= self.backburnerGoalObjects.count) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-        UINavigationController *newGoalNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"newGoalNavigationController"];
-        [self presentViewController:newGoalNavigationController animated:YES completion:nil];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+//        UINavigationController *newGoalNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"newGoalNavigationController"];
+//        [self presentViewController:newGoalNavigationController animated:YES completion:nil];
     }
     else {
         [self performSegueWithIdentifier:@"segueToGoalSummaryView" sender:self];

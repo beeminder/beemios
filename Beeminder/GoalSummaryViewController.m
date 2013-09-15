@@ -76,6 +76,11 @@
     [doubleTap setNumberOfTapsRequired:2];
     [twoFingerTap setNumberOfTouchesRequired:2];
     
+    // add gesture recognizer to go back
+    UISwipeGestureRecognizer *leftRecognizer= [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:leftRecognizer];
+    
     [self.graphImageView addGestureRecognizer:singleTap];
     [self.graphImageView addGestureRecognizer:doubleTap];
     [self.graphImageView addGestureRecognizer:twoFingerTap];
@@ -114,6 +119,11 @@
     if (self.needsFreshData) {
         [self refreshGoalData];
     }
+}
+
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
+{
+    [self back];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -337,6 +347,7 @@
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setGroupingSeparator:@""];
     
     
     NSString *inputText = [NSString stringWithFormat:@"%@ ", day];

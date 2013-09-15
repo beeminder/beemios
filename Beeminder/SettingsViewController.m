@@ -35,7 +35,7 @@
     self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     
     // Begin ReminderSwitchCell
-    self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithYPosition:52.0f showBottomBorder:NO];
+    self.reminderSwitchCell = [[ReminderCellUIView alloc] initWithYPosition:72.0f showBottomBorder:NO];
     self.remindSwitch = [[ABFlatSwitch alloc] initWithFrame:CGRectMake(195.0f, 11.0f, 80.0f, 30.0f)];
     self.remindSwitch.onTintColor = [BeeminderAppDelegate nephritisColor];
     self.remindSwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
@@ -60,7 +60,7 @@
     self.reminderTimePicker.minuteInterval = 5.0f;
     [self.reminderTimePicker addTarget:self action:@selector(timePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.reminderTimeCell = [[ReminderCellUIView alloc] initWithYPosition:103.0f showBottomBorder:YES];
+    self.reminderTimeCell = [[ReminderCellUIView alloc] initWithYPosition:123.0f showBottomBorder:YES];
     self.remindAtPRLabel = [[PRLabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 195.0f, 30.0f)];
     self.remindAtPRLabel.inputView = self.reminderTimePicker;
     self.remindAtPRLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
@@ -70,7 +70,7 @@
     [self.view addSubview:self.reminderTimeCell];
     
     // Begin Emergency Cell
-    self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:154.0 showBottomBorder:YES];
+    self.emergencySwitchCell = [[ReminderCellUIView alloc] initWithYPosition:174.0 showBottomBorder:YES];
     self.emergencySwitch = [[ABFlatSwitch alloc] init];
     self.emergencySwitch.frame = CGRectMake(195.0f, 11.0f, 80.0f, 30.0f);
     self.emergencySwitch.labelFont = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
@@ -93,7 +93,7 @@
     self.emergencyTimePicker.minuteInterval = 5.0f;
     [self.emergencyTimePicker addTarget:self action:@selector(emergencyTimePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.emergencyTimeCell = [[ReminderCellUIView alloc] initWithYPosition:205.0 showBottomBorder:YES];
+    self.emergencyTimeCell = [[ReminderCellUIView alloc] initWithYPosition:225.0 showBottomBorder:YES];
     self.emergencyTimePRLabel = [[PRLabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 235.0f, 30.0f)];
     self.emergencyTimePRLabel.inputView = self.emergencyTimePicker;
     self.emergencyTimePRLabel.font = [UIFont fontWithName:self.defaultFontString size:self.defaultFontSize];
