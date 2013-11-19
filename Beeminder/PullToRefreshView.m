@@ -87,7 +87,7 @@
 //		statusLabel.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
 //		statusLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		statusLabel.backgroundColor = [BeeminderAppDelegate silverColor];
-		statusLabel.textAlignment = UITextAlignmentCenter;
+		statusLabel.textAlignment = NSTextAlignmentCenter;
 		[self addSubview:statusLabel];
         
 		arrowImage = [[CALayer alloc] init];

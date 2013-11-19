@@ -99,7 +99,7 @@
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-    self.titleLabel.textAlignment = UITextAlignmentCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = self.titleLabel;
     
     [self fetchEverything];
