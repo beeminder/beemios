@@ -35,7 +35,6 @@
 #define TEXT_COLOR	 [UIColor blackColor]
 #define FLIP_ANIMATION_DURATION 0.18f
 
-
 @interface PullToRefreshView (Private)
 
 @property (nonatomic, assign) PullToRefreshViewState state;
@@ -159,7 +158,13 @@
 			[self showActivity:NO animated:NO];
             [self setImageFlipped:NO];
 			[self refreshLastUpdatedDate];
-            scrollView.contentInset = UIEdgeInsetsZero;
+            if (scrollView.isDragging || SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
+                scrollView.contentInset = UIEdgeInsetsZero;
+            }
+            else {
+                scrollView.contentInset = UIEdgeInsetsMake(44.0f, 0.0f, 0.0f, 0.0f);
+            }
+
 			break;
             
 		case PullToRefreshViewStateLoading:
@@ -209,9 +214,11 @@
 
 - (void)finishedLoading {
     if (state == PullToRefreshViewStateLoading) {
+
         [UIView animateWithDuration:0.3f animations:^{
             [self setState:PullToRefreshViewStateNormal];
         }];
+
     }
 }
 

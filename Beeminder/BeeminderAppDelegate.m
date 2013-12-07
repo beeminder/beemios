@@ -402,6 +402,7 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kHas20Key]) {
         NSArray *stores = [self.persistentStoreCoordinator persistentStores];
         
