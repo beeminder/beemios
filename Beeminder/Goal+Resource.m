@@ -56,19 +56,14 @@
     [GoalPushRequest requestForGoal:self additionalParams:additionalParams withSuccessBlock:successBlock];
 }
 
-- (void)pushRoadDialToRemoteWithSuccessBlock:(CompletionBlock)successBlock
-{
-    [GoalPushRequest roadDialRequestForGoal:self withSuccessBlock:successBlock];
-}
-
 - (NSString *)createURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/me/goals.json", kBaseURL, kAPIPrefix];
+    return @"/users/me/goals.json";
 }
 
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"%@/%@/users/me/goals/%@.json", kBaseURL, kAPIPrefix, self.slug];
+    return [NSString stringWithFormat:@"/users/me/goals/%@.json", self.slug];
 }
 
 - (NSString *)updateURL
@@ -312,35 +307,26 @@
 
 - (void)updateGraphImageThumbWithCompletionBlock:(void (^)())block
 {
-    NSURL *url = [NSURL URLWithString:self.thumb_url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300];
-    
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-        return image;
-    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        self.graph_image_thumb = image;
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.imageOperationManager GET:self.thumb_url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.graph_image_thumb = responseObject;
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         if (block) block();
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"%@", error);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //bar
     }];
-
-    [operation start];
 }
 
 - (void)updateGraphImageWithCompletionBlock:(void (^)())block
 {
-    NSURL *url = [NSURL URLWithString:self.graph_url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300];
-    
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-        return image;
-    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        self.graph_image = image;
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.imageOperationManager GET:self.graph_url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.graph_image = responseObject;
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         if (block) block();
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"%@", error);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //bar
     }];
-    [operation start];
 }
 
 @end

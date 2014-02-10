@@ -7,8 +7,6 @@
 //
 
 #import "GoalSummaryViewController.h"
-#import "AdvancedRoadDialViewController.h"
-#import "ContractViewController.h"
 
 @interface GoalSummaryViewController ()
 
@@ -36,20 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIImage *buttonImage = [UIImage imageNamed:@"back-caret"];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [button setImage:buttonImage forState:UIControlStateNormal];
-    
-    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
-    
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    self.navigationItem.leftBarButtonItem = customBarItem;
     
     self.scrollView.clipsToBounds = YES;
     self.scrollView.contentSize = self.graphImageView.image.size;
@@ -113,7 +97,7 @@
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-    self.titleLabel.textAlignment = UITextAlignmentCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = self.titleLabel;
     
     if (self.needsFreshData) {
@@ -176,33 +160,29 @@
     if (![MBProgressHUD HUDForView:self.view]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@&datapoints_count=3", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", @"3", @"datapoints_count", nil];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager GET:[NSString stringWithFormat:@"/users/me/goals/%@.json", [ABCurrentUser username]] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self replaceRefreshButton];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSDictionary *modGoalDict = [Goal processGoalDictFromServer:JSON];
+        NSDictionary *modGoalDict = [Goal processGoalDictFromServer:responseObject];
         
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
         
         [self loadGraphImageIgnoreCache:YES];
         [self loadGraphImageThumbIgnoreCache:YES];
-        if ([[JSON objectForKey:@"queued"] boolValue]) {
+        if ([[responseObject objectForKey:@"queued"] boolValue]) {
             [self pollUntilGraphIsNotUpdating];
         }
         [self adjustForFrozen];
         [self startTimer];
         [BeeminderAppDelegate updateApplicationIconBadgeCount];
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self replaceRefreshButton];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    
-    [operation start];
 }
 
 - (void)back {
@@ -505,7 +485,7 @@
 {
     [self saveDatapointLocally];
     
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug]];
     
@@ -515,9 +495,12 @@
     NSString *postString = [NSString stringWithFormat:@"access_token=%@&urtext=%@", [ABCurrentUser accessToken], self.inputTextField.text];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", self.inputTextField.text, @"urtext", nil];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:[NSString stringWithFormat:@"/users/me/goals/%@/datapoints.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
-        if ([JSON objectForKey:@"errors"]) {
+        if ([responseObject objectForKey:@"errors"]) {
             hud.labelText = @"Error";
         }
         else {
@@ -526,24 +509,25 @@
             [self refreshGoalData];
             Datapoint *datapoint = [Datapoint MR_createEntity];
             datapoint.goal = self.goalObject;
-            datapoint.serverId = [JSON objectForKey:@"id"];
-            datapoint.value = [JSON objectForKey:@"value"];
-            datapoint.timestamp = [JSON objectForKey:@"timestamp"];
-            datapoint.comment = [JSON objectForKey:@"comment"];
-            datapoint.updatedAt = [JSON objectForKey:@"updated_at"];
-            [[NSManagedObjectContext MR_defaultContext] MR_save];
+            datapoint.serverId = [responseObject objectForKey:@"id"];
+            datapoint.value = [responseObject objectForKey:@"value"];
+            datapoint.timestamp = [responseObject objectForKey:@"timestamp"];
+            datapoint.comment = [responseObject objectForKey:@"comment"];
+            datapoint.updatedAt = [responseObject objectForKey:@"updated_at"];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
             [self setDatapointsText];
             [self setInitialDatapoint];
         }
         hud.mode = MBProgressHUDModeText;
-
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         });
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    [operation start];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Saving...";
 }
@@ -567,23 +551,21 @@
         hud.labelText = @"Updating Graph...";
     }
 
-    NSURL *goalUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@.json?access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug, [ABCurrentUser accessToken]]];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", nil];
     
-    NSMutableURLRequest *goalRequest = [NSMutableURLRequest requestWithURL:goalUrl];
-    
-    AFJSONRequestOperation *goalOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:goalRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulGoalFetchJSON:JSON];
-        self.graphIsUpdating = [[JSON objectForKey:@"queued"] boolValue];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager GET:[NSString stringWithFormat:@"/users/me/goals/%@.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self successfulGoalFetchJSON:responseObject];
+        self.graphIsUpdating = [[responseObject objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
             [self loadGraphImageIgnoreCache:YES];
             [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        // nothing...
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //baz
     }];
-    
-    [goalOperation start];
 }
 
 - (void)updateTimer
@@ -605,19 +587,6 @@
         [self.graphPoller invalidate];
     }
     [super viewWillDisappear:animated];
-}
-
-- (IBAction)editGoalButtonPressed
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    AdvancedRoalDialViewController *advCon = [storyboard instantiateViewControllerWithIdentifier:@"advancedRoadDialViewController"];
-    advCon.goalObject = self.goalObject;
-    [self presentViewController:advCon animated:YES completion:nil];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [(AdvancedRoalDialViewController *)segue.destinationViewController setGoalObject: self.goalObject];
 }
 
 - (void)didReceiveMemoryWarning

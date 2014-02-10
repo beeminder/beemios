@@ -17,14 +17,11 @@
         [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
     }
     
-    NSURL *fetchUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@.json?associations=true&datapoints_count=3&diff_since=0&access_token=%@", kBaseURL, kAPIPrefix, [ABCurrentUser username], [ABCurrentUser accessToken]]];
-    
-    NSURLRequest *fetchRequest = [NSURLRequest requestWithURL:fetchUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:300];
-    
-    AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:fetchRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"associations", @"3", @"datapoints_count", @"0", @"diff_since", [ABCurrentUser username], @"access_token", nil];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager GET:@"/users/me.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSArray *goals = [JSON objectForKey:@"goals"];
+            NSArray *goals = [responseObject objectForKey:@"goals"];
             
             for (NSDictionary *goalDict in goals) {
                 
@@ -34,11 +31,9 @@
             }
             if (successBlock) successBlock();
         });
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorBlock) errorBlock();
     }];
-    [fetchOperation start];
 }
 
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict

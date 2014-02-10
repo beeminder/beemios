@@ -10,7 +10,6 @@
 #import <Accounts/Accounts.h>
 #import "TwitterAuthDelegate.h"
 #import "MainTabBarViewController.h"
-#import "GoalsTableViewController.h"
 
 @interface BeeminderAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -21,16 +20,13 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
+@property (strong, nonatomic) AFHTTPRequestOperationManager *operationManager;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *imageOperationManager;
 
 - (NSURL *)applicationDocumentsDirectory;
 
 + (UIButton *)standardGrayButtonWith:(UIButton *)button;
 + (UIColor *)grayButtonColor;
-+ (NSDictionary *)goalTypesInfo;
-+ (Goal *)sharedSessionGoal;
-+ (NSString *)slugFromTitle:(NSString *)title;
-+ (void)clearSessionGoal;
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 
@@ -39,8 +35,9 @@ extern NSString *const FBSessionStateChangedNotification;
 + (void)fetchAccessTokenForTwitterAccount:twitterAccount authParams:authParams withDelegate:(id<TwitterAuthDelegate>)delegate;
 + (void)getReverseAuthTokensForTwitterAccount:(ACAccount *)twitterAccount fromView:(UIView *)view withDelegate:(id<TwitterAuthDelegate>)delegate;
 
++ (NSString *)encodedString:(NSString *)string;
 + (NSString *)hmacSha1SignatureForBaseString:(NSString *)baseString andKey:(NSString *)key;
-+ (NSString *)addDeviceTokenToParamString:(NSString *)paramString;
++ (NSDictionary *)addDeviceTokenToParamsDict:(NSDictionary *)paramsDict;
 + (void)removeStoredOAuthDefaults;
 
 + (NSDate *)defaultEnterDataReminderDate;
@@ -49,7 +46,6 @@ extern NSString *const FBSessionStateChangedNotification;
 
 + (void)requestPushNotificationAccess;
 + (void)updateApplicationIconBadgeCount;
-- (void)refreshGoalsAndShowDashboard;
 
 + (void)removeDeviceTokenFromServer;
 

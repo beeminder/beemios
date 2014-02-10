@@ -58,6 +58,10 @@
 		<string>Lato-Reg.ttf</string>
 		<string>Lato-Bol.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIPrerenderedIcon</key>
@@ -67,28 +71,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarHidden</key>
-	<false/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLight</string>
-	<key>UIStatusBarTintParameters</key>
-	<dict>
-		<key>UINavigationBar</key>
-		<dict>
-			<key>Style</key>
-			<string>UIBarStyleBlack</string>
-			<key>TintColor</key>
-			<dict>
-				<key>Blue</key>
-				<real>0.3257869482040405</real>
-				<key>Green</key>
-				<real>0.3257869482040405</real>
-				<key>Red</key>
-				<real>0.3257869482040405</real>
-			</dict>
-			<key>Translucent</key>
-			<false/>
-		</dict>
-	</dict>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

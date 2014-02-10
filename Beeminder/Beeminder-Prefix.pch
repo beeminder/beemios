@@ -16,9 +16,7 @@
     #import <Foundation/Foundation.h>
     #import "CoreData+MagicalRecord.h"
     #import "constants.h"
-    #import "AFJSONRequestOperation.h"
-    #import "AFImageRequestOperation.h"
-    #import "AFHTTPClient.h"
+    #import "AFNetworking.h"
     #import "Goal+Resource.h"
     #import "User+Resource.h"
     #import "Datapoint.h"
@@ -35,5 +33,7 @@
     #import "BeeminderAppDelegate.h"
     #import "ReminderCellUIView.h"
     #import "PRLabel.h"
-    #import "WhitePlaceholderTextField.h"
+    #import "PullToRefreshView.h"
+    #import "SignInViewController.h"
+    #import "SettingsViewController.h"
 #endif

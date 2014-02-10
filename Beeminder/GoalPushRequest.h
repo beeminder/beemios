@@ -11,12 +11,10 @@ typedef void(^CompletionBlock)();
 
 @interface GoalPushRequest : NSObject
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal;
++ (void)requestForGoal:(Goal *)goal;
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock;
++ (void)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock;
 
-+ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock;
-
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
++ (void)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
 
 @end

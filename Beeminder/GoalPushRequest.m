@@ -10,88 +10,52 @@
 
 @implementation GoalPushRequest
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal
++ (void)requestForGoal:(Goal *)goal
 {
-    return [GoalPushRequest requestForGoal:goal additionalParams:nil withSuccessBlock:nil];
+    [GoalPushRequest requestForGoal:goal additionalParams:nil withSuccessBlock:nil];
 }
 
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock
++ (void)requestForGoal:(Goal *)goal additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock
 {
-    return [GoalPushRequest requestForGoal:goal roadDial:NO additionalParams:additionalParams withSuccessBlock:successBlock withErrorBlock:nil];
+    [GoalPushRequest requestForGoal:goal roadDial:NO additionalParams:additionalParams withSuccessBlock:successBlock withErrorBlock:nil];
 }
 
-+ (GoalPushRequest *)roadDialRequestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock
++ (void)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock
 {
-    return [GoalPushRequest requestForGoal:goal roadDial:YES additionalParams:nil withSuccessBlock:successBlock withErrorBlock:nil];
-}
-
-+ (GoalPushRequest *)requestForGoal:(Goal *)goal roadDial:(BOOL)roadDial additionalParams:(NSDictionary *)additionalParams withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock
-{
-    GoalPushRequest *goalPushRequest = [[GoalPushRequest alloc] init];
-    
     NSDictionary *allParams = [goal paramsDict];
+    allParams = [NSDictionary dictionaryByMerging:allParams with:[NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", nil]];
     
-    if (additionalParams) {
-        allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
-    }
+    if (additionalParams) allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
     
-    __block NSString *pString = @"";
-    
-    pString = [pString stringByAppendingFormat:@"access_token=%@", [ABCurrentUser accessToken]];
-    
-    [allParams enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isEqualToString:@"goaldate"]) {
-            pString = [pString stringByAppendingFormat:@"&%@=%f", key, [obj doubleValue]];
-        }
-        else if ([[allParams objectForKey:key] isMemberOfClass:[NSNumber class]]) {
-            pString = [pString stringByAppendingFormat:@"&%@=%g", key, [obj doubleValue]];
-        }
-        else {
-            pString = [pString stringByAppendingFormat:@"&%@=%@", key, obj];
-        }
-    }];
-    
-    NSURL *url;
-    NSMutableURLRequest *request;
+    NSString *url;
     if (goal.serverId) {
-        if (roadDial) {
-            url = [NSURL URLWithString:[[goal roadDialURL] stringByAppendingFormat:@"?%@", pString]];
-            request = [NSMutableURLRequest requestWithURL:url];
-            [request setHTTPMethod:@"POST"];
-        }
-        else {
-            url = [NSURL URLWithString:[[goal updateURL] stringByAppendingFormat:@"?%@", pString]];
-            request = [NSMutableURLRequest requestWithURL:url];
-            [request setHTTPMethod:@"PUT"];
-        }
+        allParams = [NSDictionary dictionaryByMerging:allParams with:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
+        url = [goal updateURL];
     }
     else {
-        url = [NSURL URLWithString:[goal createURL]];
-        request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];        
+        url = [goal createURL];
     }
     
-    [[AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
-        if (response.statusCode == 200) {
-            [[NSManagedObjectContext MR_defaultContext] MR_save];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:url parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (operation.response.statusCode == 200) {
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         }
         else if (!goal.serverId) {
             [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         }
         if (successBlock) successBlock();
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"%@", error);
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorBlock) errorBlock();
         if (!goal.serverId) {
             [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
-            [[NSManagedObjectContext MR_defaultContext] MR_save];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         }
-    }] start];
-    
-    return goalPushRequest;
+
+    }];
 }
 
 @end

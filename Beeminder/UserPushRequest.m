@@ -10,29 +10,16 @@
 
 @implementation UserPushRequest
 
-+ (UserPushRequest *)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams successBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock
++ (void)requestForUser:(User *)user pushAssociations:(BOOL)pushAssociations additionalParams:(NSDictionary *)additionalParams successBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock
 {
-    UserPushRequest *userPushRequest = [[UserPushRequest alloc] init];
-    
-    NSURL *url;
-    NSMutableURLRequest *request;
-    if (user.serverId) {
-        url = [NSURL URLWithString:[user updateURL]];
-        request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"PUT"];
-    }
-    else {
-        url = [NSURL URLWithString:[user createURL]];
-        request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"POST"];
-    }
-    
     NSDictionary *allParams = [user paramsDict];
     
-    if (additionalParams) {
-        allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
+    NSString *url = user.serverId ? [user updateURL] : [user createURL];
+    if (user.serverId) {
+        allParams = [allParams dictionaryByMergingWith:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
     }
-
+    
+    if (additionalParams) allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthTokenKey]) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -46,30 +33,11 @@
         allParams = [NSDictionary dictionaryByMerging:allParams with:facebookParams];
     }
     
-    NSArray *keys = [allParams allKeys];
-    
-    NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1 compare:obj2];
-    }];
-    
-    __block NSString *pString = @"";
-    
-    [sortedKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
-        pString = [pString stringByAppendingFormat:@"&%@=%@", key, AFURLEncodedStringFromStringWithEncoding([allParams objectForKey:key], NSUTF8StringEncoding)];
-    }];
-    
-    // remove first & character
-    pString = [pString substringFromIndex:1];
-    
-    pString = [BeeminderAppDelegate addDeviceTokenToParamString:pString];
-    
-    [request setHTTPBody:[pString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-
-    AFJSONRequestOperation *afRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        if (response.statusCode == 200) {
-            NSString *accessToken = [JSON objectForKey:@"access_token"];
-            NSString *username = [JSON objectForKey:@"username"];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:url parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (operation.response.statusCode == 200) {
+            NSString *accessToken = [responseObject objectForKey:@"access_token"];
+            NSString *username = [responseObject objectForKey:@"username"];
             [ABCurrentUser loginWithUsername:username accessToken:accessToken];
             
             if (pushAssociations) {
@@ -80,7 +48,6 @@
                     else {
                         [GoalPushRequest requestForGoal:g];
                     }
-
                 }
             }
             if (successBlock) successBlock();
@@ -88,15 +55,9 @@
         else {
             if (errorBlock) errorBlock();
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"%@", error);
-        NSLog(@"%@", response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorBlock) errorBlock();
     }];
-
-    [afRequest start];
-    
-    return userPushRequest;
 }
 
 @end

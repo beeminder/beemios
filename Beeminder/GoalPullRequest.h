@@ -10,6 +10,6 @@
 
 @interface GoalPullRequest : NSObject
 
-+ (GoalPullRequest *)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
++ (void)requestForGoal:(Goal *)goal withSuccessBlock:(CompletionBlock)successBlock withErrorBlock:(CompletionBlock)errorBlock;
 
 @end

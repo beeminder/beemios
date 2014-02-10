@@ -29,6 +29,20 @@
 {
     [super viewDidLoad];
 
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,0, 227, 32)];
+    titleLabel.text = @"Settings";
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
+    titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = titleLabel;
+    
+    // add gesture recognizer to go back
+    UISwipeGestureRecognizer *leftRecognizer= [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
+    [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:leftRecognizer];
+    
     self.defaultFontString = @"Lato";
     self.defaultFontSize = 15.0f;
     
@@ -127,6 +141,11 @@
     self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
 }
 
+- (void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)emergencySwitchValueChanged
 {
     [ABCurrentUser setEmergencyDayNotifications:self.emergencySwitch.on];
@@ -170,21 +189,14 @@
     
     NSInteger panic = 86400 - (60*(60*[components hour] + [components minute]));
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/me.json?access_token=%@&panic=%d", kBaseURL, kAPIPrefix,[ABCurrentUser accessToken], panic]];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:panic], @"panic", [ABCurrentUser accessToken], @"access_token", @"PUT", @"_method", nil];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPMethod:@"PUT"];
-
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:@"/users/me.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //foo
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //bar
     }];
-    
-    [operation start];
 }
 
 - (void)updateReminderTimePRLabel
@@ -254,16 +266,13 @@
 
 - (IBAction)reloadAllGoalsButtonPressed
 {
-    UINavigationController *navCon = [[[self tabBarController] viewControllers] objectAtIndex:0];
-    GoalsTableViewController *gtvCon = [[navCon viewControllers] objectAtIndex:0];
-    [ABCurrentUser resetLastUpdatedAt];
-    [gtvCon fetchEverything];
-    [[self tabBarController] setSelectedIndex:0];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadAllGoals" object:self];
 }
 
 - (IBAction)signOutButtonPressed {
     [ABCurrentUser logout];    
-    [[[self tabBarController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    SignInViewController *signInViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"signInViewController"];
+    [self presentViewController:signInViewController animated:YES completion:nil];
 }
 
 - (void)viewDidUnload {

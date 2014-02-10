@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GoalsTableViewController.h"
 #import "ReminderCellUIView.h"
 
 @interface SettingsViewController : UIViewController<UITextFieldDelegate>

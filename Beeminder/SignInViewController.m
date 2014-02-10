@@ -35,7 +35,6 @@
 
     self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.signInButton = [BeeminderAppDelegate standardGrayButtonWith:self.signInButton];
-    self.signUpButton = [BeeminderAppDelegate standardGrayButtonWith:self.signUpButton];
     self.alternativesLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
     self.emailTextField.font = [UIFont fontWithName:@"Lato" size:22.0f];
     self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:22.0f];
@@ -67,8 +66,8 @@
 
 - (void)formSubmitted
 {
-    NSString *paramString = [NSString stringWithFormat:@"beemios_secret=%@&user[login]=%@&user[password]=%@", kBeemiosSecret, AFURLEncodedStringFromStringWithEncoding(self.emailTextField.text, NSUTF8StringEncoding), AFURLEncodedStringFromStringWithEncoding(self.passwordTextField.text, NSUTF8StringEncoding)];
-    [self signInWithEncodedParamString:paramString];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:kBeemiosSecret, @"beemios_secret", [BeeminderAppDelegate encodedString:self.emailTextField.text], @"user[login]", [BeeminderAppDelegate encodedString:self.passwordTextField.text], @"user[password]", nil];
+    [self signInWithEncodedParams:params];
 }
 
 - (IBAction)signInButtonPressed:(UIButton *)sender
@@ -93,6 +92,10 @@
 
 - (IBAction)signInWithTwitterButtonPressed
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Signing into Twitter...";
+    hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
     [BeeminderAppDelegate removeStoredOAuthDefaults];
     [BeeminderAppDelegate requestAccessToTwitterFromView:self.view withDelegate:self];
 }
@@ -112,51 +115,46 @@
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:[result username] forKey:kFacebookUsernameKey];
                 [defaults setObject:[result id] forKey:kFacebookUserIdKey];
-                
-                NSString *paramString = [NSString stringWithFormat:@"email=%@&facebook_access_token=%@&facebook_username=%@&oauth_user_id=%@&provider=facebook", AFURLEncodedStringFromStringWithEncoding([result email], NSUTF8StringEncoding), FBSession.activeSession.accessToken, [result username], AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey], NSUTF8StringEncoding)];
-                [self signInWithEncodedParamString:paramString];
+                NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[BeeminderAppDelegate encodedString:[result email]], @"email", FBSession.activeSession.accessTokenData.accessToken, @"facebook_access_token", [result username], @"facebook_username", [BeeminderAppDelegate encodedString:[[NSUserDefaults standardUserDefaults] objectForKey:kFacebookUserIdKey]], @"oauth_user_id", @"facebook", @"provider", nil];
+                [self signInWithEncodedParams:[BeeminderAppDelegate addDeviceTokenToParamsDict:params]];
             }
         }];
     }
 }
 
-- (void)signInWithEncodedParamString:(NSString *)paramString
+- (void)signInWithEncodedParams:(NSDictionary *)params
 {
-    paramString = [BeeminderAppDelegate addDeviceTokenToParamString:paramString];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/private/sign_in.json", kBaseURL];
-    
-    NSURL *loginUrl = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *loginRequest = [NSMutableURLRequest requestWithURL:loginUrl];
-    
-    [loginRequest setHTTPMethod:@"POST"];
-    [loginRequest setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:loginRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [self successfulLoginJSON:JSON];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        if ([JSON objectForKey:@"errors"]) {
-            [self invalidLoginMessage:[[JSON objectForKey:@"errors"] objectForKey:@"message"]];
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:[NSString stringWithFormat:@"/api/private/sign_in.json"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self successfulLoginJSON:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+
+        if ([operation.responseObject isKindOfClass:[NSDictionary class]]) {
+            hud.labelText = [NSString stringWithFormat:@"Authentication failed: %@", [[operation.responseObject objectForKey:@"errors"] objectForKey:@"message"]];
         }
         else {
-            [self invalidLoginMessage:@"Could not reach Beeminder"];
+            hud.labelText = [NSString stringWithFormat:@"Authentication failed!"];
         }
-
+        hud.mode = MBProgressHUDModeText;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        });
     }];
+    
     [self.view endEditing:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Authenticating...";
     hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
-    
-    [operation start];
 }
 
 #pragma mark TwitterAuthDelegate methods
 
 - (void)didSuccessfullyAuthWithTwitter
 {
-    NSString *paramString = [NSString stringWithFormat:@"oauth_user_id=%@&provider=twitter", AFURLEncodedStringFromStringWithEncoding([[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUserIdKey], NSUTF8StringEncoding)];
-    [self signInWithEncodedParamString:paramString];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[BeeminderAppDelegate encodedString:[[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUserIdKey]], @"oauth_user_id", @"twitter", @"provider", nil];
+    [self signInWithEncodedParams:[BeeminderAppDelegate addDeviceTokenToParamsDict:params]];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

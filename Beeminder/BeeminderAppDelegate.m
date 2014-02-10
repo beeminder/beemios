@@ -20,70 +20,6 @@
 NSString *const FBSessionStateChangedNotification =
 @"com.beeminder.beeminder:FBSessionStateChangedNotification";
 
-+ (UIButton *)standardGrayButtonWith:(UIButton *)button
-{
-    button.backgroundColor = [BeeminderAppDelegate grayButtonColor];
-    button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
-
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    return button;
-}
-
-+ (UIColor *)grayButtonColor
-{
-    return [BeeminderAppDelegate concreteColor];
-}
-
-- (Goal *)sessionGoal
-{
-    if (!_sessionGoal) {
-        self.sessionGoal = [Goal MR_createEntity];
-    }
-    return _sessionGoal;
-}
-
-+ (Goal *)sharedSessionGoal
-{
-    BeeminderAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    return delegate.sessionGoal;
-}
-
-+ (void)clearSessionGoal
-{
-    BeeminderAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    delegate.sessionGoal = nil;
-}
-
-+ (NSString *)slugFromTitle:(NSString *)title
-{
-    NSRegularExpression *whitespaceRegex = [NSRegularExpression regularExpressionWithPattern:@"[\\s]" options:0 error:nil];
-    
-    NSString *noSpaces = [whitespaceRegex stringByReplacingMatchesInString:title options:0 range:NSMakeRange(0, title.length) withTemplate:@"-"];
-    
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^A-Za-z0-9\\-\\_]" options:0 error:nil];
-    
-    NSString *slug = [regex stringByReplacingMatchesInString:noSpaces options:0 range:NSMakeRange(0, noSpaces.length) withTemplate:@""];
-    
-    return slug;
-}
-
-+ (NSDictionary *)goalTypesInfo
-{
-    NSDictionary *fatLoser = [NSDictionary dictionaryWithObjectsAndKeys:kFatloserPrivate, kPrivateNameKey, kFatloserPublic, kPublicNameKey, kFatloserDetails, kDetailsKey, kFatloserInstructions, kInstructionsKey, [NSNumber numberWithInt:3], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
-    
-    NSDictionary *hustler = [NSDictionary dictionaryWithObjectsAndKeys:kHustlerPrivate, kPrivateNameKey, kHustlerPublic, kPublicNameKey, kHustlerDetails, kDetailsKey, kHustlerInstructions, kInstructionsKey, [NSNumber numberWithInt:1], kSortPriorityKey, [NSNumber numberWithBool:YES], kKyoomKey, nil];
-    
-    NSDictionary *biker = [NSDictionary dictionaryWithObjectsAndKeys:kBikerPrivate, kPrivateNameKey, kBikerPublic, kPublicNameKey, kBikerDetails, kDetailsKey, kBikerInstructions, kInstructionsKey, [NSNumber numberWithInt:2], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
-    
-    NSDictionary *inboxer = [NSDictionary dictionaryWithObjectsAndKeys:kInboxerPrivate, kPrivateNameKey, kInboxerPublic, kPublicNameKey, kInboxerDetails, kDetailsKey, kBikerInstructions, kInstructionsKey, [NSNumber numberWithInt:4], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
-    
-    NSDictionary *drinker = [NSDictionary dictionaryWithObjectsAndKeys:kDrinkerPrivate, kPrivateNameKey, kDrinkerPublic, kPublicNameKey, kDrinkerDetails, kDetailsKey, kDrinkerInstructions, kInstructionsKey, [NSNumber numberWithInt:5], kSortPriorityKey, [NSNumber numberWithBool:YES], kKyoomKey, nil];
-//    
-//    NSDictionary *fitbit = [NSDictionary dictionaryWithObjectsAndKeys:kFitbitPrivate, kPrivateNameKey, kFitbitPublic, kPublicNameKey, kFitbitDetails, kDetailsKey, kFitbitInstructions, kInstructionsKey, [NSNumber numberWithInt:6], kSortPriorityKey, [NSNumber numberWithBool:NO], kKyoomKey, nil];
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:fatLoser, kFatloserPrivate, hustler, kHustlerPrivate, biker, kBikerPrivate, inboxer, kInboxerPrivate, drinker, kDrinkerPrivate, nil];
-}
-
 + (NSDate *)defaultEnterDataReminderDate
 {
     NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
@@ -108,6 +44,12 @@ NSString *const FBSessionStateChangedNotification =
     
     NSDate *date = [calendar dateFromComponents:components];
     return date;
+}
+
+NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
+    static NSString * const kAFLegalCharactersToBeEscaped = @"?!@#$^&%*+=,:;'\"`<>()[]{}/\\|~ ";
+    
+	return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)kAFLegalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)));
 }
 
 + (void)scheduleEnterDataReminders
@@ -146,7 +88,6 @@ NSString *const FBSessionStateChangedNotification =
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         }
     }
-    
 }
 
 + (void)requestPushNotificationAccess
@@ -221,7 +162,7 @@ NSString *const FBSessionStateChangedNotification =
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     // Request access from the user to use their Twitter accounts.
-    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
         if(granted) {
             NSArray *twitterAccounts = [accountStore accountsWithAccountType:accountType];
             delegate.twitterAccounts = twitterAccounts;
@@ -262,7 +203,13 @@ NSString *const FBSessionStateChangedNotification =
                 
             }
             else {
-                // no accounts found
+                // show the alert on the main thread
+                int64_t delayInSeconds = 0.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [[[UIAlertView alloc] initWithTitle:@"No Twitter account found" message:@"Add a Twitter account in Settings to sign in with Twitter" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                });
+
             }
         }
         else {
@@ -306,7 +253,7 @@ NSString *const FBSessionStateChangedNotification =
     [params setValue:authParams forKey:@"x_reverse_auth_parameters"];
     
     NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-    TWRequest *request = [[TWRequest alloc] initWithURL:url parameters:params requestMethod:TWRequestMethodPOST];
+    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:url parameters:params];
     [request setAccount:twitterAccount];
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -402,7 +349,49 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
+    NSURL *baseURL = [NSURL URLWithString:kBaseURL];
+    self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    [self.operationManager setResponseSerializer:[AFJSONResponseSerializer serializer]];
+    NSOperationQueue *operationQueue = self.operationManager.operationQueue;
+    [self.operationManager.operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+    [self.operationManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [operationQueue setSuspended:NO];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                [operationQueue setSuspended:NO];
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                [operationQueue setSuspended:YES];
+                break;
+            default:
+                break;
+        }
+    }];
+    
+    self.imageOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    [self.imageOperationManager setResponseSerializer:[AFImageResponseSerializer serializer]];
+    NSOperationQueue *imageOperationQueue = self.imageOperationManager.operationQueue;
+    [self.imageOperationManager.operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+    [self.imageOperationManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [imageOperationQueue setSuspended:NO];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                [imageOperationQueue setSuspended:NO];
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                [imageOperationQueue setSuspended:YES];
+                break;
+            default:
+                break;
+        }
+    }];
+
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kHas20Key]) {
         NSArray *stores = [self.persistentStoreCoordinator persistentStores];
         
@@ -433,22 +422,12 @@ NSString *const FBSessionStateChangedNotification =
         [[NSUserDefaults standardUserDefaults] setObject:[payload objectForKey:@"slug"] forKey:kGoToGoalWithSlugKey];
     }
     [BeeminderAppDelegate scheduleEnterDataReminders];
-//    [BeeminderAppDelegate resendPendingDeviceTokenRequests];
     return YES;
 }
 
-+ (void)resendPendingDeviceTokenRequests
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    // Perhaps store the operation as NSData? Right now it complains "Attempt to insert non-property value "
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if ([defaults objectForKey:kPendingLogoutRequestKey]) {
-//        AFJSONRequestOperation *operation = [defaults objectForKey:kPendingLogoutRequestKey];
-//        [operation start];
-//    }
-//    if ([defaults objectForKey:kPendingDeviceTokenSyncKey]) {
-//        AFJSONRequestOperation *syncOperation = [defaults objectForKey:kPendingDeviceTokenSyncKey];
-//        [syncOperation start];
-//    }
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = self.operationManager.operationQueue.operationCount > 0;
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
@@ -456,9 +435,24 @@ NSString *const FBSessionStateChangedNotification =
     [BeeminderAppDelegate saveDeviceTokenToServer:deviceToken];
 }
 
-+ (NSString *)addDeviceTokenToParamString:(NSString *)paramString
++ (NSDictionary *)addDeviceTokenToParamsDict:(NSDictionary *)paramsDict
 {
-    return [paramString stringByAppendingFormat:@"&beemios_token=%@", AFURLEncodedStringFromStringWithEncoding([BeeminderAppDelegate hmacSha1SignatureForBaseString:paramString andKey:kBeemiosSigningKey], NSUTF8StringEncoding)];
+    NSString *baseString = @"";
+    NSArray *sortedKeys = [[paramsDict allKeys] sortedArrayUsingSelector: @selector(compare:)];
+    for (NSString *key in sortedKeys)
+        if (![key isEqualToString:@"_method"]) {
+            baseString = [baseString stringByAppendingString:[NSString stringWithFormat:@"%@=%@&", key, [paramsDict objectForKey:key]]];
+        }
+    
+    if (baseString.length > 0) baseString = [baseString substringToIndex:baseString.length - 1];
+    NSString *ios_token = [BeeminderAppDelegate hmacSha1SignatureForBaseString:baseString andKey:kBeemiosSigningKey];
+    NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:paramsDict];
+    [newDict setValue:ios_token forKey:@"beemios_token"];
+    return newDict;
+}
+
++ (NSString *)encodedString:(NSString *)string {
+    return AFURLEncodedStringFromStringWithEncoding(string, NSUTF8StringEncoding);
 }
 
 + (void)saveDeviceTokenToServer:(NSData *)deviceToken
@@ -475,23 +469,14 @@ NSString *const FBSessionStateChangedNotification =
     [[NSUserDefaults standardUserDefaults] setObject:deviceTokenString forKey:kLatestDeviceTokenKey];
     
     NSString *accessToken = [ABCurrentUser accessToken];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/device_tokens.json", kBaseURL, kPrivateAPIPrefix]];
-    
-    NSString *paramString = [NSString stringWithFormat:@"access_token=%@&device_token=%@", accessToken, deviceTokenString];
-    paramString = [BeeminderAppDelegate addDeviceTokenToParamString:paramString];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:accessToken, @"access_token", deviceTokenString, @"device_token", nil];
 
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPendingDeviceTokenSyncKey];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"%@", response);
-        NSLog(@"%@", error);
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:[NSString stringWithFormat:@"/%@/device_tokens.json", kPrivateAPIPrefix] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //foo
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //bar
     }];
-//    [[NSUserDefaults standardUserDefaults] setObject:operation forKey:kPendingDeviceTokenSyncKey];
-    [operation start];
 }
 
 + (void)removeDeviceTokenFromServer
@@ -499,26 +484,15 @@ NSString *const FBSessionStateChangedNotification =
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *deviceToken = [defaults objectForKey:kLatestDeviceTokenKey];
     
-    NSString *paramString = [NSString stringWithFormat:@"access_token=%@", [ABCurrentUser accessToken]];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"DELETE", @"_method", [ABCurrentUser accessToken], @"access_token", nil];
     
-    NSString *beemiosToken = [BeeminderAppDelegate addDeviceTokenToParamString:@""];
-    
-    paramString = [paramString stringByAppendingString:beemiosToken];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/device_tokens/%@.json?%@", kBaseURL, kPrivateAPIPrefix, deviceToken, paramString]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    [request setHTTPMethod:@"DELETE"];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        //        [defaults removeObjectForKey:kPendingLogoutRequestKey];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.operationManager POST:[NSString stringWithFormat:@"/%@/device_tokens/%@.json", kPrivateAPIPrefix, deviceToken] parameters:[BeeminderAppDelegate addDeviceTokenToParamsDict:params] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //foo
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //bar
     }];
-    //    [defaults setObject:operation forKey:kPendingLogoutRequestKey];
     
-    [operation start];
     [defaults removeObjectForKey:kLatestDeviceTokenKey];
 }
 
@@ -559,20 +533,7 @@ NSString *const FBSessionStateChangedNotification =
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [self refreshGoalsAndShowDashboard];
-}
-
-- (void)refreshGoalsAndShowDashboard
-{
-    UIViewController *rootCon = self.window.rootViewController;
-    if ([rootCon.presentedViewController isMemberOfClass:[MainTabBarViewController class]]) {
-        MainTabBarViewController *mtbvCon = (MainTabBarViewController *)rootCon.presentedViewController;
-        [mtbvCon setSelectedIndex:0];
-        UINavigationController *navCon = [[mtbvCon viewControllers] objectAtIndex:0];
-        GoalsTableViewController *gtvCon = [[navCon viewControllers] objectAtIndex:0];
-        [gtvCon fetchEverything];
-        [mtbvCon setSelectedIndex:0];
-    }
+//    [self refreshGoalsAndShowDashboard];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -580,7 +541,7 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to SSO
     // (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
-    [self refreshGoalsAndShowDashboard];
+//    [self refreshGoalsAndShowDashboard];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -662,6 +623,20 @@ NSString *const FBSessionStateChangedNotification =
     }
     
     return _persistentStoreCoordinator;
+}
+
++ (UIButton *)standardGrayButtonWith:(UIButton *)button
+{
+    button.backgroundColor = [BeeminderAppDelegate grayButtonColor];
+    button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:16.0f];
+    
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    return button;
+}
+
++ (UIColor *)grayButtonColor
+{
+    return [BeeminderAppDelegate concreteColor];
 }
 
 + (UIColor *)silverColor
