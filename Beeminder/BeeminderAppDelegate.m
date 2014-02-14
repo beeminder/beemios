@@ -208,6 +208,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [[[UIAlertView alloc] initWithTitle:@"No Twitter account found" message:@"Add a Twitter account in Settings to sign in with Twitter" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    [MBProgressHUD hideAllHUDsForView:view animated:YES];
                 });
 
             }
@@ -350,7 +351,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    
+
     NSURL *baseURL = [NSURL URLWithString:kBaseURL];
     self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     [self.operationManager setResponseSerializer:[AFJSONResponseSerializer serializer]];
@@ -372,7 +373,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
         }
     }];
     
-    self.imageOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    self.imageOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@""]];
     [self.imageOperationManager setResponseSerializer:[AFImageResponseSerializer serializer]];
     NSOperationQueue *imageOperationQueue = self.imageOperationManager.operationQueue;
     [self.imageOperationManager.operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
@@ -422,6 +423,8 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
         [[NSUserDefaults standardUserDefaults] setObject:[payload objectForKey:@"slug"] forKey:kGoToGoalWithSlugKey];
     }
     [BeeminderAppDelegate scheduleEnterDataReminders];
+
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     return YES;
 }
 

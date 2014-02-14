@@ -47,7 +47,7 @@
     User *user = [User MR_findFirstByAttribute:@"username" withValue:username inContext:defaultContext];
     
     Goal *goal = [user writeToGoalWithDictionary:goalDict];
-    [defaultContext MR_save];
+    [defaultContext MR_saveToPersistentStoreAndWait];
     return goal;
 }
 
@@ -56,14 +56,9 @@
     [GoalPushRequest requestForGoal:self additionalParams:additionalParams withSuccessBlock:successBlock];
 }
 
-- (NSString *)createURL
-{
-    return @"/users/me/goals.json";
-}
-
 - (NSString *)readURL
 {
-    return [NSString stringWithFormat:@"/users/me/goals/%@.json", self.slug];
+    return [NSString stringWithFormat:@"/%@/users/me/goals/%@.json", kAPIPrefix, self.slug];
 }
 
 - (NSString *)updateURL
@@ -76,45 +71,9 @@
     return [self readURL];
 }
 
-- (NSString *)roadDialURL
-{
-    return [NSString stringWithFormat:@"%@/%@/users/me/goals/%@/dial_road.json", kBaseURL, kAPIPrefix, self.slug];
-}
-
-- (NSString *)paramString
-{
-    NSString *pString = [NSString stringWithFormat:@"goal_type=%@&slug=%@&title=%@", self.goal_type, self.slug, AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding)];    
-    
-    if (self.burner) {
-        pString = [pString stringByAppendingFormat:@"&burner=%@", self.burner];
-    }
-    
-    if (self.goaldate) {
-        pString = [pString stringByAppendingFormat:@"&goaldate=%f", [self.goaldate doubleValue]];
-    }
-    
-    if (self.rate) {
-        pString = [pString stringByAppendingFormat:@"&rate=%g", [self.rate doubleValue]];
-    }
-    
-    if (self.goalval) {
-        pString = [pString stringByAppendingFormat:@"&goalval=%g", [self.goalval doubleValue]];
-    }
-    
-    if (self.initval) {
-        pString = [pString stringByAppendingFormat:@"&initval=%g", [self.initval doubleValue]];
-    }
-    
-    if (self.fitbit) {
-        pString = [pString stringByAppendingFormat:@"&fitbit=true&fitbit_field=%@", self.fitbit_field];
-    }
-    
-    return pString;
-}
-
 - (NSDictionary *)paramsDict
 {
-    NSMutableDictionary *pDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.goal_type, @"goal_type", self.slug, @"slug", AFURLEncodedStringFromStringWithEncoding(self.title, NSUTF8StringEncoding), @"title", nil];
+    NSMutableDictionary *pDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.goal_type, @"goal_type", self.slug, @"slug", [BeeminderAppDelegate encodedString:self.title], @"title", nil];
 
     if (self.burner) {
         [pDict setObject:self.burner forKey:@"burner"];
@@ -307,26 +266,31 @@
 
 - (void)updateGraphImageThumbWithCompletionBlock:(void (^)())block
 {
+    if (!self.thumb_url) return;
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.imageOperationManager GET:self.thumb_url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"%@", self.thumb_url);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.thumb_url] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+    [[delegate.imageOperationManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.graph_image_thumb = responseObject;
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         if (block) block();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //bar
-    }];
+    }] start];
 }
 
 - (void)updateGraphImageWithCompletionBlock:(void (^)())block
 {
+    if (!self.graph_url) return;
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.imageOperationManager GET:self.graph_url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.graph_url] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+    [[delegate.imageOperationManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.graph_image = responseObject;
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         if (block) block();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //bar
-    }];
+    }] start];
 }
 
 @end

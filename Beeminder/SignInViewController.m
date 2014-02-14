@@ -40,8 +40,8 @@
     self.passwordTextField.font = [UIFont fontWithName:@"Lato" size:22.0f];
     self.emailTextField.textColor = [UIColor blackColor];
 
-    self.emailTextField.backgroundColor = [BeeminderAppDelegate silverColor];
-    self.passwordTextField.backgroundColor = [BeeminderAppDelegate silverColor];
+    self.emailTextField.backgroundColor = [UIColor whiteColor];
+    self.passwordTextField.backgroundColor = [UIColor whiteColor];
     self.emailTextField.layer.borderColor = [UIColor clearColor].CGColor;
     self.passwordTextField.layer.borderColor = [UIColor clearColor].CGColor;
 }
@@ -59,11 +59,6 @@
     [super viewDidUnload];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 - (void)formSubmitted
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:kBeemiosSecret, @"beemios_secret", [BeeminderAppDelegate encodedString:self.emailTextField.text], @"user[login]", [BeeminderAppDelegate encodedString:self.passwordTextField.text], @"user[password]", nil];
@@ -73,11 +68,6 @@
 - (IBAction)signInButtonPressed:(UIButton *)sender
 {
     [self formSubmitted];
-}
-
-- (IBAction)signUpButtonPressed
-{
-    [self dismiss];
 }
 
 - (IBAction)signInWithFacebookButtonPressed
@@ -103,7 +93,7 @@
 - (void)fbSessionStateChanged:(NSNotification*)notification
 {
     if (FBSession.activeSession.isOpen) {
-        [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessToken forKey:kFacebookOAuthTokenKey];
+        [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessTokenData.accessToken forKey:kFacebookOAuthTokenKey];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         FBRequest *request = [FBRequest requestForMe];
@@ -184,12 +174,8 @@
     [userDict removeObjectForKey:@"has_authorized_fitbit"];
     
     [User writeToUserWithDictionary:userDict];
-    [self dismiss];
-}
-
-- (void)dismiss
-{
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"signedIn" object:self];
 }
 
 - (void)invalidLoginMessage:(NSString *)message

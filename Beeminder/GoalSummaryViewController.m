@@ -7,8 +7,12 @@
 //
 
 #import "GoalSummaryViewController.h"
+#define kDefaultStepperWidth 94
+#define kLeftMargin 20
 
 @interface GoalSummaryViewController ()
+
+@property int datapointsCount;
 
 @end
 
@@ -26,29 +30,55 @@
     return self;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.datapointsCount = self.view.frame.size.height > 500 ? 5 : 3;
     
     self.scrollView.clipsToBounds = YES;
     self.scrollView.contentSize = self.graphImageView.image.size;
     self.scrollView.delegate = self;
     
+    self.timerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+
+    self.dateStepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin, self.view.frame.size.height - 102, kDefaultStepperWidth, 30)];
+    self.dateStepperLabel.textAlignment = NSTextAlignmentCenter;
+    self.dateStepperLabel.text = @"Date";
+    self.dateStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    [self.view addSubview:self.dateStepperLabel];
+    
+    self.valueStepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin + self.dateStepperLabel.frame.size.width + 2, self.dateStepperLabel.frame.origin.y, kDefaultStepperWidth, 30)];
+    self.valueStepperLabel.textAlignment = NSTextAlignmentCenter;
+    self.valueStepperLabel.text = @"Datapoint";
+    self.valueStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    [self.view addSubview:self.valueStepperLabel];
+    
+    self.dateStepper = [[UIStepper alloc] initWithFrame:CGRectOffset(self.dateStepperLabel.frame, 0, -27)];
+    self.dateStepper.tintColor = [UIColor blackColor];
+    [self.dateStepper addTarget:self action:@selector(dateStepperValueChanged) forControlEvents:UIControlEventValueChanged];
+    self.dateStepper.maximumValue = 0;
+    self.dateStepper.minimumValue = -31;
+    [self.view addSubview:self.dateStepper];
+    
+    self.valueStepper = [[UIStepper alloc] initWithFrame:CGRectOffset(self.valueStepperLabel.frame, 0, -27)];
+    self.valueStepper.tintColor = [UIColor blackColor];
+    [self.valueStepper addTarget:self action:@selector(valueStepperValueChanged) forControlEvents:UIControlEventValueChanged];
+    self.valueStepper.maximumValue = 1000000;
+    self.valueStepper.minimumValue = -1000000;
+    [self.view addSubview:self.valueStepper];
+
+    self.inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(kLeftMargin, self.dateStepper.frame.origin.y - 45, 2*kDefaultStepperWidth + 2, 40)];
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
     self.inputTextField.leftView = paddingView;
     self.inputTextField.leftViewMode = UITextFieldViewModeAlways;
-    
     self.inputTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.inputTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
-    self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
-    self.timerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-    self.dateStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    self.valueStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
+    self.inputTextField.borderStyle = UITextBorderStyleNone;
+    self.inputTextField.returnKeyType = UIReturnKeyDone;
+    [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
+    self.inputTextField.delegate = self;
+    [self.view addSubview:self.inputTextField];
     
     // set the tag for the image view
     [self.graphImageView setTag:ZOOM_VIEW_TAG];
@@ -70,10 +100,20 @@
     [self.graphImageView addGestureRecognizer:twoFingerTap];
 
     [self loadGraphImageIgnoreCache:YES];
-    [self loadGraphImageThumbIgnoreCache:YES];
 
-    self.editGoalButton = [BeeminderAppDelegate standardGrayButtonWith:self.editGoalButton];
-    self.addDataButton = [BeeminderAppDelegate standardGrayButtonWith:self.addDataButton];
+    self.submitButton = [[UIButton alloc] init];
+    self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
+    self.submitButton.frame = CGRectMake(self.inputTextField.frame.origin.x + self.inputTextField.frame.size.width + 10, self.inputTextField.frame.origin.y, 80, self.inputTextField.frame.size.height);
+    [self.submitButton setTitle:@"Enter" forState:UIControlStateNormal];
+    [self.submitButton addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.submitButton];
+    
+    CGFloat yPos = self.inputTextField.frame.origin.y - self.datapointsCount*27;
+    self.lastDatapointLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin + paddingView.frame.size.width, yPos, self.view.frame.size.width - 2*(kLeftMargin + paddingView.frame.size.width), self.inputTextField.frame.origin.y - yPos)];
+    [self.view addSubview: self.lastDatapointLabel];
+    self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+    self.lastDatapointLabel.numberOfLines = self.datapointsCount;
+    
     if (self.goalObject.units) {
         self.unitsLabel.text = self.goalObject.units;
     }
@@ -88,7 +128,7 @@
     [view addGestureRecognizer:recognizer];
     self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
     self.refreshButton.target = self;
-    self.refreshButton.action = @selector(fetchEverything);
+    self.refreshButton.action = @selector(refreshGoalData);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,0, 227, 32)];
@@ -100,9 +140,12 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = self.titleLabel;
     
-    if (self.needsFreshData) {
-        [self refreshGoalData];
-    }
+    [self refreshGoalData];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self submitButtonPressed];
+    return YES;
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
@@ -110,29 +153,22 @@
     [self back];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-
-}
-
 - (void)adjustForFrozen
 {
     if ([self.goalObject canAcceptData]) {
-        self.editGoalButton.hidden = NO;
         self.inputTextField.hidden = NO;
         self.valueStepper.hidden = NO;
         self.dateStepper.hidden = NO;
-        self.addDataButton.hidden = NO;
+        self.submitButton.hidden = NO;
         self.dateStepperLabel.hidden = NO;
         self.valueStepperLabel.hidden = NO;
         self.rerailButton.hidden = YES;
     }
     else {
-        self.editGoalButton.hidden = YES;
         self.inputTextField.hidden = YES;
         self.valueStepper.hidden = YES;
         self.dateStepper.hidden = YES;
-        self.addDataButton.hidden = YES;
+        self.submitButton.hidden = YES;
         self.dateStepperLabel.hidden = YES;
         self.valueStepperLabel.hidden = YES;
     }
@@ -147,7 +183,7 @@
     [view addGestureRecognizer:recognizer];
     self.refreshButton = [[UIBarButtonItem alloc] initWithCustomView:view];
     self.refreshButton.target = self;
-    self.refreshButton.action = @selector(fetchEverything);
+    self.refreshButton.action = @selector(refreshGoalData);
     self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
@@ -161,10 +197,14 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", @"3", @"datapoints_count", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", [NSNumber numberWithInt:self.datapointsCount], @"datapoints_count", nil];
     
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.operationManager GET:[NSString stringWithFormat:@"/users/me/goals/%@.json", [ABCurrentUser username]] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [delegate.operationManager GET:[NSString stringWithFormat:@"/api/v1/users/me/goals/%@.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        for (Datapoint *d in self.goalObject.datapoints) {
+            [d MR_deleteEntity];
+        }
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         [self replaceRefreshButton];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSDictionary *modGoalDict = [Goal processGoalDictFromServer:responseObject];
@@ -179,6 +219,7 @@
         [self adjustForFrozen];
         [self startTimer];
         [BeeminderAppDelegate updateApplicationIconBadgeCount];
+        [self setDatapointsText];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self replaceRefreshButton];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -242,27 +283,22 @@
     }
     else {
         self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-        NSUInteger datapointCount = [self.goalObject.datapoints count];
-        NSArray *showDatapoints;
-        if (datapointCount < 4) {
-            showDatapoints = [self sortedDatapoints];
-        }
-        else {
-            showDatapoints = [[self sortedDatapoints] objectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(datapointCount - 3, 3)]];
-        }
         
         NSString *lastDatapointsText = @"";
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"d"];
+        NSInteger offset = [[NSTimeZone localTimeZone] secondsFromGMT];
+        NSInteger serverOffset = [[NSTimeZone timeZoneWithAbbreviation:@"EST"] secondsFromGMT];
         
-        for (Datapoint *datapoint in showDatapoints) {
+        for (Datapoint *datapoint in [self sortedDatapoints]) {
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:date];
+            int day = [components day];
+            if (offset - serverOffset >= 3600*12) day -= 1;
             
-            NSString *day = [formatter stringFromDate:date];
-            NSString *comment = [NSString stringWithFormat:@"%@ %@", day, datapoint.value];
+            NSString *comment = [NSString stringWithFormat:@"%i %@", day, datapoint.value];
             
-            if (datapoint.comment.length > 30) {
-                comment = [comment stringByAppendingFormat:@" \"%@...\"\n", [datapoint.comment substringToIndex:30]];
+            if (datapoint.comment.length > 25) {
+                comment = [comment stringByAppendingFormat:@" \"%@...\"\n", [datapoint.comment substringToIndex:25]];
             }
             else if (datapoint.comment.length > 0) {
                 comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
@@ -273,7 +309,7 @@
             
             lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
         }
-        self.lastDatapointLabel.text = lastDatapointsText;
+        self.lastDatapointLabel.text = [lastDatapointsText substringToIndex:lastDatapointsText.length - 1];
     }
 }
 
@@ -296,11 +332,7 @@
 
 - (void)loadGraphImageThumbIgnoreCache:(BOOL)ignoreCache
 {
-    if (ignoreCache || !self.goalObject.graph_image_thumb) {
-        [self.goalObject updateGraphImageThumbWithCompletionBlock:^(void){
-            [self loadGraphImageThumbIgnoreCache:NO];
-        }];
-    }
+    [self.goalObject updateGraphImageThumb];
 }
 
 - (void)successfulGoalFetchJSON:(id)responseJSON
@@ -312,11 +344,6 @@
     [Goal writeToGoalWithDictionary:mutableResponse forUserWithUsername:[ABCurrentUser username]];
 
     [self startTimer];
-}
-
-- (void)failedDatapointsFetch
-{
-    
 }
 
 - (void)updateInputTextFieldText
@@ -417,6 +444,9 @@
 - (IBAction)inputTextFieldEditingChanged
 {
     [self saveDatapointLocally];
+    if ([[self.inputTextField.text componentsSeparatedByString:@"\""] count] == 2 && [[self.inputTextField.text substringFromIndex:self.inputTextField.text.length - 1] isEqualToString:@"\""]) {
+        self.inputTextField.text = [self.inputTextField.text substringToIndex:self.inputTextField.text.length - 1];
+    }
 }
 
 - (void)saveDatapointLocally
@@ -498,7 +528,7 @@
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", self.inputTextField.text, @"urtext", nil];
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.operationManager POST:[NSString stringWithFormat:@"/users/me/goals/%@/datapoints.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [delegate.operationManager POST:[NSString stringWithFormat:@"/api/v1/users/me/goals/%@/datapoints.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
         if ([responseObject objectForKey:@"errors"]) {
             hud.labelText = @"Error";
@@ -554,11 +584,12 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", nil];
     
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.operationManager GET:[NSString stringWithFormat:@"/users/me/goals/%@.json", self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [delegate.operationManager GET:[NSString stringWithFormat:@"/%@/users/me/goals/%@.json", kAPIPrefix, self.goalObject.slug] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self successfulGoalFetchJSON:responseObject];
         self.graphIsUpdating = [[responseObject objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
             [self.graphPoller invalidate];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"goalUpdated" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.goalObject, @"goal", nil]];
             [self loadGraphImageIgnoreCache:YES];
             [MBProgressHUD hideAllHUDsForView:self.graphImageView animated:YES];
         }
@@ -608,7 +639,8 @@
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     // double tap zooms in
-    float newScale = [self.scrollView zoomScale] * ZOOM_STEP;
+    float newScale = [self.graphScrollView zoomScale] * ZOOM_STEP;
+    if (newScale > self.graphScrollView.maximumZoomScale) return;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [self.graphScrollView zoomToRect:zoomRect animated:YES];
 }
@@ -616,6 +648,7 @@
 - (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
     // two-finger tap zooms out
     float newScale = [self.scrollView zoomScale] / ZOOM_STEP;
+    if (newScale < self.graphScrollView.minimumZoomScale) return;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [self.graphScrollView zoomToRect:zoomRect animated:YES];
 }
@@ -644,8 +677,6 @@
     [self setSubmitButton:nil];
     [self setTimerLabel:nil];
     [self setScrollView:nil];
-    [self setEditGoalButton:nil];
-    [self setAddDataButton:nil];
     [self setLastDatapointLabel:nil];
     [self setDateStepper:nil];
     [self setValueStepper:nil];

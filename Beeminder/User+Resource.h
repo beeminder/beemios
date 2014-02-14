@@ -12,15 +12,9 @@
 
 @interface User (Resource)
 
-- (void)reloadAllGoalsWithSuccessBlock:(CompletionBlock)successBlock errorBlock:(CompletionBlock)errorBlock;
 + (User *)writeToUserWithDictionary:(NSDictionary *)userDict;
 - (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict;
 - (void)pushToRemote;
-- (NSString *)createURL;
-- (NSString *)readURL;
-- (NSString *)updateURL;
-- (NSString *)deleteURL;
-- (NSString *)paramString;
 - (NSDictionary *)paramsDict;
 
 @end

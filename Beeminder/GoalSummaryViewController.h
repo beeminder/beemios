@@ -10,7 +10,7 @@
 
 @class AdvancedRoalDialViewController;
 
-@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate, UIScrollViewDelegate>
+@interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate, UIScrollViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIScrollView *graphScrollView;
@@ -29,8 +29,6 @@
 @property (strong, nonatomic) NSTimer *graphPoller;
 @property (strong, nonatomic) NSTimer *countdownTimer;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIButton *editGoalButton;
-@property (strong, nonatomic) IBOutlet UIButton *addDataButton;
 @property (strong, nonatomic) IBOutlet UILabel *lastDatapointLabel;
 
 @property (strong, nonatomic) NSDate *datapointDate;
@@ -39,11 +37,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *rerailButton;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property BOOL needsFreshData;
 @property (strong, nonatomic) UILabel *titleLabel;
 
 - (void)pollUntilGraphIsNotUpdating;
-- (NSUInteger)supportedInterfaceOrientations;
 - (void)refreshGoalData;
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView;
 

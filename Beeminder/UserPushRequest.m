@@ -14,10 +14,8 @@
 {
     NSDictionary *allParams = [user paramsDict];
     
-    NSString *url = user.serverId ? [user updateURL] : [user createURL];
-    if (user.serverId) {
-        allParams = [allParams dictionaryByMergingWith:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
-    }
+    NSString *url = @"/api/v1/users/me.json";
+    allParams = [allParams dictionaryByMergingWith:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
     
     if (additionalParams) allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
     

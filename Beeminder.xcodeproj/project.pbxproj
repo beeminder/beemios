@@ -46,11 +46,12 @@
 		A16548ED1722F2C900FA995B /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A16548EB1722EF8600FA995B /* Lato-Bol.ttf */; };
 		A16548EE1722F2C900FA995B /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A16548EC1722EF8600FA995B /* Lato-Reg.ttf */; };
 		A16A5CBA1725DE90007EE004 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A16A5CB91725DE90007EE004 /* twitter-icon@2x.png */; };
-		A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A180F6E418A6D7B6005C00F4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E218A6D6A6005C00F4 /* FacebookSDK.framework */; };
 		A180F6E618A6E589005C00F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E518A6E589005C00F4 /* SystemConfiguration.framework */; };
+		A180F6E818A91E48005C00F4 /* settings-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A180F6E718A91E48005C00F4 /* settings-white@2x.png */; };
+		A180F6EA18A96686005C00F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E918A96686005C00F4 /* AudioToolbox.framework */; };
 		A1879B6B1629DD4B007FF592 /* dark-cell-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B691629DD4B007FF592 /* dark-cell-noise.png */; };
 		A1879B6C1629DD4B007FF592 /* dark-cell-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1879B6A1629DD4B007FF592 /* dark-cell-noise@2x.png */; };
 		A18A487915CE20F600E314B7 /* GradientViews.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A487815CE20F600E314B7 /* GradientViews.m */; };
@@ -69,7 +70,6 @@
 		A1A7E45015CE461000711D3A /* ios_logo_bmndr_238.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44C15CE461000711D3A /* ios_logo_bmndr_238.png */; };
 		A1A7E45115CE461000711D3A /* ios_logo_bmndr_476.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */; };
 		A1AC0D7B15CDA1DF00EFB21E /* ABCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */; };
-		A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B31643159D16E000998C76 /* DashboardNavigationController.m */; };
 		A1B64A471665B2CB0023CC40 /* ReminderCellUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */; };
 		A1C244E6172581C600844297 /* flat-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C244E5172581C600844297 /* flat-refresh.png */; };
 		A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA034F16210374000A4E95 /* TPKeyboardAvoidingScrollView.m */; };
@@ -169,12 +169,12 @@
 		A16548EB1722EF8600FA995B /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		A16548EC1722EF8600FA995B /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		A16A5CB91725DE90007EE004 /* twitter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon@2x.png"; sourceTree = "<group>"; };
-		A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+autoRotate.h"; sourceTree = "<group>"; };
-		A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+autoRotate.m"; sourceTree = "<group>"; };
 		A17EBDCB165573F6007949CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A17EBDCE16557603007949CA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A180F6E218A6D6A6005C00F4 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		A180F6E518A6E589005C00F4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A180F6E718A91E48005C00F4 /* settings-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-white@2x.png"; sourceTree = "<group>"; };
+		A180F6E918A96686005C00F4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A1879B691629DD4B007FF592 /* dark-cell-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-cell-noise.png"; sourceTree = "<group>"; };
 		A1879B6A1629DD4B007FF592 /* dark-cell-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-cell-noise@2x.png"; sourceTree = "<group>"; };
 		A18A487715CE20F600E314B7 /* GradientViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientViews.h; sourceTree = "<group>"; };
@@ -197,8 +197,6 @@
 		A1A7E44D15CE461000711D3A /* ios_logo_bmndr_476.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_logo_bmndr_476.png; sourceTree = "<group>"; };
 		A1AC0D7915CDA1DF00EFB21E /* ABCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCurrentUser.h; sourceTree = "<group>"; };
 		A1AC0D7A15CDA1DF00EFB21E /* ABCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCurrentUser.m; sourceTree = "<group>"; };
-		A1B31642159D16E000998C76 /* DashboardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardNavigationController.h; sourceTree = "<group>"; };
-		A1B31643159D16E000998C76 /* DashboardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardNavigationController.m; sourceTree = "<group>"; };
 		A1B64A451665B2CB0023CC40 /* ReminderCellUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderCellUIView.h; sourceTree = "<group>"; };
 		A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderCellUIView.m; sourceTree = "<group>"; };
 		A1C244E5172581C600844297 /* flat-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat-refresh.png"; sourceTree = "<group>"; };
@@ -256,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A180F6EA18A96686005C00F4 /* AudioToolbox.framework in Frameworks */,
 				A180F6E618A6E589005C00F4 /* SystemConfiguration.framework in Frameworks */,
 				A14AA67616602C5100D59A47 /* Security.framework in Frameworks */,
 				A14AA6B21661B43600D59A47 /* AdSupport.framework in Frameworks */,
@@ -334,8 +333,6 @@
 		A162C8C816668AA10085D94A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				A172997B162520FF000FE17E /* UITabBarController+autoRotate.h */,
-				A172997C162520FF000FE17E /* UITabBarController+autoRotate.m */,
 				A14AA67D1660647E00D59A47 /* NSString+Base64.h */,
 				A14AA67E1660647E00D59A47 /* NSString+Base64.m */,
 				A140F3E11665070B0082275A /* NSDictionary+Merge.h */,
@@ -411,6 +408,7 @@
 				A16A5CB91725DE90007EE004 /* twitter-icon@2x.png */,
 				A1EA62E4172594CE00E69F70 /* settings.png */,
 				A1EA62E21725934E00E69F70 /* settings@2x.png */,
+				A180F6E718A91E48005C00F4 /* settings-white@2x.png */,
 				A14A1FA9161E0F4200E2F3BB /* bg-noise.png */,
 				A14A1FAA161E0F4200E2F3BB /* bg-noise@2x.png */,
 				A14A1FA5161E0B0000E2F3BB /* cell-noise.png */,
@@ -478,6 +476,7 @@
 		A1F03D4F158E9A850075D5DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A180F6E918A96686005C00F4 /* AudioToolbox.framework */,
 				A180F6E518A6E589005C00F4 /* SystemConfiguration.framework */,
 				A180F6E218A6D6A6005C00F4 /* FacebookSDK.framework */,
 				A14AA6B11661B43500D59A47 /* AdSupport.framework */,
@@ -510,8 +509,6 @@
 				A1F03D5F158E9A850075D5DA /* BeeminderAppDelegate.h */,
 				A1F03D60158E9A850075D5DA /* BeeminderAppDelegate.m */,
 				A126C9301592EE1700FE8CF8 /* constants.h */,
-				A1B31642159D16E000998C76 /* DashboardNavigationController.h */,
-				A1B31643159D16E000998C76 /* DashboardNavigationController.m */,
 				A1A5CFC8159D357900C83DED /* GoalSummaryViewController.h */,
 				A1A5CFC9159D357900C83DED /* GoalSummaryViewController.m */,
 				A18A487715CE20F600E314B7 /* GradientViews.h */,
@@ -640,6 +637,7 @@
 				A11511A1167EAE2F009C7B91 /* sample_graph@2x.png in Resources */,
 				A1F83C4817E566E700648111 /* Icon-Retina-120.png in Resources */,
 				A1C244E6172581C600844297 /* flat-refresh.png in Resources */,
+				A180F6E818A91E48005C00F4 /* settings-white@2x.png in Resources */,
 				A1EA62E31725934E00E69F70 /* settings@2x.png in Resources */,
 				A1F83C4A17E5675700648111 /* Icon-80.png in Resources */,
 				A1EA62E5172594CF00E69F70 /* settings.png in Resources */,
@@ -710,7 +708,6 @@
 				A133F9FC158FB27F002F151A /* SBJsonWriter.m in Sources */,
 				A1993CC2159007B700011568 /* SettingsViewController.m in Sources */,
 				A19D7BE51596DC840031ABED /* Beeminder.xcdatamodeld in Sources */,
-				A1B31644159D16E000998C76 /* DashboardNavigationController.m in Sources */,
 				A1A5CFCA159D357900C83DED /* GoalSummaryViewController.m in Sources */,
 				A1253A83159FCDCF0058B495 /* User+Resource.m in Sources */,
 				A1253A86159FDB350058B495 /* Goal+Resource.m in Sources */,
@@ -724,7 +721,6 @@
 				A18A487915CE20F600E314B7 /* GradientViews.m in Sources */,
 				A1CA035016210374000A4E95 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				A1CC73601622493C00E14238 /* MainTabBarViewController.m in Sources */,
-				A172997D162520FF000FE17E /* UITabBarController+autoRotate.m in Sources */,
 				A1CE2A2716265409005B3517 /* GoalPullRequest.m in Sources */,
 				A14AA67F1660647E00D59A47 /* NSString+Base64.m in Sources */,
 				A1D9A1D31662E74900E54ACE /* PullToRefreshView.m in Sources */,
@@ -811,8 +807,8 @@
 			baseConfigurationReference = 54A00A9B57F640D79D063BC5 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/andy/code/beemiOS,
 					/Users/andy/Documents/FacebookSDK,
@@ -821,15 +817,15 @@
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
+				PROVISIONING_PROFILE = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -840,8 +836,8 @@
 			baseConfigurationReference = 54A00A9B57F640D79D063BC5 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/andy/code/beemiOS,
 					/Users/andy/Documents/FacebookSDK,
@@ -850,15 +846,15 @@
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Beeminder/Beeminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B5970B6-F509-4CE9-BFCB-A29B3058F786";
+				PROVISIONING_PROFILE = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

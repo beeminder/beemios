@@ -18,12 +18,8 @@
 + (Goal *)writeToGoalWithDictionary:(NSDictionary *)goalDict forUserWithUsername:(NSString *)username;
 
 - (void)pushToRemoteWithAdditionalParams:(NSDictionary*)additionalParams successBlock:(CompletionBlock)successBlock;
-- (NSString *)createURL;
 - (NSString *)readURL;
 - (NSString *)updateURL;
-- (NSString *)deleteURL;
-- (NSString *)roadDialURL;
-- (NSString *)paramString;
 - (NSDictionary *)paramsDict;
 - (NSString *)losedateTextBrief:(BOOL)brief;
 - (NSNumber *)panicTime;

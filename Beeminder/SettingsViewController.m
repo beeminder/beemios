@@ -259,20 +259,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 - (IBAction)reloadAllGoalsButtonPressed
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadAllGoals" object:self];
 }
 
 - (IBAction)signOutButtonPressed {
-    [ABCurrentUser logout];    
-    SignInViewController *signInViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"signInViewController"];
-    [self presentViewController:signInViewController animated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"signedOut" object:self];
 }
 
 - (void)viewDidUnload {

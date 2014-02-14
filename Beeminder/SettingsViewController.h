@@ -14,7 +14,6 @@
 - (IBAction)signOutButtonPressed;
 @property (strong, nonatomic) IBOutlet UILabel *loggedInAsLabel;
 @property (strong, nonatomic) IBOutlet UIButton *signOutButton;
-- (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) IBOutlet UIButton *reloadAllGoalsButton;
 @property (strong, nonatomic) ABFlatSwitch *remindSwitch;
 @property (strong, nonatomic) ABFlatSwitch *emergencySwitch;

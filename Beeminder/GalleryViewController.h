@@ -11,12 +11,9 @@
 @interface GalleryViewController : UIViewController<PullToRefreshViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *goalsTableView;
 
-@property (strong, nonatomic) NSMutableArray *goalObjects;
 @property (strong, nonatomic) NSMutableArray *frontburnerGoalObjects;
 @property (strong, nonatomic) NSMutableArray *backburnerGoalObjects;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSComparator goalComparator;
-- (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) PullToRefreshView *pull;
 - (void)fetchEverything;
 @property BOOL hasCompletedDataFetch;

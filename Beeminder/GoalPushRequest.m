@@ -27,14 +27,8 @@
     
     if (additionalParams) allParams = [NSDictionary dictionaryByMerging:allParams with:additionalParams];
     
-    NSString *url;
-    if (goal.serverId) {
-        allParams = [NSDictionary dictionaryByMerging:allParams with:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
-        url = [goal updateURL];
-    }
-    else {
-        url = [goal createURL];
-    }
+    NSString *url = [goal updateURL];
+    allParams = [NSDictionary dictionaryByMerging:allParams with:[NSDictionary dictionaryWithObjectsAndKeys:@"PUT", @"_method", nil]];
     
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     [delegate.operationManager POST:url parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {

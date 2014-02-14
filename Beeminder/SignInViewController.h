@@ -14,7 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *signInButton;
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;
-- (NSUInteger)supportedInterfaceOrientations;
 @property (strong, nonatomic) NSArray *twitterAccounts;
 @property (strong, nonatomic) IBOutlet UILabel *alternativesLabel;
 @property (strong, nonatomic) ACAccount *selectedTwitterAccount;
