@@ -54,21 +54,6 @@
                                             <action selector="signInButtonPressed:" destination="cow-QV-CvW" eventType="touchUpInside" id="ruo-AR-pBw"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inx-8g-Naa">
-                                        <rect key="frame" x="90" y="504" width="140" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Back to Sign Up">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signUpButtonPressed" destination="cow-QV-CvW" eventType="touchUpInside" id="vFJ-4R-NCX"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Or sign in with Twitter or Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKy-OX-k4C">
                                         <rect key="frame" x="20" y="255" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -122,12 +107,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="alternativesLabel" destination="GKy-OX-k4C" id="Ox6-Ru-eN6"/>
-                        <outlet property="connectContainer" destination="7TJ-cX-IMI" id="ix1-ha-Wkf"/>
                         <outlet property="emailTextField" destination="AR1-lZ-qpt" id="Nqo-sH-KCV"/>
                         <outlet property="facebookButton" destination="Mbz-Bd-AGs" id="HiX-au-ZJV"/>
                         <outlet property="passwordTextField" destination="b88-32-Ykb" id="AAF-AR-Vak"/>
                         <outlet property="signInButton" destination="CqD-QV-7h3" id="3AL-kT-g44"/>
-                        <outlet property="signUpButton" destination="inx-8g-Naa" id="556-Bj-vgr"/>
                         <outlet property="twitterButton" destination="f4b-U1-LIb" id="PCJ-Wq-Ofg"/>
                     </connections>
                 </viewController>

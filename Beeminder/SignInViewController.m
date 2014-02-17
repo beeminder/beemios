@@ -29,8 +29,6 @@
 {
     [super viewDidLoad];
     
-    self.connectContainer.backgroundColor = [UIColor clearColor];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
 
     self.view.backgroundColor = [BeeminderAppDelegate cloudsColor];
@@ -51,11 +49,9 @@
     [self setEmailTextField:nil];
     [self setPasswordTextField:nil];
     [self setSignInButton:nil];
-    [self setSignUpButton:nil];
     [self setAlternativesLabel:nil];
     [self setTwitterButton:nil];
     [self setFacebookButton:nil];
-    [self setConnectContainer:nil];
     [super viewDidUnload];
 }
 
@@ -185,11 +181,11 @@
     [alert show];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if (theTextField == self.passwordTextField) {
-        [theTextField resignFirstResponder];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.passwordTextField) {
+        [textField resignFirstResponder];
         [self formSubmitted];
-    } else if (theTextField == self.emailTextField) {
+    } else if (textField == self.emailTextField) {
         [self.passwordTextField becomeFirstResponder];
     }
     return YES;

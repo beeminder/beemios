@@ -201,7 +201,7 @@
         return @"Success!";
     }
     else {
-        return [NSString stringWithFormat:@"Derailed!"];
+        return @"Derailed!";
     }
 }
 
@@ -268,7 +268,6 @@
 {
     if (!self.thumb_url) return;
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    NSLog(@"%@", self.thumb_url);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.thumb_url] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
     [[delegate.imageOperationManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.graph_image_thumb = responseObject;

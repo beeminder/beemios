@@ -348,9 +348,20 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
     return [FBSession.activeSession handleOpenURL:url];
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    double delayInSeconds = 25.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        completionHandler(UIBackgroundFetchResultNewData);
+    });
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchEverything" object:self];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     NSURL *baseURL = [NSURL URLWithString:kBaseURL];
     self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];

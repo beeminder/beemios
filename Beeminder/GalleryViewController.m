@@ -35,6 +35,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signedIn) name:@"signedIn" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goalUpdated:) name:@"goalUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllGoals) name:@"reloadAllGoals" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchEverything) name:@"fetchEverything" object:nil];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"your-goals-tab"] style:UIBarButtonItemStylePlain target:self action:@selector(fetchEverything)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
@@ -66,8 +67,8 @@
     [self.goalsTableView setSectionFooterHeight:[self.goalsTableView cellForRowAtIndexPath:[[NSIndexPath alloc] initWithIndex:0]].frame.size.height];
     
     User *user = [ABCurrentUser user];
-    [self.frontburnerGoalObjects removeAllObjects];
-    [self.backburnerGoalObjects removeAllObjects];
+//    [self.frontburnerGoalObjects removeAllObjects];
+//    [self.backburnerGoalObjects removeAllObjects];
     
     self.frontburnerGoalObjects = [NSMutableArray arrayWithArray:[[[user.goals allObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         Goal *g = (Goal *)evaluatedObject;
@@ -78,8 +79,6 @@
         Goal *g = (Goal *)evaluatedObject;
         return [g.burner isEqualToString:@"backburner"];
     }]] sortedArrayUsingComparator:self.goalComparator]];
-    
-    [self pollForThumbnails];
     
     UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settings-white"]];
     view.userInteractionEnabled = YES;
@@ -161,6 +160,13 @@
         return [goal.slug isEqualToString:slug];
     }];
     
+    if (set.count == 0) {
+        set = [self.backburnerGoalObjects indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            Goal *goal = (Goal *)obj;
+            return [goal.slug isEqualToString:slug];
+        }];
+    }
+    
     [set lastIndex];
     
     NSIndexPath *path = [NSIndexPath indexPathForItem:[set lastIndex] inSection:0];
@@ -181,7 +187,6 @@
     [self.goalsTableView reloadData];
     int lastUpdatedAt = [ABCurrentUser lastUpdatedAt];
     
-    [ABCurrentUser setLastUpdatedAtToNow];
     MBProgressHUD *hud;
     BOOL initialImport = (!lastUpdatedAt || lastUpdatedAt == 0);
     if (initialImport) {
@@ -379,7 +384,8 @@
         return [g.burner isEqualToString:@"backburner"];
     }]] sortedArrayUsingComparator:self.goalComparator]];
     
-    [BeeminderAppDelegate updateApplicationIconBadgeCount];    
+    [BeeminderAppDelegate updateApplicationIconBadgeCount];
+    [ABCurrentUser setLastUpdatedAtToNow];    
     [self pollForThumbnails];
     self.hasCompletedDataFetch = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -399,18 +405,34 @@
     [alert show];
 }
 
+- (NSIndexPath *)indexPathForGoal:(Goal *)goal
+{
+    NSInteger row;
+    NSInteger section;
+    if ([goal.burner isEqualToString:@"frontburner"]) {
+        section = 0;
+        row = [self.frontburnerGoalObjects indexOfObject:goal];
+    }
+    else {
+        section = 1;
+        row = [self.backburnerGoalObjects indexOfObject:goal];
+    }
+
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
 - (void)pollUntilThumbnailURLIsPresentForGoal:(Goal *)goal
 {
     if (goal.thumb_url) {
         [goal updateGraphImageThumbWithCompletionBlock:^{
-            [self.goalsTableView reloadData];
+            [self.goalsTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[self indexPathForGoal:goal]] withRowAnimation:UITableViewRowAnimationNone];
         }];
     }
     else {
         [GoalPullRequest requestForGoal:goal withSuccessBlock:^{
             if (goal.thumb_url) {
                 [goal updateGraphImageThumbWithCompletionBlock:^{
-                    [self.goalsTableView reloadData];
+                    [self.goalsTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[self indexPathForGoal:goal]] withRowAnimation:UITableViewRowAnimationNone];
                 }];
             }
             else {

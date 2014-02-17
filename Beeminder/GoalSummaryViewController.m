@@ -293,7 +293,9 @@
             NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
             NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:date];
             int day = [components day];
-            if (offset - serverOffset >= 3600*12) day -= 1;
+            if (offset - serverOffset >= 3600*12) {
+                day -= 1;   
+            }
             
             NSString *comment = [NSString stringWithFormat:@"%i %@", day, datapoint.value];
             
@@ -516,15 +518,6 @@
     [self saveDatapointLocally];
     
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/users/%@/goals/%@/datapoints.json", kBaseURL, kAPIPrefix, [ABCurrentUser username], self.goalObject.slug]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *postString = [NSString stringWithFormat:@"access_token=%@&urtext=%@", [ABCurrentUser accessToken], self.inputTextField.text];
-    
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[ABCurrentUser accessToken], @"access_token", self.inputTextField.text, @"urtext", nil];
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
