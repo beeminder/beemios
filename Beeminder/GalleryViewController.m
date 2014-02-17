@@ -199,7 +199,7 @@
         hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
     }
 
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"associations", @"3", @"datapoints_count", [NSNumber numberWithInt:lastUpdatedAt], @"diff_since", [ABCurrentUser accessToken], @"access_token", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"associations", @"5", @"datapoints_count", [NSNumber numberWithInt:lastUpdatedAt], @"diff_since", [ABCurrentUser accessToken], @"access_token", nil];
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
     [delegate.operationManager GET:[NSString stringWithFormat:@"%@/users/me.json", kAPIPrefix] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.isUpdating = NO;

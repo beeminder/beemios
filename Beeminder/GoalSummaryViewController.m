@@ -283,7 +283,9 @@
     }
     else {
         self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-        
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setFormatterBehavior:NSNumberFormatterDecimalStyle];
+        formatter.usesSignificantDigits = YES;
         NSString *lastDatapointsText = @"";
         NSInteger offset = [[NSTimeZone localTimeZone] secondsFromGMT];
         NSInteger serverOffset = [[NSTimeZone timeZoneWithAbbreviation:@"EST"] secondsFromGMT];
@@ -294,10 +296,10 @@
             NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:date];
             int day = [components day];
             if (offset - serverOffset >= 3600*12) {
-                day -= 1;   
+                day -= 1;
             }
             
-            NSString *comment = [NSString stringWithFormat:@"%i %@", day, datapoint.value];
+            NSString *comment = [NSString stringWithFormat:@"%i %@", day, [formatter stringFromNumber:datapoint.value]];
             
             if (datapoint.comment.length > 25) {
                 comment = [comment stringByAppendingFormat:@" \"%@...\"\n", [datapoint.comment substringToIndex:25]];
