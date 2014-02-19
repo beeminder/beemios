@@ -362,7 +362,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-
+    
     NSURL *baseURL = [NSURL URLWithString:kBaseURL];
     self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     [self.operationManager setResponseSerializer:[AFJSONResponseSerializer serializer]];
@@ -383,7 +383,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
                 break;
         }
     }];
-    
+
     self.imageOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@""]];
     [self.imageOperationManager setResponseSerializer:[AFImageResponseSerializer serializer]];
     NSOperationQueue *imageOperationQueue = self.imageOperationManager.operationQueue;
@@ -441,7 +441,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = self.operationManager.operationQueue.operationCount > 0;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = self.operationManager.operationQueue.operationCount > 0 || self.imageOperationManager.operationQueue.operationCount > 0;
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
@@ -517,13 +517,12 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 
 + (void)updateApplicationIconBadgeCount
 {
-    __block int count = 0;
-    [[ABCurrentUser user].goals enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-        Goal *goal = (Goal *)obj;
+    int count = 0;
+    for (Goal *goal in [ABCurrentUser user].goals) {
         if (![goal.won boolValue] && [goal.panicTime doubleValue] < [[NSDate date] timeIntervalSince1970]) {
             count++;
         }
-    }];
+    }
 
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];    
 }

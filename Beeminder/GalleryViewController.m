@@ -232,7 +232,6 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.isUpdating = NO;
-        [self failedFetch];
     }];
 }
 
@@ -395,14 +394,6 @@
         [self.goalsTableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     });
-}
-
-- (void)failedFetch
-{
-    if (![ABCurrentUser username]) return;
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not fetch goals" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 - (NSIndexPath *)indexPathForGoal:(Goal *)goal

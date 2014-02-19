@@ -12,6 +12,7 @@
 
 @interface GoalSummaryViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate, UIScrollViewDelegate, UITextFieldDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *deltasLabel;
 @property (strong, nonatomic) Goal *goalObject;
 @property (strong, nonatomic) IBOutlet UIScrollView *graphScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *graphImageView;

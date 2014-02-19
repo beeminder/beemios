@@ -34,7 +34,14 @@
 {
     [super viewDidLoad];
     
-    self.datapointsCount = self.view.frame.size.height > 500 ? 5 : 3;
+    if (self.view.frame.size.height > 500) {
+        self.datapointsCount = 5;
+        self.deltasLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    else {
+        self.datapointsCount = 3;
+        self.deltasLabel.hidden = YES;
+    }
     
     self.scrollView.clipsToBounds = YES;
     self.scrollView.contentSize = self.graphImageView.image.size;
@@ -187,6 +194,47 @@
     self.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
+- (void)updateDeltaLabel:(NSString *)deltaText yaw:(NSNumber *)yaw
+{
+    NSArray *deltas = [deltaText componentsSeparatedByString:@" "];
+    
+    UIColor *firstColor;
+    UIColor *thirdColor;
+    if ([yaw intValue] == 1) {
+        firstColor = [UIColor orangeColor];
+        thirdColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
+    }
+    else {
+        firstColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
+        thirdColor = [UIColor orangeColor];
+    }
+    
+    NSString *delta1 = [deltas objectAtIndex:0];
+    if ([delta1 isEqualToString:@"\u2714"]) delta1 = @"";
+    NSString *delta2 = [deltas objectAtIndex:1];
+    if ([delta2 isEqualToString:@"\u2714"]) delta2 = @"";
+    NSString *delta3 = [deltas objectAtIndex:2];
+    if ([delta3 isEqualToString:@"\u2714"]) delta3 = @"";
+    
+    NSMutableAttributedString *delta1Attributed = [[NSMutableAttributedString alloc] initWithString:delta1];
+    [delta1Attributed addAttribute:NSForegroundColorAttributeName value:firstColor range:NSMakeRange(0, delta1Attributed.length)];
+    
+    NSMutableAttributedString *delta2Attributed = [[NSMutableAttributedString alloc] initWithString:delta2];
+    [delta2Attributed addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, delta2Attributed.length)];
+    
+    NSMutableAttributedString *delta3Attributed = [[NSMutableAttributedString alloc] initWithString:delta3];
+    [delta3Attributed addAttribute:NSForegroundColorAttributeName value:thirdColor range:NSMakeRange(0, delta3Attributed.length)];
+    
+    NSMutableAttributedString *allAttributed = [[NSMutableAttributedString alloc] init];
+    [allAttributed appendAttributedString:delta1Attributed];
+    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
+    [allAttributed appendAttributedString:delta2Attributed];
+    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
+    [allAttributed appendAttributedString:delta3Attributed];
+    [allAttributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Lato-Bold" size:18] range:NSMakeRange(0, allAttributed.length)];
+    [self.deltasLabel setAttributedText:allAttributed];
+}
+
 - (void)refreshGoalData
 {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -204,6 +252,9 @@
         for (Datapoint *d in self.goalObject.datapoints) {
             [d MR_deleteEntity];
         }
+        NSString *deltaText = [responseObject objectForKey:@"delta_text"];
+        [self updateDeltaLabel:deltaText yaw:[responseObject objectForKey:@"yaw"]];
+
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
         [self replaceRefreshButton];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -239,6 +290,10 @@
     unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setFormatterBehavior:NSNumberFormatterDecimalStyle];
+    formatter.usesSignificantDigits = YES;
+    
     NSDateComponents *dateComponents = [gregorian components:unitFlags fromDate:[NSDate date]];
     
     NSDecimalNumber *datapointValue;
@@ -249,7 +304,7 @@
         datapointValue = [NSDecimalNumber decimalNumberWithString:@"0"];
     }
 
-    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], datapointValue];
+    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], [formatter stringFromNumber:datapointValue]];
     
     self.valueStepper.value = [datapoint.value doubleValue];
 
@@ -359,7 +414,6 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [numberFormatter setGroupingSeparator:@""];
-    
     
     NSString *inputText = [NSString stringWithFormat:@"%@ ", day];
     
@@ -530,7 +584,6 @@
         }
         else {
             hud.labelText = @"Saved";
-            [self pollUntilGraphIsNotUpdating];
             [self refreshGoalData];
             Datapoint *datapoint = [Datapoint MR_createEntity];
             datapoint.goal = self.goalObject;
@@ -545,10 +598,6 @@
         }
         hud.mode = MBProgressHUDModeText;
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        });
-
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
@@ -583,6 +632,8 @@
         [self successfulGoalFetchJSON:responseObject];
         self.graphIsUpdating = [[responseObject objectForKey:@"queued"] boolValue];
         if (!self.graphIsUpdating) {
+            NSString *deltaText = [responseObject objectForKey:@"delta_text"];
+            [self updateDeltaLabel:deltaText yaw:[responseObject objectForKey:@"yaw"]];
             [self.graphPoller invalidate];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"goalUpdated" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.goalObject, @"goal", nil]];
             [self loadGraphImageIgnoreCache:YES];
