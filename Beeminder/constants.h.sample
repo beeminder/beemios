@@ -1,0 +1,99 @@
+//
+//  constants.h
+//  Beeminder
+//
+//  Created by Andy Brett on 6/17/12.
+//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//
+
+#ifdef DEBUG
+//    #define kBaseURL @"http://localhost:3000"
+    #define kBaseURL @"https://www.beeminder.com"
+#else
+    #define kBaseURL @"https://www.beeminder.com"
+#endif
+
+#define kHas20Key @"has20"
+
+#define kTwitterConsumerKey @"foo"
+#define kTwitterConsumerSecret @"foo"
+
+#define kTwitterOAuthTokenKey @"twitterOAuthToken"
+#define kTwitterOAuthTokenSecretKey @"twitterOAuthTokenSecret"
+#define kTwitterUserIdKey @"twitterUserId"
+#define kTwitterScreenNameKey @"twitterScreenName"
+
+#define kFacebookOAuthTokenKey @"facebookOAuthToken"
+#define kFacebookUserIdKey @"facebookUserId"
+#define kFacebookUsernameKey @"facebookUsername"
+
+#define kAPIPrefix @"api/v1"
+#define kPrivateAPIPrefix @"api/private"
+
+#define kPendingDeviceTokenSyncKey @"pendingDeviceTokenSync"
+#define kLatestDeviceTokenKey @"latestDeviceToken"
+#define kPendingLogoutRequestKey @"pendingLogoutRequest"
+#define kGoToGoalWithSlugKey @"goToGoalWithSlug"
+
+#define kNewGoalKey @"newGoal"
+#define kPublicNameKey @"publicName"
+#define kPrivateNameKey @"privateName"
+#define kDetailsKey @"details"
+#define kInstructionsKey @"instructions"
+#define kSortPriorityKey @"sortPriority"
+#define kKyoomKey @"kyoom"
+
+#define kRemindMeToEnterDataKey @"remindMeToEnterData"
+#define kRemindMeToEnterDataAtKey @"remindMeToEnterDataAt"
+#define kEmergencyKey @"kEmergency"
+#define kEmergencyTimeKey @"kEmergencyTime"
+
+#define kBeemiosSecret @"foo"
+#define kBeemiosSigningKey @"foo"
+
+#define kGoalsTableControllerIndex 0
+
+#define kWinnerText @"You made it -- great work!"
+#define kDerailedText @"You drove off the road! Was that legit? If not, email support@beeminder.com."
+
+#define kWeeklyEstimateText @"A generous estimate for your current weekly rate:"
+
+#define kHustlerPrivate @"hustler"
+#define kHustlerPublic @"Do More"
+#define kHustlerDetails @"Do more of something -- for example, exercise more often, work more hours, write more blog posts."
+#define kHustlerInstructions @"You will report a number each day you do something, e.g., 20 if you did 20 minutes of exercise. Beeminder will keep a running total (cumulative total is plotted on the y-axis). It's fine to report multiple numbers on the same day -- Beeminder will auto-sum them. NB: Don't set the goal value below unless you know the total cumulative amount you want to end up doing."
+
+#define kFatloserPrivate @"fatloser"
+#define kFatloserPublic @"Lose Weight"
+#define kFatloserDetails @"This goal also works for things like decreasing bodyfat percent, or waist size, or similar."
+#define kFatloserInstructions @"You will report your weight daily (or as often as possible) to Beeminder."
+
+#define kBikerPrivate @"biker"
+#define kBikerPublic @"Odometer"
+#define kBikerDetails @"For example, report your bike's odometer reading, or the page number of a book."
+#define kBikerInstructions @"You will report your odometer number after each bike ride, or current page number in your book. Report a 0 to indicate a new book or an odometer reset. Beeminder will plot your total number (miles biked, pages read). It's fine to report multiple numbers on the same day -- Beeminder will plot the max of them. We need your initial odometer reading or page number today, which may be zero."
+
+#define kInboxerPrivate @"inboxer"
+#define kInboxerPublic @"Inbox Fewer"
+#define kInboxerDetails @"Report the number of messages in your inbox and make it go down"
+#define kInboxerInstructions @"Report the number of messages in your inbox whenever the Beeminder bot emails you. We need the current number of messages as your starting value. No going above that initial value!"
+
+#define kDrinkerPrivate @"drinker"
+#define kDrinkerPublic @"Set a Limit"
+#define kDrinkerDetails @"Limit how much you do something, like drink coffee, check Hacker News, or smoke cigarettes."
+#define kDrinkerInstructions @"Your yellow brick road will be limiting you to a quota that you specify. Report a number each day, and Beeminder will keep a running total, letting you know how much more you can have on any given day."
+
+#define kFitbitPrivate @"fitbit"
+#define kFitbitPublic @"Fitbit"
+#define kFitbitDetails @"Automatically track your Fitbit datasets, including Weight, Steps, Active Score, and Sleep."
+#define kFitbitInstructions @"Choose the dataset  you want to track, then just use Fitbit normally."
+
+#define kChooseFitbitFieldText @"Fitbit data to track:"
+#define kFitbitAccessTokenKey @"fitbitAccessToken"
+#define kFitbitAccessTokenSecretKey @"fitbitAccessTokenSecret"
+#define kFitbitUserIdKey @"fitbitUserId"
+
+#define kCustomPrivate @"custom"
+#define kCustomPublic @"Custom"
+#define kCustomDetails @"Any quantifiable goal you can think of."
+#define kCustomInstructions @"Describe your goal to us if you think it doesn't fit into one of these categories, and if it's interesting enough we'll set the appropriate settings and add it to this list!"
