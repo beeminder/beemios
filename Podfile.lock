@@ -17,16 +17,19 @@ PODS:
   - AFNetworking/Serialization (2.1.0)
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
+  - Facebook-iOS-SDK (3.12.0)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - Facebook-iOS-SDK
   - MagicalRecord
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  Facebook-iOS-SDK: c09f7d80db5c48170ff834bc03ebe774c49d1f5b
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
 
 COCOAPODS: 0.29.0
