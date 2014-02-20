@@ -239,6 +239,7 @@
 		A1F07DC31680CE6C00E12B8F /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		A1F07DC41680CE6C00E12B8F /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		A1F0C7BC15BB77530044E01B /* graph-processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph-processing.png"; sourceTree = "<group>"; };
+		A1F5EA0918B5BC5A00F21261 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		A1F82AC91601791B000E56DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		A1F83C4717E566E700648111 /* Icon-Retina-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Retina-120.png"; sourceTree = "<group>"; };
 		A1F83C4917E5675700648111 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
@@ -522,6 +523,7 @@
 				A1B64A461665B2CB0023CC40 /* ReminderCellUIView.m */,
 				A1E362D81853C07D005F485A /* GalleryViewController.h */,
 				A1E362D91853C07D005F485A /* GalleryViewController.m */,
+				A1F5EA0918B5BC5A00F21261 /* constants.h */,
 			);
 			path = Beeminder;
 			sourceTree = "<group>";
