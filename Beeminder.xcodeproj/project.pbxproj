@@ -48,7 +48,6 @@
 		A16A5CBA1725DE90007EE004 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A16A5CB91725DE90007EE004 /* twitter-icon@2x.png */; };
 		A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCB165573F6007949CA /* Twitter.framework */; };
 		A17EBDD016557613007949CA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17EBDCE16557603007949CA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A180F6E418A6D7B6005C00F4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E218A6D6A6005C00F4 /* FacebookSDK.framework */; };
 		A180F6E618A6E589005C00F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E518A6E589005C00F4 /* SystemConfiguration.framework */; };
 		A180F6E818A91E48005C00F4 /* settings-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A180F6E718A91E48005C00F4 /* settings-white@2x.png */; };
 		A180F6EA18A96686005C00F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A180F6E918A96686005C00F4 /* AudioToolbox.framework */; };
@@ -261,7 +260,6 @@
 				A14AA6A41661AB0C00D59A47 /* Social.framework in Frameworks */,
 				A19D7BE21596DC3B0031ABED /* CoreData.framework in Frameworks */,
 				A17EBDCD16557462007949CA /* Twitter.framework in Frameworks */,
-				A180F6E418A6D7B6005C00F4 /* FacebookSDK.framework in Frameworks */,
 				A17EBDD016557613007949CA /* Accounts.framework in Frameworks */,
 				A1CA215A15935AE200AE16FB /* QuartzCore.framework in Frameworks */,
 				A1F03D51158E9A850075D5DA /* UIKit.framework in Frameworks */,
@@ -809,10 +807,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/beemiOS",
-					"~/Documents/FacebookSDK",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
@@ -838,10 +833,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/beemiOS",
-					"~/Documents/FacebookSDK",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
