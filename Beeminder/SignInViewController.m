@@ -164,7 +164,6 @@
     
     NSMutableDictionary *userDict = [NSMutableDictionary dictionaryWithDictionary:responseJSON];
     [userDict setObject:[responseJSON objectForKey:@"id"] forKey:@"serverId"];
-    [userDict setObject:[responseJSON objectForKey:@"has_authorized_fitbit"]  forKey:@"hasAuthorizedFitbit"];
     [userDict removeObjectForKey:@"id"];
     [userDict removeObjectForKey:@"goals"];
     [userDict removeObjectForKey:@"has_authorized_fitbit"];
