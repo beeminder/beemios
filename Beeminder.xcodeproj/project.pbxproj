@@ -807,11 +807,11 @@
 			baseConfigurationReference = 54A00A9B57F640D79D063BC5 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					/Users/andy/code/beemiOS,
-					/Users/andy/Documents/FacebookSDK,
+					"$(SRCROOT)/beemiOS",
+					"~/Documents/FacebookSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
@@ -824,8 +824,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "65743105-48D9-4727-BE86-4959B669E33C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65743105-48D9-4727-BE86-4959B669E33C";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -836,11 +836,11 @@
 			baseConfigurationReference = 54A00A9B57F640D79D063BC5 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Brett (8TW9V9HVES)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
-					/Users/andy/code/beemiOS,
-					/Users/andy/Documents/FacebookSDK,
+					"$(SRCROOT)/beemiOS",
+					"~/Documents/FacebookSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Beeminder/Beeminder-Prefix.pch";
@@ -853,8 +853,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEF9E769-A9DA-4E16-9D32-B670864A6C8F";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
