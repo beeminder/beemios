@@ -192,7 +192,7 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:panic], @"panic", [ABCurrentUser accessToken], @"access_token", @"PUT", @"_method", nil];
     
     BeeminderAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.operationManager POST:@"/users/me.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [delegate.operationManager POST:@"/api/v1/users/me.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //foo
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //bar
