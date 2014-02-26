@@ -117,10 +117,10 @@
         MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
 
         if ([operation.responseObject isKindOfClass:[NSDictionary class]]) {
-            hud.labelText = [NSString stringWithFormat:@"Authentication failed: %@", [[operation.responseObject objectForKey:@"errors"] objectForKey:@"message"]];
+            hud.labelText = [NSString stringWithFormat:@"Login failed: %@", [[operation.responseObject objectForKey:@"errors"] objectForKey:@"message"]];
         }
         else {
-            hud.labelText = [NSString stringWithFormat:@"Authentication failed!"];
+            hud.labelText = [NSString stringWithFormat:@"Login failed!"];
         }
         hud.mode = MBProgressHUDModeText;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
