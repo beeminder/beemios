@@ -92,8 +92,9 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 
 + (void)requestPushNotificationAccess
 {
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+//	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+//     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 }
 
 // Begin Twitter Auth code
@@ -362,7 +363,7 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    
+
     NSURL *baseURL = [NSURL URLWithString:kBaseURL];
     self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
     [self.operationManager setResponseSerializer:[AFJSONResponseSerializer serializer]];
@@ -404,29 +405,38 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
         }
     }];
 
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:kHas20Key]) {
-        NSArray *stores = [self.persistentStoreCoordinator persistentStores];
-        
-        NSURL *url;
-        for(NSPersistentStore *store in stores) {
-            [self.persistentStoreCoordinator removePersistentStore:store error:nil];
-            url = store.URL;
-            [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
-        }
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                                 nil];
-        [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:nil];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:kHas31Key]) {
+//        NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+//        
+//        NSURL *url;
+//        for(NSPersistentStore *store in stores) {
+//            [self.persistentStoreCoordinator removePersistentStore:store error:nil];
+//            url = store.URL;
+//            [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+//        }
+//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+//                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+//                                 nil];
+//        [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:nil];
         
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kHas20Key];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kHas31Key];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self managedObjectContext];
-    }
+//        [self managedObjectContext];
 
-    [MagicalRecord setupAutoMigratingCoreDataStack];
+        [Fabric with:@[CrashlyticsKit]];
+        [MagicalRecord setupAutoMigratingCoreDataStack];
+    
+        [User MR_deleteAllMatchingPredicate:[NSPredicate predicateWithValue:YES]];
+        [Goal MR_deleteAllMatchingPredicate:[NSPredicate predicateWithValue:YES]];
+        [Datapoint MR_deleteAllMatchingPredicate:[NSPredicate predicateWithValue:YES]];
+    }
+    else {
+        [Fabric with:@[CrashlyticsKit]];
+        [MagicalRecord setupAutoMigratingCoreDataStack];
+    }
     
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
         NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -675,6 +685,47 @@ NSString * AFURLEncodedStringFromStringWithEncoding(NSString *string, NSStringEn
 + (UIColor *)nephritisColor
 {
     return [UIColor colorWithRed:39.0f/255.0f green:174.0f/255.0f blue:96.0f/255.0f alpha:1.0f];
+}
+
++ (NSAttributedString *)attributedDeltasString:(NSString *)deltaText yaw:(NSNumber *)yaw
+{
+    NSArray *deltas = [deltaText componentsSeparatedByString:@" "];
+    
+    UIColor *firstColor;
+    UIColor *thirdColor;
+    if ([yaw intValue] == 1) {
+        firstColor = [UIColor orangeColor];
+        thirdColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
+    }
+    else {
+        firstColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
+        thirdColor = [UIColor orangeColor];
+    }
+    
+    NSString *delta1 = [deltas objectAtIndex:0];
+    if ([delta1 isEqualToString:@"\u2714"]) delta1 = @"";
+    NSString *delta2 = [deltas objectAtIndex:1];
+    if ([delta2 isEqualToString:@"\u2714"]) delta2 = @"";
+    NSString *delta3 = [deltas objectAtIndex:2];
+    if ([delta3 isEqualToString:@"\u2714"]) delta3 = @"";
+    
+    NSMutableAttributedString *delta1Attributed = [[NSMutableAttributedString alloc] initWithString:delta1];
+    [delta1Attributed addAttribute:NSForegroundColorAttributeName value:firstColor range:NSMakeRange(0, delta1Attributed.length)];
+    
+    NSMutableAttributedString *delta2Attributed = [[NSMutableAttributedString alloc] initWithString:delta2];
+    [delta2Attributed addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, delta2Attributed.length)];
+    
+    NSMutableAttributedString *delta3Attributed = [[NSMutableAttributedString alloc] initWithString:delta3];
+    [delta3Attributed addAttribute:NSForegroundColorAttributeName value:thirdColor range:NSMakeRange(0, delta3Attributed.length)];
+    
+    NSMutableAttributedString *allAttributed = [[NSMutableAttributedString alloc] init];
+    [allAttributed appendAttributedString:delta1Attributed];
+    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
+    [allAttributed appendAttributedString:delta2Attributed];
+    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
+    [allAttributed appendAttributedString:delta3Attributed];
+    [allAttributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Lato-Bold" size:18] range:NSMakeRange(0, allAttributed.length)];
+    return allAttributed;
 }
 
 #pragma mark - Application's Documents directory

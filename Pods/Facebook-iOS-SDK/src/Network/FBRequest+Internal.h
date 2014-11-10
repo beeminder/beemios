@@ -16,7 +16,7 @@
 
 #import "FBRequest.h"
 
-@interface FBRequest (Internal)
+@interface FBRequest ()
 
 /*!
  @abstract
@@ -29,4 +29,15 @@
  */
 @property (assign, nonatomic) BOOL canCloseSessionOnError;
 
+@property (assign, nonatomic) BOOL skipClientToken;
+
+@property (readonly) NSString *versionPart;
+
+// Deprecated rest API helper methods only kept for internal use
+@property (nonatomic, copy) NSString *restMethod;
+
+- (instancetype)initWithSession:(FBSession *)session
+                     restMethod:(NSString *)restMethod
+                     parameters:(NSDictionary *)parameters
+                     HTTPMethod:(NSString *)HTTPMethod;
 @end

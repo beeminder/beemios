@@ -64,7 +64,7 @@
     self.dateStepper = [[UIStepper alloc] initWithFrame:CGRectOffset(self.dateStepperLabel.frame, 0, -27)];
     self.dateStepper.tintColor = [UIColor blackColor];
     [self.dateStepper addTarget:self action:@selector(dateStepperValueChanged) forControlEvents:UIControlEventValueChanged];
-    self.dateStepper.maximumValue = 0;
+    self.dateStepper.maximumValue = 1;
     self.dateStepper.minimumValue = -31;
     [self.view addSubview:self.dateStepper];
     
@@ -115,9 +115,14 @@
     [self.submitButton addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.submitButton];
     
-    CGFloat yPos = self.inputTextField.frame.origin.y - self.datapointsCount*27;
-    self.lastDatapointLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin + paddingView.frame.size.width, yPos, self.view.frame.size.width - 2*(kLeftMargin + paddingView.frame.size.width), self.inputTextField.frame.origin.y - yPos)];
+    self.lastDatapointLabel = [[UILabel alloc] init];
     [self.view addSubview: self.lastDatapointLabel];
+    [self.lastDatapointLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.graphImageView.mas_bottom);
+        make.left.equalTo(self.inputTextField);
+        make.right.equalTo(self.submitButton);
+        make.bottom.equalTo(self.submitButton.mas_top);
+    }];
     self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.lastDatapointLabel.numberOfLines = self.datapointsCount;
     
@@ -196,43 +201,7 @@
 
 - (void)updateDeltaLabel:(NSString *)deltaText yaw:(NSNumber *)yaw
 {
-    NSArray *deltas = [deltaText componentsSeparatedByString:@" "];
-    
-    UIColor *firstColor;
-    UIColor *thirdColor;
-    if ([yaw intValue] == 1) {
-        firstColor = [UIColor orangeColor];
-        thirdColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
-    }
-    else {
-        firstColor = [UIColor colorWithRed:81.0/255.0 green:163.0/255.0 blue:81.0/255.0 alpha:1];
-        thirdColor = [UIColor orangeColor];
-    }
-    
-    NSString *delta1 = [deltas objectAtIndex:0];
-    if ([delta1 isEqualToString:@"\u2714"]) delta1 = @"";
-    NSString *delta2 = [deltas objectAtIndex:1];
-    if ([delta2 isEqualToString:@"\u2714"]) delta2 = @"";
-    NSString *delta3 = [deltas objectAtIndex:2];
-    if ([delta3 isEqualToString:@"\u2714"]) delta3 = @"";
-    
-    NSMutableAttributedString *delta1Attributed = [[NSMutableAttributedString alloc] initWithString:delta1];
-    [delta1Attributed addAttribute:NSForegroundColorAttributeName value:firstColor range:NSMakeRange(0, delta1Attributed.length)];
-    
-    NSMutableAttributedString *delta2Attributed = [[NSMutableAttributedString alloc] initWithString:delta2];
-    [delta2Attributed addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, delta2Attributed.length)];
-    
-    NSMutableAttributedString *delta3Attributed = [[NSMutableAttributedString alloc] initWithString:delta3];
-    [delta3Attributed addAttribute:NSForegroundColorAttributeName value:thirdColor range:NSMakeRange(0, delta3Attributed.length)];
-    
-    NSMutableAttributedString *allAttributed = [[NSMutableAttributedString alloc] init];
-    [allAttributed appendAttributedString:delta1Attributed];
-    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
-    [allAttributed appendAttributedString:delta2Attributed];
-    [allAttributed appendAttributedString:[[NSAttributedString alloc] initWithString:@"   "]];
-    [allAttributed appendAttributedString:delta3Attributed];
-    [allAttributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Lato-Bold" size:18] range:NSMakeRange(0, allAttributed.length)];
-    [self.deltasLabel setAttributedText:allAttributed];
+    [self.deltasLabel setAttributedText:[BeeminderAppDelegate attributedDeltasString:deltaText yaw:yaw]];
 }
 
 - (void)refreshGoalData
@@ -304,8 +273,8 @@
         datapointValue = [NSDecimalNumber decimalNumberWithString:@"0"];
     }
 
-    self.inputTextField.text = [NSString stringWithFormat:@"%d %@", [dateComponents day], [formatter stringFromNumber:datapointValue]];
-    
+    self.inputTextField.text = [NSString stringWithFormat:@"%ld %@", (long)[dateComponents day], [formatter stringFromNumber:datapointValue]];
+    self.dateStepper.value = 0;
     self.valueStepper.value = [datapoint.value doubleValue];
 
 }
@@ -338,35 +307,17 @@
     }
     else {
         self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setFormatterBehavior:NSNumberFormatterDecimalStyle];
-        formatter.usesSignificantDigits = YES;
         NSString *lastDatapointsText = @"";
-        NSInteger offset = [[NSTimeZone localTimeZone] secondsFromGMT];
-        NSInteger serverOffset = [[NSTimeZone timeZoneWithAbbreviation:@"EST"] secondsFromGMT];
         
         for (Datapoint *datapoint in [self sortedDatapoints]) {
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[datapoint.timestamp doubleValue]];
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:date];
-            int day = [components day];
-            if (offset - serverOffset >= 3600*12) {
-                day -= 1;
+            NSString *strippedCanonical = datapoint.canonical;
+            if ([[datapoint.canonical substringToIndex:1] isEqualToString:@"0"]) {
+                strippedCanonical = [datapoint.canonical substringFromIndex:1];
             }
-            
-            NSString *comment = [NSString stringWithFormat:@"%i %@", day, [formatter stringFromNumber:datapoint.value]];
-            
-            if (datapoint.comment.length > 25) {
-                comment = [comment stringByAppendingFormat:@" \"%@...\"\n", [datapoint.comment substringToIndex:25]];
+            if (strippedCanonical.length > 37) {
+                strippedCanonical = [NSString stringWithFormat:@"%@...", [strippedCanonical substringToIndex:37]];
             }
-            else if (datapoint.comment.length > 0) {
-                comment = [comment stringByAppendingFormat:@" \"%@\"\n", datapoint.comment];
-            }
-            else {
-                comment = [comment stringByAppendingString:@"\n"];
-            }
-            
-            lastDatapointsText = [lastDatapointsText stringByAppendingString:comment];
+            lastDatapointsText = [lastDatapointsText stringByAppendingString:[NSString stringWithFormat:@"%@\n", strippedCanonical]];
         }
         self.lastDatapointLabel.text = [lastDatapointsText substringToIndex:lastDatapointsText.length - 1];
     }

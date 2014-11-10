@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GalleryViewController : UIViewController<PullToRefreshViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface GalleryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *goalsTableView;
 
 @property (strong, nonatomic) NSMutableArray *frontburnerGoalObjects;
 @property (strong, nonatomic) NSMutableArray *backburnerGoalObjects;
 @property (strong, nonatomic) NSComparator goalComparator;
-@property (strong, nonatomic) PullToRefreshView *pull;
 - (void)fetchEverything;
-@property BOOL hasCompletedDataFetch;
 @property (strong, nonatomic) UILabel *titleLabel;
 
 @end

@@ -63,6 +63,7 @@
                 datapoint.serverId = [datapointDict objectForKey:@"id"];
                 datapoint.timestamp = [datapointDict objectForKey:@"timestamp"];
                 datapoint.updatedAt = [datapointDict objectForKey:@"updated_at"];
+                datapoint.canonical = [datapointDict objectForKey:@"canonical"];
                 [defaultContext MR_saveToPersistentStoreAndWait];
             }
         }

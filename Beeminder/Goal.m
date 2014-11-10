@@ -2,8 +2,8 @@
 //  Goal.m
 //  Beeminder
 //
-//  Created by Andy Brett on 12/18/12.
-//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//  Created by Andy Brett on 11/8/14.
+//  Copyright (c) 2014 Andy Brett. All rights reserved.
 //
 
 #import "Goal.h"
@@ -15,6 +15,7 @@
 
 @dynamic burner;
 @dynamic contract;
+@dynamic delta_text;
 @dynamic ephem;
 @dynamic fitbit;
 @dynamic fitbit_field;
@@ -37,6 +38,8 @@
 @dynamic title;
 @dynamic units;
 @dynamic won;
+@dynamic yaw;
+@dynamic runits;
 @dynamic datapoints;
 @dynamic user;
 

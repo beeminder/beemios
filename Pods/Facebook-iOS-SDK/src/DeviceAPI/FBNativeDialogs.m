@@ -28,7 +28,6 @@
 #import "FBDialogsData+Internal.h"
 #import "FBDialogsParams+Internal.h"
 #import "FBError.h"
-#import "FBLoginDialogParams.h"
 #import "FBOpenGraphActionShareDialogParams.h"
 #import "FBSession.h"
 #import "FBShareDialogParams.h"
@@ -41,7 +40,7 @@
 + (FBOSIntegratedShareDialogHandler)handlerFromHandler:(FBShareDialogHandler)handler {
     if (handler) {
         FBOSIntegratedShareDialogHandler fancy = ^(FBOSIntegratedShareDialogResult result, NSError *error) {
-            handler(result, error);
+            handler((FBNativeDialogResult)result, error);
         };
         return [[fancy copy] autorelease];
     }

@@ -24,12 +24,12 @@
 #import "FBDialogsData+Internal.h"
 #import "FBError.h"
 #import "FBGraphObject.h"
+#import "FBInternalSettings.h"
 #import "FBLogger.h"
 #import "FBRequest.h"
 #import "FBSession+Internal.h"
 #import "FBSessionUtility.h"
 #import "FBSettings+Internal.h"
-#import "FBSettings.h"
 #import "FBUtility.h"
 
 @interface FBAppCall ()
@@ -48,6 +48,7 @@
 
 NSString *const FBLastDeferredAppLink = @"com.facebook.sdk:lastDeferredAppLink%@";
 NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
+NSString *const FBAppLinkInboundEvent = @"fb_al_inbound";
 
 @implementation FBAppCall
 
@@ -100,7 +101,7 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
                                                originalParams:originalQueryParameters
                                                     arguments:methodArgs]
                            autorelease];
-
+    [appCall logInboundAppLinkEvent];
     return appCall;
 }
 
@@ -122,8 +123,7 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
                                                originalParams:originalQueryParameters]
                            autorelease];
 
-
-
+    [appCall logInboundAppLinkEvent];
     return appCall;
 }
 
@@ -157,6 +157,40 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
     }
     // if we get here, we were unable to parse the URL.
     return nil;
+}
+
+- (void)logInboundAppLinkEvent {
+    FBAppLinkData *applinkData = self.appLinkData;
+    NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
+    if (applinkData.targetURL) {
+        logData[@"targetURL"] = [applinkData.targetURL absoluteString];
+    }
+    if ([applinkData.targetURL host]) {
+        logData[@"targetURLHost"] = [applinkData.targetURL host];
+    }
+    if (applinkData.refererData) {
+        if (applinkData.refererData[@"target_url"]) {
+            logData[@"referralTargetURL"] = applinkData.refererData[@"target_url"];
+        }
+        if (applinkData.refererData[@"url"]) {
+            logData[@"referralURL"] = applinkData.refererData[@"url"];
+        }
+        if (applinkData.refererData[@"app_name"]) {
+            logData[@"referralAppName"] = applinkData.refererData[@"app_name"];
+        }
+    }
+    if ([applinkData.originalURL absoluteString]) {
+        logData[@"inputURL"] = [applinkData.originalURL absoluteString];
+    }
+    if ([applinkData.originalURL scheme]) {
+        logData[@"inputURLScheme"] = [applinkData.originalURL scheme];
+    }
+
+    [FBAppEvents logImplicitEvent:FBAppLinkInboundEvent
+                       valueToSum:nil
+                       parameters:logData
+                          session:nil];
+    [logData release];
 }
 
 - (void)dealloc
@@ -256,6 +290,7 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
           withSession:(FBSession *)session
       fallbackHandler:(FBAppCallHandler)handler {
     FBSession *workingSession = session ?: FBSession.activeSessionIfExists;
+    [FBAppEvents setSourceApplication:sourceApplication openURL:url];
 
     // Wrap the fallback handler to intercept login flow for FBSession
     FBAppCallHandler sessionHandler = ^(FBAppCall *call) {
@@ -269,11 +304,17 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
             // login data.
             NSDictionary *results = call.dialogData.results;
             NSDate *expirationDate = [FBUtility expirationDateFromExpirationUnixTimeString:results[@"expires"]];
+            NSString *userID = [FBSessionUtility userIDFromSignedRequest:results[@"signed_request"]];
+
             FBAccessTokenData *accessToken = [FBAccessTokenData createTokenFromString:results[@"access_token"]
                                                                           permissions:results[@"permissions"]
+                                                                  declinedPermissions:nil
                                                                        expirationDate:expirationDate
                                                                             loginType:FBSessionLoginTypeFacebookApplication
-                                                                          refreshDate:nil];
+                                                                          refreshDate:nil
+                                                               permissionsRefreshDate:nil
+                                                                                appID:nil
+                                                                               userID:userID];
 
             // In some cases, it might be fine to go ahead and open the session anyways.
             if ([FBAppCall tryOpenSession:workingSession withAccessToken:accessToken]) {
@@ -308,15 +349,19 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
         return YES;
     }
 
-    // If this is a web login, log the dialog load performance stats
+    // If this is a web login, Add "close" timestamp to e2eMetrics & log the dialog load performance stats
+    // ("e2e" is expected to be a NSString - json encoded dictionary, if it's not - there's no sense to log anything)
     NSDictionary *params = [FBUtility queryParamsDictionaryFromFBURL:url];
     NSString *e2eMetrics = [params objectForKey:@"e2e"];
-    if (e2eMetrics != nil)  {
+    NSMutableDictionary *e2eMetricsMutableDict = [[[FBUtility simpleJSONDecode:e2eMetrics] mutableCopy] autorelease];
+    if ([e2eMetricsMutableDict isKindOfClass:[NSDictionary class]]) {
+        e2eMetricsMutableDict[@"close"] = [NSNumber numberWithDouble:round(1000 * [[NSDate date] timeIntervalSince1970])];
+        e2eMetrics = [FBUtility simpleJSONEncode:e2eMetricsMutableDict];
+
         [FBAppEvents logImplicitEvent:FBAppEventNameFBDialogsWebLoginCompleted
                            valueToSum:nil
                            parameters:@{
                                         FBAppEventsWebLoginE2E : e2eMetrics,
-                                        FBAppEventsWebLoginSwitchbackTime : [NSNumber numberWithDouble:round(1000 * [[NSDate date] timeIntervalSince1970])],
                                         @"app_id" : [FBSettings defaultAppID]
                                         }
                               session:nil];
@@ -406,6 +451,9 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
         FBAppCall *loginCall = [[[FBAppCall alloc] init] autorelease];
         loginCall.accessTokenData = accessToken;
         loginCall.appLinkData = appLinkData;
+        if (appLinkData) {
+            [loginCall logInboundAppLinkEvent];
+        }
 
         handler(loginCall);
     }
@@ -452,7 +500,7 @@ NSString *const FBDeferredAppLinkEvent = @"DEFERRED_APP_LINK";
         [deferredAppLinkParameters setObject:advertiserID forKey:@"advertiser_id"];
     }
 
-    [FBUtility updateParametersWithEventUsageLimitsAndBundleInfo:deferredAppLinkParameters];
+    [FBUtility updateParametersWithEventUsageLimitsAndBundleInfo:deferredAppLinkParameters accessAdvertisingTrackingStatus:YES];
 
     FBRequest *deferredAppLinkRequest = [[[FBRequest alloc] initForPostWithSession:nil
                                                                          graphPath:[NSString stringWithFormat:@"%@/activities", appID, nil]

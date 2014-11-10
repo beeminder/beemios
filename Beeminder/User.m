@@ -2,8 +2,8 @@
 //  User.m
 //  Beeminder
 //
-//  Created by Andy Brett on 12/18/12.
-//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//  Created by Andy Brett on 11/3/14.
+//  Copyright (c) 2014 Andy Brett. All rights reserved.
 //
 
 #import "User.h"

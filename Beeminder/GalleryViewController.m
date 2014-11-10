@@ -13,6 +13,8 @@
 @interface GalleryViewController ()
 
 @property BOOL isUpdating;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) UILabel *lastUpdatedLabel;
 
 @end
 
@@ -38,7 +40,31 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchEverything) name:@"fetchEverything" object:nil];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"your-goals-tab"] style:UIBarButtonItemStylePlain target:self action:@selector(fetchEverything)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.lastUpdatedLabel = [[UILabel alloc] init];
+    [self.view addSubview:self.lastUpdatedLabel];
 
+    self.lastUpdatedLabel.font = [UIFont defaultFont];
+    self.lastUpdatedLabel.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    self.lastUpdatedLabel.textAlignment = NSTextAlignmentCenter;
+    [self.lastUpdatedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIView *topLayoutGuide = (id)self.topLayoutGuide;
+        make.top.equalTo(topLayoutGuide.mas_bottom);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(28);
+    }];
+    [self updateLastUpdatedLabel];
+    
+    self.goalsTableView = [[UITableView alloc] init];
+    [self.view addSubview:self.goalsTableView];
+    [self.goalsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.lastUpdatedLabel.mas_bottom);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        UIView *bottomLayoutGuide = (id)self.bottomLayoutGuide;
+        make.bottom.equalTo(bottomLayoutGuide.mas_top);
+    }];
     self.goalsTableView.delegate = self;
     self.goalsTableView.dataSource = self;
     self.goalsTableView.separatorColor = [UIColor clearColor];
@@ -46,22 +72,23 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.backgroundColor = [UIColor blackColor];
     
-    self.hasCompletedDataFetch = NO;
-    
     [BeeminderAppDelegate requestPushNotificationAccess];
     
-    self.pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.goalsTableView];
-    [self.pull setDelegate:self];
-    [self.goalsTableView addSubview:self.pull];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    UITableViewController *tableVC = [[UITableViewController alloc] init];
+    tableVC.tableView = self.goalsTableView;
+    tableVC.refreshControl = self.refreshControl;
+    [self.goalsTableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(fetchEverything) forControlEvents:UIControlEventValueChanged];
     
-    self.goalsTableView.rowHeight = 92.0f;
+    self.goalsTableView.rowHeight = 110.0f;
     self.goalsTableView.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.goalComparator = ^(id a, id b) {
         if ([[a panicTime] doubleValue] - ([[b panicTime] doubleValue]) > 0) {
-            return 1;
+            return NSOrderedDescending;
         }
         else {
-            return -1;
+            return NSOrderedAscending;
         }
     };
     [self.goalsTableView setSectionFooterHeight:[self.goalsTableView cellForRowAtIndexPath:[[NSIndexPath alloc] initWithIndex:0]].frame.size.height];
@@ -99,6 +126,34 @@
     self.navigationItem.titleView = self.titleLabel;
     
     [self fetchEverything];
+    
+    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(updateLastUpdatedLabel) userInfo:nil repeats:YES];
+}
+
+- (void)updateLastUpdatedLabel
+{
+    int diff = [[[NSDate alloc] init] timeIntervalSince1970] - [ABCurrentUser lastUpdatedAt];
+    if (diff < 60) {
+        self.lastUpdatedLabel.text = @"Last updated: less than a minute ago";
+        self.lastUpdatedLabel.textColor = [UIColor darkTextColor];
+        self.lastUpdatedLabel.font = [UIFont defaultFont];
+    }
+    else if (diff > 3600) {
+        self.lastUpdatedLabel.text = @"Last updated: more than an hour ago";
+        self.lastUpdatedLabel.textColor = [UIColor redColor];
+        self.lastUpdatedLabel.font = [UIFont defaultFontBold];
+    }
+    else {
+        if (diff/60 == 1) {
+            self.lastUpdatedLabel.text = @"Last updated: 1 minute ago";
+        }
+        else {
+            self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Last updated: %d minutes ago", diff/60];
+        }
+
+        self.lastUpdatedLabel.textColor = [UIColor darkTextColor];
+        self.lastUpdatedLabel.font = [UIFont defaultFont];
+    }
 }
 
 - (void)goalUpdated:(NSNotification *)notification
@@ -176,13 +231,9 @@
     [self performSegueWithIdentifier:@"segueToGoalSummaryView" sender:self];
 }
 
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    [self performSelectorInBackground:@selector(fetchEverything) withObject:nil];
-}
-
 - (void)fetchEverything
 {
+    if (self.isUpdating) return;
     self.isUpdating = YES;
     [self.goalsTableView reloadData];
     int lastUpdatedAt = [ABCurrentUser lastUpdatedAt];
@@ -287,23 +338,18 @@
         else {
             goal = [self.backburnerGoalObjects objectAtIndex:indexPath.row];
         }
-        cell.textLabel.text = goal.title;
-        cell.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
-        cell.textLabel.adjustsFontSizeToFitWidth = YES;
-        cell.textLabel.minimumScaleFactor = 0.5f;
-        if (self.isUpdating) {
-            cell.detailTextLabel.text = @"Updating...";
-            cell.detailTextLabel.textColor = [UIColor darkGrayColor];
-        }
-        else {
-            cell.detailTextLabel.text = [goal losedateTextBrief:YES];
-            cell.detailTextLabel.textColor = goal.losedateColor;
-        }
-
-        cell.detailTextLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
-        cell.indentationLevel = 3.0;
-        cell.indentationWidth = 40.0;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 10, 106, 70)];
+        
+        UILabel *titleLabel = [[UILabel alloc] init];
+        
+        titleLabel.text = goal.title;
+        titleLabel.font = [UIFont defaultFontBold];
+        [cell.contentView addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(8);
+            make.top.mas_equalTo(8);
+        }];
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
         if (goal.graph_image_thumb) {
             imageView.image = goal.graph_image_thumb;
         }
@@ -311,7 +357,92 @@
             [MBProgressHUD showHUDAddedTo:imageView animated:YES];
         }
         
-        [cell addSubview:imageView];
+        [cell.contentView addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(8);
+            make.top.equalTo(titleLabel.mas_bottom).with.offset(10);
+            make.width.mas_equalTo(106);
+            make.height.mas_equalTo(70);
+        }];
+
+        
+        UIView *losedateView = [[UIView alloc] init];
+        [cell.contentView addSubview:losedateView];
+        [losedateView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(0);
+            make.top.equalTo(imageView);
+            make.bottom.equalTo(imageView);
+            make.width.equalTo(cell.contentView).with.multipliedBy(0.22);
+        }];
+        losedateView.backgroundColor = [goal losedateColor];
+        
+        UILabel *loseDateLabel = [[UILabel alloc] init];
+        loseDateLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
+        loseDateLabel.textAlignment = NSTextAlignmentCenter;
+        [losedateView addSubview:loseDateLabel];
+        [loseDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(losedateView);
+        }];
+        loseDateLabel.numberOfLines = 0;
+        loseDateLabel.textColor = [UIColor whiteColor];
+        
+        if (self.isUpdating) {
+            loseDateLabel.text = @"";
+        }
+        else if(goal.yaw && goal.delta_text) {
+            loseDateLabel.text = [goal losedateTextBrief:YES];
+        }
+        
+        UILabel *rateLabel = [[UILabel alloc] init];
+        [cell.contentView addSubview:rateLabel];
+        [rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(imageView.mas_right);
+            make.top.equalTo(imageView);
+            make.right.equalTo(losedateView.mas_left);
+            make.bottom.equalTo(imageView);
+        }];
+        rateLabel.font = [UIFont defaultFontBold];
+        rateLabel.textColor = [UIColor darkTextColor];
+        rateLabel.textAlignment = NSTextAlignmentCenter;
+
+        NSString *runitString = @"week";
+        if ([goal.runits isEqualToString:@"d"]) {
+            runitString = @"day";
+        }
+        else if ([goal.runits isEqualToString:@"m"]) {
+            runitString = @"month";
+        }
+        else if ([goal.runits isEqualToString:@"y"]) {
+             runitString = @"year";
+        }
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.maximumSignificantDigits = 2;
+        rateLabel.text = [NSString stringWithFormat:@"%@/%@", [formatter stringFromNumber:goal.rate], runitString];
+        
+        if (goal.delta_text && goal.yaw && [[BeeminderAppDelegate attributedDeltasString:goal.delta_text yaw:goal.yaw].string stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0) {
+            UILabel *deltasLabel = [[UILabel alloc] init];
+            NSMutableAttributedString *deltas = [[NSMutableAttributedString alloc] initWithAttributedString:[BeeminderAppDelegate attributedDeltasString:goal.delta_text yaw:goal.yaw]];
+            [deltas addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Lato-Bold" size:13.0f] range:NSMakeRange(0, deltas.length)];
+            deltasLabel.attributedText = deltas;
+            deltasLabel.textAlignment = NSTextAlignmentCenter;
+            [cell.contentView addSubview:deltasLabel];
+            [deltasLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(imageView.mas_right);
+                make.bottom.equalTo(imageView);
+                make.top.mas_equalTo(imageView.mas_centerY);
+                make.right.equalTo(losedateView.mas_left);
+            }];
+            [rateLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(imageView.mas_right);
+                make.top.equalTo(imageView);
+                make.right.equalTo(losedateView.mas_left);
+                make.bottom.mas_equalTo(imageView.mas_centerY);
+            }];
+        }
+
+
+        cell.detailTextLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
+
         cell.backgroundColor = [BeeminderAppDelegate silverColor];
         cell.backgroundColor = [UIColor whiteColor];
     }
@@ -350,7 +481,7 @@
 - (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON progressCallback:(void(^)(float incrementBy))progressCallback
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.pull finishedLoading];
+        [self.refreshControl endRefreshing];
     });
     
     NSArray *deletedGoals = [responseJSON objectForKey:@"deleted_goals"];
@@ -386,13 +517,14 @@
     [BeeminderAppDelegate updateApplicationIconBadgeCount];
     [ABCurrentUser setLastUpdatedAtToNow];    
     [self pollForThumbnails];
-    self.hasCompletedDataFetch = YES;
+
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]) {
             [self goToGoalWithSlug:[[NSUserDefaults standardUserDefaults] objectForKey:kGoToGoalWithSlugKey]];
         }
         [self.goalsTableView reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self updateLastUpdatedLabel];
     });
 }
 

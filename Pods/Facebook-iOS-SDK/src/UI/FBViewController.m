@@ -17,8 +17,8 @@
 #import "FBViewController.h"
 #import "FBViewController+Internal.h"
 
+#import "FBInternalSettings.h"
 #import "FBLogger.h"
-#import "FBSettings.h"
 
 @interface FBViewController ()
 
@@ -118,15 +118,11 @@
     self.doneButton.action = @selector(doneButtonPressed:);
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelButtonPressed:);
-
-    [self updateBar];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-    // If the view goes away for any reason, nil out the handler to avoid a retain cycle.
-    self.handler = nil;
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateBar];
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -162,7 +158,8 @@
         if (!application.statusBarHidden) {
             if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
                 if ((self.edgesForExtendedLayout & UIRectEdgeTop) == 0) {
-                    CGFloat offset = CGRectGetMaxY(application.statusBarFrame);
+                    BOOL landscape = UIInterfaceOrientationIsLandscape(application.statusBarOrientation);
+                    CGFloat offset = landscape ? application.statusBarFrame.size.width : application.statusBarFrame.size.height;
                     bounds.origin.y += offset;
                     bounds.size.height -= offset;
                 }
@@ -273,6 +270,7 @@
         [self logAppEvents:YES];
         if (self.handler) {
             self.handler(self, NO);
+            self.handler = nil;
         }
     }
 }
@@ -289,6 +287,7 @@
         [self logAppEvents:NO];
         if (self.handler) {
             self.handler(self, YES);
+            self.handler = nil;
         }
     }
 }

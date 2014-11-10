@@ -2,8 +2,8 @@
 //  Goal.h
 //  Beeminder
 //
-//  Created by Andy Brett on 12/18/12.
-//  Copyright (c) 2012 Andy Brett. All rights reserved.
+//  Created by Andy Brett on 11/8/14.
+//  Copyright (c) 2014 Andy Brett. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * burner;
 @property (nonatomic, retain) id contract;
+@property (nonatomic, retain) NSString * delta_text;
 @property (nonatomic, retain) NSNumber * ephem;
 @property (nonatomic, retain) NSNumber * fitbit;
 @property (nonatomic, retain) NSString * fitbit_field;
@@ -37,6 +38,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * units;
 @property (nonatomic, retain) NSNumber * won;
+@property (nonatomic, retain) NSNumber * yaw;
+@property (nonatomic, retain) NSString * runits;
 @property (nonatomic, retain) NSSet *datapoints;
 @property (nonatomic, retain) User *user;
 @end

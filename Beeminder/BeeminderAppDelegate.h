@@ -49,6 +49,8 @@ extern NSString *const FBSessionStateChangedNotification;
 
 + (void)removeDeviceTokenFromServer;
 
++ (NSAttributedString *)attributedDeltasString:(NSString *)deltaText yaw:(NSNumber *)yaw;
+
 + (UIColor *)silverColor;
 + (UIColor *)cloudsColor;
 + (UIColor *)sunflowerColor;

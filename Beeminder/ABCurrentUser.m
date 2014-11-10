@@ -12,7 +12,12 @@
 
 + (User *)user
 {
-    return [User MR_findFirstByAttribute:@"username" withValue:[ABCurrentUser username] inContext:[NSManagedObjectContext MR_defaultContext]];
+    User *user = [User MR_findFirstByAttribute:@"username" withValue:[ABCurrentUser username] inContext:[NSManagedObjectContext MR_defaultContext]];
+    if (!user) {
+        user = [User MR_createEntity];
+        user.username = [ABCurrentUser username];
+    }
+    return user;
 }
 
 + (NSString *)username

@@ -44,6 +44,19 @@ static BOOL FBIsDeviceIPad() {
     return NO;
 }
 
+// This function determines if we want to use the legacy view layout in effect for iPhone OS 2.0
+// through iOS 7, where we, the developer, have to worry about device orientation when working with
+// views outside of the window's root view controller and apply the correct rotation transform and/
+// or swap a view's width and height values. If the application was linked with UIKit on iOS 7 or
+// earlier or the application is running on iOS 7 or earlier then we need to use the legacy layout
+// code. Otherwise if the application was linked with UIKit on iOS 8 or later and the application
+// is running on iOS 8 or later, UIKit handles all the rotation complexity and the origin is always
+// in the top-left and no rotation transform is necessary.
+static BOOL FBUseLegacyLayout(void) {
+    return (![FBUtility isUIKitLinkedOnOrAfter:FBIOSVersion_8_0] ||
+            ![FBUtility isRunningOnOrAfter:FBIOSVersion_8_0]);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation FBDialog {
@@ -144,16 +157,19 @@ static BOOL FBIsDeviceIPad() {
 }
 
 - (CGAffineTransform)transformForOrientation {
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (orientation == UIInterfaceOrientationLandscapeLeft) {
-        return CGAffineTransformMakeRotation(M_PI * 1.5);
-    } else if (orientation == UIInterfaceOrientationLandscapeRight) {
-        return CGAffineTransformMakeRotation(M_PI/2);
-    } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-        return CGAffineTransformMakeRotation(-M_PI);
-    } else {
-        return CGAffineTransformIdentity;
+    // iOS 8 simply adjusts the application frame to adapt to the current orientation and deprecated the concept of interface orientations
+    if (FBUseLegacyLayout()) {
+        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        if (orientation == UIInterfaceOrientationLandscapeLeft) {
+            return CGAffineTransformMakeRotation(M_PI * 1.5);
+        } else if (orientation == UIInterfaceOrientationLandscapeRight) {
+            return CGAffineTransformMakeRotation(M_PI/2);
+        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+            return CGAffineTransformMakeRotation(-M_PI);
+        }
     }
+
+    return CGAffineTransformIdentity;
 }
 
 - (void)sizeToFitOrientation:(BOOL)transform {
@@ -176,10 +192,10 @@ static BOOL FBIsDeviceIPad() {
     CGFloat height = floor(scale_factor * frame.size.height) - kPadding * 2;
 
     _orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        self.frame = CGRectMake(kPadding, kPadding, height, width);
-    } else {
+    if (UIInterfaceOrientationIsPortrait(_orientation) || !FBUseLegacyLayout()) {
         self.frame = CGRectMake(kPadding, kPadding, width, height);
+    } else {
+        self.frame = CGRectMake(kPadding, kPadding, height, width);
     }
     self.center = center;
 
@@ -498,11 +514,11 @@ static BOOL FBIsDeviceIPad() {
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     // 102 == WebKitErrorFrameLoadInterruptedByPolicyChange
-    // -999 == "Operation could not be completed", note -999 occurs when the user clicks away before
-    // the page has completely loaded, if we find cases where we want this to result in dialog failure
-    // (usually this just means quick-user), then we should add something more robust here to account
-    // for differences in application needs
-    if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
+    // NSURLErrorCancelled == "Operation could not be completed", note NSURLErrorCancelled occurs when
+    // the user clicks away before the page has completely loaded, if we find cases where we want this
+    // to result in dialog failure (usually this just means quick-user), then we should add something
+    // more robust here to account for differences in application needs
+    if (!(([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) ||
           ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
         [self dismissWithError:error animated:YES];
     }
@@ -619,7 +635,7 @@ static BOOL FBIsDeviceIPad() {
     if ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) {
         if ([_delegate respondsToSelector:@selector(dialog:didFailWithError:)]) {
             NSError *error = [NSError errorWithDomain:FacebookSDKDomain
-                                                 code:FBErrorOperationDisallowedForRestrictedTreament
+                                                 code:FBErrorOperationDisallowedForRestrictedTreatment
                                              userInfo:nil];
             [_delegate dialog:self didFailWithError:error];
         }

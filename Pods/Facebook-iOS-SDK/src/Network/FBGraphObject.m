@@ -45,14 +45,12 @@
 // implementations for common methods such as respondsToSelector and conformsToProtocol, as
 // suggested in the previously referenced documentation
 
-static NSString *const FBIsGraphObjectKey = @"com.facebook.FBIsGraphObjectKey";
-
 // used internally by the category impl
-typedef enum _SelectorInferredImplType {
+typedef NS_ENUM(NSUInteger, SelectorInferredImplType) {
     SelectorInferredImplTypeNone  = 0,
     SelectorInferredImplTypeGet = 1,
     SelectorInferredImplTypeSet = 2
-} SelectorInferredImplType;
+};
 
 
 // internal-only wrapper
@@ -117,6 +115,22 @@ typedef enum _SelectorInferredImplType {
     }
 }
 
+- (NSString *)objectID {
+    return _jsonObject[@"id"];
+}
+
+- (void)setObjectID:(NSString *)objectID {
+    _jsonObject[@"id"] = objectID;
+}
+
+- (id)objectDescription {
+    return _jsonObject[@"description"];
+}
+
+- (void)setObjectDescription:(id)objectDescription {
+    _jsonObject[@"description"] = objectDescription;
+}
+
 - (void)dealloc {
     [_jsonObject release];
     [super dealloc];
@@ -166,7 +180,7 @@ typedef enum _SelectorInferredImplType {
         ogo.url = url;
     }
     if (description) {
-        ogo.description = description;
+        ogo.objectDescription = description;
     }
     return ogo;
 }

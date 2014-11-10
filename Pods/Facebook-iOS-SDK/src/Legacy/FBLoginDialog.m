@@ -31,12 +31,12 @@
  */
 - (instancetype)initWithURL:(NSString *)loginURL
                 loginParams:(NSMutableDictionary *)params
-                   delegate:(id<FBLoginDialogDelegate>)delegate
+                   delegate:(id<FBLoginDialogDelegate>)loginDelegate
 {
     if ((self = [super init])) {
         _serverURL = [loginURL retain];
         _params = [params retain];
-        _loginDelegate = delegate;
+        _loginDelegate = loginDelegate;
     }
     return self;
 }
@@ -86,7 +86,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
+    if (!(([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) ||
           ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
         [super webView:webView didFailLoadWithError:error];
         if ([_loginDelegate respondsToSelector:@selector(fbDialogNotLogin:)]) {

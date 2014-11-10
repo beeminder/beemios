@@ -33,4 +33,18 @@
     return nil;
 }
 
++ (NSString *)methodName {
+    // Fetching methodName here makes the assumption that content types map 1-to-1 to bridge method names.
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    return [[[self class] alloc] init];
+}
+
 @end

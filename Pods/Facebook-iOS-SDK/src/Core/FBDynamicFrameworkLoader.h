@@ -16,8 +16,12 @@
 
 #import <sqlite3.h>
 
+#import <AudioToolbox/AudioToolbox.h>
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 #import <Security/Security.h>
+
+#import "FBSDKMacros.h"
 
 /*!
  @class FBDynamicFrameworkLoader
@@ -27,34 +31,11 @@
  fashion.  It allows the SDK to be just dragged into a project without having to specify additional
  frameworks to link against.  It is an internal class and not to be used by 3rd party developers.
 
- This class is a generic class for loading Classes, NSStrings, and SecRandomRef.
  As new types are needed, they should be added and strongly typed.
  */
 @interface FBDynamicFrameworkLoader : NSObject
 
-/*!
- @abstract
- Loads a Class and returns the Class object.  This can then be used to create an instance of the class.
-
- @param className  An NSString of the name of the class
-
- @param frameworkName The framework in which the class appears
-
- @return The Class object or nil if it fails to load.
- */
-+ (Class)loadClass:(NSString *)className withFramework:(NSString *)frameworkName;
-
-/*!
- @abstract
- Loads a string constant and return the string.
-
- @param constantName  An NSString of the name of the constant
-
- @param frameworkName The framework in which the constant appears
-
- @return The string or nil if it fails to load.
- */
-+ (NSString *)loadStringConstant:(NSString *)constantName withFramework:(NSString *)frameworkName;
+#pragma mark Security Constants
 
 /*!
  @abstract
@@ -66,50 +47,115 @@
 
 /*!
  @abstract
- Returns the path template to the Frameworks.
- We will try and load the template passing in the framework twice
- "/System/Library/Frameworks/%@.framework/%@" is the default value.
+ Load the kSecAttrAccessible value from the Security Framework
 
- @return The path template for loading Frameworks
+ @return The kSecAttrAccessible value or nil.
  */
-+ (NSString *)frameworkPathTemplate;
++ (CFTypeRef)loadkSecAttrAccessible;
 
 /*!
  @abstract
- Sets the path template of where to load Frameworks from
- This will be loaded with [NSString stringWithFormat:pathTemplate, framework, framework]
+ Load the kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value from the Security Framework
 
- @param pathTemplate An NSString of the pathTemplate
-
- @return void
+ @return The kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value or nil.
  */
-+ (void)setFrameworkPathTemplate:(NSString *)pathTemplate;
++ (CFTypeRef)loadkSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
 
 /*!
  @abstract
- Returns the path to the Sqlite library
+ Load the kSecAttrAccount value from the Security Framework
 
- @return The path we will attempt to load the Sqlite library from
+ @return The kSecAttrAccount value or nil.
  */
-+ (NSString *)sqlitePath;
++ (CFTypeRef)loadkSecAttrAccount;
 
 /*!
  @abstract
- Sets the path of where to load the Sqlite library from
+ Load the kSecAttrService value from the Security Framework
 
- @param path An NSString of the path
-
- @return void
+ @return The kSecAttrService value or nil.
  */
-+ (void)setSqlitePath:(NSString *)path;
++ (CFTypeRef)loadkSecAttrService;
+
+/*!
+ @abstract
+ Load the kSecAttrGeneric value from the Security Framework
+
+ @return The kSecAttrGeneric value or nil.
+ */
++ (CFTypeRef)loadkSecAttrGeneric;
+
+/*!
+ @abstract
+ Load the kSecValueData value from the Security Framework
+
+ @return The kSecValueData value or nil.
+ */
++ (CFTypeRef)loadkSecValueData;
+
+/*!
+ @abstract
+ Load the kSecClassGenericPassword value from the Security Framework
+
+ @return The kSecClassGenericPassword value or nil.
+ */
++ (CFTypeRef)loadkSecClassGenericPassword;
+
+/*!
+ @abstract
+ Load the kSecAttrAccessGroup value from the Security Framework
+
+ @return The kSecAttrAccessGroup value or nil.
+ */
++ (CFTypeRef)loadkSecAttrAccessGroup;
+
+/*!
+ @abstract
+ Load the kSecMatchLimitOne value from the Security Framework
+
+ @return The kSecMatchLimitOne value or nil.
+ */
++ (CFTypeRef)loadkSecMatchLimitOne;
+
+/*!
+ @abstract
+ Load the kSecMatchLimit value from the Security Framework
+
+ @return The kSecMatchLimit value or nil.
+ */
++ (CFTypeRef)loadkSecMatchLimit;
+
+/*!
+ @abstract
+ Load the kSecReturnData value from the Security Framework
+
+ @return The kSecReturnData value or nil.
+ */
++ (CFTypeRef)loadkSecReturnData;
+
+/*!
+ @abstract
+ Load the kSecClass value from the Security Framework
+
+ @return The kSecClass value or nil.
+ */
++ (CFTypeRef)loadkSecClass;
 
 @end
 
-// Security c-style APIs
+#pragma mark Security APIs
+
 // These are local wrappers around the corresponding methods in Security/SecRandom.h
 int fbdfl_SecRandomCopyBytes(SecRandomRef rnd, size_t count, uint8_t *bytes);
 
-// SQLITE3 c-style APIs
+// These are local wrappers around Keychain API
+OSStatus fbdfl_SecItemUpdate(CFDictionaryRef query, CFDictionaryRef attributesToUpdate);
+OSStatus fbdfl_SecItemAdd(CFDictionaryRef attributes, CFTypeRef *result);
+OSStatus fbdfl_SecItemCopyMatching(CFDictionaryRef query, CFTypeRef *result);
+OSStatus fbdfl_SecItemDelete(CFDictionaryRef query);
+
+#pragma mark sqlite3 APIs
+
 // These are local wrappers around the corresponding sqlite3 method from /usr/include/sqlite3.h
 SQLITE_API const char *fbdfl_sqlite3_errmsg(sqlite3 *db);
 SQLITE_API int fbdfl_sqlite3_prepare_v2(sqlite3 *db, const char *zSql, int nByte, sqlite3_stmt **ppStmt, const char **pzTail);
@@ -126,4 +172,47 @@ SQLITE_API double fbdfl_sqlite3_column_double(sqlite3_stmt *stmt, int iCol);
 SQLITE_API int fbdfl_sqlite3_column_int(sqlite3_stmt *stmt, int iCol);
 SQLITE_API const unsigned char *fbdfl_sqlite3_column_text(sqlite3_stmt *stmt, int iCol);
 
+#pragma mark Social Constants
 
+NSString *fbdfl_SLServiceTypeFacebook(void);
+
+#pragma mark Social Classes
+
+Class fbdfl_SLComposeViewControllerClass(void);
+
+#pragma mark QuartzCore Classes
+
+Class fbdfl_CATransactionClass(void);
+
+#pragma mark QuartzCore APIs
+
+// These are local wrappers around the corresponding transform methods from QuartzCore.framework/CATransform3D.h
+CATransform3D fbdfl_CATransform3DMakeScale (CGFloat sx, CGFloat sy, CGFloat sz);
+CATransform3D fbdfl_CATransform3DMakeTranslation (CGFloat tx, CGFloat ty, CGFloat tz);
+CATransform3D fbdfl_CATransform3DConcat (CATransform3D a, CATransform3D b);
+
+FBSDK_EXTERN const CATransform3D fbdfl_CATransform3DIdentity;
+
+#pragma mark AudioToolbox APIs
+
+// These are local wrappers around the corresponding methods in AudioToolbox/AudioToolbox.h
+OSStatus fbdfl_AudioServicesCreateSystemSoundID(CFURLRef inFileURL, SystemSoundID *outSystemSoundID);
+OSStatus fbdfl_AudioServicesDisposeSystemSoundID(SystemSoundID inSystemSoundID);
+void fbdfl_AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID);
+
+#pragma mark AdSupport Classes
+
+Class fbdfl_ASIdentifierManagerClass(void);
+
+#pragma mark Accounts Constants
+
+NSString *fbdfl_ACFacebookAppIdKey(void);
+NSString *fbdfl_ACFacebookAudienceEveryone(void);
+NSString *fbdfl_ACFacebookAudienceFriends(void);
+NSString *fbdfl_ACFacebookAudienceKey(void);
+NSString *fbdfl_ACFacebookAudienceOnlyMe(void);
+NSString *fbdfl_ACFacebookPermissionsKey(void);
+
+#pragma mark Accounts Classes
+
+Class fbdfl_ACAccountStoreClass(void);

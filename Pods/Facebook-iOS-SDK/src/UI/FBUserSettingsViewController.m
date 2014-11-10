@@ -18,6 +18,8 @@
 
 #import "FBAppEvents+Internal.h"
 #import "FBGraphUser.h"
+#import "FBInternalSettings.h"
+#import "FBLogger.h"
 #import "FBProfilePictureView.h"
 #import "FBRequest.h"
 #import "FBSession+Internal.h"
@@ -88,7 +90,8 @@
                                                          ofType:@"bundle"];
         self.bundle = [NSBundle bundleWithPath:path];
         if (self.bundle == nil) {
-            NSLog(@"WARNING: FBUserSettingsViewController could not find FBUserSettingsViewResources.bundle");
+            [FBLogger singleShotLogEntry:FBLoggingBehaviorInformational
+                                logEntry:@"WARNING: FBUserSettingsViewController could not find FBUserSettingsViewResources.bundle"];
         }
         [self initializeBlocks];
     }

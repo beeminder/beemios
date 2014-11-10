@@ -34,4 +34,11 @@
                       defaultAudience:(FBSessionDefaultAudience)defaultAudience
                    allowSystemAccount:(BOOL)allowSystemAccount
                                isRead:(BOOL)isRead;
++ (void)extractPermissionsFromResponse:(NSDictionary *)responseObject
+                        allPermissions:(NSMutableArray *)allPermissions
+                    grantedPermissions:(NSMutableArray *)grantedPermissions
+                   declinedPermissions:(NSMutableArray *)declinedPermissions;
++ (FBSessionLoginBehavior)loginBehaviorForLoginType:(FBSessionLoginType)loginType;
++ (NSString *)userIDFromSignedRequest:(NSString *)signedRequest;
++ (NSString *)audienceNameWithAudience:(FBSessionDefaultAudience)audience;
 @end
