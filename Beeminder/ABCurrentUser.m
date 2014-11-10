@@ -38,6 +38,11 @@
     [defaults removeObjectForKey:@"username"];
     [BeeminderAppDelegate removeStoredOAuthDefaults];
     [defaults synchronize];
+    User *user = [ABCurrentUser user];
+    for (Goal *goal in user.goals) {
+        [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
+    }
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
 + (void)loginWithUsername:(NSString *)username accessToken:(NSString *)accessToken

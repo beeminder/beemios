@@ -241,10 +241,6 @@
     MBProgressHUD *hud;
     BOOL initialImport = (!lastUpdatedAt || lastUpdatedAt == 0);
     if (initialImport) {
-        User *user = [ABCurrentUser user];
-        for (Goal *goal in user.goals) {
-            [[NSManagedObjectContext MR_defaultContext] deleteObject:goal];
-        }
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Fetching Beeswax...";
         hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
@@ -255,18 +251,12 @@
     [delegate.operationManager GET:[NSString stringWithFormat:@"%@/users/me.json", kAPIPrefix] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.isUpdating = NO;
         if (initialImport) {
-            hud.mode = MBProgressHUDModeDeterminate;
             hud.progress = 0.0f;
             hud.labelText = @"Importing Beeswax...";
             hud.labelFont = [UIFont fontWithName:@"Lato" size:14.0f];
         }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self successfulFetchEverythingJSON:responseObject progressCallback:^(float incrementBy){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (initialImport) [hud setProgress:hud.progress + incrementBy];
-                    [self.goalsTableView reloadData];
-                });
-            }];
+            [self successfulFetchEverythingJSON:responseObject];
             for (Goal *goal in self.frontburnerGoalObjects) {
                 [goal updateGraphImage];
                 [goal updateGraphImageThumbWithCompletionBlock:^{
@@ -374,7 +364,13 @@
             make.bottom.equalTo(imageView);
             make.width.equalTo(cell.contentView).with.multipliedBy(0.22);
         }];
-        losedateView.backgroundColor = [goal losedateColor];
+        if (goal.slug) {
+            losedateView.backgroundColor = [goal losedateColor];
+        }
+        else {
+            losedateView.backgroundColor = [UIColor whiteColor];
+        }
+
         
         UILabel *loseDateLabel = [[UILabel alloc] init];
         loseDateLabel.font = [UIFont fontWithName:@"Lato-Bold" size:18.0f];
@@ -415,9 +411,15 @@
         else if ([goal.runits isEqualToString:@"y"]) {
              runitString = @"year";
         }
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        formatter.maximumSignificantDigits = 2;
-        rateLabel.text = [NSString stringWithFormat:@"%@/%@", [formatter stringFromNumber:goal.rate], runitString];
+        
+        NSString *rateString = @"";
+        if (goal.rate) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            formatter.maximumSignificantDigits = 2;
+            rateString = [formatter stringFromNumber:goal.rate];
+        }
+
+        rateLabel.text = [NSString stringWithFormat:@"%@/%@", rateString, runitString];
         
         if (goal.delta_text && goal.yaw && [[BeeminderAppDelegate attributedDeltasString:goal.delta_text yaw:goal.yaw].string stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0) {
             UILabel *deltasLabel = [[UILabel alloc] init];
@@ -439,7 +441,6 @@
                 make.bottom.mas_equalTo(imageView.mas_centerY);
             }];
         }
-
 
         cell.detailTextLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0f];
 
@@ -478,7 +479,7 @@
     }
 }
 
-- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON progressCallback:(void(^)(float incrementBy))progressCallback
+- (void)successfulFetchEverythingJSON:(NSDictionary *)responseJSON
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.refreshControl endRefreshing];
@@ -494,7 +495,6 @@
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     for (NSDictionary *goalDict in goals) {
-        progressCallback(1.0f/[goals count]);
         
         NSDictionary *modGoalDict = [Goal processGoalDictFromServer:goalDict];
         
