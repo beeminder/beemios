@@ -28,6 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIView *statusBarView = [[UIView alloc] init];
+    statusBarView.frame = [UIApplication sharedApplication].statusBarFrame;
+    statusBarView.backgroundColor = [UIColor blackColor];
 
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,0, 227, 32)];
     titleLabel.text = @"Settings";
@@ -139,6 +143,8 @@
     self.reloadAllGoalsButton = [BeeminderAppDelegate standardGrayButtonWith:self.reloadAllGoalsButton];
 
     self.loggedInAsLabel.text = [NSString stringWithFormat:@"Logged in as: %@", [ABCurrentUser username]];
+    
+    [self.navigationController.view addSubview:statusBarView];
 }
 
 - (void)back
