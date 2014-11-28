@@ -118,7 +118,7 @@
     self.lastDatapointLabel = [[UILabel alloc] init];
     [self.view addSubview: self.lastDatapointLabel];
     [self.lastDatapointLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.graphImageView.mas_bottom);
+        make.top.equalTo(self.graphScrollView.mas_bottom);
         make.left.equalTo(self.inputTextField);
         make.right.equalTo(self.submitButton);
         make.bottom.equalTo(self.submitButton.mas_top);
@@ -637,7 +637,7 @@
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     // double tap zooms in
     float newScale = [self.graphScrollView zoomScale] * ZOOM_STEP;
-    if (newScale > self.graphScrollView.maximumZoomScale) return;
+    if (newScale > self.graphScrollView.maximumZoomScale) newScale = 1;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [self.graphScrollView zoomToRect:zoomRect animated:YES];
 }
