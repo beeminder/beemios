@@ -495,9 +495,7 @@
     NSArray *goals = [responseJSON objectForKey:@"goals"];
     
     for (NSDictionary *goalDict in goals) {
-        
         NSDictionary *modGoalDict = [Goal processGoalDictFromServer:goalDict];
-        
         [Goal writeToGoalWithDictionary:modGoalDict forUserWithUsername:[ABCurrentUser username]];
     }
     User *user = [ABCurrentUser user];
