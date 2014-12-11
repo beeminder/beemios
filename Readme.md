@@ -1,5 +1,7 @@
 Beeminder iOS App ("beemiOS" is pronounced "be my OS")
 
+This is the [official Beeminder iOS app, available in the App Store](https://itunes.apple.com/us/app/beeminder/id551869729).
+
 #### Dependencies
 
 [Cocoapods](http://cocoapods.org/)
