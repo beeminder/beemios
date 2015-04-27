@@ -49,20 +49,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.2</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>b473216e39a2f0be4fa5a296822e50b5247a2afc</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>FacebookAppID</key>
 	<string>208127512622250</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -93,6 +79,9 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
