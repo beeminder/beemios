@@ -1,6 +1,6 @@
 # Warning! 
 
-#### This is no longer the code for the App Store version of the Beeminder app. It's been rewritten in Swift and still has some things in it (integration keys) that we need to remove before open sourcing it. We'll publish it soon and link to it here when we do. 
+#### This is no longer the code for the App Store version of the Beeminder app. It's been [rewritten in Swift](https://github.com/beeminder/BeeSwift)
 
 Beeminder iOS App ("beemiOS" is pronounced "be my OS")
 
