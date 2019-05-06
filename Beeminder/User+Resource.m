@@ -38,7 +38,7 @@
     
     NSSet *goals = self.goals;
     for (g in goals) {
-        if ([g.slug isEqualToString:[goalDict objectForKey:@"slug"]]) {
+        if ([g.serverId isEqualToString:[goalDict objectForKey:@"id"]]) {
             goal = g;
         }
     }
