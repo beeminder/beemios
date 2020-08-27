@@ -30,7 +30,7 @@
 @property (strong, nonatomic) NSTimer *graphPoller;
 @property (strong, nonatomic) NSTimer *countdownTimer;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UILabel *lastDatapointLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastDatapointLabel;
 
 @property (strong, nonatomic) NSDate *datapointDate;
 @property (strong, nonatomic) NSNumber *datapointDecimalValue;

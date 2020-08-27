@@ -7,6 +7,7 @@
 //
 
 #import "GoalSummaryViewController.h"
+#import "constants.h"
 #define kDefaultStepperWidth 94
 #define kLeftMargin 20
 
@@ -43,52 +44,38 @@
         self.deltasLabel.hidden = YES;
     }
     
-    self.scrollView.clipsToBounds = YES;
-    self.scrollView.contentSize = self.graphImageView.image.size;
+    self.scrollView.clipsToBounds = YES;	
+	self.scrollView.contentSize = self.graphImageView.image.size;
     self.scrollView.delegate = self;
     
     self.timerLabel.font = [UIFont fontWithName:@"Lato-Bold" size:20.0f];
-
-    self.dateStepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin, self.view.frame.size.height - 102, kDefaultStepperWidth, 30)];
-    self.dateStepperLabel.textAlignment = NSTextAlignmentCenter;
+	
+	self.dateStepperLabel.textAlignment = NSTextAlignmentCenter;
     self.dateStepperLabel.text = @"Date";
     self.dateStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    [self.view addSubview:self.dateStepperLabel];
-    
-    self.valueStepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftMargin + self.dateStepperLabel.frame.size.width + 2, self.dateStepperLabel.frame.origin.y, kDefaultStepperWidth, 30)];
     self.valueStepperLabel.textAlignment = NSTextAlignmentCenter;
     self.valueStepperLabel.text = @"Datapoint";
     self.valueStepperLabel.font = [UIFont fontWithName:@"Lato" size:15.0f];
-    [self.view addSubview:self.valueStepperLabel];
-    
-    self.dateStepper = [[UIStepper alloc] initWithFrame:CGRectOffset(self.dateStepperLabel.frame, 0, -27)];
-    self.dateStepper.tintColor = [UIColor blackColor];
+	
+	self.dateStepper.tintColor = [UIColor blackColor];
     [self.dateStepper addTarget:self action:@selector(dateStepperValueChanged) forControlEvents:UIControlEventValueChanged];
     self.dateStepper.maximumValue = 1;
     self.dateStepper.minimumValue = -31;
-    [self.view addSubview:self.dateStepper];
-    
-    self.valueStepper = [[UIStepper alloc] initWithFrame:CGRectOffset(self.valueStepperLabel.frame, 0, -27)];
-    self.valueStepper.tintColor = [UIColor blackColor];
+
+	self.valueStepper.tintColor = [UIColor blackColor];
     [self.valueStepper addTarget:self action:@selector(valueStepperValueChanged) forControlEvents:UIControlEventValueChanged];
     self.valueStepper.maximumValue = 1000000;
     self.valueStepper.minimumValue = -1000000;
-    [self.view addSubview:self.valueStepper];
 
-    self.inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(kLeftMargin, self.dateStepper.frame.origin.y - 45, 2*kDefaultStepperWidth + 2, 40)];
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-    self.inputTextField.leftView = paddingView;
-    self.inputTextField.leftViewMode = UITextFieldViewModeAlways;
+	self.inputTextField.leftViewMode = UITextFieldViewModeAlways;
     self.inputTextField.backgroundColor = [BeeminderAppDelegate cloudsColor];
     self.inputTextField.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.inputTextField.borderStyle = UITextBorderStyleNone;
     self.inputTextField.returnKeyType = UIReturnKeyDone;
     [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
     self.inputTextField.delegate = self;
-    [self.view addSubview:self.inputTextField];
-    
-    // set the tag for the image view
-    [self.graphImageView setTag:ZOOM_VIEW_TAG];
+
+	[self.graphImageView setTag:ZOOM_VIEW_TAG];
     
     // add gesture recognizers to the image view
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -108,22 +95,11 @@
 
     [self loadGraphImageIgnoreCache:YES];
 
-    self.submitButton = [[UIButton alloc] init];
     self.submitButton = [BeeminderAppDelegate standardGrayButtonWith:self.submitButton];
-    self.submitButton.frame = CGRectMake(self.inputTextField.frame.origin.x + self.inputTextField.frame.size.width + 10, self.inputTextField.frame.origin.y, 80, self.inputTextField.frame.size.height);
-    [self.submitButton setTitle:@"Enter" forState:UIControlStateNormal];
+	[self.submitButton setTitle:@"Enter" forState:UIControlStateNormal];
     [self.submitButton addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.submitButton];
-    
-    self.lastDatapointLabel = [[UILabel alloc] init];
-    [self.view addSubview: self.lastDatapointLabel];
-    [self.lastDatapointLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.graphScrollView.mas_bottom);
-        make.left.equalTo(self.inputTextField);
-        make.right.equalTo(self.submitButton);
-        make.bottom.equalTo(self.submitButton.mas_top);
-    }];
-    self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
+	
+	self.lastDatapointLabel.font = [UIFont fontWithName:@"Lato" size:16.0f];
     self.lastDatapointLabel.numberOfLines = self.datapointsCount;
     
     if (self.goalObject.units) {
